@@ -134,6 +134,21 @@
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .benefit-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: inherit;
+            z-index: -1;
         }
         
         .benefit-content h3 {
@@ -360,6 +375,24 @@
                 width: 28px;
                 height: 28px;
             }
+            
+            .benefit-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                min-height: 48px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.25rem;
+                overflow: hidden;
+                flex-shrink: 0;
+                position: relative;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+            }
         }
     </style>
 </head>
@@ -495,7 +528,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2025 Groupe d'Analyse Financière. Tous droits réservés.</p>
+            <p>© 2024 Groupe d'Analyse Financière. Tous droits réservés.</p>
             <div class="footer-links">
                 <a href="Privacy.html">Politique de Confidentialité</a>
                 <span> • </span>
@@ -520,6 +553,6 @@
         </div>
     </div>
 
-   
+     
 </body>
 </html>
