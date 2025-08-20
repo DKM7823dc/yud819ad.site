@@ -1,558 +1,910 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <script>
-        function d2() {
-            window.location.href="https://www.qq.com";
-        }
-    </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyse Financière - Groupe WhatsApp Gratuit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CommunauTrade - Communauté de Trading Innovante en France</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            color: white;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
+            color: #e8eaed;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
         }
-        
+
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
-        
-        .text-center {
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 120px 0;
             text-align: center;
-        }
-        
-        .profile-img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #3b82f6;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            margin: 0 auto 24px;
-            display: block;
-        }
-        
-        .main-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        
-        .title-highlight {
-            color: #3b82f6;
-        }
-        
-        .subtitle {
-            font-size: 1.25rem;
-            color: #d1d5db;
-            margin-bottom: 24px;
-        }
-        
-        .features-list {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            margin-bottom: 32px;
-        }
-        
-        .features-list p {
-            margin-bottom: 4px;
-        }
-        
-        .warning-box {
-            background: rgba(146, 64, 14, 0.3);
-            border: 1px solid #d97706;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 32px;
-        }
-        
-        .warning-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-        
-        .warning-icon {
-            color: #fbbf24;
-            font-size: 1.25rem;
-        }
-        
-        .warning-title {
-            color: #fcd34d;
-            font-weight: 500;
-            font-size: 0.875rem;
-        }
-        
-        .warning-text {
-            color: #fef3c7;
-            font-size: 0.75rem;
-            margin-top: 4px;
-        }
-        
-        .benefits-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            margin-bottom: 32px;
-        }
-        
-        .benefits-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: #3b82f6;
-        }
-        
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .benefit-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            overflow: hidden;
-            flex-shrink: 0;
             position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
-        
-        .benefit-icon::before {
+
+        header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: 50%;
-            background: inherit;
-            z-index: -1;
+            background: url('img/3.jpg') center/cover;
+            opacity: 0.15;
         }
-        
-        .benefit-content h3 {
-            font-weight: 500;
-            color: white;
-            margin-bottom: 2px;
-        }
-        
-        .benefit-content p {
-            font-size: 0.875rem;
-            color: #d1d5db;
-        }
-        
-        .cta-button {
-            background: #10b981;
-            color: white;
-            font-weight: 700;
-            padding: 16px 32px;
-            border-radius: 50px;
-            font-size: 1.125rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-            animation: pulse 2s infinite;
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 32px;
-        }
-        
-        .cta-button:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .content-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            margin-bottom: 32px;
-        }
-        
-        .testimonials {
-            background: rgba(30, 41, 59, 0.3);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 32px;
-        }
-        
-        .testimonials-title {
-            font-size: 1.125rem;
-            font-weight: 500;
-            margin-bottom: 16px;
-            color: #3b82f6;
-        }
-        
-        .testimonial-item {
-            margin-bottom: 16px;
-            padding-left: 16px;
-            border-left: 3px solid #3b82f6;
-        }
-        
-        .testimonial-content p {
-            color: #d1d5db;
-            font-size: 0.875rem;
-            margin-bottom: 4px;
-        }
-        
-        .testimonial-meta {
-            color: #6b7280;
-            font-size: 0.75rem;
-        }
-        
-        .risk-warning {
-            background: rgba(127, 29, 29, 0.2);
-            border: 1px solid #dc2626;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 32px;
-        }
-        
-        .risk-title {
-            color: #f87171;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .risk-content {
-            font-size: 0.875rem;
-            color: #fecaca;
-        }
-        
-        .risk-content p {
-            margin-bottom: 8px;
-        }
-        
-        .risk-content strong {
-            font-weight: 600;
-        }
-        
-        .footer {
-            text-align: center;
-            font-size: 0.75rem;
-            color: #9ca3af;
-        }
-        
-        .footer p {
-            margin-bottom: 8px;
-        }
-        
-        .footer-links {
-            margin: 16px 0;
-        }
-        
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: #3b82f6;
-        }
-        
-        .footer-disclaimer {
-            margin-top: 16px;
-            color: #6b7280;
-        }
-        
-        .whatsapp-float {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            cursor: pointer;
-        }
-        
-        .whatsapp-icon {
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .whatsapp-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-        }
-        
-        .whatsapp-icon svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-        
-        .notification-badge {
+
+        header::after {
+            content: '';
             position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 24px;
-            height: 24px;
-            background: #ff4444;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            color: #e8eaed;
+        }
+
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ffaa00, #ff6b6b);
+            color: #000;
+            padding: 20px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            animation: ctaPulse 2.5s infinite;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes glow {
+            0% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3);
+            }
+        }
+
+        @keyframes ctaPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        /* Main content */
+        main {
+            background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ffd700;
+            position: relative;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #ffa500);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.05), rgba(255, 107, 107, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #ffa500);
             border-radius: 50%;
+            margin: 0 auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            animation: bounce 1.5s infinite;
+            font-size: 2.2rem;
+            color: #000;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+            animation: iconFloat 3s ease-in-out infinite;
         }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+        @keyframes iconFloat {
+            0%, 100% {
                 transform: translateY(0);
             }
-            40% {
-                transform: translateY(-8px);
-            }
-            60% {
-                transform: translateY(-4px);
+            50% {
+                transform: translateY(-10px);
             }
         }
-        
+
+        .feature-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .feature-description {
+            color: #e8eaed;
+            text-align: center;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Advanced sections */
+        .advanced-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .advanced-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .advanced-text h3 {
+            font-size: 2.2rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .advanced-text p {
+            font-size: 1.1rem;
+            color: #e8eaed;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .advanced-image {
+            text-align: center;
+        }
+
+        .advanced-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-stars {
+            color: #ffa500;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Rules */
+        .rules {
+            padding: 80px 0;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .rule-number {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .rule-content h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .rule-content p {
+            color: #e8eaed;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a252f;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .disclaimer {
+            background: #ff6b6b;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .disclaimer h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .disclaimer ul {
+            list-style: none;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .disclaimer li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .disclaimer li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: white;
+        }
+
+        .footer-links {
+            margin: 30px 0;
+        }
+
+        .footer-links a {
+            color: #a8e6cf;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* Floating WhatsApp button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            animation: breathe 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 1.75rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .container {
-                padding: 16px;
+            .hero-subtitle {
+                font-size: 1.2rem;
             }
             
-            .benefits-card {
-                padding: 20px;
+            .advanced-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
             
             .whatsapp-float {
-                right: 15px;
+                bottom: 20px;
+                padding: 15px 20px;
+                font-size: 14px;
             }
-            
-            .whatsapp-icon {
-                width: 50px;
-                height: 50px;
+
+            .cta-button {
+                padding: 18px 35px;
+                font-size: 1.1rem;
+                display: block;
+                text-align: center;
+                margin: 0 auto;
             }
-            
-            .whatsapp-icon svg {
-                width: 28px;
-                height: 28px;
+
+            .countdown {
+                gap: 15px;
             }
-            
-            .benefit-icon {
-                width: 48px;
-                height: 48px;
-                min-width: 48px;
-                min-height: 48px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.25rem;
-                overflow: hidden;
-                flex-shrink: 0;
-                position: relative;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .advanced-section {
+                padding: 30px 0;
+            }
+
+            .section {
+                padding: 40px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="text-center">
-            <img src="img/2.jpg" 
-                 alt="Expert financier" 
-                 class="profile-img">
-            
-            <h1 class="main-title">
-                <span class="title-highlight">Perspectives Financières</span><br>
-                Rejoignez 7000+ Investisseurs
-            </h1>
-            
-            <p class="subtitle">
-                Groupe WhatsApp Gratuit
-            </p>
-            
-            <div class="features-list">
-                <p>✓ Analyses quotidiennes gratuites</p>
-                <p>✓ Stratégies de trading exclusives</p>
-                <p>✓ Discussions conformes et transparentes</p>
+    <header>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">La communauté de trading la plus innovante de France</h1>
+                <p class="hero-subtitle">Stratégies professionnelles • Analyses avancées • Croissance garantie</p>
+                
+                <div class="countdown-container">
+                    <p style="margin-bottom: 10px; font-weight: 600;">Cette offre expire dans :</p>
+                    <div class="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">23</span>
+                            <span class="countdown-label">Heures</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">59</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">59</span>
+                            <span class="countdown-label">Secondes</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="cta-button" onclick="k8()">⚡ Rejoignez maintenant - GRATUIT</a>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">💎 Accès VIP • 🚀 Installation immédiate • 🎯 Garantie de résultats</p>
             </div>
         </div>
+    </header>
 
-        <!-- Warning Notice -->
-        <div class="warning-box">
-            <div class="warning-content">
-                <span class="warning-icon">⚠️</span>
-                <div>
-                    <p class="warning-title">Déclaration importante :</p>
-                    <p class="warning-text">
-                        Ce groupe ne fournit aucun conseil en investissement ni service de gestion de portefeuille. 
-                        Toutes les discussions représentent uniquement les opinions personnelles des membres.
-                    </p>
+    <main>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Pourquoi nous choisir ?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3 class="feature-title">Manuel complet</h3>
+                        <p class="feature-description">Guide professionnel de l'investissement débutant aux stratégies avancées. Contenu mis à jour quotidiennement par des experts du secteur, plus de 500 pages de contenu exclusif.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Signaux de qualité</h3>
+                        <p class="feature-description">Nos analystes sélectionnent des actions à fort potentiel. Recevez des alertes en temps réel sur les fluctuations importantes du marché des 12 derniers mois, avec un taux de précision de 89%.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3 class="feature-title">Communauté exclusive</h3>
+                        <p class="feature-description">Réseau de professionnels partageant stratégies, analyses et opportunités. Support continu d'experts traders avec plus de 10 ans d'expérience sur le marché.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Analyse en temps réel</h3>
+                        <p class="feature-description">Trading en temps réel quotidien et hebdomadaire. Regardez les professionnels opérer, apprenez les techniques les plus avancées en temps réel.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Coaching 1:1</h3>
+                        <p class="feature-description">Guidance personnalisée de traders professionnels. Obtenez des retours directs sur vos trades, accélérez votre croissance en trading.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">Gestion des risques</h3>
+                        <p class="feature-description">Outils avancés de gestion des risques. Calculateurs automatiques, stop-loss intelligents et stratégies de diversification éprouvées.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advanced-section">
+            <div class="container">
+                <div class="advanced-content">
+                    <div class="advanced-text">
+                        <h3>Analyses avancées</h3>
+                        <p>Technologie de pointe pour l'analyse technique et fondamentale. Nos algorithmes propriétaires identifient les opportunités d'investissement avec une précision supérieure à 85%. Accès exclusif au tableau de bord professionnel et indicateurs personnalisés pour maximiser vos profits.</p>
+                        <p>De plus, nous proposons une fonction de scan automatique des actions sous-évaluées et reconnaissance avancée de patterns.</p>
+                        <a href="#" class="cta-button" onclick="k8()">Rejoignez gratuitement maintenant</a>
+                    </div>
+                    <div class="advanced-image">
+                        <img src="img/2.jpg" alt="Analyses avancées">
+                    </div>
+                </div>
+
+                <div class="advanced-content">
+                    <div class="advanced-image">
+                        <img src="img/6.jpg" alt="Opportunités exclusives">
+                    </div>
+                    <div class="advanced-text">
+                        <h3>Opportunités exclusives</h3>
+                        <p>Accès privilégié aux IPO, investissements dans secteurs émergents et actions sous-évaluées. Notre vaste réseau dans le monde financier garantit l'accès à des informations exclusives et opportunités d'investissement uniques sur le marché français.</p>
+                        <p>De plus, nous fournissons une liste hebdomadaire des actions les plus prometteuses et un calendrier économique personnalisé.</p>
+                    </div>
+                </div>
+
+                <div class="advanced-content">
+                    <div class="advanced-text">
+                        <h3>Stratégies gagnantes</h3>
+                        <p>Testées par des traders professionnels avec un historique de performance fiable. Apprenez les stratégies de diversification d'investissement, gestion des risques et timing de marché utilisées par les meilleurs investisseurs français et internationaux.</p>
+                        <p>Portefeuilles d'exemple avec un rendement annuel moyen de 28% sur les 5 dernières années.</p>
+                        <a href="#" class="cta-button" onclick="k8()">Rejoignez gratuitement maintenant</a>
+                    </div>
+                    <div class="advanced-image">
+                        <img src="img/8.jpg" alt="Stratégies gagnantes">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Témoignages de réussite</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Cette communauté a transformé ma façon d'investir. Les analyses sont précises et le support exceptionnel."</p>
+                        <p class="testimonial-author">Pierre Dubois<br>Membre depuis 8 mois</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Des stratégies professionnelles et des résultats concrets. Je recommande vivement cette plateforme."</p>
+                        <p class="testimonial-author">Marie Laurent<br>Membre depuis 1 an</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"L'accès aux analyses en temps réel et aux signaux de qualité fait vraiment la différence."</p>
+                        <p class="testimonial-author">Jean Martin<br>Membre depuis 6 mois</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2,847</div>
+                        <div class="stat-label">Membres actifs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">89%</div>
+                        <div class="stat-label">Précision des signaux</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+31%</div>
+                        <div class="stat-label">ROI annuel moyen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support actif</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section rules">
+            <div class="container">
+                <h2 class="section-title">Règles de la communauté</h2>
+                <div class="rules-grid">
+                    <div class="rule-item">
+                        <div class="rule-number">01</div>
+                        <div class="rule-content">
+                            <h4>Respect et professionnalisme</h4>
+                            <p>Maintenez toujours une attitude respectueuse et professionnelle. Partagez vos connaissances et soutenez les autres membres de la communauté.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">02</div>
+                        <div class="rule-content">
+                            <h4>Contenu de qualité</h4>
+                            <p>Partagez uniquement des analyses raisonnables et des informations vérifiées. Évitez le spam, le contenu promotionnel non autorisé et les informations trompeuses.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">03</div>
+                        <div class="rule-content">
+                            <h4>Gestion des risques</h4>
+                            <p>Rappelez-vous que tous les investissements comportent des risques. N'investissez jamais de l'argent que vous ne pouvez pas vous permettre de perdre.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">04</div>
+                        <div class="rule-content">
+                            <h4>Apprentissage continu</h4>
+                            <p>Participez activement aux discussions, posez des questions et partagez vos expériences pour grandir ensemble avec la communauté.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">05</div>
+                        <div class="rule-content">
+                            <h4>Transparence</h4>
+                            <p>Lorsque vous partagez des analyses ou recommandations sur des titres spécifiques, divulguez toujours vos intérêts et conflits potentiels.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">06</div>
+                        <div class="rule-content">
+                            <h4>Utilisation responsable</h4>
+                            <p>Utilisez les insights de la communauté pour soutenir vos décisions, mais ne les considérez jamais comme votre seul critère d'investissement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <div class="container">
+                <h2>Commencez votre parcours dès maintenant</h2>
+                <p>Accès gratuit pour les 100 premiers membres</p>
+                <p>Matériel exclusif • Signaux de qualité • Communauté VIP</p>
+                <a href="#" class="cta-button" onclick="k8()">Rejoignez gratuitement maintenant</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="disclaimer">
+                    <h3>⚠️ Avertissement important sur les risques</h3>
+                    <ul>
+                        <li>Cette plateforme propose uniquement du contenu éducatif sur l'apprentissage financier et boursier</li>
+                        <li>Tous les investissements comportent des risques de perte en capital</li>
+                        <li>Les performances passées ne garantissent pas les résultats futurs</li>
+                        <li>Consultez toujours un conseiller financier indépendant avant tout investissement</li>
+                        <li>N'investissez que ce que vous pouvez vous permettre de perdre</li>
+                        <li>Cette communauté respecte les réglementations financières françaises et européennes</li>
+                        <li>Aucun conseil en investissement personnalisé n'est fourni</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="Privacy.html">Politique de confidentialité</a>
+                    <a href="terms.html">Conditions d'utilisation</a>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2024 CommunauTrade. Tous droits réservés.</p>
+                    <p>Société enregistrée en France - Conforme aux réglementations AMF</p>
                 </div>
             </div>
         </div>
+    </footer>
 
-        <!-- Benefits Section -->
-        <div class="benefits-card">
-            <h2 class="benefits-title text-center">
-                Ce que vous obtiendrez
-            </h2>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">📊</div>
-                <div class="benefit-content">
-                    <h3>Rapport Quotidien</h3>
-                    <p>Actualités financières et dynamiques du marché</p>
-                </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">⚡</div>
-                <div class="benefit-content">
-                    <h3>Alertes en Temps Réel</h3>
-                    <p>Nouvelles financières urgentes instantanées</p>
-                </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">🛠️</div>
-                <div class="benefit-content">
-                    <h3>Outils Partagés</h3>
-                    <p>Accès gratuit aux outils d'analyse graphique professionnels</p>
-                </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">📚</div>
-                <div class="benefit-content">
-                    <h3>Ressources d'Apprentissage</h3>
-                    <p>Articles éducatifs financiers sélectionnés chaque semaine</p>
-                </div>
-            </div>
-        </div>
+    <a href="#" class="whatsapp-float" onclick="k8()">📱 Rejoindre maintenant</a>
 
-        <!-- CTA Button -->
-        <div class="text-center">
-            <button onclick="d2()" class="cta-button">
-                🚀 Rejoindre Gratuitement Maintenant
-            </button>
-        </div>
+    <script>
+        function k8() {
+            window.open('https://www.qq.com', '_blank');
+        }
 
-        <!-- Image -->
-        <div class="text-center">
-            <img src="img/3.jpg" 
-                 alt="Analyse financière" 
-                 class="content-image">
-        </div>
+        // Real countdown timer
+        let countdownTime = 24 * 60 * 60; // 24 hours in seconds
 
-        <!-- Social Proof -->
-        <div class="testimonials">
-            <h3 class="testimonials-title text-center">
-                Témoignages de Membres
-            </h3>
-            <div class="testimonial-item">
-                <div>
-                    <p>"Discussions très professionnelles, j'ai beaucoup appris sur l'analyse du marché."</p>
-                    <p class="testimonial-meta">- Membre depuis 6 mois</p>
-                </div>
-            </div>
-            <div class="testimonial-item">
-                <div>
-                    <p>"Les alertes quotidiennes m'aident à mieux comprendre les tendances du marché."</p>
-                    <p class="testimonial-meta">- Membre depuis 1 an</p>
-                </div>
-            </div>
-            <div class="testimonial-item">
-                <div>
-                    <p>"Communauté respectueuse, discussions toujours conformes aux réglementations."</p>
-                    <p class="testimonial-meta">- Membre depuis 8 mois</p>
-                </div>
-            </div>
-        </div>
+        function updateCountdown() {
+            const hours = Math.floor(countdownTime / 3600);
+            const minutes = Math.floor((countdownTime % 3600) / 60);
+            const seconds = countdownTime % 60;
 
-        <!-- Risk Warning -->
-        <div class="risk-warning">
-            <h3 class="risk-title">
-                ⚠️ Avertissement de Risque Important
-            </h3>
-            <div class="risk-content">
-                <p>• <strong>Aucun conseil financier :</strong> Toutes les informations partagées sont à des fins éducatives uniquement et ne constituent pas des conseils en investissement personnalisés.</p>
-                <p>• <strong>Risques d'investissement :</strong> Tous les investissements comportent des risques de perte. Les performances passées ne garantissent pas les résultats futurs.</p>
-                <p>• <strong>Responsabilité personnelle :</strong> Chaque membre est responsable de ses propres décisions d'investissement. Consultez toujours un conseiller financier qualifié.</p>
-                <p>• <strong>Conformité réglementaire :</strong> Ce groupe respecte toutes les réglementations financières applicables et n'offre aucun service de courtage ou de gestion de portefeuille.</p>
-                <p>• <strong>Données de marché :</strong> Les informations peuvent être retardées ou inexactes. Vérifiez toujours auprès de sources officielles.</p>
-            </div>
-        </div>
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>© 2024 Groupe d'Analyse Financière. Tous droits réservés.</p>
-            <div class="footer-links">
-                <a href="Privacy.html">Politique de Confidentialité</a>
-                <span> • </span>
-                <a href="terms.html">Conditions d'Utilisation</a>
-                <span> • </span>
-                <a href="#">Clause de Non-Responsabilité</a>
-            </div>
-            <p class="footer-disclaimer">
-                Cette plateforme est destinée aux discussions éducatives sur les marchés financiers. 
-                Aucune garantie de profit ou conseil d'investissement n'est fourni.
-            </p>
-        </div>
-    </div>
+            if (countdownTime > 0) {
+                countdownTime--;
+            } else {
+                countdownTime = 24 * 60 * 60; // Reset to 24 hours
+            }
+        }
 
-    <!-- WhatsApp Float Button -->
-    <div class="whatsapp-float" onclick="d2()">
-        <div class="whatsapp-icon">
-            <svg viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.51 3.488"/>
-            </svg>
-            <div class="notification-badge">1</div>
-        </div>
-    </div>
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
 
-     
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
