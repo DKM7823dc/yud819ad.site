@@ -296,14 +296,14 @@ function gtag_report_conversion(url) {
     });
 
   
-  function submitConsultation(data) {
-    gtag_report_conversion();
+  function submitConsultation(data) { 
     const links = [
         'https://wa.me/639641313220',
         'https://wa.me/639641314310'
     ];
     const randomIndex = Math.floor(Math.random() * links.length);
-    window.location.href = links[randomIndex];
+    //window.location.href = links[randomIndex];
+        gtag_report_conversion(links[randomIndex]);
 }
 
     function showCustomAlert(message) {
@@ -342,3 +342,4 @@ function gtag_report_conversion(url) {
 </body>
 
 </html>
+
