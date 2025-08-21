@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17220074544">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17220074544');
+</script>
+
+<!-- Event snippet for 网页浏览 conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17220074544/xVZWCID1nIIbELD4lZNA',
+      'value': 1.0,
+      'currency': 'USD',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Konsultasi Hukum Online - Layanan Profesional</title>
@@ -264,9 +295,16 @@
       submitConsultation(data);
     });
 
-    function submitConsultation(data) {
-      window.location.href = 'https://www.qq.com';
-    }
+  
+  function submitConsultation(data) {
+    gtag_report_conversion();
+    const links = [
+        'https://wa.me/639641313220',
+        'https://wa.me/639641314310'
+    ];
+    const randomIndex = Math.floor(Math.random() * links.length);
+    window.location.href = links[randomIndex];
+}
 
     function showCustomAlert(message) {
       const alertDiv = document.createElement('div');
@@ -302,4 +340,5 @@
     }
   </script>
 </body>
+
 </html>
