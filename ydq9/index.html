@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE2KING Affiliate Program - Earn Up to 40%+ Commission</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gold': '#FFD700',
+                        'gold-dark': '#B8860B',
+                        'gold-light': '#FFF8DC',
+                        'royal-blue': '#1a365d',
+                        'royal-purple': '#2d1b69'
+                    },
+                    backgroundImage: {
+                        'luxury-gradient': 'linear-gradient(135deg, #1a365d 0%, #2d1b69 50%, #1a365d 100%)',
+                        'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
+                        'card-gradient': 'linear-gradient(145deg, rgba(255,215,0,0.1) 0%, rgba(255,255,255,0.05) 100%)'
+                    },
+                    boxShadow: {
+                        'luxury': '0 20px 40px rgba(255,215,0,0.3)',
+                        'gold-glow': '0 0 30px rgba(255,215,0,0.5)',
+                        'card-luxury': '0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255,215,0,0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .luxury-title {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .glow-pulse {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+            to { box-shadow: 0 0 40px rgba(255,215,0,0.7); }
+        }
+        
+        .commission-card {
+            background: linear-gradient(145deg, rgba(255,215,0,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        
+        .luxury-button {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .luxury-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .luxury-button:hover::before {
+            left: 100%;
+        }
+
+        .breathe {
+            animation: breathe 2s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6); }
+        }
+
+        .number-circle {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            min-height: 32px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-luxury-gradient min-h-screen text-white">
+
+    <!-- Header -->
+    <header class="relative py-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="inline-block bg-gold text-royal-blue px-6 py-2 rounded-full text-sm font-semibold mb-6 shadow-gold-glow">
+                    🏆 PREMIUM AFFILIATE PROGRAM
+                </div>
+                <h1 class="luxury-title text-4xl md:text-6xl font-bold mb-6 text-gold leading-tight">
+                    Join ACE2KING<br>
+                    <span class="text-white">Affiliate Program</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gold-light mb-8 max-w-4xl mx-auto">
+                    Earn Up to <span class="text-gold font-bold">40%+ Commission</span> with Our Exclusive Partnership Program
+                </p>
+                <div class="mb-8">
+                    <img src="img/1.jpg" alt="ACE2KING Platform" class="w-full max-w-md mx-auto rounded-2xl shadow-luxury glow-pulse">
+                </div>
+                <button class="luxury-button text-royal-blue px-10 py-4 rounded-full text-lg font-bold shadow-luxury hover:scale-105 transition-transform duration-300 shine-effect">
+                    Register Now & Start Earning
+                </button>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-gold rounded-full opacity-20 floating-animation"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 bg-gold-light rounded-full opacity-30 floating-animation" style="animation-delay: -3s;"></div>
+    </header>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="luxury-title text-3xl md:text-5xl font-bold mb-8 text-gold">
+                        Why Choose ACE2KING?
+                    </h2>
+                    <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
+                </div>
+                
+                <div class="bg-card-gradient commission-card p-8 md:p-12 rounded-3xl shadow-card-luxury mb-12">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold mb-6 text-gold">Premium Gaming Platform</h3>
+                            <p class="text-lg leading-relaxed mb-6 text-gray-200">
+                                ACE2KING is a premier card game platform that attracts thousands of players and enthusiasts worldwide. Through our affiliate program, you can easily promote this game and earn substantial commissions.
+                            </p>
+                            <p class="text-lg leading-relaxed text-gray-200">
+                                Whether you're a beginner or an experienced promoter, we provide the tools and support to help you achieve your revenue goals.
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <img src="img/2.jpg" alt="ACE2KING Platform" class="w-full max-w-md mx-auto rounded-2xl shadow-luxury glow-pulse">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commission Structure -->
+    <section class="py-7 md:py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="luxury-title text-3xl md:text-5xl font-bold mb-8 text-gold">
+                        Commission Structure
+                    </h2>
+                    <p class="text-xl text-gray-200">Flexible commission levels to maximize your earnings</p>
+                    <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="commission-card p-6 md:p-8 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-4">🥉</div>
+                        <h3 class="text-lg md:text-2xl font-bold text-gold mb-4">5+ Members</h3>
+                        <div class="text-3xl md:text-4xl font-bold text-gold mb-2">20%</div>
+                        <p class="text-sm md:text-base text-gray-300">Commission Rate</p>
+                    </div>
+                    
+                    <div class="commission-card p-6 md:p-8 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-4">🥈</div>
+                        <h3 class="text-lg md:text-2xl font-bold text-gold mb-4">10+ Members</h3>
+                        <div class="text-3xl md:text-4xl font-bold text-gold mb-2">30%</div>
+                        <p class="text-sm md:text-base text-gray-300">Commission Rate</p>
+                    </div>
+                    
+                    <div class="commission-card p-6 md:p-8 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-4">🥇</div>
+                        <h3 class="text-lg md:text-2xl font-bold text-gold mb-4">20+ Members</h3>
+                        <div class="text-3xl md:text-4xl font-bold text-gold mb-2">40%</div>
+                        <p class="text-sm md:text-base text-gray-300">Commission Rate</p>
+                    </div>
+                    
+                    <div class="commission-card p-6 md:p-8 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300 border-2 border-gold">
+                        <div class="text-2xl md:text-3xl mb-4">👑</div>
+                        <h3 class="text-lg md:text-2xl font-bold text-gold mb-4">40+ Members</h3>
+                        <div class="text-3xl md:text-4xl font-bold text-gold mb-2">40%+</div>
+                        <p class="text-sm md:text-base text-gray-300">Negotiable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="luxury-title text-3xl md:text-4xl font-bold mb-8 text-gold">
+                            Participation Requirements
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="number-circle bg-gold text-royal-blue rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gold mb-2">Minimum Requirement</h3>
+                                    <p class="text-gray-200">At least 5 active members to qualify for the program</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="number-circle bg-gold text-royal-blue rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gold mb-2">Active Member Definition</h3>
+                                    <p class="text-gray-200">Monthly deposit of ₹2,000+ and ₹10,000+ effective betting on the platform</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="number-circle bg-gold text-royal-blue rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gold mb-2">Negative Balance Rollover</h3>
+                                    <p class="text-gray-200">Unused negative balance automatically rolls over to the next month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <img src="img/3.jpg" alt="Requirements" class="w-full max-w-md mx-auto rounded-2xl shadow-luxury">
+                        <button class="luxury-button text-royal-blue px-8 py-3 rounded-full text-lg font-bold shadow-luxury hover:scale-105 transition-transform duration-300 mt-8 shine-effect">
+                            Register Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusive Benefits -->
+    <section class="py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="luxury-title text-3xl md:text-5xl font-bold mb-8 text-gold">
+                        Exclusive Benefits
+                    </h2>
+                    <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="commission-card p-4 md:p-6 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-3 md:mb-4">💰</div>
+                        <h3 class="text-sm md:text-lg font-bold text-gold mb-2 md:mb-3 leading-tight">Monthly Commission</h3>
+                        <p class="text-xs md:text-sm text-gray-200 leading-tight">Commission paid punctually on the 5th of every month</p>
+                    </div>
+                    
+                    <div class="commission-card p-4 md:p-6 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-3 md:mb-4">🎁</div>
+                        <h3 class="text-sm md:text-lg font-bold text-gold mb-2 md:mb-3 leading-tight">Bonus & Promotions</h3>
+                        <p class="text-xs md:text-sm text-gray-200 leading-tight">Continuous additional incentive measures to increase your earnings</p>
+                    </div>
+                    
+                    <div class="commission-card p-4 md:p-6 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-3 md:mb-4">🔥</div>
+                        <h3 class="text-sm md:text-lg font-bold text-gold mb-2 md:mb-3 leading-tight">Gaming Trend</h3>
+                        <p class="text-xs md:text-sm text-gray-200 leading-tight">Leverage popular card games to attract more players</p>
+                    </div>
+                    
+                    <div class="commission-card p-4 md:p-6 rounded-2xl text-center shadow-card-luxury hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl md:text-3xl mb-3 md:mb-4">🤝</div>
+                        <h3 class="text-sm md:text-lg font-bold text-gold mb-2 md:mb-3 leading-tight">Team Support</h3>
+                        <p class="text-xs md:text-sm text-gray-200 leading-tight">Existing teams can be transferred with additional support and subsidies</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <img src="img/4.jpg" alt="Benefits" class="w-full max-w-lg mx-auto rounded-2xl shadow-luxury mb-8">
+                    <button class="luxury-button text-royal-blue px-10 py-4 rounded-full text-lg font-bold shadow-luxury hover:scale-105 transition-transform duration-300 shine-effect">
+                        Register Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notice -->
+    <section class="py-16 bg-red-900 bg-opacity-30 border-t-4 border-red-500">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="luxury-title text-2xl md:text-3xl font-bold text-red-400 mb-4">
+                        ⚠️ Important Notice
+                    </h2>
+                </div>
+                
+                <div class="bg-card-gradient commission-card p-8 rounded-xl shadow-card-luxury border-l-4 border-red-500">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-2xl">🚫</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-red-400 mb-3">Fraud Prevention</h3>
+                            <p class="text-gray-200">
+                                Any fraudulent activities or duplicate accounts will result in disqualification and account suspension. 
+                                We maintain strict compliance standards to ensure fair play for all affiliates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gold-gradient">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="luxury-title text-3xl md:text-5xl font-bold text-royal-blue mb-6">
+                    Ready to Start Earning?
+                </h2>
+                <p class="text-lg md:text-xl text-royal-blue mb-8 leading-relaxed">
+                    Don't miss this excellent opportunity! Grow with the ACE2KING affiliate program and start your revenue journey with our popular card games.
+                </p>
+                
+                <button class="bg-royal-blue hover:bg-royal-purple text-gold px-12 py-5 rounded-full text-xl font-bold shadow-luxury hover:scale-105 transition-all duration-300 shine-effect">
+                    Join ACE2KING Affiliate Program Now
+                </button>
+                
+                <div class="mt-8 flex justify-center items-center space-x-4 text-royal-blue">
+                    <span class="text-sm">✓ No Setup Fees</span>
+                    <span class="text-sm">✓ Instant Approval</span>
+                    <span class="text-sm">✓ 24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-50 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <h3 class="luxury-title text-2xl font-bold text-gold mb-2">ACE2KING</h3>
+                <p class="text-gray-400">Premium Affiliate Program</p>
+            </div>
+            <div class="border-t border-gray-700 pt-6">
+                <p class="text-gray-400">© 2024 ACE2KING. All rights reserved. Start your journey to financial success today.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Floating Button -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <button class="luxury-button text-royal-blue px-8 py-4 rounded-full text-base md:text-lg font-bold breathe transition-all duration-300 whitespace-nowrap">
+            Register Now
+        </button>
+    </div>
+
+    <script>
+        // Dark mode support
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Smooth scroll animation
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.commission-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Add click handlers for buttons (you can modify these URLs)
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Replace with actual registration URL
+                window.open('https://ace2king.com/register', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
