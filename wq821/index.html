@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
       <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17220074544">
@@ -45,7 +45,7 @@ function gtag_report_conversion(url) {
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Konsultasi Hukum Online - Layanan Profesional</title>
+  <title>Online Legal Consultation - Professional Services</title>
   <style>
     body {
       margin: 0;
@@ -190,7 +190,7 @@ function gtag_report_conversion(url) {
       text-align: center;
     }
 
-    /* 移动端优化 */
+    /* Mobile optimization */
     @media (max-width: 480px) {
       body {
         padding: 16px;
@@ -234,54 +234,52 @@ function gtag_report_conversion(url) {
 </head>
 <body>
   <div class="container">
-    <div class="header">⚖️ Konsultasi Hukum Online Profesional</div>
+    <div class="header">⚖️ Professional Online Legal Consultation</div>
     
     <div class="success-message" id="successMessage">
-      Terima kasih! Permintaan konsultasi Anda telah dikirim. Tim kami akan menghubungi Anda dalam 24 jam.
+      Thank you! Your consultation request has been sent. Our team will contact you within 24 hours.
     </div>
 
     <div id="mainForm">
       <div class="content">
-        Dapatkan bantuan hukum profesional dari pengacara berpengalaman untuk menyelesaikan masalah hukum Anda.
-        <span class="highlight">Layanan Konsultasi Meliputi:</span>
+        Get professional legal assistance from experienced lawyers to solve your legal problems.
+        <span class="highlight">How We Help You Recover Your Money</span>
         <ul>
-          <li>Konsultasi hukum perdata dan pidana</li>
-          <li>Bantuan penyusunan kontrak</li>
-          <li>Mediasi sengketa</li>
-          <li>Konsultasi hukum keluarga</li>
-          <li>Bantuan hukum bisnis dan korporasi</li>
+          <li>Free Case Review</li>
+          <li>Evidence Collection</li>
+          <li>Legal and Expert Action</li>
+          <li>Recovery and Resolution</li>
         </ul>
       </div>
 
       <form id="consultationForm">
         <div class="form-section">
-          <label for="legalIssue">Jenis Masalah Hukum *</label>
+          <label for="legalIssue">Please select your scam type *</label>
           <select id="legalIssue" name="legalIssue" required>
-            <option value="">Pilih jenis masalah hukum</option>
-            <option value="perdata">Hukum Perdata</option>
-            <option value="pidana">Hukum Pidana</option>
-            <option value="keluarga">Hukum Keluarga</option>
-            <option value="bisnis">Hukum Bisnis</option>
-            <option value="properti">Hukum Properti</option>
-            <option value="lainnya">Lainnya</option>
+            <option value="">Please select your scam type</option>
+            <option value="investment">Investment and Cryptocurrency Scams</option>
+            <option value="romance">Online and Romance Scams</option>
+            <option value="loan">Loan and Credit Fraud</option>
+            <option value="forex">Forex and Binary Options Fraud</option>
+            <option value="phishing">Phishing and Identity Theft</option>
           </select>
         </div>
 
         <div class="form-section">
-          <label for="description">Deskripsi Singkat Masalah *</label>
-          <textarea id="description" name="description" required placeholder="Jelaskan masalah hukum yang Anda hadapi secara singkat..."></textarea>
+          <label for="description">Brief Description of Issue *</label>
+          <textarea id="description" name="description" required placeholder="Briefly explain the legal issue you are facing..."></textarea>
         </div>
 
-        <button type="submit" class="button">Ajukan Konsultasi</button>
+        <button type="submit" class="button">Submit Consultation</button>
       </form>
 
       <div class="terms">
-        Dengan mengajukan konsultasi, Anda menyetujui <a href="terms.html"  >Syarat & Ketentuan</a> 
-        dan <a href="privacy.html" >Kebijakan Privasi</a> kami.
+        By submitting a consultation, you agree to our <a href="terms.html"  >Terms & Conditions</a> 
+        and <a href="privacy.html" >Privacy Policy</a>.
       </div>
     </div>
 
-    <div class="footer">© 2025 LegalConsult Pro. Layanan Konsultasi Hukum Terpercaya.</div>
+    <div class="footer">© 2025 LegalConsult Pro. Trusted Legal Consultation Services.</div>
   </div>
 
   <script>
@@ -292,17 +290,17 @@ function gtag_report_conversion(url) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // 获取表单数据
+      // Get form data
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
       
-      // 验证必填字段
+      // Validate required fields
       if (!data.legalIssue || !data.description) {
-        showCustomAlert('Mohon lengkapi semua field yang wajib diisi (*)');
+        showCustomAlert('Please fill in all required fields (*)');
         return;
       }
       
-      // 模拟提交成功
+      // Simulate successful submission
       submitConsultation(data);
     });
 
@@ -343,17 +341,13 @@ function gtag_report_conversion(url) {
     }
 
     function showTerms() {
-      showCustomAlert('Syarat & Ketentuan: Konsultasi bersifat rahasia dan profesional. Pembayaran dilakukan sebelum sesi konsultasi dimulai.');
+      showCustomAlert('Terms & Conditions: Consultations are confidential and professional. Payment is required before consultation sessions begin.');
     }
 
     function showPrivacy() {
-      showCustomAlert('Kebijakan Privasi: Data pribadi Anda akan dijaga kerahasiaannya dan hanya digunakan untuk keperluan konsultasi hukum.');
+      showCustomAlert('Privacy Policy: Your personal data will be kept confidential and used only for legal consultation purposes.');
     }
   </script>
 </body>
 
 </html>
-
-
-
-
