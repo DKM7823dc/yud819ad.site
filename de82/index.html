@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Aktien-Signale | Professionelle Investmentberatung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#0A0E1A',
+                        'dark-blue': '#1A1F2E',
+                        'accent-yellow': '#FFD700',
+                        'light-yellow': '#FFF8DC',
+                        'gray-text': '#B8BCC5'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        function h2() {
+            window.open('https://www.qq.com', '_blank');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0A0E1A 0%, #1A1F2E 100%);
+        }
+        
+        .golden-gradient {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card {
+            backdrop-filter: blur(10px);
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .number-circle {
+            width: 32px;
+            height: 32px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0A0E1A;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white font-inter">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-4 py-20">
+        <div class="max-w-6xl mx-auto text-center">
+            <!-- Hero Content -->
+            <div class="mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Treten Sie der <span class="text-accent-yellow">Elite-Aktien-Signal-Gruppe</span> bei
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-text mb-8 max-w-4xl mx-auto leading-relaxed">
+                    Verwirklichen Sie Ihre Investitionsträume und folgen Sie mühelos dem Marktpuls!
+                </p>
+                <p class="text-lg text-gray-text mb-12 max-w-3xl mx-auto">
+                    Treten Sie unserer mobilen Trading-Signal-Gruppe bei und erhalten Sie täglich professionelle Analysen und Handelspläne. Lernen Sie, kluge Entscheidungen an der Börse zu treffen und schaffen Sie gemeinsam eine wohlhabende Zukunft!
+                </p>
+                
+                <button onclick="h2()" class="golden-gradient text-deep-blue px-12 py-4 rounded-full text-xl font-semibold hover-glow mb-16">
+                    Jetzt Beitreten
+                </button>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="relative">
+                <img src="img/1.jpg" 
+                     alt="Elite Trading Signals" 
+                     class="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl glow-effect">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                        Erreichen Sie <span class="text-accent-yellow">stabile Investitionsrenditen</span>
+                    </h2>
+                    <p class="text-xl text-gray-text mb-8 leading-relaxed">
+                        Möchten Sie solide Renditen an der Börse erzielen? Treten Sie unserer mobilen Trading-Signal-Gruppe bei und erhalten Sie mühelos täglich Marktanalysen und Handelspläne.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="number-circle">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Gruppe beitreten</h3>
+                                <p class="text-gray-text">Einfache Registrierung, erhalten Sie jederzeit und überall die neuesten Signale.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="number-circle">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Handelsplan befolgen</h3>
+                                <p class="text-gray-text">Handeln Sie nach unseren täglich bereitgestellten Plänen.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="number-circle">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Ergebnisse beobachten</h3>
+                                <p class="text-gray-text">Sehen Sie potenzielle Rendite-Steigerungen, aber beachten Sie: Investitionen sind mit Risiken verbunden.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <img src="img/b1-s.jpg" 
+                         alt="Trading Interface" 
+                         class="w-full rounded-2xl shadow-xl card-hover">
+                    <img src="img/b2-s.jpg" 
+                         alt="Market Analysis" 
+                         class="w-full rounded-2xl shadow-xl card-hover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Social Proof Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Was unsere <span class="text-accent-yellow">Mitglieder</span> sagen
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <img src="img/tx(11).png" 
+                         alt="User 1" 
+                         class="w-48 h-auto mx-auto mb-4">
+                    <h4 class="font-semibold text-center mb-2">Michael K.</h4>
+                    <p class="text-gray-text text-center text-sm">
+                        "Die Signale sind präzise und haben mein Portfolio erheblich verbessert. Sehr empfehlenswert!"
+                    </p>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <img src="img/tx(22).png" 
+                         alt="User 2" 
+                         class="w-48 h-auto mx-auto mb-4">
+                    <h4 class="font-semibold text-center mb-2">Sarah M.</h4>
+                    <p class="text-gray-text text-center text-sm">
+                        "Endlich verstehe ich die Märkte besser. Die täglichen Analysen sind goldwert."
+                    </p>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <img src="img/tx(33).png" 
+                         alt="User 3" 
+                         class="w-48 h-auto mx-auto mb-4">
+                    <h4 class="font-semibold text-center mb-2">Thomas B.</h4>
+                    <p class="text-gray-text text-center text-sm">
+                        "Professioneller Service mit ausgezeichneten Ergebnissen. Bin sehr zufrieden!"
+                    </p>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <img src="img/tx(55).png" 
+                         alt="User 4" 
+                         class="w-48 h-auto mx-auto mb-4">
+                    <h4 class="font-semibold text-center mb-2">Anna W.</h4>
+                    <p class="text-gray-text text-center text-sm">
+                        "Die Gruppe hat meine Investitionsstrategie revolutioniert. Danke für die Expertise!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                Werden Sie der <span class="text-accent-yellow">Nächste</span> sein?
+            </h2>
+            <p class="text-xl text-gray-text mb-12">
+                Klicken Sie auf den Link unten und beginnen Sie sofort!
+            </p>
+            
+            <div class="bg-dark-blue p-8 rounded-2xl border border-accent-yellow/30 mb-8">
+                <div class="text-accent-yellow text-2xl font-bold mb-4">⚡ Begrenzte Zeit</div>
+                <div class="text-3xl font-bold mb-4">Nur noch 80 kostenlose Plätze</div>
+                <div class="text-gray-text">Sichern Sie sich Ihren Platz, bevor es zu spät ist!</div>
+            </div>
+            
+            <button onclick="h2()" class="golden-gradient text-deep-blue px-16 py-6 rounded-full text-2xl font-bold hover-glow mb-8">
+                Signal-Gruppe Beitreten
+            </button>
+            
+            <p class="text-sm text-gray-text">
+                Risikohinweis: Der Handel mit Finanzinstrumenten birgt Risiken. Vergangene Ergebnisse sind keine Garantie für zukünftige Gewinne.
+            </p>
+        </div>
+    </section>
+
+    <!-- Risk Warning Section -->
+    <section class="py-12 px-4 bg-red-900/20 border-t border-red-500/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-red-900/30 border border-red-500/50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-red-400 mb-6 text-center">⚠️ WICHTIGE RISIKOWARNUNG</h3>
+                <div class="text-sm text-gray-300 space-y-4">
+                    <p><strong>Allgemeine Risiken:</strong> Der Handel mit Aktien, Derivaten und anderen Finanzinstrumenten ist mit erheblichen Risiken verbunden, einschließlich des Totalverlusts Ihres eingesetzten Kapitals. Vergangene Wertentwicklungen sind kein Indikator für zukünftige Ergebnisse.</p>
+                    
+                    <p><strong>Keine Anlageberatung:</strong> Die bereitgestellten Informationen stellen keine Anlageberatung dar und sollten nicht als Grundlage für Investitionsentscheidungen verwendet werden. Konsultieren Sie einen qualifizierten Finanzberater, bevor Sie Investitionsentscheidungen treffen.</p>
+                    
+                    <p><strong>Marktvolatilität:</strong> Finanzmärkte sind volatil und können sich schnell und unvorhersehbar ändern. Externe Faktoren wie wirtschaftliche, politische und regulatorische Änderungen können erhebliche Auswirkungen auf die Märkte haben.</p>
+                    
+                    <p><strong>Keine Garantien:</strong> Es gibt keine Garantie für Gewinne oder Schutz vor Verlusten. Alle Handelssignale und Analysen basieren auf aktuellen Marktdaten und können sich als ungenau erweisen.</p>
+                    
+                    <p><strong>Eigene Verantwortung:</strong> Sie handeln auf eigene Verantwortung und eigenes Risiko. Investieren Sie nur Geld, dessen Verlust Sie sich leisten können.</p>
+                    
+                    <p><strong>Regulatorische Hinweise:</strong> Diese Dienstleistung unterliegt den deutschen und europäischen Finanzmarktregulierungen. Überprüfen Sie die Rechtmäßigkeit von Finanzdienstleistungen in Ihrem Zuständigkeitsbereich.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-blue border-t border-gray-700 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4 text-accent-yellow">Elite Aktien-Signale</h3>
+                    <p class="text-gray-text mb-4">
+                        Ihr vertrauensvoller Partner für professionelle Aktienanalysen und Handelssignale.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Rechtliches</h4>
+                    <ul class="space-y-2 text-gray-text">
+                        <li><a href="Privacy.html" class="hover:text-accent-yellow transition-colors">Datenschutzerklärung</a></li>
+                        <li><a href="terms.html" class="hover:text-accent-yellow transition-colors">Nutzungsbedingungen</a></li>
+                        <li><a href="#" class="hover:text-accent-yellow transition-colors">Impressum</a></li>
+                        <li><a href="#" class="hover:text-accent-yellow transition-colors">Risikohinweise</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Kontakt</h4>
+                    <ul class="space-y-2 text-gray-text">
+                        <li>Deutschland</li>
+                        <li>BaFin Registriert</li>
+                        <li>support@aktien-signale.de</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-text text-sm">
+                <p>&copy; 2024 Elite Aktien-Signale. Alle Rechte vorbehalten.</p>
+                <p class="mt-2">
+                    Lizenziert und reguliert in Deutschland. 
+                    <a href="Privacy.html" class="text-accent-yellow hover:underline">Datenschutzerklärung</a> | 
+                    <a href="terms.html" class="text-accent-yellow hover:underline">Nutzungsbedingungen</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
