@@ -750,10 +750,11 @@ src="https://www.facebook.com/tr?id=1278871883685394&ev=PageView&noscript=1"
                 errorMessage.style.display = 'block';
                 errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Disable form permanently
+                // Disable form immediately
+                disableForm();
+                document.getElementById('blockedMessage').style.display = 'block';
+                
                 setTimeout(() => {
-                    disableForm();
-                    document.getElementById('blockedMessage').style.display = 'block';
                     errorMessage.style.display = 'none';
                 }, 3000);
                 
