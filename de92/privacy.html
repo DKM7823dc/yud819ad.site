@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Datenschutzrichtlinie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #34495E;
+            --accent-color: #3498DB;
+            --text-dark: #2C3E50;
+            --text-light: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --bg-card: #FFFFFF;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+            border-left: 5px solid #E74C3C;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.1);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%);
+            border-left: 5px solid #2ECC71;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(46, 204, 113, 0.1);
+        }
+
+        .footer {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-top: 0;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .section-number {
+            background: var(--accent-color);
+            color: var(--text-light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            ul {
+                margin-left: 20px;
+            }
+
+            .highlight-box, .warning-box, .info-box {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .footer {
+                padding: 25px 20px;
+                border-radius: 0 0 10px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Datenschutzrichtlinie</h1>
+            <p>Schutz Ihrer personenbezogenen Daten hat für uns höchste Priorität</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <p><strong>Wichtiger Hinweis:</strong> Diese Datenschutzrichtlinie informiert Sie über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten auf unserer Website und in unseren Diensten.</p>
+            </div>
+
+            <h2><span class="section-number">1</span>Verantwortlicher</h2>
+            <p>Verantwortlicher für die Datenverarbeitung auf dieser Website ist der im Impressum genannte Betreiber. Der Verantwortliche entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten.</p>
+
+            <h2><span class="section-number">2</span>Erhebung und Verarbeitung personenbezogener Daten</h2>
+            <p>Wir erheben und verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist oder Sie ausdrücklich eingewilligt haben.</p>
+
+            <h3>2.1 Beim Besuch der Website automatisch erhobene Daten</h3>
+            <p>Beim Aufrufen unserer Website werden durch den auf Ihrem Endgerät zum Einsatz kommenden Browser automatisch Informationen an den Server unserer Website gesendet:</p>
+            <ul>
+                <li>IP-Adresse des anfragenden Rechners</li>
+                <li>Datum und Uhrzeit des Zugriffs</li>
+                <li>Name und URL der abgerufenen Datei</li>
+                <li>Website, von der aus der Zugriff erfolgt (Referrer-URL)</li>
+                <li>Verwendeter Browser und ggf. das Betriebssystem Ihres Rechners</li>
+                <li>Name Ihres Access-Providers</li>
+            </ul>
+
+            <h3>2.2 Daten bei Nutzung von Kontaktmöglichkeiten</h3>
+            <p>Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail oder Telefon) werden die von Ihnen gemachten Angaben zum Zwecke der Bearbeitung der Anfrage sowie für mögliche Anschlussfragen gespeichert.</p>
+
+            <h2><span class="section-number">3</span>Zwecke der Datenverarbeitung</h2>
+            <p>Die Verarbeitung personenbezogener Daten erfolgt zu folgenden Zwecken:</p>
+            <ul>
+                <li>Bereitstellung der Website und Gewährleistung der Funktionalität</li>
+                <li>Gewährleistung der Systemsicherheit und -stabilität</li>
+                <li>Zur Optimierung der Website</li>
+                <li>Zur Erfüllung gesetzlicher Verpflichtungen</li>
+                <li>Zur Bearbeitung von Anfragen und Kommunikation mit Nutzern</li>
+            </ul>
+
+            <h2><span class="section-number">4</span>Rechtsgrundlagen der Verarbeitung</h2>
+            <p>Die Verarbeitung personenbezogener Daten erfolgt nur auf Grundlage einer Rechtsgrundlage. Mögliche Rechtsgrundlagen sind:</p>
+            <ul>
+                <li><strong>Art. 6 Abs. 1 lit. a) DSGVO:</strong> Einwilligung der betroffenen Person</li>
+                <li><strong>Art. 6 Abs. 1 lit. b) DSGVO:</strong> Verarbeitung zur Erfüllung eines Vertrags</li>
+                <li><strong>Art. 6 Abs. 1 lit. c) DSGVO:</strong> Verarbeitung zur Erfüllung einer rechtlichen Verpflichtung</li>
+                <li><strong>Art. 6 Abs. 1 lit. f) DSGVO:</strong> Verarbeitung auf Grundlage berechtigter Interessen</li>
+            </ul>
+
+            <h2><span class="section-number">5</span>Cookies und ähnliche Technologien</h2>
+            <p>Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Sie richten keinen Schaden an.</p>
+
+            <h3>5.1 Arten von Cookies</h3>
+            <ul>
+                <li><strong>Technisch notwendige Cookies:</strong> Diese sind für die Grundfunktionen der Website erforderlich</li>
+                <li><strong>Funktions-Cookies:</strong> Diese ermöglichen erweiterte Funktionalitäten</li>
+                <li><strong>Analyse-Cookies:</strong> Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren</li>
+            </ul>
+
+            <h3>5.2 Verwaltung von Cookies</h3>
+            <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und einzeln über deren Annahme entscheiden oder die Annahme von Cookies für bestimmte Fälle oder generell ausschließen.</p>
+
+            <h2><span class="section-number">6</span>Weitergabe von Daten an Dritte</h2>
+            <p>Eine Übermittlung Ihrer persönlichen Daten an Dritte zu anderen als den im Folgenden aufgeführten Zwecken findet nicht statt.</p>
+            
+            <div class="warning-box">
+                <p><strong>Wichtig:</strong> Wir geben Ihre persönlichen Daten nur an Dritte weiter, wenn Sie ausdrücklich eingewilligt haben, eine gesetzliche Verpflichtung besteht oder dies zur Vertragserfüllung erforderlich ist.</p>
+            </div>
+
+            <h2><span class="section-number">7</span>Speicherdauer</h2>
+            <p>Wir speichern personenbezogene Daten nur so lange, wie dies für die Erfüllung der jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungsfristen bestehen.</p>
+            <ul>
+                <li><strong>Logfiles:</strong> 30 Tage</li>
+                <li><strong>Kontaktanfragen:</strong> 3 Jahre</li>
+                <li><strong>Vertragsunterlagen:</strong> 10 Jahre (§ 257 HGB)</li>
+            </ul>
+
+            <h2><span class="section-number">8</span>Ihre Rechte als betroffene Person</h2>
+            <p>Sie haben folgende Rechte:</p>
+
+            <h3>8.1 Auskunftsrecht (Art. 15 DSGVO)</h3>
+            <p>Sie haben das Recht, Auskunft über die zu Ihrer Person gespeicherten personenbezogenen Daten zu verlangen.</p>
+
+            <h3>8.2 Berichtigungsrecht (Art. 16 DSGVO)</h3>
+            <p>Sie haben das Recht auf unverzügliche Berichtigung unrichtiger oder Vervollständigung unvollständiger personenbezogener Daten.</p>
+
+            <h3>8.3 Löschungsrecht (Art. 17 DSGVO)</h3>
+            <p>Sie haben das Recht auf Löschung Ihrer personenbezogenen Daten, soweit nicht deren weitere Aufbewahrung erforderlich ist.</p>
+
+            <h3>8.4 Einschränkungsrecht (Art. 18 DSGVO)</h3>
+            <p>Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
+
+            <h3>8.5 Datenübertragbarkeitsrecht (Art. 20 DSGVO)</h3>
+            <p>Sie haben das Recht, die Sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</p>
+
+            <h3>8.6 Widerspruchsrecht (Art. 21 DSGVO)</h3>
+            <p>Sie haben das Recht, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten Widerspruch einzulegen.</p>
+
+            <h3>8.7 Widerruf der Einwilligung</h3>
+            <p>Haben Sie uns eine Einwilligung zur Verarbeitung Ihrer Daten erteilt, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+
+            <h3>8.8 Beschwerderecht</h3>
+            <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über unsere Verarbeitung personenbezogener Daten zu beschweren.</p>
+
+            <h2><span class="section-number">9</span>Datensicherheit</h2>
+            <p>Wir verwenden geeignete technische und organisatorische Sicherheitsmaßnahmen, um Ihre Daten gegen zufällige oder vorsätzliche Manipulationen, teilweisen oder vollständigen Verlust, Zerstörung oder gegen den unbefugten Zugriff Dritter zu schützen.</p>
+
+            <div class="info-box">
+                <p><strong>SSL-Verschlüsselung:</strong> Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt.</p>
+            </div>
+
+            <h2><span class="section-number">10</span>Externe Links</h2>
+            <p>Unser Internetauftritt enthält Links zu anderen Websites. Wir haben keinen Einfluss darauf, dass deren Betreiber die Datenschutzbestimmungen einhalten.</p>
+
+            <h2><span class="section-number">11</span>Minderjährige</h2>
+            <p>Unser Angebot richtet sich nicht an Personen unter 16 Jahren. Personen unter 16 Jahren sollten ohne Zustimmung der Eltern oder Erziehungsberechtigten keine personenbezogenen Daten an uns übermitteln.</p>
+
+            <h2><span class="section-number">12</span>Änderungen der Datenschutzrichtlinie</h2>
+            <p>Wir behalten uns vor, diese Datenschutzrichtlinie zu ändern, um sie an geänderte Rechtslagen oder bei Änderungen des Dienstes sowie der Datenverarbeitung anzupassen. Dies gilt jedoch nur für Erklärungen zur Datenverarbeitung. Sofern Einwilligungen des Nutzers erforderlich sind oder Bestandteile der Datenschutzrichtlinie Regelungen des Vertragsverhältnisses mit den Nutzern enthalten, erfolgen die Änderungen nur mit Zustimmung des Nutzers.</p>
+
+            <div class="warning-box">
+                <p><strong>Hinweis:</strong> Diese Datenschutzrichtlinie stellt eine allgemeine Vorlage dar. Für spezifische Anwendungsfälle und Geschäftsmodelle sollten Sie rechtliche Beratung in Anspruch nehmen, um die Einhaltung aller anwendbaren Datenschutzgesetze sicherzustellen.</p>
+            </div>
+
+            <h2><span class="section-number">13</span>Kontakt zum Datenschutzbeauftragten</h2>
+            <p>Bei Fragen zum Datenschutz wenden Sie sich bitte an die im Impressum angegebenen Kontaktdaten oder an unseren Datenschutzbeauftragten.</p>
+        </div>
+
+        <div class="footer">
+            <p><strong>© 2024 - Datenschutzrichtlinie</strong></p>
+            <p>Diese Richtlinie entspricht den Anforderungen der DSGVO (EU-Datenschutz-Grundverordnung)</p>
+            <p><strong>Stand:</strong> Dezember 2024</p>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+</body>
+</html>

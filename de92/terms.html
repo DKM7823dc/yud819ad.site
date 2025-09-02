@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nutzungsbedingungen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #34495E;
+            --accent-color: #3498DB;
+            --text-dark: #2C3E50;
+            --text-light: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --bg-card: #FFFFFF;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+            border-left: 5px solid #E74C3C;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.1);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%);
+            border-left: 5px solid #2ECC71;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(46, 204, 113, 0.1);
+        }
+
+        .legal-box {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(155, 89, 182, 0.05) 100%);
+            border-left: 5px solid #9B59B6;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);
+        }
+
+        .footer {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-top: 0;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .section-number {
+            background: var(--accent-color);
+            color: var(--text-light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            ul, ol {
+                margin-left: 20px;
+            }
+
+            .highlight-box, .warning-box, .info-box, .legal-box {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .footer {
+                padding: 25px 20px;
+                border-radius: 0 0 10px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nutzungsbedingungen</h1>
+            <p>Allgemeine Geschäftsbedingungen für die Nutzung unserer Website und Dienste</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <p><strong>Wichtiger Hinweis:</strong> Durch die Nutzung unserer Website und Dienste stimmen Sie diesen Nutzungsbedingungen zu. Bitte lesen Sie diese sorgfältig durch, bevor Sie unsere Dienste verwenden.</p>
+            </div>
+
+            <h2><span class="section-number">1</span>Geltungsbereich</h2>
+            <p>Diese Nutzungsbedingungen (nachfolgend "AGB") gelten für die Nutzung der Website und aller damit verbundenen Dienstleistungen des im Impressum genannten Anbieters.</p>
+            <p>Diese AGB gelten gegenüber Unternehmern, juristischen Personen des öffentlichen Rechts oder öffentlich-rechtlichen Sondervermögen im Sinne von § 310 Absatz 1 BGB. Entgegenstehende oder von diesen AGB abweichende Bedingungen erkennen wir nicht an, es sei denn, wir hätten ausdrücklich schriftlich ihrer Geltung zugestimmt.</p>
+
+            <h2><span class="section-number">2</span>Vertragspartner und Vertragsschluss</h2>
+            <p>Der Vertrag kommt zustande mit dem im Impressum genannten Anbieter.</p>
+            
+            <h3>2.1 Registrierung</h3>
+            <p>Für die Nutzung bestimmter Funktionen ist eine Registrierung erforderlich. Bei der Registrierung sind wahrheitsgemäße Angaben zu machen. Der Nutzer ist verpflichtet, die Registrierungsdaten aktuell zu halten.</p>
+            
+            <h3>2.2 Vertragsschluss</h3>
+            <p>Mit der erfolgreichen Registrierung bzw. der ersten Nutzung unserer Dienste kommt ein Nutzungsvertrag zustande.</p>
+
+            <h2><span class="section-number">3</span>Leistungsumfang</h2>
+            <p>Der Umfang unserer Leistungen ergibt sich aus der jeweiligen Leistungsbeschreibung auf unserer Website.</p>
+            
+            <div class="info-box">
+                <p><strong>Verfügbarkeit:</strong> Wir bemühen uns um eine hohe Verfügbarkeit unserer Dienste, können jedoch keine 100%ige Verfügbarkeit garantieren. Wartungsarbeiten können zu vorübergehenden Unterbrechungen führen.</p>
+            </div>
+
+            <h2><span class="section-number">4</span>Nutzungsrechte und Pflichten des Nutzers</h2>
+            
+            <h3>4.1 Erlaubte Nutzung</h3>
+            <p>Der Nutzer ist berechtigt, die angebotenen Dienste bestimmungsgemäß zu nutzen. Eine darüber hinausgehende Nutzung ist nicht gestattet.</p>
+            
+            <h3>4.2 Verbotene Handlungen</h3>
+            <p>Dem Nutzer ist es untersagt:</p>
+            <ul>
+                <li>Inhalte zu übertragen, die gegen geltendes Recht verstoßen</li>
+                <li>Rechte Dritter zu verletzen</li>
+                <li>Schadsoftware zu übertragen oder zu verbreiten</li>
+                <li>Die Funktionsfähigkeit der Website zu beeinträchtigen</li>
+                <li>Automatisierte Abrufe ohne Genehmigung durchzuführen</li>
+                <li>Sicherheitsvorkehrungen zu umgehen</li>
+                <li>Falsche Identitäten vorzutäuschen</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Sanktionen:</strong> Bei Verstößen gegen diese Nutzungsbedingungen behalten wir uns vor, den Zugang zu unseren Diensten zu beschränken oder zu sperren.</p>
+            </div>
+
+            <h2><span class="section-number">5</span>Geistiges Eigentum</h2>
+            <p>Alle Inhalte der Website, insbesondere Texte, Bilder, Grafiken, Videos, Marken, und Software, sind urheberrechtlich geschützt.</p>
+            
+            <h3>5.1 Nutzungsrechte</h3>
+            <p>Wir räumen dem Nutzer das nicht-ausschließliche, nicht übertragbare Recht ein, die Inhalte im Rahmen der bestimmungsgemäßen Nutzung zu verwenden.</p>
+            
+            <h3>5.2 Urheberrechtsverletzungen</h3>
+            <p>Jede über die bestimmungsgemäße Nutzung hinausgehende Verwendung, insbesondere die Vervielfältigung, Verbreitung oder öffentliche Wiedergabe, ist ohne unsere ausdrückliche Zustimmung untersagt.</p>
+
+            <h2><span class="section-number">6</span>Haftungsausschluss</h2>
+            
+            <h3>6.1 Haftungsbeschränkung</h3>
+            <p>Wir haften unbeschränkt für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, die auf einer vorsätzlichen oder fahrlässigen Pflichtverletzung beruhen, sowie für sonstige Schäden, die auf einer vorsätzlichen oder grob fahrlässigen Pflichtverletzung beruhen.</p>
+            
+            <h3>6.2 Leichte Fahrlässigkeit</h3>
+            <p>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten ist unsere Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Im Übrigen ist die Haftung ausgeschlossen.</p>
+            
+            <h3>6.3 Datenverlust</h3>
+            <p>Für den Verlust von Daten haften wir nur, wenn der Nutzer nicht dafür gesorgt hat, dass die Daten aus den Datenbeständen bei ordnungsgemäßem Ablauf nur mit vertretbarem Aufwand rekonstruiert werden können.</p>
+
+            <div class="legal-box">
+                <p><strong>Gesetzliche Haftung:</strong> Die Haftung nach dem Produkthaftungsgesetz bleibt unberührt. Die vorstehenden Haftungsausschlüsse und -beschränkungen gelten auch zugunsten unserer Mitarbeiter und Erfüllungsgehilfen.</p>
+            </div>
+
+            <h2><span class="section-number">7</span>Beendigung des Nutzungsverhältnisses</h2>
+            
+            <h3>7.1 Ordentliche Kündigung</h3>
+            <p>Das Nutzungsverhältnis kann von beiden Seiten jederzeit ohne Einhaltung einer Kündigungsfrist gekündigt werden, sofern keine kostenpflichtigen Dienste in Anspruch genommen werden.</p>
+            
+            <h3>7.2 Außerordentliche Kündigung</h3>
+            <p>Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Ein wichtiger Grund liegt insbesondere vor bei:</p>
+            <ul>
+                <li>Verstößen gegen diese Nutzungsbedingungen</li>
+                <li>Missbrauch der Dienste</li>
+                <li>Rechtsverletzungen</li>
+            </ul>
+            
+            <h3>7.3 Folgen der Beendigung</h3>
+            <p>Mit Beendigung des Nutzungsverhältnisses erlöschen alle Nutzungsrechte. Gespeicherte Daten können nach angemessener Frist gelöscht werden.</p>
+
+            <h2><span class="section-number">8</span>Änderungen der Nutzungsbedingungen</h2>
+            <p>Wir behalten uns vor, diese Nutzungsbedingungen zu ändern. Über wesentliche Änderungen werden Sie mit angemessener Frist vor dem Inkrafttreten informiert.</p>
+            <p>Widersprechen Sie den Änderungen nicht innerhalb von vier Wochen nach Zugang der Mitteilung, gelten die Änderungen als genehmigt. Auf die Folgen eines unterlassenen Widerspruchs werden wir Sie in der Mitteilung hinweisen.</p>
+
+            <h2><span class="section-number">9</span>Datenschutz</h2>
+            <p>Der Schutz Ihrer personenbezogenen Daten ist uns wichtig. Details zur Datenverarbeitung entnehmen Sie bitte unserer Datenschutzrichtlinie.</p>
+
+            <h2><span class="section-number">10</span>Streitbeilegung</h2>
+            
+            <h3>10.1 Außergerichtliche Streitbeilegung</h3>
+            <p>Wir sind grundsätzlich bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+            
+            <h3>10.2 Online-Streitbeilegung</h3>
+            <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <strong>https://ec.europa.eu/consumers/odr</strong></p>
+
+            <h2><span class="section-number">11</span>Anwendbares Recht und Gerichtsstand</h2>
+            
+            <h3>11.1 Anwendbares Recht</h3>
+            <p>Es gilt ausschließlich deutsches Recht unter Ausschluss des UN-Kaufrechts (CISG).</p>
+            
+            <h3>11.2 Gerichtsstand</h3>
+            <p>Gerichtsstand für alle Streitigkeiten ist, soweit gesetzlich zulässig, der Sitz des Anbieters.</p>
+
+            <div class="legal-box">
+                <p><strong>Verbraucher:</strong> Für Verbraucher gelten die vorstehenden Regelungen nur, soweit hierdurch der durch zwingende Bestimmungen des Rechts des Staates des gewöhnlichen Aufenthaltes des Verbrauchers gewährte Schutz nicht entzogen wird.</p>
+            </div>
+
+            <h2><span class="section-number">12</span>Salvatorische Klausel</h2>
+            <p>Sollten einzelne Bestimmungen dieser Nutzungsbedingungen unwirksam oder undurchführbar sein oder nach Vertragsschluss unwirksam oder undurchführbar werden, bleibt davon die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+            <p>An die Stelle der unwirksamen oder undurchführbaren Bestimmung soll diejenige wirksame und durchführbare Regelung treten, deren Wirkungen der wirtschaftlichen Zielsetzung am nächsten kommen, die die Vertragsparteien mit der unwirksamen bzw. undurchführbaren Bestimmung verfolgt haben.</p>
+
+            <h2><span class="section-number">13</span>Sprache</h2>
+            <p>Vertragssprache ist Deutsch. Sollten Übersetzungen dieser Nutzungsbedingungen in andere Sprachen von der deutschen Version abweichen, ist die deutsche Version maßgebend.</p>
+
+            <div class="warning-box">
+                <p><strong>Rechtlicher Hinweis:</strong> Diese Nutzungsbedingungen stellen eine allgemeine Vorlage dar. Für spezifische Geschäftsmodelle und rechtliche Anforderungen sollten Sie rechtliche Beratung in Anspruch nehmen.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>© 2024 - Allgemeine Nutzungsbedingungen</strong></p>
+            <p>Diese Bedingungen entsprechen den aktuellen rechtlichen Anforderungen in Deutschland</p>
+            <p><strong>Stand:</strong> Dezember 2024</p>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+</body>
+</html>
