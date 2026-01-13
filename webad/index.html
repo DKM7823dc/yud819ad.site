@@ -73,19 +73,25 @@
 </head>
 <body class="h-screen w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
 
-    <!-- 背景图片层 (直接使用 img 标签) -->
+    <!-- 
+        修复说明：
+        1. 添加 playsinline: 允许在 iOS 上内联播放，不强制全屏。
+        2. 添加 webkit-playsinline: 兼容旧版 iOS WebKit。
+        建议：如果可能，添加 poster="img/poster.jpg" 属性作为视频加载失败或省电模式下的封面图。
+    -->
     <video 
         src="img/2.mp4" 
         autoplay 
         loop 
         muted 
+        playsinline
+        webkit-playsinline
         class="absolute w-full h-full object-cover z-0"
     >
         Your browser does not support the video tag.
     </video>
 
     <!-- 黑色遮罩，确保文字可读 -->
-    <!-- 修改：移除了 backdrop-blur-[2px]，并将透明度从 50 降至 30 -->
     <div class="absolute inset-0 bg-black/30 z-0"></div>
 
     <!-- 导航栏 (绝对定位顶部) -->
