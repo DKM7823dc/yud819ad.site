@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击限制测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 20px;
+            color: #dc3545;
+            font-weight: bold;
+            text-align: center;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="k2()">点击跳转 (每天限3次)</button>
+    <div id="message"></div>
+
+    <script>
+        // 定义常量
+        const MAX_CLICKS_PER_DAY = 3; // 每天允许点击次数
+        const STORAGE_KEY = 'user_click_data'; 
+
+        function k2() {
+            const messageDiv = document.getElementById('message');
+            const now = new Date();
+            // 获取当前日期字符串，格式为 YYYY-MM-DD
+            const todayStr = now.toISOString().split('T')[0]; 
+
+            // 获取存储的数据
+            const storedData = localStorage.getItem(STORAGE_KEY);
+            let data = null;
+
+            if (storedData) {
+                try {
+                    data = JSON.parse(storedData);
+                } catch (e) {
+                    data = null;
+                }
+            }
+
+            // 逻辑判断
+            if (data && data.date === todayStr) {
+                // 如果记录存在，且日期是今天
+                if (data.count >= MAX_CLICKS_PER_DAY) {
+                    // 次数已用完
+                    messageDiv.innerText = `今天次数已用完（${data.count}/${MAX_CLICKS_PER_DAY}），请明天再来。`;
+                    return; // 阻止跳转
+                } else {
+                    // 还是今天，但次数没用完，次数+1
+                    data.count++;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                }
+            } else {
+                // 如果没有记录，或者记录的日期不是今天
+                // 重置为今天的第一次
+                data = {
+                    date: todayStr,
+                    count: 1
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            }
+
+            // 接粉链接配置 - 立即跳转
+            window.location.href = "https://ssxxwd.top/Nuhjqa";
+        }
+    </script>
+</body>
+</html>
