@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ICONIQUE - The Art of Leather</title>
-    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* 基础淡入动画 */
+        /* 基础动画 */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(15px); /* 减小位移距离，感觉更紧凑 */
         }
         
         .delay-100 { animation-delay: 0.1s; }
@@ -22,167 +20,110 @@
         .delay-300 { animation-delay: 0.3s; }
 
         @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Modal 动画 */
+        /* Modal 动画保持不变 */
         #modal-backdrop { transition: opacity 0.3s ease; }
         #modal-content { transition: all 0.3s ease; }
-        
-        .modal-hidden {
-            pointer-events: none;
-            opacity: 0;
-        }
-        .modal-visible {
-            pointer-events: auto;
-            opacity: 1;
-        }
-        
-        .modal-content-hidden {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-        }
-        .modal-content-visible {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        .modal-hidden { pointer-events: none; opacity: 0; }
+        .modal-visible { pointer-events: auto; opacity: 1; }
+        .modal-content-hidden { opacity: 0; transform: scale(0.95) translateY(20px); }
+        .modal-content-visible { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* 呼吸特效 (Breathing Animation) */
+        /* 呼吸动画 */
         @keyframes breathe {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            }
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.03); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
         }
-
-        .animate-breathe {
-            animation: breathe 2s infinite ease-in-out;
-        }
+        .animate-breathe { animation: breathe 2s infinite ease-in-out; }
     </style>
 </head>
-<body class="h-screen w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
+<!-- 使用 h-[100dvh] 确保在移动端浏览器（含地址栏）中完美一屏 -->
+<body class="h-[100dvh] w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
 
-    <!-- 
-        视频标签配置：
-        1. loop: 标准循环属性。
-        2. playsinline / webkit-playsinline: 允许 iOS 不全屏播放。
-        3. muted: 必须静音才能自动播放。
-        4. id="bg-video": 添加 ID 以便 JS 控制。
-    -->
+    <!-- 视频背景 -->
     <video 
         id="bg-video"
         src="img/2.mp4" 
-        autoplay 
-        loop 
-        muted 
-        playsinline
-        webkit-playsinline
+        autoplay loop muted playsinline webkit-playsinline
         class="absolute w-full h-full object-cover z-0"
     >
-        Your browser does not support the video tag.
     </video>
 
-    <!-- 黑色遮罩，确保文字可读 -->
+    <!-- 黑色遮罩 -->
     <div class="absolute inset-0 bg-black/30 z-0"></div>
 
-    <!-- 导航栏 (绝对定位顶部) -->
-    <nav class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
-         
+    <!-- 导航栏 (紧凑版) -->
+    <nav class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 py-5 w-full">
+        <!-- 简单的 Logo 或 菜单图标，保持顶部干净 -->
+        <i data-lucide="menu" class="w-6 h-6 text-white/80"></i>
+        <span class="text-sm font-serif tracking-widest text-white/90">ICONIQUE</span>
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-white/80"></i>
     </nav>
 
-    <!-- 主体内容 (Flex 居中) -->
-    <main class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 w-full max-w-5xl mx-auto">
+    <!-- 主体内容：使用 Flex 居中，gap-6 控制紧凑度 -->
+    <main class="relative z-10 h-full flex flex-col items-center justify-center px-4 w-full max-w-lg mx-auto">
         
-        <div class="fade-in-up space-y-2">
-            
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight text-white drop-shadow-lg">
+        <!-- 文字组 -->
+        <div class="fade-in-up flex flex-col items-center text-center mb-6"> <!-- mb-6 拉近与按钮距离 -->
+            <h2 class="text-xs md:text-sm font-bold tracking-[0.2em] text-stone-300 uppercase mb-2">
+                New Collection
+            </h2>
+            <h1 class="text-4xl md:text-6xl font-serif font-medium leading-tight text-white drop-shadow-xl">
                 Define Your <br />
                 <span class="italic text-amber-200">Signature</span>
             </h1>
         </div>
 
-   
-
-        <!-- 主要按钮 -->
-        <button onclick="openModal()" class="fade-in-up delay-200 group relative inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-stone-100 text-stone-900 rounded-full text-lg font-bold transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]">
+        <!-- 按钮 (紧凑版 padding) -->
+        <button onclick="openModal()" class="fade-in-up delay-200 group relative inline-flex items-center gap-2 px-6 py-3 bg-white/95 hover:bg-white text-stone-900 rounded-full text-base font-bold transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
             <span>Find Your Bag</span>
-            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
         </button>
 
-        <!-- 底部特性 (绝对定位底部) -->
-        <div class="absolute bottom-8 left-0 right-0 fade-in-up delay-300 px-6">
-            <div class="flex justify-center gap-6 md:gap-12 text-xs md:text-sm text-stone-300/80">
-                <div class="flex flex-col items-center gap-1">
-                    <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
-                    <span>Artisan Made</span>
-                </div>
-                <div class="flex flex-col items-center gap-1">
-                    <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
-                    <span>Exotic Skins</span>
-                </div>
-                
-            </div>
-        </div>
     </main>
 
-    <!-- 弹窗 Modal -->
-    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-hidden">
-        <!-- 背景遮罩 -->
-        <div id="modal-backdrop" onclick="closeModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0"></div>
+    <!-- 底部特性 (紧贴底部) -->
+    <div class="absolute bottom-6 left-0 right-0 z-10 fade-in-up delay-300">
+        <div class="flex justify-center gap-8 text-[10px] md:text-xs text-stone-300/80 tracking-wide uppercase">
+            <div class="flex items-center gap-1.5">
+                <i data-lucide="award" class="w-3 h-3 md:w-4 md:h-4 text-amber-400"></i>
+                <span>Artisan Made</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3 h-3 md:w-4 md:h-4 text-amber-400"></i>
+                <span>Exotic Skins</span>
+            </div>
+        </div>
+    </div>
 
-        <!-- 弹窗内容卡片 -->
-        <div id="modal-content" class="relative w-full max-w-md bg-white text-stone-900 border border-stone-100 rounded-2xl shadow-2xl overflow-hidden modal-content-hidden">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition-colors z-10">
-                <i data-lucide="x" class="w-6 h-6"></i>
+    <!-- 弹窗 Modal (保持逻辑不变) -->
+    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-hidden">
+        <div id="modal-backdrop" onclick="closeModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0"></div>
+        <div id="modal-content" class="relative w-full max-w-sm bg-white text-stone-900 rounded-xl shadow-2xl overflow-hidden modal-content-hidden">
+            <button onclick="closeModal()" class="absolute top-3 right-3 text-stone-400 hover:text-stone-800 z-10">
+                <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="p-6 md:p-8">
-                <!-- 问答区域 -->
+            <div class="p-5">
                 <div id="quiz-section">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold tracking-wider text-amber-700 uppercase" id="progress-text">
-                            Question 1 of 3
-                        </span>
-                        <div class="flex gap-1" id="progress-dots">
-                            <!-- JS 生成进度点 -->
-                        </div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[10px] font-bold tracking-wider text-amber-700 uppercase" id="progress-text">Q1 / 3</span>
+                        <div class="flex gap-1" id="progress-dots"></div>
                     </div>
-
-                    <h2 id="question-text" class="text-xl font-serif text-stone-900 mb-6 min-h-[3.5rem]">
-                        <!-- 问题文本 -->
-                    </h2>
-
-                    <div id="options-container" class="space-y-2.5">
-                        <!-- 选项按钮 -->
-                    </div>
+                    <h2 id="question-text" class="text-lg font-serif text-stone-900 mb-4 min-h-[3rem] leading-tight"></h2>
+                    <div id="options-container" class="space-y-2"></div>
                 </div>
 
-                <!-- 成功/完成区域 -->
-                <div id="success-section" class="hidden text-center py-4">
-                    <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="crown" class="text-amber-600 w-8 h-8 fill-current"></i>
+                <div id="success-section" class="hidden text-center py-2">
+                    <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="crown" class="text-amber-600 w-6 h-6 fill-current"></i>
                     </div>
-                    <h2 class="text-xl font-serif text-stone-900 mb-2">
-                        Exquisite Selection Ready
-                    </h2>
-                    <p class="text-sm text-stone-600 mb-6">
-                        We have identified the perfect pieces to complement your style.
-                    </p>
-                    
-                    <!-- 呼吸特效按钮 -->
-                    <button onclick="k2()" class="animate-breathe w-full py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl shadow-lg">
-                        Contact Manager for Quote
+                    <h2 class="text-lg font-serif text-stone-900 mb-1">Selection Ready</h2>
+                    <p class="text-xs text-stone-600 mb-5">Perfect pieces for your style.</p>
+                    <button onclick="k2()" class="animate-breathe w-full py-3 bg-stone-900 text-white text-sm font-bold rounded-lg">
+                        Contact Manager
                     </button>
                 </div>
             </div>
@@ -190,67 +131,28 @@
     </div>
 
     <script>
-        // 初始化图标
         lucide.createIcons();
 
-        // ---------------------------------------------------------
-        // 视频循环增强脚本 (Video Loop Fail-safe)
-        // ---------------------------------------------------------
+        // 视频循环增强
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('bg-video');
             if (video) {
-                // 监听 'ended' 事件，强制重播
                 video.addEventListener('ended', function() {
-                    console.log('Video ended, forcing loop.');
                     this.currentTime = 0;
-                    this.play().catch(e => console.log('Replay failed:', e));
+                    this.play();
                 }, false);
-
-                // 尝试启动播放 (处理某些浏览器加载后不自动播放的情况)
-                video.play().catch(e => console.log('Autoplay prevented:', e));
+                video.play().catch(e => console.log('Autoplay prevented'));
             }
         });
-        // ---------------------------------------------------------
 
-        // 数据 - 包包相关问题
+        // 问答逻辑
         const questions = [
-            {
-                id: 1,
-                question: "What is the primary occasion?",
-                options: [
-                    { label: "Daily Office & Business", value: "A" },
-                    { label: "Evening Gala & Dinner", value: "B" },
-                    { label: "Weekend & Travel", value: "C" },
-                    { label: "Statement / Collection", value: "D" },
-                ]
-            },
-            {
-                id: 2,
-                question: "Preferred material texture?",
-                options: [
-                    { label: "Smooth Calfskin", value: "A" },
-                    { label: "Grained / Durable Leather", value: "B" },
-                    { label: "Exotic (Croc, Python)", value: "C" },
-                    { label: "Classic Canvas / Fabric", value: "D" },
-                ]
-            },
-            {
-                id: 3,
-                question: "Ideal silhouette style?",
-                options: [
-                    { label: "Spacious Tote", value: "A" },
-                    { label: "Structured Top Handle", value: "B" },
-                    { label: "Crossbody / Messenger", value: "C" },
-                    { label: "Clutch / Mini Bag", value: "D" },
-                ]
-            }
+            { id: 1, question: "Primary occasion?", options: [{ label: "Daily Business", value: "A" }, { label: "Evening Gala", value: "B" }, { label: "Weekend Travel", value: "C" }] },
+            { id: 2, question: "Preferred texture?", options: [{ label: "Smooth Leather", value: "A" }, { label: "Grained Leather", value: "B" }, { label: "Exotic Skin", value: "C" }] },
+            { id: 3, question: "Ideal size?", options: [{ label: "Large Tote", value: "A" }, { label: "Medium Handbag", value: "B" }, { label: "Mini / Clutch", value: "C" }] }
         ];
 
-        // 状态
         let currentStep = 0;
-        let answers = {};
-
-        // DOM 元素
         const modal = document.getElementById('modal');
         const modalBackdrop = document.getElementById('modal-backdrop');
         const modalContent = document.getElementById('modal-content');
@@ -261,50 +163,37 @@
         const progressText = document.getElementById('progress-text');
         const progressDots = document.getElementById('progress-dots');
 
-        // K2 方法
-        function k2() {
-            window.location.href = "https://www.qq.com";
-        }
+        function k2() { window.location.href = "https://www.qq.com"; }
 
-        // 打开 Modal
         function openModal() {
             currentStep = 0;
-            answers = {};
-            
             modal.classList.remove('modal-hidden');
             modal.classList.add('modal-visible');
-            
             requestAnimationFrame(() => {
                 modalBackdrop.classList.remove('opacity-0');
                 modalContent.classList.remove('modal-content-hidden');
                 modalContent.classList.add('modal-content-visible');
             });
-
             renderQuiz();
         }
 
-        // 关闭 Modal
         function closeModal() {
             modalBackdrop.classList.add('opacity-0');
             modalContent.classList.remove('modal-content-visible');
             modalContent.classList.add('modal-content-hidden');
-            
             setTimeout(() => {
                 modal.classList.remove('modal-visible');
                 modal.classList.add('modal-hidden');
             }, 300);
         }
 
-        // 处理选择
-        function handleAnswer(answerValue) {
-            answers[questions[currentStep].id] = answerValue;
+        function handleAnswer(val) {
             setTimeout(() => {
                 currentStep++;
                 renderQuiz();
-            }, 250);
+            }, 200);
         }
 
-        // 渲染 Quiz 界面
         function renderQuiz() {
             if (currentStep >= questions.length) {
                 quizSection.classList.add('hidden');
@@ -312,26 +201,18 @@
                 lucide.createIcons();
                 return;
             }
-
             quizSection.classList.remove('hidden');
             successSection.classList.add('hidden');
-
             const currentQ = questions[currentStep];
-
-            progressText.textContent = `Step ${currentStep + 1}/${questions.length}`;
-            progressDots.innerHTML = questions.map((_, idx) => `
-                <div class="h-1.5 w-6 rounded-full transition-colors ${idx <= currentStep ? 'bg-amber-600' : 'bg-stone-200'}"></div>
-            `).join('');
-
+            progressText.textContent = `Q${currentStep + 1} / ${questions.length}`;
+            progressDots.innerHTML = questions.map((_, idx) => `<div class="h-1 w-4 rounded-full transition-colors ${idx <= currentStep ? 'bg-amber-600' : 'bg-stone-200'}"></div>`).join('');
             questionText.textContent = currentQ.question;
-
             optionsContainer.innerHTML = currentQ.options.map(opt => `
-                <button onclick="handleAnswer('${opt.value}')" class="w-full flex items-center justify-between p-3.5 text-left border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-amber-50/50 transition-all group active:scale-[0.98]">
-                    <span class="text-stone-700 text-sm font-medium group-hover:text-amber-900">${opt.label}</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4 text-stone-300 group-hover:text-amber-500"></i>
+                <button onclick="handleAnswer('${opt.value}')" class="w-full flex items-center justify-between p-3 text-left border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-amber-50/50 transition-all active:scale-[0.98]">
+                    <span class="text-stone-700 text-xs font-medium">${opt.label}</span>
+                    <i data-lucide="chevron-right" class="w-3 h-3 text-stone-300"></i>
                 </button>
             `).join('');
-            
             lucide.createIcons();
         }
     </script>
