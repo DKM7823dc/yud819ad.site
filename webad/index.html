@@ -10,9 +10,9 @@
     <style>
         /* 基础动画 */
         .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 更优雅的缓动 */
             opacity: 0;
-            transform: translateY(15px); /* 减小位移距离，感觉更紧凑 */
+            transform: translateY(30px);
         }
         
         .delay-100 { animation-delay: 0.1s; }
@@ -23,7 +23,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Modal 动画保持不变 */
+        /* Modal 动画 */
         #modal-backdrop { transition: opacity 0.3s ease; }
         #modal-content { transition: all 0.3s ease; }
         .modal-hidden { pointer-events: none; opacity: 0; }
@@ -39,7 +39,6 @@
         .animate-breathe { animation: breathe 2s infinite ease-in-out; }
     </style>
 </head>
-<!-- 使用 h-[100dvh] 确保在移动端浏览器（含地址栏）中完美一屏 -->
 <body class="h-[100dvh] w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
 
     <!-- 视频背景 -->
@@ -54,51 +53,53 @@
     <!-- 黑色遮罩 -->
     <div class="absolute inset-0 bg-black/30 z-0"></div>
 
-    <!-- 导航栏 (紧凑版) -->
-    <nav class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 py-5 w-full">
-        <!-- 简单的 Logo 或 菜单图标，保持顶部干净 -->
+    <!-- 导航栏 -->
+    <nav class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-6 w-full">
         <i data-lucide="menu" class="w-6 h-6 text-white/80"></i>
         <span class="text-sm font-serif tracking-widest text-white/90">ICONIQUE</span>
         <i data-lucide="shopping-bag" class="w-5 h-5 text-white/80"></i>
     </nav>
 
-    <!-- 主体内容：使用 Flex 居中，gap-6 控制紧凑度 -->
+    <!-- 主体内容 -->
     <main class="relative z-10 h-full flex flex-col items-center justify-center px-4 w-full max-w-lg mx-auto">
         
-        <!-- 文字组 -->
-        <div class="fade-in-up flex flex-col items-center text-center mb-6"> <!-- mb-6 拉近与按钮距离 -->
-            <h2 class="text-xs md:text-sm font-bold tracking-[0.2em] text-stone-300 uppercase mb-2">
+        <!-- 文字组：
+             -mt-24: 负边距，将整体向上提
+             mb-32: 巨大的下边距，将下方的按钮用力推向底部
+        -->
+        <div class="fade-in-up flex flex-col items-center text-center mb-32 -mt-24"> 
+            <h2 class="text-xs md:text-sm font-bold tracking-[0.25em] text-stone-300 uppercase mb-4">
                 New Collection
             </h2>
-            <h1 class="text-4xl md:text-6xl font-serif font-medium leading-tight text-white drop-shadow-xl">
+            <h1 class="text-5xl md:text-7xl font-serif font-medium leading-tight text-white drop-shadow-2xl">
                 Define Your <br />
-                <span class="italic text-amber-200">Signature</span>
+                <span class="italic text-amber-200 block mt-1">Signature</span>
             </h1>
         </div>
 
-        <!-- 按钮 (紧凑版 padding) -->
-        <button onclick="openModal()" class="fade-in-up delay-200 group relative inline-flex items-center gap-2 px-6 py-3 bg-white/95 hover:bg-white text-stone-900 rounded-full text-base font-bold transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+        <!-- 按钮：被上方的 mb-32 推到了下面 -->
+        <button onclick="openModal()" class="fade-in-up delay-200 group relative inline-flex items-center gap-3 px-8 py-4 bg-white/95 hover:bg-white text-stone-900 rounded-full text-base font-bold transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.15)]">
             <span>Find Your Bag</span>
             <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
         </button>
 
     </main>
 
-    <!-- 底部特性 (紧贴底部) -->
-    <div class="absolute bottom-6 left-0 right-0 z-10 fade-in-up delay-300">
-        <div class="flex justify-center gap-8 text-[10px] md:text-xs text-stone-300/80 tracking-wide uppercase">
+    <!-- 底部特性 -->
+    <div class="absolute bottom-8 left-0 right-0 z-10 fade-in-up delay-300">
+        <div class="flex justify-center gap-8 text-[10px] md:text-xs text-stone-300/70 tracking-wide uppercase">
             <div class="flex items-center gap-1.5">
-                <i data-lucide="award" class="w-3 h-3 md:w-4 md:h-4 text-amber-400"></i>
+                <i data-lucide="award" class="w-3 h-3 text-amber-400"></i>
                 <span>Artisan Made</span>
             </div>
             <div class="flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3 h-3 md:w-4 md:h-4 text-amber-400"></i>
+                <i data-lucide="sparkles" class="w-3 h-3 text-amber-400"></i>
                 <span>Exotic Skins</span>
             </div>
         </div>
     </div>
 
-    <!-- 弹窗 Modal (保持逻辑不变) -->
+    <!-- 弹窗 Modal -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-hidden">
         <div id="modal-backdrop" onclick="closeModal()" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0"></div>
         <div id="modal-content" class="relative w-full max-w-sm bg-white text-stone-900 rounded-xl shadow-2xl overflow-hidden modal-content-hidden">
@@ -106,23 +107,23 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="p-5">
+            <div class="p-6">
                 <div id="quiz-section">
-                    <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center justify-between mb-4">
                         <span class="text-[10px] font-bold tracking-wider text-amber-700 uppercase" id="progress-text">Q1 / 3</span>
                         <div class="flex gap-1" id="progress-dots"></div>
                     </div>
-                    <h2 id="question-text" class="text-lg font-serif text-stone-900 mb-4 min-h-[3rem] leading-tight"></h2>
-                    <div id="options-container" class="space-y-2"></div>
+                    <h2 id="question-text" class="text-xl font-serif text-stone-900 mb-6 min-h-[3.5rem] leading-tight"></h2>
+                    <div id="options-container" class="space-y-3"></div>
                 </div>
 
-                <div id="success-section" class="hidden text-center py-2">
-                    <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i data-lucide="crown" class="text-amber-600 w-6 h-6 fill-current"></i>
+                <div id="success-section" class="hidden text-center py-4">
+                    <div class="w-14 h-14 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="crown" class="text-amber-600 w-7 h-7 fill-current"></i>
                     </div>
-                    <h2 class="text-lg font-serif text-stone-900 mb-1">Selection Ready</h2>
-                    <p class="text-xs text-stone-600 mb-5">Perfect pieces for your style.</p>
-                    <button onclick="k2()" class="animate-breathe w-full py-3 bg-stone-900 text-white text-sm font-bold rounded-lg">
+                    <h2 class="text-xl font-serif text-stone-900 mb-2">Selection Ready</h2>
+                    <p class="text-sm text-stone-600 mb-6">We have curated pieces for your style.</p>
+                    <button onclick="k2()" class="animate-breathe w-full py-3.5 bg-stone-900 text-white text-sm font-bold rounded-lg shadow-lg">
                         Contact Manager
                     </button>
                 </div>
@@ -133,7 +134,6 @@
     <script>
         lucide.createIcons();
 
-        // 视频循环增强
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('bg-video');
             if (video) {
@@ -145,7 +145,6 @@
             }
         });
 
-        // 问答逻辑
         const questions = [
             { id: 1, question: "Primary occasion?", options: [{ label: "Daily Business", value: "A" }, { label: "Evening Gala", value: "B" }, { label: "Weekend Travel", value: "C" }] },
             { id: 2, question: "Preferred texture?", options: [{ label: "Smooth Leather", value: "A" }, { label: "Grained Leather", value: "B" }, { label: "Exotic Skin", value: "C" }] },
@@ -191,7 +190,7 @@
             setTimeout(() => {
                 currentStep++;
                 renderQuiz();
-            }, 200);
+            }, 250);
         }
 
         function renderQuiz() {
@@ -205,12 +204,12 @@
             successSection.classList.add('hidden');
             const currentQ = questions[currentStep];
             progressText.textContent = `Q${currentStep + 1} / ${questions.length}`;
-            progressDots.innerHTML = questions.map((_, idx) => `<div class="h-1 w-4 rounded-full transition-colors ${idx <= currentStep ? 'bg-amber-600' : 'bg-stone-200'}"></div>`).join('');
+            progressDots.innerHTML = questions.map((_, idx) => `<div class="h-1 w-5 rounded-full transition-colors ${idx <= currentStep ? 'bg-amber-600' : 'bg-stone-200'}"></div>`).join('');
             questionText.textContent = currentQ.question;
             optionsContainer.innerHTML = currentQ.options.map(opt => `
-                <button onclick="handleAnswer('${opt.value}')" class="w-full flex items-center justify-between p-3 text-left border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-amber-50/50 transition-all active:scale-[0.98]">
-                    <span class="text-stone-700 text-xs font-medium">${opt.label}</span>
-                    <i data-lucide="chevron-right" class="w-3 h-3 text-stone-300"></i>
+                <button onclick="handleAnswer('${opt.value}')" class="w-full flex items-center justify-between p-4 text-left border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-amber-50/50 transition-all active:scale-[0.98]">
+                    <span class="text-stone-700 text-sm font-medium">${opt.label}</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-stone-300"></i>
                 </button>
             `).join('');
             lucide.createIcons();
