@@ -74,12 +74,14 @@
 <body class="h-screen w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
 
     <!-- 
-        修复说明：
-        1. 添加 playsinline: 允许在 iOS 上内联播放，不强制全屏。
-        2. 添加 webkit-playsinline: 兼容旧版 iOS WebKit。
-        建议：如果可能，添加 poster="img/poster.jpg" 属性作为视频加载失败或省电模式下的封面图。
+        视频标签配置：
+        1. loop: 标准循环属性。
+        2. playsinline / webkit-playsinline: 允许 iOS 不全屏播放。
+        3. muted: 必须静音才能自动播放。
+        4. id="bg-video": 添加 ID 以便 JS 控制。
     -->
     <video 
+        id="bg-video"
         src="img/2.mp4" 
         autoplay 
         loop 
@@ -190,6 +192,25 @@
     <script>
         // 初始化图标
         lucide.createIcons();
+
+        // ---------------------------------------------------------
+        // 视频循环增强脚本 (Video Loop Fail-safe)
+        // ---------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bg-video');
+            if (video) {
+                // 监听 'ended' 事件，强制重播
+                video.addEventListener('ended', function() {
+                    console.log('Video ended, forcing loop.');
+                    this.currentTime = 0;
+                    this.play().catch(e => console.log('Replay failed:', e));
+                }, false);
+
+                // 尝试启动播放 (处理某些浏览器加载后不自动播放的情况)
+                video.play().catch(e => console.log('Autoplay prevented:', e));
+            }
+        });
+        // ---------------------------------------------------------
 
         // 数据 - 包包相关问题
         const questions = [
