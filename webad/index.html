@@ -74,44 +74,37 @@
 <body class="h-screen w-screen overflow-hidden bg-stone-900 text-white font-sans antialiased relative">
 
     <!-- 背景图片层 (直接使用 img 标签) -->
- <video 
-    src="img/1.mp4" 
-    autoplay 
-    loop 
-    muted 
-    class="absolute inset-0 w-full h-full object-cover z-0"
->
-    Your browser does not support the video tag.
-</video>
+    <video 
+        src="img/2.mp4" 
+        autoplay 
+        loop 
+        muted 
+        class="absolute w-full h-full object-cover z-0"
+    >
+        Your browser does not support the video tag.
+    </video>
 
     <!-- 黑色遮罩，确保文字可读 -->
-    <div class="absolute inset-0 bg-black/50 z-0 backdrop-blur-[2px]"></div>
+    <!-- 修改：移除了 backdrop-blur-[2px]，并将透明度从 50 降至 30 -->
+    <div class="absolute inset-0 bg-black/30 z-0"></div>
 
     <!-- 导航栏 (绝对定位顶部) -->
     <nav class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
-        <div class="flex items-center gap-2 text-white">
-            <i data-lucide="shopping-bag" class="w-6 h-6 stroke-[1.5]"></i>
-            <span class="text-lg font-serif tracking-widest font-bold">ICONIQUE</span>
-        </div>
+         
     </nav>
 
     <!-- 主体内容 (Flex 居中) -->
     <main class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 w-full max-w-5xl mx-auto">
         
         <div class="fade-in-up space-y-2">
-            <span class="inline-block py-1 px-3 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-100 text-xs font-medium tracking-wider uppercase mb-4 backdrop-blur-md">
-                Private Collection
-            </span>
+            
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight text-white drop-shadow-lg">
                 Define Your <br />
                 <span class="italic text-amber-200">Signature</span>
             </h1>
         </div>
 
-        <p class="fade-in-up delay-100 text-base md:text-xl text-stone-200 max-w-lg mt-6 mb-10 font-light leading-relaxed drop-shadow-md">
-            Timeless silhouettes. Unmatched craftsmanship. <br class="hidden md:block" />
-            Carry a legacy of elegance wherever you go.
-        </p>
+   
 
         <!-- 主要按钮 -->
         <button onclick="openModal()" class="fade-in-up delay-200 group relative inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-stone-100 text-stone-900 rounded-full text-lg font-bold transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]">
@@ -130,10 +123,7 @@
                     <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
                     <span>Exotic Skins</span>
                 </div>
-                <div class="flex flex-col items-center gap-1">
-                    <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
-                    <span>Authentic</span>
-                </div>
+                
             </div>
         </div>
     </main>
