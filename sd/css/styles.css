@@ -1,0 +1,233 @@
+﻿:root {
+    --main-color: #00B900;
+    --light-text: rgba(255,255,255,0.9);
+    --dark-text: #333;
+    --default-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    --hover-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    --transition-duration: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.carousel-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    touch-action: pan-y;
+    background-color: #f5f5f5;
+}
+
+.track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.image-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+.fallback-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    color: #666;
+    font-size: 16px;
+}
+
+.navigation {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+    background: rgba(0,0,0,0.3);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all var(--transition-duration);
+}
+
+.nav-dot.active {
+    background: white;
+    width: 20px;
+    border-radius: 5px;
+}
+
+.cta-section {
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.cta-container {
+    padding: 25px 20px 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--main-color);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: var(--default-shadow);
+    transition: all var(--transition-duration);
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    width: auto;
+    max-width: 90%;
+    animation: pulse 1.5s infinite;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+footer {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-link {
+    color: var(--main-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color var(--transition-duration);
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    color: #008000;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    .cta-container {
+        padding: 20px 15px 8px;
+    }
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+    .navigation {
+        top: 15px;
+    }
+    .slide:nth-child(1),
+    .slide:nth-child(2),
+    .slide:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-container {
+        padding: 15px 10px 5px;
+    }
+    .cta-button {
+        padding: 10px 25px;
+        font-size: 15px;
+    }
+    .navigation {
+        top: 10px;
+    }
+    .footer-link {
+        font-size: 13px;
+    }
+}
