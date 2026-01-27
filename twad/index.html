@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>期待和你的緣分</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 確保背景圖覆蓋整個屏幕且不重複 */
+        .bg-custom {
+            background-image: url('img/1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* 添加一個微妙的動畫給按鈕 */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+        }
+        
+        .btn-pulse {
+            animation: pulse-soft 2s infinite;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden m-0 p-0 font-sans">
+
+    <!-- 背景容器 -->
+    <div class="relative w-full h-full bg-custom flex flex-col justify-center items-center">
+        
+        <!-- 黑色半透明遮罩，讓文字更清晰 -->
+        <div class="absolute inset-0 bg-black/40 z-0"></div>
+
+        <!-- 內容區域 -->
+        <div class="relative z-10 flex flex-col items-center justify-center space-y-8 px-4 text-center w-full max-w-md">
+            
+            <!-- 主標題 -->
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-wider drop-shadow-lg">
+                期待和你的緣分
+            </h1>
+
+            <!-- 裝飾線條 -->
+            <div class="w-16 h-1 bg-white/80 rounded-full"></div>
+
+             
+
+            <!-- 行動號召按鈕 -->
+            <button onclick="k2()" class="btn-pulse mt-8 px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xl font-bold rounded-full shadow-xl transition-all duration-300 transform active:scale-95 border border-white/20 backdrop-blur-sm">
+                和我聯繫
+            </button>
+
+        </div>
+
+        <!-- 底部版權/提示 (可選) -->
+      
+    </div>
+
+    <script>
+        // 定義 k2 方法
+        function k2() {
+            // 這裡可以加入統計代碼或其他邏輯
+            console.log("k2 function triggered");
+            
+            // 跳轉邏輯
+            window.location.href = "http://www.QQ.COM";
+        }
+    </script>
+</body>
+</html>
