@@ -3,104 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roami eSIM - Специальное предложение</title>
-    <!-- 引入 Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Roami eSIM</title>
+    <!-- 邮件客户端通常忽略 head 中的样式，所以关键样式都写在了内联 style 中 -->
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-        }
+        /* 针对部分客户端的基础重置 */
+        body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+<body style="background-color: #f8fafc; margin: 0; padding: 20px;">
 
-    <!-- 主卡片 -->
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
-        
-        <!-- 顶部品牌栏 -->
-        <div class="bg-blue-600 p-6 text-center">
-            <h1 class="text-2xl font-bold text-white tracking-wider">
-                Roami eSIM
-            </h1>
-        </div>
+    <!-- 居中容器 -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center">
+                <!-- 卡片主体 -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 480px; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    
+                    <!-- 顶部品牌栏 -->
+                    <tr>
+                        <td style="background-color: #2563eb; padding: 24px; text-align: center;">
+                            <h1 style="margin: 0; font-size: 24px; font-weight: bold; color: #ffffff; letter-spacing: 1px;">
+                                Roami eSIM
+                            </h1>
+                        </td>
+                    </tr>
 
-        <!-- 主要内容 -->
-        <div class="p-8 space-y-8">
-            
-            <!-- 标题 -->
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl font-bold text-slate-800 leading-tight">
-                    Спасибо за загрузку Roami eSIM!
-                </h2>
-            </div>
+                    <!-- 主要内容区域 -->
+                    <tr>
+                        <td style="padding: 32px 24px;">
+                            
+                            <!-- 标题 -->
+                            <div style="text-align: center; margin-bottom: 24px;">
+                                <h2 style="margin: 0; font-size: 22px; font-weight: bold; color: #1e293b; line-height: 1.3;">
+                                    Спасибо за загрузку Roami eSIM!
+                                </h2>
+                            </div>
 
-            <!-- 价值主张 -->
-            <div class="space-y-4">
-                <p class="font-semibold text-slate-700 text-lg">
-                    Мы за простоту и прозрачность:
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-start">
-                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">✓</span>
-                        <span class="text-slate-600">Никаких сложных подписок</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">✓</span>
-                        <span class="text-slate-600">Никаких скрытых условий</span>
-                    </li>
-                </ul>
-            </div>
+                            <!-- 价值主张 -->
+                            <div style="margin-bottom: 24px;">
+                                <p style="font-weight: 600; color: #334155; font-size: 16px; margin-bottom: 12px;">
+                                    Мы за простоту и прозрачность:
+                                </p>
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="vertical-align: top; padding-bottom: 8px;">
+                                            <span style="display: inline-block; width: 20px; height: 20px; background-color: #dcfce7; color: #16a34a; border-radius: 50%; text-align: center; line-height: 20px; font-size: 12px; font-weight: bold; margin-right: 10px;">✓</span>
+                                        </td>
+                                        <td style="vertical-align: top; color: #475569; font-size: 15px; padding-bottom: 8px;">
+                                            Никаких сложных подписок
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top;">
+                                            <span style="display: inline-block; width: 20px; height: 20px; background-color: #dcfce7; color: #16a34a; border-radius: 50%; text-align: center; line-height: 20px; font-size: 12px; font-weight: bold; margin-right: 10px;">✓</span>
+                                        </td>
+                                        <td style="vertical-align: top; color: #475569; font-size: 15px;">
+                                            Никаких скрытых условий
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
-            <!-- 价格优势 -->
-            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                <p class="text-slate-800 text-sm leading-relaxed">
-                    Наслаждайтесь той же скоростью <span class="font-bold text-blue-700">5G</span>, но на 
-                    <span class="font-bold text-red-500 mx-1">25%–30% дешевле</span>, 
-                    чем у Airalo или Yesim.
-                </p>
-            </div>
+                            <!-- 价格优势 -->
+                            <div style="background-color: #f8fafc; border-radius: 12px; padding: 16px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
+                                <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.6;">
+                                    Наслаждайтесь той же скоростью <span style="font-weight: bold; color: #1d4ed8;">5G</span>, но на 
+                                    <span style="font-weight: bold; color: #ef4444;">25%–30% дешевле</span>, 
+                                    чем у Airalo или Yesim.
+                                </p>
+                            </div>
 
-            <!-- 核心赠品区域 (重点突出) -->
-            <div class="text-center space-y-4 pt-2">
-                <div class="text-4xl animate-bounce">🎁</div>
-                <h3 class="text-lg font-bold text-slate-800">
-                    Подарок за вашу поддержку
-                </h3>
-                
-                <!-- 1GB 突出显示框 -->
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-dashed border-blue-300 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
-                    <p class="text-slate-500 text-sm uppercase tracking-wide font-semibold mb-1">Бесплатно</p>
-                    <p class="text-4xl font-extrabold text-blue-600 leading-none">
-                        1 ГБ
-                    </p>
-                    <p class="text-blue-800 font-medium mt-1">интернета</p>
-                </div>
-            </div>
+                            <!-- 核心赠品区域 (重点突出 - 1GB) -->
+                            <div style="text-align: center; margin-bottom: 24px; padding-top: 10px;">
+                                <div style="font-size: 36px; margin-bottom: 10px;">🎁</div>
+                                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: bold; color: #1e293b;">
+                                    Подарок за вашу поддержку
+                                </h3>
+                                
+                                <!-- 1GB 突出显示框 -->
+                                <!-- 使用 dashed border 和浅蓝色背景来强调 -->
+                                <div style="background-color: #eff6ff; border: 2px dashed #93c5fd; border-radius: 12px; padding: 24px; margin: 0 auto;">
+                                    <p style="margin: 0 0 4px 0; color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Бесплатно</p>
+                                    <p style="margin: 0; font-size: 48px; font-weight: 800; color: #2563eb; line-height: 1;">
+                                        1 ГБ
+                                    </p>
+                                    <p style="margin: 4px 0 0 0; color: #1e40af; font-weight: 500; font-size: 16px;">интернета</p>
+                                </div>
+                            </div>
 
-            <!-- CTA 按钮 -->
-            <div class="pt-2">
-                <a 
-                    href="https://t.me/esim2026a" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl text-center transition-colors duration-200 shadow-lg shadow-blue-200 no-underline text-lg"
-                >
-                    Забрать в Telegram ➤
-                </a>
-                <p class="text-center text-xs text-slate-400 mt-3">
-                    Нажмите для перехода в Telegram
-                </p>
-            </div>
+                            <!-- CTA 按钮 -->
+                            <div style="margin-bottom: 20px;">
+                                <a href="https://t.me/esim2026a" target="_blank" style="display: block; width: 100%; background-color: #2563eb; color: #ffffff; font-weight: bold; padding: 16px 0; border-radius: 12px; text-align: center; text-decoration: none; font-size: 18px; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);">
+                                    Забрать в Telegram ➤
+                                </a>
+                                <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 12px;">
+                                    Нажмите для перехода в Telegram
+                                </p>
+                            </div>
 
-            <!-- 倒计时提示 -->
-            <div class="border-t border-slate-100 pt-4 text-center">
-                <p class="text-red-500 text-sm font-medium bg-red-50 inline-block px-3 py-1 rounded-full">
-                    ⏳ Осталось 3 дня
-                </p>
-            </div>
+                            <!-- 倒计时提示 -->
+                            <div style="border-top: 1px solid #f1f5f9; padding-top: 20px; text-align: center;">
+                                <span style="color: #ef4444; font-size: 14px; font-weight: 600; background-color: #fef2f2; padding: 6px 12px; border-radius: 9999px;">
+                                    ⏳ Осталось 3 дня
+                                </span>
+                            </div>
 
-        </div>
-    </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>
