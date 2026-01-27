@@ -6,7 +6,7 @@
     <title>期待和你的緣分</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 確保背景圖覆蓋整個屏幕且不重複 */
+        /* 背景圖設置 */
         .bg-custom {
             background-image: url('img/1.jpg');
             background-size: cover;
@@ -14,59 +14,83 @@
             background-repeat: no-repeat;
         }
         
-        /* 添加一個微妙的動畫給按鈕 */
+        /* 按鈕呼吸動畫 */
         @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
         }
         
         .btn-pulse {
             animation: pulse-soft 2s infinite;
         }
+
+        /* 確保文字陰影，增加對比度 */
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
-<body class="h-screen w-screen overflow-hidden m-0 p-0 font-sans">
+<body class="h-screen w-screen overflow-hidden m-0 p-0 font-sans text-white">
 
     <!-- 背景容器 -->
     <div class="relative w-full h-full bg-custom flex flex-col justify-center items-center">
         
-        <!-- 黑色半透明遮罩，讓文字更清晰 -->
-        <div class="absolute inset-0 bg-black/40 z-0"></div>
+        <!-- 黑色遮罩層：加深一點以確保文字在雜亂背景上可見 -->
+        <div class="absolute inset-0 bg-slate-900/60 z-0"></div>
 
-        <!-- 內容區域 -->
-        <div class="relative z-10 flex flex-col items-center justify-center space-y-8 px-4 text-center w-full max-w-md">
+        <!-- 主要內容區域 -->
+        <div class="relative z-10 w-full max-w-md px-6 flex flex-col items-center justify-center h-full">
             
-            <!-- 主標題 -->
-            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-wider drop-shadow-lg">
-                期待和你的緣分
-            </h1>
+            <!-- 頂部標題 -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold tracking-wider mb-2 text-shadow">
+                    期待和你的緣分
+                </h1>
+                <div class="h-1 w-20 bg-blue-500 mx-auto rounded-full"></div>
+            </div>
 
-            <!-- 裝飾線條 -->
-            <div class="w-16 h-1 bg-white/80 rounded-full"></div>
-
-             
+            <!-- 中間文案區塊 (帶有輕微毛玻璃背景) -->
+            <div class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 mb-8 shadow-lg">
+                <p class="text-center text-lg mb-6 font-medium leading-relaxed">
+                    我們是一個專注於<br>建立真誠交流的社交平台
+                </p>
+                
+                <!-- 列表區域 -->
+                <div class="space-y-3 pl-2">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xl">✔️</span>
+                        <span class="text-lg tracking-wide">認識志同道合的朋友</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xl">✔️</span>
+                        <span class="text-lg tracking-wide">分享生活與興趣</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xl">✔️</span>
+                        <span class="text-lg tracking-wide">擴展你的社交圈</span>
+                    </div>
+                </div>
+            </div>
 
             <!-- 行動號召按鈕 -->
-            <button onclick="k2()" class="btn-pulse mt-8 px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xl font-bold rounded-full shadow-xl transition-all duration-300 transform active:scale-95 border border-white/20 backdrop-blur-sm">
+            <button onclick="k2()" class="btn-pulse w-full max-w-xs py-4 bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-full shadow-xl transition-all duration-300 active:scale-95 border border-blue-400">
                 和我聯繫
             </button>
 
-        </div>
+            <!-- 底部版權 -->
+            <div class="absolute bottom-4 text-white/40 text-xs">
+                &copy; 2024 Social Connect.
+            </div>
 
-        <!-- 底部版權/提示 (可選) -->
-      
+        </div>
     </div>
 
     <script>
         // 定義 k2 方法
         function k2() {
-            // 這裡可以加入統計代碼或其他邏輯
-            console.log("k2 function triggered");
-            
             // 跳轉邏輯
             window.location.href = "https://sd1.xyz/p/yXHN93Zi";
         }
     </script>
 </body>
-
 </html>
