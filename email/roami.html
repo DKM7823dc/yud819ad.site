@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roami eSIM - Специальное предложение</title>
-    <!-- 引入 Tailwind CSS 以实现快速样式布局 -->
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 简单的自定义字体设置，确保俄语显示美观 */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
         }
@@ -15,7 +14,7 @@
 </head>
 <body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
 
-    <!-- 主卡片容器 -->
+    <!-- 主卡片 -->
     <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
         
         <!-- 顶部品牌栏 -->
@@ -25,7 +24,7 @@
             </h1>
         </div>
 
-        <!-- 主要内容区域 -->
+        <!-- 主要内容 -->
         <div class="p-8 space-y-8">
             
             <!-- 标题 -->
@@ -33,60 +32,58 @@
                 <h2 class="text-2xl font-bold text-slate-800 leading-tight">
                     Спасибо за загрузку Roami eSIM!
                 </h2>
-                <!-- 中文注释：感谢您下载 Roami eSIM! -->
             </div>
 
-            <!-- 价值主张列表 -->
+            <!-- 价值主张 -->
             <div class="space-y-4">
                 <p class="font-semibold text-slate-700 text-lg">
                     Мы за простоту и прозрачность:
                 </p>
-                
                 <ul class="space-y-3">
                     <li class="flex items-start">
-                        <!-- 使用 Unicode 字符代替 SVG -->
-                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">
-                            ✓
-                        </span>
+                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">✓</span>
                         <span class="text-slate-600">Никаких сложных подписок</span>
                     </li>
                     <li class="flex items-start">
-                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">
-                            ✓
-                        </span>
+                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 font-bold text-sm">✓</span>
                         <span class="text-slate-600">Никаких скрытых условий</span>
                     </li>
                 </ul>
             </div>
 
-            <!-- 价格对比高亮框 -->
-            <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
-                <p class="text-slate-800 leading-relaxed">
+            <!-- 价格优势 -->
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <p class="text-slate-800 text-sm leading-relaxed">
                     Наслаждайтесь той же скоростью <span class="font-bold text-blue-700">5G</span>, но на 
                     <span class="font-bold text-red-500 mx-1">25%–30% дешевле</span>, 
                     чем у Airalo или Yesim.
                 </p>
             </div>
 
-            <!-- 赠品区域 -->
+            <!-- 核心赠品区域 (重点突出) -->
             <div class="text-center space-y-4 pt-2">
-                <div class="text-4xl">🎁</div>
+                <div class="text-4xl animate-bounce">🎁</div>
                 <h3 class="text-lg font-bold text-slate-800">
                     Подарок за вашу поддержку
                 </h3>
-                <p class="text-slate-600">
-                    Мы дарим вам дополнительно <br/>
-                    <span class="font-bold text-blue-600 text-xl">1 ГБ интернета</span>
-                </p>
+                
+                <!-- 1GB 突出显示框 -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-dashed border-blue-300 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
+                    <p class="text-slate-500 text-sm uppercase tracking-wide font-semibold mb-1">Бесплатно</p>
+                    <p class="text-4xl font-extrabold text-blue-600 leading-none">
+                        1 ГБ
+                    </p>
+                    <p class="text-blue-800 font-medium mt-1">интернета</p>
+                </div>
             </div>
 
-            <!-- 行动号召按钮 (CTA) -->
+            <!-- CTA 按钮 -->
             <div class="pt-2">
                 <a 
                     href="https://t.me/esim2026a" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl text-center transition-colors duration-200 shadow-lg shadow-blue-200 no-underline"
+                    class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl text-center transition-colors duration-200 shadow-lg shadow-blue-200 no-underline text-lg"
                 >
                     Забрать в Telegram ➤
                 </a>
@@ -95,13 +92,10 @@
                 </p>
             </div>
 
-            <!-- 底部紧迫感提示 -->
+            <!-- 倒计时提示 -->
             <div class="border-t border-slate-100 pt-4 text-center">
                 <p class="text-red-500 text-sm font-medium bg-red-50 inline-block px-3 py-1 rounded-full">
                     ⏳ Осталось 3 дня
-                </p>
-                <p class="text-slate-400 text-xs mt-2">
-                    Предложение истекает автоматически
                 </p>
             </div>
 
