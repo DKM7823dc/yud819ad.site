@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFM模型分层简易版五步法</title>
+    <!-- 引入 Tailwind CSS 用于样式 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Chart.js 用于图表 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入 Lucide 用于图标 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- 头部 -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                </div>
+                <h1 class="text-xl font-bold text-slate-900">RFM 简易分层工具</h1>
+            </div>
+            <div class="text-sm text-slate-500 hidden md:block">
+                基于 R(最近购买)、F(频次)、M(金额) 的五步落地法
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-8 flex-grow w-full">
+        
+        <!-- 第一步：数据输入 -->
+        <div id="step1-container" class="fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+                <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                    准备数据
+                </h2>
+                <p class="text-slate-600 mb-6">
+                    请粘贴您的订单数据。格式要求：三列（用户邮箱, 订单日期, 订单金额），用逗号或制表符分隔。<br>
+                    <span class="text-sm text-slate-400">提示：您可以直接从 Excel 复制这三列粘贴到下方。</span>
+                </p>
+
+                <div class="relative">
+                    <textarea id="dataInput" 
+                        placeholder="用户邮箱,订单日期,订单金额&#10;user1@test.com,2023-10-01,100&#10;..."
+                        class="w-full h-64 p-4 font-mono text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none bg-slate-50"></textarea>
+                    <div class="absolute top-4 right-4">
+                        <button onclick="generateSampleData()" class="text-xs bg-white border border-slate-300 hover:bg-slate-50 text-slate-600 px-3 py-1 rounded shadow-sm transition-colors">
+                            生成模拟数据
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="processData()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                        <i data-lucide="calculator" class="w-4 h-4"></i>
+                        开始分析 (自动计算 R/F/M)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二步：分析结果仪表盘 (初始隐藏) -->
+        <div id="step2-container" class="hidden fade-in space-y-8">
+            
+            <!-- 统计卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-sm text-slate-500 mb-1">总用户数</div>
+                    <div class="text-3xl font-bold text-slate-900" id="stat-total-users">0</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-sm text-slate-500 mb-1">R值中位数 (天)</div>
+                    <div class="text-3xl font-bold text-blue-600" id="stat-median-r">0</div>
+                    <div class="text-xs text-slate-400 mt-1">≤ <span id="label-median-r"></span> 天为"高"</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-sm text-slate-500 mb-1">F值中位数 (次)</div>
+                    <div class="text-3xl font-bold text-blue-600" id="stat-median-f">0</div>
+                    <div class="text-xs text-slate-400 mt-1">≥ <span id="label-median-f"></span> 次为"高"</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="text-sm text-slate-500 mb-1">M值中位数 (元)</div>
+                    <div class="text-3xl font-bold text-blue-600" id="stat-median-m">0</div>
+                    <div class="text-xs text-slate-400 mt-1">≥ <span id="label-median-m"></span> 元为"高"</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 图表区域 -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-500"></i>
+                        用户分层分布
+                    </h3>
+                    <div class="h-80 w-full relative">
+                        <canvas id="rfmChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-slate-400 mt-2">点击图表条目可筛选下方详情及查看策略</p>
+                </div>
+
+                <!-- 策略展示区域 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-500"></i>
+                        行动策略
+                    </h3>
+                    
+                    <div id="strategy-content" class="flex-1 flex flex-col hidden">
+                        <div id="strategy-badge" class="text-white px-4 py-2 rounded-lg text-sm font-bold inline-block self-start mb-4">
+                            人群名称
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-xs text-slate-500 uppercase font-bold mb-1">用户特征</div>
+                                <div id="strategy-desc" class="text-slate-800 font-medium">描述</div>
+                                <div id="strategy-tags" class="flex gap-2 mt-2">
+                                    <!-- Tags injected here -->
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                                <div class="text-xs text-blue-600 uppercase font-bold mb-1">建议动作</div>
+                                <div id="strategy-action" class="text-blue-900 font-medium">
+                                    策略内容
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-6">
+                            <button onclick="exportCurrentSegment()" class="w-full py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="download" class="w-4 h-4"></i> 导出该人群名单
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="strategy-placeholder" class="flex-1 flex flex-col items-center justify-center text-center text-slate-400 p-4">
+                        <i data-lucide="help-circle" class="w-12 h-12 mb-4 opacity-20"></i>
+                        <p>请在左侧图表中点击某一人群<br>查看具体的运营策略</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 表格区域 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                    <h3 class="font-bold flex items-center gap-2">
+                        <i data-lucide="file-spreadsheet" class="w-5 h-5 text-slate-500"></i>
+                        用户明细表
+                        <span id="table-filter-label" class="text-sm font-normal text-slate-500"></span>
+                    </h3>
+                    <button id="reset-filter-btn" onclick="resetFilter()" class="text-sm text-blue-600 hover:text-blue-800 hidden">
+                        显示全部
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-500 font-medium">
+                            <tr>
+                                <th class="px-6 py-3">用户邮箱</th>
+                                <th class="px-6 py-3 text-right">R (天数)</th>
+                                <th class="px-6 py-3 text-right">F (频次)</th>
+                                <th class="px-6 py-3 text-right">M (金额)</th>
+                                <th class="px-6 py-3">RFM得分</th>
+                                <th class="px-6 py-3">所属分层</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body" class="divide-y divide-slate-100">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="table-footer" class="px-6 py-3 text-center text-xs text-slate-400 bg-slate-50 border-t border-slate-100 hidden">
+                    为保证性能，仅显示前 100 条数据
+                </div>
+            </div>
+
+            <div class="flex justify-center pb-8">
+                <button onclick="resetApp()" class="text-slate-500 hover:text-slate-800 flex items-center gap-2 text-sm">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    返回重新上传数据
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- 配置与常量 ---
+        const SEGMENT_STRATEGIES = {
+            '重要价值用户': { tags: ['R高', 'F高', 'M高'], desc: 'VIP大佬', strategy: '重点保护：专属客服、新品优先体验、送高额券', color: '#4f46e5' },
+            '重要深耕用户': { tags: ['R高', 'F高', 'M低'], desc: '常客但抠门', strategy: '提升价值：推高价商品、发满减券（满100减15）', color: '#0ea5e9' },
+            '重要唤回用户': { tags: ['R高', 'F低', 'M高'], desc: '新客/买大件', strategy: '培养习惯：发频次券（多张无门槛券）、推常购品', color: '#8b5cf6' },
+            '重要挽留用户': { tags: ['R高', 'F低', 'M低'], desc: '新客/试探者', strategy: '引导复购：发爆款秒杀券、推送促销信息', color: '#10b981' },
+            '潜力用户': { tags: ['R低', 'F高', 'M高'], desc: '沉睡的富豪', strategy: '大力召回：打电话、发大额优惠券（满200减50）', color: '#f59e0b' },
+            '一般用户': { tags: ['R低', 'F高', 'M低'], desc: '沉睡的熟客', strategy: '折扣唤醒：推送他们常买商品的折扣信息', color: '#f97316' },
+            '深耕用户': { tags: ['R低', 'F低', 'M高'], desc: '沉睡的鲸鱼', strategy: '尝试唤醒：推送新品/活动，效果不好可暂放弃', color: '#ec4899' },
+            '流失用户': { tags: ['R低', 'F低', 'M低'], desc: '过去的痕迹', strategy: '暂时放弃：低成本广撒网（朋友圈广告），或暂不运营', color: '#64748b' }
+        };
+
+        // --- 全局状态 ---
+        let globalUsers = [];
+        let currentChart = null;
+        let selectedSegment = null;
+
+        // --- 初始化图标 ---
+        lucide.createIcons();
+
+        // --- 核心逻辑 ---
+
+        // 1. 生成模拟数据
+        function generateSampleData() {
+            const today = new Date();
+            const data = [];
+            const emails = Array.from({ length: 50 }, (_, i) => `user${i + 1}@example.com`);
+            
+            for (let i = 0; i < 200; i++) {
+                const email = emails[Math.floor(Math.random() * emails.length)];
+                const daysAgo = Math.floor(Math.random() * 365); 
+                const date = new Date(today);
+                date.setDate(date.getDate() - daysAgo);
+                const amount = Math.floor(Math.random() * 500) + 50; 
+                
+                data.push({
+                    email,
+                    date: date.toISOString().split('T')[0],
+                    amount
+                });
+            }
+            
+            let csv = "用户邮箱,订单日期,订单金额\n";
+            data.forEach(row => {
+                csv += `${row.email},${row.date},${row.amount}\n`;
+            });
+            
+            document.getElementById('dataInput').value = csv;
+        }
+
+        // 2. 解析 CSV
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
+            
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                const parts = line.split(/,|\t/); 
+                if (parts.length >= 3) {
+                    data.push({
+                        email: parts[0].trim(),
+                        date: parts[1].trim(),
+                        amount: parseFloat(parts[2].trim()) || 0
+                    });
+                }
+            }
+            return data;
+        }
+
+        // 3. 计算中位数
+        function getMedian(values) {
+            if (values.length === 0) return 0;
+            const sorted = [...values].sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+        }
+
+        // 4. 主处理函数
+        function processData() {
+            const rawInput = document.getElementById('dataInput').value;
+            if (!rawInput) {
+                alert("请输入数据");
+                return;
+            }
+
+            const rawData = parseCSV(rawInput);
+            if (rawData.length === 0) {
+                alert("数据格式不正确，无法解析");
+                return;
+            }
+
+            // 聚合
+            const userMap = {};
+            const today = new Date();
+
+            rawData.forEach(row => {
+                if (!userMap[row.email]) {
+                    userMap[row.email] = { email: row.email, lastDate: new Date(row.date), orderCount: 0, totalAmount: 0 };
+                }
+                const orderDate = new Date(row.date);
+                if (orderDate > userMap[row.email].lastDate) userMap[row.email].lastDate = orderDate;
+                userMap[row.email].orderCount += 1;
+                userMap[row.email].totalAmount += row.amount;
+            });
+
+            const processedUsers = Object.values(userMap).map(u => {
+                const diffTime = Math.abs(today - u.lastDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                return { ...u, R: diffDays, F: u.orderCount, M: u.totalAmount };
+            });
+
+            // 计算中位数
+            const rValues = processedUsers.map(u => u.R);
+            const fValues = processedUsers.map(u => u.F);
+            const mValues = processedUsers.map(u => u.M);
+
+            const medianR = getMedian(rValues);
+            const medianF = getMedian(fValues);
+            const medianM = getMedian(mValues);
+
+            // 分层
+            globalUsers = processedUsers.map(u => {
+                const rScore = u.R <= medianR ? '高' : '低';
+                const fScore = u.F >= medianF ? '高' : '低';
+                const mScore = u.M >= medianM ? '高' : '低';
+
+                let segmentName = '';
+                if (rScore === '高' && fScore === '高' && mScore === '高') segmentName = '重要价值用户';
+                else if (rScore === '高' && fScore === '高' && mScore === '低') segmentName = '重要深耕用户';
+                else if (rScore === '高' && fScore === '低' && mScore === '高') segmentName = '重要唤回用户';
+                else if (rScore === '高' && fScore === '低' && mScore === '低') segmentName = '重要挽留用户';
+                else if (rScore === '低' && fScore === '高' && mScore === '高') segmentName = '潜力用户';
+                else if (rScore === '低' && fScore === '高' && mScore === '低') segmentName = '一般用户';
+                else if (rScore === '低' && fScore === '低' && mScore === '高') segmentName = '深耕用户';
+                else segmentName = '流失用户';
+
+                return { ...u, rScore, fScore, mScore, segment: segmentName };
+            });
+
+            // 更新 UI
+            updateDashboard(medianR, medianF, medianM);
+            
+            // 切换视图
+            document.getElementById('step1-container').classList.add('hidden');
+            document.getElementById('step2-container').classList.remove('hidden');
+        }
+
+        // 5. 更新仪表盘
+        function updateDashboard(mR, mF, mM) {
+            // 更新统计数字
+            document.getElementById('stat-total-users').innerText = globalUsers.length;
+            document.getElementById('stat-median-r').innerText = mR;
+            document.getElementById('label-median-r').innerText = mR;
+            document.getElementById('stat-median-f').innerText = mF;
+            document.getElementById('label-median-f').innerText = mF;
+            document.getElementById('stat-median-m').innerText = '¥' + mM.toFixed(0);
+            document.getElementById('label-median-m').innerText = mM.toFixed(0);
+
+            // 准备图表数据
+            const stats = {};
+            Object.keys(SEGMENT_STRATEGIES).forEach(k => stats[k] = 0);
+            globalUsers.forEach(u => stats[u.segment]++);
+
+            const labels = Object.keys(stats);
+            const data = labels.map(k => stats[k]);
+            const colors = labels.map(k => SEGMENT_STRATEGIES[k].color);
+
+            // 渲染图表
+            renderChart(labels, data, colors);
+
+            // 渲染表格（默认显示全部）
+            renderTable();
+        }
+
+        // 6. 渲染图表 (Chart.js)
+        function renderChart(labels, data, colors) {
+            const ctx = document.getElementById('rfmChart').getContext('2d');
+            
+            if (currentChart) currentChart.destroy();
+
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '用户数量',
+                        data: data,
+                        backgroundColor: colors,
+                        borderRadius: 4,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // 横向柱状图
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' 人';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: true, color: '#f1f5f9' } },
+                        y: { grid: { display: false } }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const segmentName = labels[index];
+                            selectSegment(segmentName);
+                        } else {
+                            // 点击空白处不取消，保持体验连贯，或者可以取消
+                            // selectSegment(null); 
+                        }
+                    }
+                }
+            });
+        }
+
+        // 7. 选中分层逻辑
+        function selectSegment(segmentName) {
+            selectedSegment = segmentName;
+            
+            // 更新策略面板
+            if (segmentName) {
+                const info = SEGMENT_STRATEGIES[segmentName];
+                document.getElementById('strategy-placeholder').classList.add('hidden');
+                document.getElementById('strategy-content').classList.remove('hidden');
+                
+                const badge = document.getElementById('strategy-badge');
+                badge.innerText = segmentName;
+                badge.style.backgroundColor = info.color;
+                
+                document.getElementById('strategy-desc').innerText = info.desc;
+                document.getElementById('strategy-action').innerText = info.strategy;
+                
+                const tagsContainer = document.getElementById('strategy-tags');
+                tagsContainer.innerHTML = info.tags.map(t => 
+                    `<span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded">${t}</span>`
+                ).join('');
+
+                // 更新表格标题和按钮
+                document.getElementById('table-filter-label').innerText = `(${segmentName})`;
+                document.getElementById('reset-filter-btn').classList.remove('hidden');
+            } else {
+                resetFilterUI();
+            }
+
+            // 重新渲染表格
+            renderTable();
+        }
+
+        function resetFilterUI() {
+            selectedSegment = null;
+            document.getElementById('strategy-content').classList.add('hidden');
+            document.getElementById('strategy-placeholder').classList.remove('hidden');
+            document.getElementById('table-filter-label').innerText = '';
+            document.getElementById('reset-filter-btn').classList.add('hidden');
+        }
+
+        function resetFilter() {
+            resetFilterUI();
+            renderTable();
+        }
+
+        // 8. 渲染表格
+        function renderTable() {
+            const tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = '';
+
+            const filteredUsers = selectedSegment 
+                ? globalUsers.filter(u => u.segment === selectedSegment)
+                : globalUsers;
+
+            // 性能优化：只显示前100条
+            const displayUsers = filteredUsers.slice(0, 100);
+            
+            if (filteredUsers.length > 100) {
+                document.getElementById('table-footer').classList.remove('hidden');
+            } else {
+                document.getElementById('table-footer').classList.add('hidden');
+            }
+
+            displayUsers.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                
+                // 辅助函数：生成标签样式
+                const getScoreClass = (score) => score === '高' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500';
+
+                tr.innerHTML = `
+                    <td class="px-6 py-3 font-medium text-slate-700">${user.email}</td>
+                    <td class="px-6 py-3 text-right text-slate-600">${user.R}</td>
+                    <td class="px-6 py-3 text-right text-slate-600">${user.F}</td>
+                    <td class="px-6 py-3 text-right text-slate-600">¥${user.M.toFixed(2)}</td>
+                    <td class="px-6 py-3">
+                        <div class="flex gap-1">
+                            <span class="px-1.5 py-0.5 rounded text-xs ${getScoreClass(user.rScore)}">R${user.rScore}</span>
+                            <span class="px-1.5 py-0.5 rounded text-xs ${getScoreClass(user.fScore)}">F${user.fScore}</span>
+                            <span class="px-1.5 py-0.5 rounded text-xs ${getScoreClass(user.mScore)}">M${user.mScore}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-3">
+                        <span class="px-2 py-1 rounded-full text-xs font-medium text-white" style="background-color: ${SEGMENT_STRATEGIES[user.segment].color}">
+                            ${user.segment}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 9. 导出功能 (模拟)
+        function exportCurrentSegment() {
+            if(!selectedSegment) return;
+            const users = globalUsers.filter(u => u.segment === selectedSegment);
+            let csvContent = "data:text/csv;charset=utf-8,用户邮箱,R,F,M\n";
+            users.forEach(u => {
+                csvContent += `${u.email},${u.R},${u.F},${u.M}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `${selectedSegment}_名单.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 10. 重置应用
+        function resetApp() {
+            document.getElementById('step2-container').classList.add('hidden');
+            document.getElementById('step1-container').classList.remove('hidden');
+            document.getElementById('dataInput').value = '';
+            globalUsers = [];
+            selectedSegment = null;
+            resetFilterUI();
+        }
+
+    </script>
+</body>
+</html>
