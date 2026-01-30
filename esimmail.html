@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件在线排版工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .preview-container {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            min-height: 400px;
+            background: #fafafa;
+        }
+
+        .email-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .email-content h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .email-content h2 {
+            color: #34495e;
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .email-content h3 {
+            color: #546e7a;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        .email-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .email-content ul, .email-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .email-content li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .email-content strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .email-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .signature {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+            <h1>📝 输入内容</h1>
+            <p class="subtitle">在下方输入您的邮件内容，支持标题、段落、列表等格式</p>
+            <textarea id="input" placeholder="示例：
+
+标题：项目进度汇报
+
+各位领导、同事们好，
+
+本周项目进展顺利，主要完成了以下工作：
+
+- 完成了用户界面设计
+- 实现了核心功能模块
+- 进行了初步测试
+
+下周计划：
+1. 优化用户体验
+2. 修复已知问题
+3. 准备上线部署
+
+如有任何问题，请随时与我联系。
+
+此致
+敬礼
+
+张三
+2024年1月30日"></textarea>
+            <div class="button-group">
+                <button class="btn-primary" onclick="formatEmail()">🎨 自动排版</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h1>👁️ 预览效果</h1>
+            <p class="subtitle">排版后的效果预览</p>
+            <div class="preview-container">
+                <div class="email-content" id="preview">
+                    <p style="color: #999;">排版后的内容将显示在这里...</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="copyHTML()">📋 复制 HTML</button>
+                <button class="btn-primary" onclick="copyText()">📄 复制纯文本</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">复制成功！</div>
+
+    <script>
+        function formatEmail() {
+            const input = document.getElementById('input').value;
+            const preview = document.getElementById('preview');
+            
+            if (!input.trim()) {
+                preview.innerHTML = '<p style="color: #999;">请输入内容后点击排版</p>';
+                return;
+            }
+
+            let html = '';
+            const lines = input.split('\n');
+            let inList = false;
+            let listType = '';
+            
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+                
+                if (!line) {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    continue;
+                }
+                
+                // 检测标题
+                if (line.startsWith('标题：') || line.startsWith('主题：')) {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    html += `<h1>${line.replace(/^(标题：|主题：)/, '')}</h1>`;
+                }
+                // 检测二级标题
+                else if (line.startsWith('##')) {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    html += `<h2>${line.replace(/^##\s*/, '')}</h2>`;
+                }
+                // 检测三级标题
+                else if (line.startsWith('#')) {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    html += `<h3>${line.replace(/^#\s*/, '')}</h3>`;
+                }
+                // 检测无序列表
+                else if (line.match(/^[-*•]\s/)) {
+                    if (!inList || listType !== 'ul') {
+                        if (inList) html += '</ol>';
+                        html += '<ul>';
+                        inList = true;
+                        listType = 'ul';
+                    }
+                    html += `<li>${line.replace(/^[-*•]\s/, '')}</li>`;
+                }
+                // 检测有序列表
+                else if (line.match(/^\d+[.、)]\s/)) {
+                    if (!inList || listType !== 'ol') {
+                        if (inList) html += '</ul>';
+                        html += '<ol>';
+                        inList = true;
+                        listType = 'ol';
+                    }
+                    html += `<li>${line.replace(/^\d+[.、)]\s/, '')}</li>`;
+                }
+                // 检测引用
+                else if (line.startsWith('>')) {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    html += `<blockquote>${line.replace(/^>\s*/, '')}</blockquote>`;
+                }
+                // 普通段落
+                else {
+                    if (inList) {
+                        html += listType === 'ul' ? '</ul>' : '</ol>';
+                        inList = false;
+                    }
+                    // 检测加粗
+                    line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                    line = line.replace(/__(.+?)__/g, '<strong>$1</strong>');
+                    
+                    html += `<p>${line}</p>`;
+                }
+            }
+            
+            if (inList) {
+                html += listType === 'ul' ? '</ul>' : '</ol>';
+            }
+            
+            preview.innerHTML = html;
+        }
+
+        function copyHTML() {
+            const preview = document.getElementById('preview');
+            const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: #2c3e50; font-size: 26px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
+        h2 { color: #34495e; font-size: 22px; margin-top: 30px; margin-bottom: 15px; }
+        h3 { color: #546e7a; font-size: 18px; margin-top: 25px; margin-bottom: 12px; }
+        p { color: #555; line-height: 1.8; margin-bottom: 15px; }
+        ul, ol { margin-left: 25px; margin-bottom: 15px; }
+        li { color: #555; line-height: 1.8; margin-bottom: 8px; }
+        strong { color: #2c3e50; font-weight: 600; }
+        blockquote { border-left: 4px solid #667eea; padding-left: 20px; margin: 20px 0; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+${preview.innerHTML}
+</body>
+</html>`;
+            
+            navigator.clipboard.writeText(htmlContent).then(() => {
+                showToast('HTML 代码已复制到剪贴板！');
+            });
+        }
+
+        function copyText() {
+            const preview = document.getElementById('preview');
+            const text = preview.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('纯文本已复制到剪贴板！');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+
+        // 自动排版
+        document.getElementById('input').addEventListener('input', function() {
+            if (this.value.trim()) {
+                formatEmail();
+            }
+        });
+    </script>
+</body>
+</html>
