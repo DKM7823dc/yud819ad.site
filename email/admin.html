@@ -818,119 +818,187 @@
             arivoy: 'support@arivoy.com'
         };
 
-        // 邮件标题配置
-        const emailTitles = {
+        // 折扣优惠标题（用于：只注册未下单、近期活跃未下单、取消支付）
+        const discountTitles = {
             jianti: [
-                "您的专属优惠正在等您领取 🎁",
-                "别错过！限时特惠即将结束 ⏰",
-                "完成您的订单，开启精彩旅程 ✈️",
-                "我们想念您，回来看看吧 💝",
-                "专属福利已为您准备好 🌟"
+                "您的专属25%eSIM折扣待领取 🎁",
+                "您的专属25%eSIM折扣即将失效 ⏰",
+                "您的专属25%eSIM折扣已到账 ✅",
+                "您的专属 25% eSIM 折扣请尽快使用 🚀"
             ],
             fanti: [
-                "您的專屬優惠正在等您領取 🎁",
-                "別錯過！限時特惠即將結束 ⏰",
-                "完成您的訂單，開啟精彩旅程 ✈️",
-                "我們想念您，回來看看吧 💝",
-                "專屬福利已為您準備好 🌟"
+                "您的專屬25%eSIM折扣待領取 🎁",
+                "您的專屬25%eSIM折扣即將失效 ⏰",
+                "您的專屬25%eSIM折扣已到賬 ✅",
+                "您的專屬 25% eSIM 折扣請儘快使用 🚀"
             ],
             yingwen: [
-                "Your exclusive offer is waiting! 🎁",
-                "Don't miss out! Limited time offer ends soon ⏰",
-                "Complete your order and start your journey ✈️",
-                "We miss you! Come back and explore 💝",
-                "Special benefits are ready for you 🌟"
+                "Your Exclusive 25% eSIM Discount Awaits 🎁",
+                "Your Exclusive 25% eSIM Discount Expires Soon ⏰",
+                "Your Exclusive 25% eSIM Discount Has Arrived ✅",
+                "Use Your Exclusive 25% eSIM Discount Now 🚀"
             ],
             alabo: [
-                "عرضك الحصري في انتظارك 🎁",
-                "لا تفوت! العرض المحدود ينتهي قريباً ⏰",
-                "أكمل طلبك وابدأ رحلتك ✈️",
-                "نفتقدك! عد وتصفح 💝",
-                "مزايا خاصة جاهزة لك 🌟"
+                "خصمك الحصري 25% على eSIM بانتظارك 🎁",
+                "خصمك الحصري 25% على eSIM سينتهي قريباً ⏰",
+                "خصمك الحصري 25% على eSIM قد وصل ✅",
+                "استخدم خصمك الحصري 25% على eSIM الآن 🚀"
             ],
             danmai: [
-                "Dit eksklusive tilbud venter på dig 🎁",
-                "Gå ikke glip af det! Tidsbegrænset tilbud ⏰",
-                "Fuldfør din ordre og start din rejse ✈️",
-                "Vi savner dig! Kom tilbage og udforsk 💝",
-                "Særlige fordele er klar til dig 🌟"
+                "Din eksklusive 25% eSIM-rabat venter 🎁",
+                "Din eksklusive 25% eSIM-rabat udløber snart ⏰",
+                "Din eksklusive 25% eSIM-rabat er ankommet ✅",
+                "Brug din eksklusive 25% eSIM-rabat nu 🚀"
             ],
             helan: [
-                "Uw exclusieve aanbieding wacht op u 🎁",
-                "Mis het niet! Beperkte aanbieding ⏰",
-                "Voltooi uw bestelling en start uw reis ✈️",
-                "We missen je! Kom terug en ontdek 💝",
-                "Speciale voordelen zijn klaar voor u 🌟"
+                "Uw exclusieve 25% eSIM-korting wacht op u 🎁",
+                "Uw exclusieve 25% eSIM-korting verloopt binnenkort ⏰",
+                "Uw exclusieve 25% eSIM-korting is gearriveerd ✅",
+                "Gebruik nu uw exclusieve 25% eSIM-korting 🚀"
             ],
             jieke: [
-                "Vaše exkluzivní nabídka na vás čeká 🎁",
-                "Nenechte si ujít! Časově omezená nabídka ⏰",
-                "Dokončete objednávku a vydejte se na cestu ✈️",
-                "Chybíte nám! Vraťte se a prozkoumejte 💝",
-                "Speciální výhody jsou pro vás připraveny 🌟"
+                "Vaše exkluzivní 25% sleva na eSIM čeká 🎁",
+                "Vaše exkluzivní 25% sleva na eSIM brzy vyprší ⏰",
+                "Vaše exkluzivní 25% sleva na eSIM dorazila ✅",
+                "Využijte nyní svou exkluzivní 25% slevu na eSIM 🚀"
             ],
             bolan: [
-                "Twoja ekskluzywna oferta czeka na Ciebie 🎁",
-                "Nie przegap! Oferta ograniczona czasowo ⏰",
-                "Dokończ zamówienie i rozpocznij podróż ✈️",
-                "Tęsknimy za Tobą! Wróć i odkrywaj 💝",
-                "Specjalne korzyści czekają na Ciebie 🌟"
+                "Twój ekskluzywny 25% rabat na eSIM czeka 🎁",
+                "Twój ekskluzywny 25% rabat na eSIM wkrótce wygaśnie ⏰",
+                "Twój ekskluzywny 25% rabat na eSIM został przyznany ✅",
+                "Wykorzystaj teraz swój ekskluzywny 25% rabat na eSIM 🚀"
             ],
             han: [
-                "특별 혜택이 기다리고 있어요 🎁",
-                "놓치지 마세요! 한정 특가 진행 중 ⏰",
-                "주문을 완료하고 여행을 시작하세요 ✈️",
-                "보고 싶어요! 다시 방문해 주세요 💝",
-                "특별한 혜택이 준비되어 있어요 🌟"
+                "귀하의 25% eSIM 전용 할인이 기다리고 있습니다 🎁",
+                "귀하의 25% eSIM 전용 할인이 곧 만료됩니다 ⏰",
+                "귀하의 25% eSIM 전용 할인이 도착했습니다 ✅",
+                "지금 25% eSIM 전용 할인을 사용하세요 🚀"
             ],
             fa: [
-                "Votre offre exclusive vous attend 🎁",
-                "Ne manquez pas! Offre limitée dans le temps ⏰",
-                "Finalisez votre commande et partez en voyage ✈️",
-                "Vous nous manquez! Revenez nous voir 💝",
-                "Des avantages spéciaux vous attendent 🌟"
+                "Votre remise exclusive de 25% sur eSIM vous attend 🎁",
+                "Votre remise exclusive de 25% sur eSIM expire bientôt ⏰",
+                "Votre remise exclusive de 25% sur eSIM est arrivée ✅",
+                "Utilisez votre remise exclusive de 25% sur eSIM maintenant 🚀"
             ],
             yidali: [
-                "La tua offerta esclusiva ti aspetta 🎁",
-                "Non perdere! Offerta a tempo limitato ⏰",
-                "Completa il tuo ordine e parti per il viaggio ✈️",
-                "Ci manchi! Torna a trovarci 💝",
-                "Vantaggi speciali pronti per te 🌟"
+                "Il tuo sconto esclusivo del 25% su eSIM ti aspetta 🎁",
+                "Il tuo sconto esclusivo del 25% su eSIM scade presto ⏰",
+                "Il tuo sconto esclusivo del 25% su eSIM è arrivato ✅",
+                "Usa ora il tuo sconto esclusivo del 25% su eSIM 🚀"
             ],
             tu: [
-                "Özel teklifiniz sizi bekliyor 🎁",
-                "Kaçırmayın! Sınırlı süreli teklif ⏰",
-                "Siparişinizi tamamlayın ve yolculuğa başlayın ✈️",
-                "Sizi özledik! Geri dönün ve keşfedin 💝",
-                "Özel avantajlar sizin için hazır 🌟"
+                "Özel %25 eSIM indiriminiz sizi bekliyor 🎁",
+                "Özel %25 eSIM indiriminiz yakında sona erecek ⏰",
+                "Özel %25 eSIM indiriminiz hesabınıza yüklendi ✅",
+                "Özel %25 eSIM indiriminizi hemen kullanın 🚀"
             ],
             br: [
-                "Sua oferta exclusiva está esperando 🎁",
-                "Não perca! Oferta por tempo limitado ⏰",
-                "Conclua seu pedido e comece sua viagem ✈️",
-                "Sentimos sua falta! Volte e explore 💝",
-                "Benefícios especiais estão prontos para você 🌟"
+                "Seu desconto exclusivo de 25% no eSIM está esperando 🎁",
+                "Seu desconto exclusivo de 25% no eSIM expira em breve ⏰",
+                "Seu desconto exclusivo de 25% no eSIM chegou ✅",
+                "Use seu desconto exclusivo de 25% no eSIM agora 🚀"
             ],
             ru: [
-                "Ваше эксклюзивное предложение ждёт вас 🎁",
-                "Не пропустите! Ограниченное предложение ⏰",
-                "Завершите заказ и начните путешествие ✈️",
-                "Мы скучаем по вам! Возвращайтесь 💝",
-                "Специальные преимущества готовы для вас 🌟"
+                "Ваша эксклюзивная скидка 25% на eSIM ждёт вас 🎁",
+                "Ваша эксклюзивная скидка 25% на eSIM скоро истечёт ⏰",
+                "Ваша эксклюзивная скидка 25% на eSIM уже доступна ✅",
+                "Используйте вашу эксклюзивную скидку 25% на eSIM сейчас 🚀"
             ],
             de: [
-                "Ihr exklusives Angebot wartet auf Sie 🎁",
-                "Nicht verpassen! Zeitlich begrenztes Angebot ⏰",
-                "Schließen Sie Ihre Bestellung ab und starten Sie ✈️",
-                "Wir vermissen Sie! Kommen Sie zurück 💝",
-                "Besondere Vorteile warten auf Sie 🌟"
+                "Ihr exklusiver 25% eSIM-Rabatt wartet auf Sie 🎁",
+                "Ihr exklusiver 25% eSIM-Rabatt läuft bald ab ⏰",
+                "Ihr exklusiver 25% eSIM-Rabatt ist eingetroffen ✅",
+                "Nutzen Sie jetzt Ihren exklusiven 25% eSIM-Rabatt 🚀"
             ],
             xibanya: [
-                "Tu oferta exclusiva te está esperando 🎁",
-                "¡No te lo pierdas! Oferta por tiempo limitado ⏰",
-                "Completa tu pedido y comienza tu viaje ✈️",
-                "¡Te extrañamos! Vuelve a visitarnos 💝",
-                "Beneficios especiales listos para ti 🌟"
+                "Tu descuento exclusivo del 25% en eSIM te espera 🎁",
+                "Tu descuento exclusivo del 25% en eSIM expira pronto ⏰",
+                "Tu descuento exclusivo del 25% en eSIM ha llegado ✅",
+                "Usa tu descuento exclusivo del 25% en eSIM ahora 🚀"
+            ]
+        };
+
+        // 支付失败标题（单独使用）
+        const failedTitles = {
+            jianti: [
+                "【重要】您的eSIM订单支付失败 ⚠️",
+                "您的eSIM订单支付未完成 📋",
+                "您的eSIM付款遇到问题？ 🔧"
+            ],
+            fanti: [
+                "【重要】您的eSIM訂單支付失敗 ⚠️",
+                "您的eSIM訂單支付未完成 📋",
+                "您的eSIM付款遇到問題？ 🔧"
+            ],
+            yingwen: [
+                "[Important] Your eSIM Order Payment Failed ⚠️",
+                "Your eSIM Order Payment Incomplete 📋",
+                "Having Trouble with Your eSIM Payment? 🔧"
+            ],
+            alabo: [
+                "[مهم] فشل دفع طلب eSIM الخاص بك ⚠️",
+                "لم يكتمل دفع طلب eSIM الخاص بك 📋",
+                "هل واجهت مشكلة في دفع eSIM؟ 🔧"
+            ],
+            danmai: [
+                "[Vigtigt] Din eSIM-ordrebetaling mislykkedes ⚠️",
+                "Din eSIM-ordrebetaling er ufuldstændig 📋",
+                "Problemer med din eSIM-betaling? 🔧"
+            ],
+            helan: [
+                "[Belangrijk] Uw eSIM-bestelling betaling mislukt ⚠️",
+                "Uw eSIM-bestelling betaling onvolledig 📋",
+                "Problemen met uw eSIM-betaling? 🔧"
+            ],
+            jieke: [
+                "[Důležité] Platba za objednávku eSIM se nezdařila ⚠️",
+                "Platba za objednávku eSIM nebyla dokončena 📋",
+                "Máte problém s platbou za eSIM? 🔧"
+            ],
+            bolan: [
+                "[Ważne] Płatność za zamówienie eSIM nie powiodła się ⚠️",
+                "Płatność za zamówienie eSIM niekompletna 📋",
+                "Problem z płatnością za eSIM? 🔧"
+            ],
+            han: [
+                "[중요] eSIM 주문 결제 실패 ⚠️",
+                "eSIM 주문 결제가 완료되지 않았습니다 📋",
+                "eSIM 결제에 문제가 있으신가요? 🔧"
+            ],
+            fa: [
+                "[Important] Le paiement de votre commande eSIM a échoué ⚠️",
+                "Le paiement de votre commande eSIM est incomplet 📋",
+                "Un problème avec votre paiement eSIM? 🔧"
+            ],
+            yidali: [
+                "[Importante] Pagamento ordine eSIM fallito ⚠️",
+                "Pagamento ordine eSIM incompleto 📋",
+                "Problemi con il pagamento eSIM? 🔧"
+            ],
+            tu: [
+                "[Önemli] eSIM sipariş ödemeniz başarısız oldu ⚠️",
+                "eSIM sipariş ödemeniz tamamlanmadı 📋",
+                "eSIM ödemenizde sorun mu yaşıyorsunuz? 🔧"
+            ],
+            br: [
+                "[Importante] O pagamento do seu pedido eSIM falhou ⚠️",
+                "O pagamento do seu pedido eSIM está incompleto 📋",
+                "Problemas com o pagamento do seu eSIM? 🔧"
+            ],
+            ru: [
+                "[Важно] Оплата заказа eSIM не прошла ⚠️",
+                "Оплата заказа eSIM не завершена 📋",
+                "Проблемы с оплатой eSIM? 🔧"
+            ],
+            de: [
+                "[Wichtig] Ihre eSIM-Bestellzahlung ist fehlgeschlagen ⚠️",
+                "Ihre eSIM-Bestellzahlung ist unvollständig 📋",
+                "Probleme bei der eSIM-Zahlung? 🔧"
+            ],
+            xibanya: [
+                "[Importante] El pago de tu pedido eSIM ha fallado ⚠️",
+                "El pago de tu pedido eSIM está incompleto 📋",
+                "¿Problemas con el pago de tu eSIM? 🔧"
             ]
         };
 
@@ -1128,8 +1196,8 @@
                 '<span class="tag app"><i class="fas fa-mobile-alt" style="font-size:10px"></i> ' + appMap[app] + '</span>' +
                 '<span class="tag lang"><i class="fas fa-globe" style="font-size:10px"></i> ' + langMap[lang] + '</span>';
 
-            // Update titles
-            const titles = emailTitles[lang];
+            // Update titles - 根据状态选择标题集
+            const titles = (status === 'failed') ? failedTitles[lang] : discountTitles[lang];
             document.getElementById('titlesList').innerHTML = titles.map(function(title, index) {
                 return '<div class="title-item">' +
                     '<span class="title-number">' + (index + 1) + '</span>' +
