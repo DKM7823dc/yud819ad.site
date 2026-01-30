@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件模板管理后台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-sidebar: #1e293b;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --primary-light: #a5b4fc;
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-sidebar: #0f172a;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-sidebar);
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .sidebar-logo i {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .form-group label i {
+            color: var(--primary-light);
+            width: 16px;
+            font-size: 12px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.05);
+            color: #f1f5f9;
+            transition: all 0.2s;
+            font-family: inherit;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+            padding-right: 40px;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group select option {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        /* App Email Display */
+        .app-email-box {
+            display: none;
+            margin-top: 8px;
+            padding: 10px 12px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .app-email-box.show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .app-email-box i {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .app-email-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-email-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .app-email-address {
+            font-size: 13px;
+            color: var(--secondary);
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .app-email-copy {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: var(--secondary);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+
+        .app-email-copy:hover {
+            background: #059669;
+            transform: scale(1.05);
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: inherit;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            margin-top: 8px;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-generate:active {
+            transform: translateY(0);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .main-header {
+            background: var(--bg-card);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .main-header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .header-badge {
+            padding: 6px 14px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.2) 100%);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .main-body {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .empty-state-icon i {
+            font-size: 40px;
+            color: var(--text-light);
+        }
+
+        .empty-state h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            max-width: 300px;
+        }
+
+        /* Result Content */
+        .result-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-content.show {
+            display: block;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1100px) {
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-header-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .card-header-icon.template {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .card-header-icon.titles {
+            background: linear-gradient(135deg, var(--warning) 0%, #ea580c 100%);
+        }
+
+        .card-header-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-header-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Template URL */
+        .template-url-box {
+            background: var(--bg-main);
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .template-url {
+            font-size: 13px;
+            word-break: break-all;
+            color: var(--primary);
+            line-height: 1.6;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        .selection-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag.status {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        .tag.app {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .tag.lang {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .btn-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .btn-action.primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-action.primary:hover {
+            background: #059669;
+        }
+
+        .btn-action.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-action.outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Title Items */
+        .title-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .title-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .title-item:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(99, 102, 241, 0.08) 100%);
+        }
+
+        .title-number {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .title-text {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .title-copy-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--bg-card);
+            color: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .title-copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .title-copy-btn.copied {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-card);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            color: var(--secondary);
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .admin-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: none;
+            }
+
+            .sidebar-content {
+                padding: 16px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .main-body {
+                padding: 16px;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .btn-actions {
+                flex-direction: column;
+            }
+
+            .title-item {
+                padding: 12px;
+            }
+
+            .title-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span>邮件模板系统</span>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">模板选择器</div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-user-clock"></i> 用户状态</label>
+                        <select id="statusSelect" onchange="clearResults()">
+                            <option value="">请选择状态</option>
+                            <option value="registered">只注册未下单</option>
+                            <option value="active">近期活跃未下单</option>
+                            <option value="cancelled">取消支付</option>
+                            <option value="failed">支付失败</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-mobile-alt"></i> 所属APP</label>
+                        <select id="appSelect" onchange="onAppChange()">
+                            <option value="">请选择APP</option>
+                            <option value="gotrip">GoTrip</option>
+                            <option value="elink">Elink</option>
+                            <option value="roami">Roami</option>
+                            <option value="phonesim">PhoneSim</option>
+                            <option value="triplink">TripLink</option>
+                            <option value="arivoy">Arivoy</option>
+                        </select>
+                        <div class="app-email-box" id="appEmailBox">
+                            <i class="fas fa-at"></i>
+                            <div class="app-email-info">
+                                <div class="app-email-label">发件邮箱</div>
+                                <div class="app-email-address" id="appEmailAddress"></div>
+                            </div>
+                            <button class="app-email-copy" onclick="copyAppEmail()" title="复制邮箱">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> 邮件语言</label>
+                        <select id="langSelect" onchange="clearResults()">
+                            <option value="">请选择语言</option>
+                            <option value="jianti">简体中文</option>
+                            <option value="fanti">繁体中文</option>
+                            <option value="yingwen">英文</option>
+                            <option value="alabo">阿拉伯语</option>
+                            <option value="danmai">丹麦语</option>
+                            <option value="helan">荷兰语</option>
+                            <option value="jieke">捷克语</option>
+                            <option value="bolan">波兰语</option>
+                            <option value="han">韩语</option>
+                            <option value="fa">法语</option>
+                            <option value="yidali">意大利语</option>
+                            <option value="tu">土耳其语</option>
+                            <option value="br">葡萄牙语</option>
+                            <option value="ru">俄罗斯语</option>
+                            <option value="de">德语</option>
+                            <option value="xibanya">西班牙文</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-generate" onclick="generateUrl()">
+                        <i class="fas fa-magic"></i> 生成模板地址
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>邮件模板管理后台</h1>
+                <span class="header-badge"><i class="fas fa-circle" style="font-size:8px;margin-right:6px;"></i>在线</span>
+            </header>
+            <div class="main-body">
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h2>选择条件生成模板</h2>
+                    <p>请在左侧选择用户状态、所属APP和邮件语言，然后点击生成按钮</p>
+                </div>
+
+                <!-- Result Content -->
+                <div class="result-content" id="resultContent">
+                    <div class="result-grid">
+                        <!-- Template URL Card -->
+                        <div class="result-card">
+                            <div class="card-header">
+                                <div class="card-header-icon template">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div class="card-header-info">
+                                    <h3>邮件模板地址</h3>
+                                    <p>点击按钮复制或访问链接</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="template-url-box">
+                                    <div class="template-url" id="resultUrl"></div>
+                                </div>
+                                <div class="selection-tags" id="selectionTags"></div>
+                                <div class="btn-actions">
+                                    <button class="btn-action primary" onclick="copyUrl()">
+                                        <i class="fas fa-copy"></i> 复制地址
+                                    </button>
+                                    <button class="btn-action outline" onclick="openUrl()">
+                                        <i class="fas fa-external-link-alt"></i> 打开链接
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email Titles Card -->
+                        <div class="result-card">
+                            <div class="card-header">
+                                <div class="card-header-icon titles">
+                                    <i class="fas fa-heading"></i>
+                                </div>
+                                <div class="card-header-info">
+                                    <h3>推荐邮件标题</h3>
+                                    <p>点击复制按钮使用标题</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="title-list" id="titlesList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">操作成功</span>
+    </div>
+
+    <script>
+        // 暗色模式检测
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // APP邮箱地址配置
+        const appEmails = {
+            gotrip: 'support@gotrip.com',
+            elink: 'support@elink.com',
+            roami: 'support@roami.com',
+            phonesim: 'support@phonesim.com',
+            triplink: 'support@triplink.com',
+            arivoy: 'support@arivoy.com'
+        };
+
+        // 邮件标题配置
+        const emailTitles = {
+            jianti: [
+                "您的专属优惠正在等您领取 🎁",
+                "别错过！限时特惠即将结束 ⏰",
+                "完成您的订单，开启精彩旅程 ✈️",
+                "我们想念您，回来看看吧 💝",
+                "专属福利已为您准备好 🌟"
+            ],
+            fanti: [
+                "您的專屬優惠正在等您領取 🎁",
+                "別錯過！限時特惠即將結束 ⏰",
+                "完成您的訂單，開啟精彩旅程 ✈️",
+                "我們想念您，回來看看吧 💝",
+                "專屬福利已為您準備好 🌟"
+            ],
+            yingwen: [
+                "Your exclusive offer is waiting! 🎁",
+                "Don't miss out! Limited time offer ends soon ⏰",
+                "Complete your order and start your journey ✈️",
+                "We miss you! Come back and explore 💝",
+                "Special benefits are ready for you 🌟"
+            ],
+            alabo: [
+                "عرضك الحصري في انتظارك 🎁",
+                "لا تفوت! العرض المحدود ينتهي قريباً ⏰",
+                "أكمل طلبك وابدأ رحلتك ✈️",
+                "نفتقدك! عد وتصفح 💝",
+                "مزايا خاصة جاهزة لك 🌟"
+            ],
+            danmai: [
+                "Dit eksklusive tilbud venter på dig 🎁",
+                "Gå ikke glip af det! Tidsbegrænset tilbud ⏰",
+                "Fuldfør din ordre og start din rejse ✈️",
+                "Vi savner dig! Kom tilbage og udforsk 💝",
+                "Særlige fordele er klar til dig 🌟"
+            ],
+            helan: [
+                "Uw exclusieve aanbieding wacht op u 🎁",
+                "Mis het niet! Beperkte aanbieding ⏰",
+                "Voltooi uw bestelling en start uw reis ✈️",
+                "We missen je! Kom terug en ontdek 💝",
+                "Speciale voordelen zijn klaar voor u 🌟"
+            ],
+            jieke: [
+                "Vaše exkluzivní nabídka na vás čeká 🎁",
+                "Nenechte si ujít! Časově omezená nabídka ⏰",
+                "Dokončete objednávku a vydejte se na cestu ✈️",
+                "Chybíte nám! Vraťte se a prozkoumejte 💝",
+                "Speciální výhody jsou pro vás připraveny 🌟"
+            ],
+            bolan: [
+                "Twoja ekskluzywna oferta czeka na Ciebie 🎁",
+                "Nie przegap! Oferta ograniczona czasowo ⏰",
+                "Dokończ zamówienie i rozpocznij podróż ✈️",
+                "Tęsknimy za Tobą! Wróć i odkrywaj 💝",
+                "Specjalne korzyści czekają na Ciebie 🌟"
+            ],
+            han: [
+                "특별 혜택이 기다리고 있어요 🎁",
+                "놓치지 마세요! 한정 특가 진행 중 ⏰",
+                "주문을 완료하고 여행을 시작하세요 ✈️",
+                "보고 싶어요! 다시 방문해 주세요 💝",
+                "특별한 혜택이 준비되어 있어요 🌟"
+            ],
+            fa: [
+                "Votre offre exclusive vous attend 🎁",
+                "Ne manquez pas! Offre limitée dans le temps ⏰",
+                "Finalisez votre commande et partez en voyage ✈️",
+                "Vous nous manquez! Revenez nous voir 💝",
+                "Des avantages spéciaux vous attendent 🌟"
+            ],
+            yidali: [
+                "La tua offerta esclusiva ti aspetta 🎁",
+                "Non perdere! Offerta a tempo limitato ⏰",
+                "Completa il tuo ordine e parti per il viaggio ✈️",
+                "Ci manchi! Torna a trovarci 💝",
+                "Vantaggi speciali pronti per te 🌟"
+            ],
+            tu: [
+                "Özel teklifiniz sizi bekliyor 🎁",
+                "Kaçırmayın! Sınırlı süreli teklif ⏰",
+                "Siparişinizi tamamlayın ve yolculuğa başlayın ✈️",
+                "Sizi özledik! Geri dönün ve keşfedin 💝",
+                "Özel avantajlar sizin için hazır 🌟"
+            ],
+            br: [
+                "Sua oferta exclusiva está esperando 🎁",
+                "Não perca! Oferta por tempo limitado ⏰",
+                "Conclua seu pedido e comece sua viagem ✈️",
+                "Sentimos sua falta! Volte e explore 💝",
+                "Benefícios especiais estão prontos para você 🌟"
+            ],
+            ru: [
+                "Ваше эксклюзивное предложение ждёт вас 🎁",
+                "Не пропустите! Ограниченное предложение ⏰",
+                "Завершите заказ и начните путешествие ✈️",
+                "Мы скучаем по вам! Возвращайтесь 💝",
+                "Специальные преимущества готовы для вас 🌟"
+            ],
+            de: [
+                "Ihr exklusives Angebot wartet auf Sie 🎁",
+                "Nicht verpassen! Zeitlich begrenztes Angebot ⏰",
+                "Schließen Sie Ihre Bestellung ab und starten Sie ✈️",
+                "Wir vermissen Sie! Kommen Sie zurück 💝",
+                "Besondere Vorteile warten auf Sie 🌟"
+            ],
+            xibanya: [
+                "Tu oferta exclusiva te está esperando 🎁",
+                "¡No te lo pierdas! Oferta por tiempo limitado ⏰",
+                "Completa tu pedido y comienza tu viaje ✈️",
+                "¡Te extrañamos! Vuelve a visitarnos 💝",
+                "Beneficios especiales listos para ti 🌟"
+            ]
+        };
+
+        // 邮件模板URL配置
+        const templateUrls = {
+            gotrip: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/gotrip/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/gotrip/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/gotrip/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/gotrip/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/gotrip/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/gotrip/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/gotrip/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/gotrip/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/gotrip/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/gotrip/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/gotrip/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/gotrip/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/gotrip/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/gotrip/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/gotrip/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/gotrip/xibanya.html'
+            },
+            elink: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/elink/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/elink/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/elink/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/elink/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/elink/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/elink/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/elink/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/elink/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/elink/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/elink/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/elink/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/elink/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/elink/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/elink/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/elink/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/elink/xibanya.html'
+            },
+            roami: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/roami/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/roami/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/roami/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/roami/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/roami/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/roami/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/roami/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/roami/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/roami/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/roami/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/roami/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/roami/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/roami/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/roami/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/roami/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/roami/xibanya.html'
+            },
+            phonesim: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/phonesim/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/phonesim/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/phonesim/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/phonesim/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/phonesim/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/phonesim/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/phonesim/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/phonesim/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/phonesim/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/phonesim/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/phonesim/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/phonesim/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/phonesim/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/phonesim/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/phonesim/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/phonesim/xibanya.html'
+            },
+            triplink: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/triplink/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/triplink/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/triplink/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/triplink/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/triplink/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/triplink/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/triplink/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/triplink/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/triplink/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/triplink/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/triplink/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/triplink/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/triplink/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/triplink/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/triplink/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/triplink/xibanya.html'
+            },
+            arivoy: {
+                jianti: 'https://www.yud819ad.site/email/zhuce/arivoy/jianti.html',
+                fanti: 'https://www.yud819ad.site/email/zhuce/arivoy/fanti.html',
+                alabo: 'https://www.yud819ad.site/email/zhuce/arivoy/alabo.html',
+                danmai: 'https://www.yud819ad.site/email/zhuce/arivoy/danmai.html',
+                helan: 'https://www.yud819ad.site/email/zhuce/arivoy/helan.html',
+                jieke: 'https://www.yud819ad.site/email/zhuce/arivoy/jieke.html',
+                bolan: 'https://www.yud819ad.site/email/zhuce/arivoy/bolan.html',
+                han: 'https://www.yud819ad.site/email/zhuce/arivoy/han.html',
+                fa: 'https://www.yud819ad.site/email/zhuce/arivoy/fa.html',
+                yidali: 'https://www.yud819ad.site/email/zhuce/arivoy/yidali.html',
+                tu: 'https://www.yud819ad.site/email/zhuce/arivoy/tu.html',
+                br: 'https://www.yud819ad.site/email/zhuce/arivoy/br.html',
+                ru: 'https://www.yud819ad.site/email/zhuce/arivoy/ru.html',
+                yingwen: 'https://www.yud819ad.site/email/zhuce/arivoy/yingwen.html',
+                de: 'https://www.yud819ad.site/email/zhuce/arivoy/de.html',
+                xibanya: 'https://www.yud819ad.site/email/zhuce/arivoy/xibanya.html'
+            }
+        };
+
+        // 映射配置
+        const statusMap = {
+            registered: { text: '只注册未下单', folder: 'zhuce' },
+            active: { text: '近期活跃未下单', folder: 'huoyue' },
+            cancelled: { text: '取消支付', folder: 'quxiao' },
+            failed: { text: '支付失败', folder: 'shibai' }
+        };
+
+        const langMap = {
+            jianti: '简体中文', fanti: '繁体中文', yingwen: '英文',
+            alabo: '阿拉伯语', danmai: '丹麦语', helan: '荷兰语',
+            jieke: '捷克语', bolan: '波兰语', han: '韩语',
+            fa: '法语', yidali: '意大利语', tu: '土耳其语',
+            br: '葡萄牙语', ru: '俄罗斯语', de: '德语', xibanya: '西班牙文'
+        };
+
+        const appMap = {
+            gotrip: 'GoTrip', elink: 'Elink', roami: 'Roami',
+            phonesim: 'PhoneSim', triplink: 'TripLink', arivoy: 'Arivoy'
+        };
+
+        let currentUrl = '';
+        let currentAppEmail = '';
+
+        function clearResults() {
+            document.getElementById('emptyState').style.display = 'flex';
+            document.getElementById('resultContent').classList.remove('show');
+            currentUrl = '';
+        }
+
+        function onAppChange() {
+            const app = document.getElementById('appSelect').value;
+            const emailBox = document.getElementById('appEmailBox');
+            const emailAddress = document.getElementById('appEmailAddress');
+
+            clearResults();
+
+            if (app && appEmails[app]) {
+                currentAppEmail = appEmails[app];
+                emailAddress.textContent = currentAppEmail;
+                emailBox.classList.add('show');
+            } else {
+                emailBox.classList.remove('show');
+                currentAppEmail = '';
+            }
+        }
+
+        function copyAppEmail() {
+            if (!currentAppEmail) return;
+            navigator.clipboard.writeText(currentAppEmail).then(function() {
+                showToast('邮箱地址已复制');
+            });
+        }
+
+        function generateUrl() {
+            const status = document.getElementById('statusSelect').value;
+            const app = document.getElementById('appSelect').value;
+            const lang = document.getElementById('langSelect').value;
+
+            if (!status || !app || !lang) {
+                showToast('请选择完整的条件');
+                return;
+            }
+
+            const statusFolder = statusMap[status].folder;
+            let url = templateUrls[app][lang];
+
+            if (status !== 'registered') {
+                url = url.replace('/zhuce/', '/' + statusFolder + '/');
+            }
+
+            currentUrl = url;
+
+            // Update URL display
+            document.getElementById('resultUrl').textContent = url;
+
+            // Update tags
+            document.getElementById('selectionTags').innerHTML =
+                '<span class="tag status"><i class="fas fa-circle" style="font-size:6px"></i> ' + statusMap[status].text + '</span>' +
+                '<span class="tag app"><i class="fas fa-mobile-alt" style="font-size:10px"></i> ' + appMap[app] + '</span>' +
+                '<span class="tag lang"><i class="fas fa-globe" style="font-size:10px"></i> ' + langMap[lang] + '</span>';
+
+            // Update titles
+            const titles = emailTitles[lang];
+            document.getElementById('titlesList').innerHTML = titles.map(function(title, index) {
+                return '<div class="title-item">' +
+                    '<span class="title-number">' + (index + 1) + '</span>' +
+                    '<span class="title-text">' + title + '</span>' +
+                    '<button class="title-copy-btn" onclick="copyTitle(this, \'' + title.replace(/'/g, "\\'") + '\')" title="复制">' +
+                    '<i class="fas fa-copy"></i>' +
+                    '</button>' +
+                    '</div>';
+            }).join('');
+
+            // Show results
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('resultContent').classList.add('show');
+        }
+
+        function copyTitle(btn, title) {
+            navigator.clipboard.writeText(title).then(function() {
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                showToast('标题已复制');
+
+                setTimeout(function() {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i>';
+                }, 2000);
+            });
+        }
+
+        function copyUrl() {
+            if (!currentUrl) return;
+            navigator.clipboard.writeText(currentUrl).then(function() {
+                showToast('链接已复制到剪贴板');
+            });
+        }
+
+        function openUrl() {
+            if (!currentUrl) return;
+            window.open(currentUrl, '_blank');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
