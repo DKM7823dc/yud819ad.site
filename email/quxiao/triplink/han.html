@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eSIM</title>
     
-    <!-- Configuration Variables -->
-    <script>
-        const CONFIG = {
-            brandName: 'TripLink',
-            discountPercent: 25,
-            couponCode: 'hi25'
-        };
-    </script>
-    
     <style>
         /* Reset styles */
         body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 100%); }
@@ -53,11 +44,11 @@
                             </h1>
                             <div style="background-color: rgba(255,255,255,0.2); display: inline-block; padding: 12px 24px; border-radius: 50px; backdrop-filter: blur(10px);">
                                 <p style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 1px;">
-                                    48시간 유효
+                                    48시간 내 유효
                                 </p>
                             </div>
                             <p style="color: #ffffff; margin: 20px 0 0 0; font-size: 16px; font-weight: 400; opacity: 0.95;">
-                                전 세계 200개 이상의 목적지에서 네트워크 연결을 이용하세요
+                                전 세계 200개 이상의 목적지에서 즉시 네트워크 연결
                             </p>
                         </td>
                     </tr>
@@ -73,7 +64,7 @@
                             
                             <!-- Intro Text with Highlighted Discount -->
                             <p style="color: #c9d1d9; font-size: 16px; line-height: 1.8; margin-bottom: 35px;">
-                                <span id="brand-intro"></span> 글로벌 로밍 패밀리에 오신 것을 환영합니다! 여행을 시작하시는 여러분을 위해 특별 제안을 준비했습니다. 앞으로 48시간 동안 첫 번째 데이터 패키지에서 <span class="highlight-cyan" id="discount-intro"></span> 할인을 받으실 수 있습니다.
+                                TripLink 글로벌 로밍 패밀리에 오신 것을 환영합니다! 여행을 시작하기 위해 특별 할인을 준비했습니다. 앞으로 48시간 동안 첫 번째 데이터 패키지를 <span class="highlight-cyan">25% 할인된</span> 가격에 이용하실 수 있습니다.
                             </p>
 
                             <!-- COUPON BOX -->
@@ -86,11 +77,12 @@
                                                 <!-- Label and Badge Row -->
                                                 <td align="left" valign="middle">
                                                     <p style="color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0; font-weight: 700;">
-                                                        프로모션 코드
+                                                        할인 코드
                                                     </p>
                                                 </td>
                                                 <td align="right" valign="top">
-                                                    <div style="background: linear-gradient(135deg, #6b4ce6 0%, #00d4ff 100%); color: #ffffff; font-weight: 900; font-size: 22px; padding: 8px 18px; border-radius: 8px; display: inline-block; white-space: nowrap; box-shadow: 0 4px 12px rgba(107, 76, 230, 0.6);" id="discount-badge">
+                                                    <div style="background: linear-gradient(135deg, #6b4ce6 0%, #00d4ff 100%); color: #ffffff; font-weight: 900; font-size: 22px; padding: 8px 18px; border-radius: 8px; display: inline-block; white-space: nowrap; box-shadow: 0 4px 12px rgba(107, 76, 230, 0.6);">
+                                                        -25%
                                                     </div>
                                                 </td>
                                             </tr>
@@ -98,7 +90,7 @@
                                             <tr>
                                                 <td colspan="2" align="center" style="padding: 25px 0 20px 0;">
                                                     <div style="background-color: rgba(107, 76, 230, 0.15); padding: 20px; border-radius: 12px; border: 2px dashed #6b4ce6;">
-                                                        <div class="code-text" style="color: #00d4ff; font-size: 52px; font-weight: 900; letter-spacing: 6px; font-family: 'Courier New', monospace; text-shadow: 0 2px 8px rgba(0, 212, 255, 0.5);" id="coupon-code"></div>
+                                                        <div class="code-text" style="color: #00d4ff; font-size: 52px; font-weight: 900; letter-spacing: 6px; font-family: 'Courier New', monospace; text-shadow: 0 2px 8px rgba(0, 212, 255, 0.5);">hi25</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -106,7 +98,7 @@
                                             <tr>
                                                 <td colspan="2" align="center">
                                                     <p style="color: #c9d1d9; font-size: 15px; margin: 0; line-height: 1.6;">
-                                                        결제 시 적용하여 즉시 <span style="color: #00d4ff; font-weight: 800; font-size: 18px;" id="discount-instruction"></span> 할인을 받으세요.
+                                                        결제 시 적용하여 <span style="color: #00d4ff; font-weight: 800; font-size: 18px;">25%</span> 할인을 받으세요.
                                                     </p>
                                                 </td>
                                             </tr>
@@ -120,7 +112,7 @@
                                 <tr>
                                     <td align="center" style="padding-bottom: 45px;">
                                         <a href="https://apps.apple.com/app/id6749361412" target="_blank" style="background: linear-gradient(135deg, #6b4ce6 0%, #00d4ff 100%); color: #ffffff; font-size: 18px; font-weight: 800; text-decoration: none; padding: 20px 50px; border-radius: 50px; display: inline-block; box-shadow: 0 6px 20px rgba(107, 76, 230, 0.5); transition: transform 0.3s; letter-spacing: 0.5px;">
-                                            혜택 받기
+                                            지금 할인 받기
                                         </a>
                                     </td>
                                 </tr>
@@ -131,7 +123,7 @@
 
                             <!-- Trust Section -->
                             <h3 style="color: #ffffff; font-size: 22px; font-weight: 800; margin-bottom: 30px; text-align: center;">
-                                여행자들이 <span id="brand-trust"></span>를 선택하는 이유
+                                여행자들이 TripLink를 선택하는 이유
                             </h3>
                             
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 35px;">
@@ -139,14 +131,14 @@
                                     <td width="50%" valign="top" style="padding-right: 15px; padding-bottom: 20px;">
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="background-color: rgba(107, 76, 230, 0.15); padding: 20px; border-radius: 12px; width: 100%; border-left: 4px solid #6b4ce6;">
                                             <tr>
-                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">즉시 활성화</strong><br>물리적 SIM 카드 불필요.</td>
+                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">즉시 활성화</strong><br>실물 SIM 카드 불필요.</td>
                                             </tr>
                                         </table>
                                     </td>
                                     <td width="50%" valign="top" style="padding-bottom: 20px;">
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="background-color: rgba(107, 76, 230, 0.15); padding: 20px; border-radius: 12px; width: 100%; border-left: 4px solid #6b4ce6;">
                                             <tr>
-                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">200개 이상 지역</strong><br>글로벌 커버리지.</td>
+                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">200개 이상 지역</strong><br>전 세계 커버리지.</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -155,7 +147,7 @@
                                     <td width="50%" valign="top" style="padding-right: 15px;">
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="background-color: rgba(107, 76, 230, 0.15); padding: 20px; border-radius: 12px; width: 100%; border-left: 4px solid #6b4ce6;">
                                             <tr>
-                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">약정 없음</strong><br>사용한 만큼만 결제, 유연하고 자유롭게.</td>
+                                                <td style="color: #c9d1d9; font-size: 15px; line-height: 1.6;"><strong style="color: #00d4ff; font-size: 16px;">약정 없음</strong><br>사용한 만큼만 결제, 자유롭고 유연하게.</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -172,7 +164,7 @@
                             <!-- Closing -->
                             <div style="background: linear-gradient(135deg, #1a1d3a 0%, #0a0e27 100%); padding: 25px; border-radius: 12px; text-align: center; border: 2px solid rgba(107, 76, 230, 0.4);">
                                 <p style="margin: 0; color: #c9d1d9; font-size: 15px; line-height: 1.8;">
-                                    여러분을 세계와 연결하기를 기대합니다.<br>
+                                    세계와 여러분을 연결하게 되어 기쁩니다.<br>
                                     <strong style="color: #00d4ff; font-size: 16px;">즐거운 여행 되세요!</strong>
                                 </p>
                             </div>
@@ -184,10 +176,10 @@
                     <tr>
                         <td style="background-color: #0a0e27; padding: 30px 25px; text-align: center;">
                             <p style="color: #8b949e; font-size: 13px; margin: 0 0 10px 0; font-weight: 500;">
-                                &copy; 2026 <span id="brand-footer"></span>. 모든 권리 보유.
+                                &copy; 2026 TripLink. All rights reserved.
                             </p>
                             <p style="color: #6e7681; font-size: 12px; margin: 0;">
-                                <span id="brand-footer-2"></span>에 가입하셨기 때문에 이 이메일을 받으셨습니다.
+                                TripLink에 가입하셨기 때문에 이 이메일을 받으셨습니다.
                             </p>
                         </td>
                     </tr>
@@ -197,25 +189,5 @@
         </tr>
     </table>
 
-    <script>
-        // Apply configuration variables to the page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update brand name
-            document.getElementById('brand-intro').textContent = CONFIG.brandName;
-            document.getElementById('brand-trust').textContent = CONFIG.brandName;
-            document.getElementById('brand-footer').textContent = CONFIG.brandName;
-            document.getElementById('brand-footer-2').textContent = CONFIG.brandName;
-            
-            // Update discount percentage
-            document.getElementById('discount-intro').textContent = CONFIG.discountPercent + '%';
-            document.getElementById('discount-badge').textContent = '-' + CONFIG.discountPercent + '%';
-            document.getElementById('discount-instruction').textContent = CONFIG.discountPercent + '%';
-            
-            // Update coupon code
-            document.getElementById('coupon-code').textContent = CONFIG.couponCode;
-        });
-    </script>
-
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
