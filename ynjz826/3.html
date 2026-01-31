@@ -69,7 +69,7 @@
     </script>
     <!-- TikTok Pixel Code End -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026</title>
+    <title>2025</title>
     <style>
         * {
             margin: 0;
@@ -178,7 +178,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .stat-card {
@@ -209,87 +209,6 @@
             line-height: 1.3;
         }
 
-        .consultation-form {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 16px;
-            font-weight: 600;
-            color: #87ceeb;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: rgba(0, 102, 204, 0.1);
-            border-radius: 12px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .radio-option:hover {
-            background: rgba(0, 102, 204, 0.2);
-            border-color: rgba(0, 102, 204, 0.4);
-        }
-
-        .radio-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .radio-custom {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #87ceeb;
-            border-radius: 50%;
-            margin-right: 12px;
-            position: relative;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .radio-option input[type="radio"]:checked + .radio-custom {
-            border-color: #00ff88;
-            background: #00ff88;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
-
-        .radio-option input[type="radio"]:checked + .radio-custom::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: #000;
-            border-radius: 50%;
-        }
-
-        .radio-option input[type="radio"]:checked ~ span:not(.radio-custom) {
-            color: #00ff88;
-            font-weight: 600;
-        }
-
         .cta-button {
             background: linear-gradient(135deg, #0066cc, #004499, #002266);
             border: none;
@@ -305,6 +224,7 @@
             box-shadow: 0 15px 35px rgba(0, 102, 204, 0.4);
             transition: all 0.3s ease;
             animation: breathe 3s infinite ease-in-out;
+            margin-bottom: 20px;
         }
 
         .cta-button::before {
@@ -399,14 +319,6 @@
                 padding: 20px 15px;
             }
 
-            .form-label {
-                font-size: 15px;
-            }
-
-            .radio-option {
-                padding: 12px;
-            }
-
             .stats-grid {
                 gap: 10px;
             }
@@ -444,7 +356,7 @@
         <p class="subtitle">Tidak lagi terikat jam kantor. Nikmati kebebasan mengatur waktumu</p>
 
         <div class="hero-section">
-            <div class="hero-title">Bekerja dari Rumah,<br>Dapatkan Komisi Tinggi</div>
+            <div class="hero-title">Manfaatkan waktu ini untuk meningkatkan kualitas hidup Anda.</div>
             <div class="hero-subtitle">Tidak lagi terikat pada jam kerja 9 pagi hingga 5 sore. Nikmati kebebasan mengatur waktu Anda sendiri.</div>
         </div>
 
@@ -466,7 +378,10 @@
                 <div class="stat-label">Pembayaran Instan</div>
             </div>
         </div>
- 
+
+        <button type="button" class="cta-button" onclick="submitForm()">
+            Konsultasi gratis melalui WhatsApp
+        </button>
 
         <div class="footer-info">
             <div class="copyright">
@@ -512,45 +427,6 @@
                 ttq.track('Contact');
             }
             window.open('https://sourl.cn/HpGMgz', '_blank');
-        }
-
-        // Add visual feedback for radio button interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            const radioOptions = document.querySelectorAll('.radio-option');
-
-            radioOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const input = this.querySelector('input[type="radio"]');
-                    if (input) {
-                        input.checked = true;
-
-                        // Remove selection from other options in the same group
-                        const groupName = input.name;
-                        document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
-                            if (radio !== input) {
-                                radio.checked = false;
-                            }
-                        });
-
-                        // Update visual state
-                        updateRadioVisuals();
-                    }
-                });
-            });
-        });
-
-        function updateRadioVisuals() {
-            const radioOptions = document.querySelectorAll('.radio-option');
-            radioOptions.forEach(option => {
-                const input = option.querySelector('input[type="radio"]');
-                if (input.checked) {
-                    option.style.borderColor = 'rgba(0, 255, 136, 0.6)';
-                    option.style.background = 'rgba(0, 255, 136, 0.1)';
-                } else {
-                    option.style.borderColor = 'transparent';
-                    option.style.background = 'rgba(0, 102, 204, 0.1)';
-                }
-            });
         }
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
