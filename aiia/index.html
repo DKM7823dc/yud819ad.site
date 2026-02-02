@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 銘柄情報分析 - Premium Report</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #0B0F19; /* 深色背景 */
+            color: #e2e8f0;
+        }
+
+        /* 极光背景动画 */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        .animate-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* 按钮光扫过效果 */
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        .shimmer-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        .group:hover .shimmer-effect {
+            animation: shimmer 1.5s infinite;
+        }
+
+        /* 隐藏滚动条但允许滚动 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 圆环加载动画 */
+        .circle-progress {
+            transition: stroke-dashoffset 0.3s linear; /* 改为线性过渡，更平滑 */
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* 跑马灯动画 */
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .marquee-container {
+            overflow: hidden;
+            height: 40px; /* 控制显示高度 */
+            position: relative;
+        }
+        .marquee-content {
+            animation: scroll-up 10s linear infinite;
+        }
+        /* 遮罩效果，让顶部和底部有渐隐 */
+        .marquee-mask {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- === HERO SECTION === -->
+    <section class="relative w-full overflow-hidden pb-20 lg:pb-32 min-h-screen flex flex-col">
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen animate-glow"></div>
+            <div class="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] mix-blend-screen"></div>
+            <!-- 网格纹理 -->
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 pt-24 text-center flex-grow">
+            
+            <!-- 主标题 -->
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
+                銘柄情報<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">分析</span>
+            </h1>
+
+            <!-- 跑马灯评论区 -->
+            <div class="mb-8 flex justify-center">
+                <div class="bg-white/5 border border-white/10 backdrop-blur-sm rounded-full px-6 py-2 flex items-center gap-3 marquee-mask h-[40px] w-full max-w-md overflow-hidden relative">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0"></div>
+                    <div class="marquee-container w-full">
+                        <div class="marquee-content flex flex-col gap-2 text-xs md:text-sm text-slate-300 text-left">
+                            <!-- 这里的列表会被复制一份以实现无缝滚动 -->
+                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが  の分析を完了しました</div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが  の分析を完了しました</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 副标题 -->
+            <p class="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto font-light">
+                AIを活用し、公開情報や市場データをもとに銘柄情報を整理した参考レポートを無料でご提供します。投資判断の参考としてご利用いただけます。
+            </p>
+
+            <div class="inline-block mb-12">
+                <span class="px-4 py-2 rounded bg-indigo-900/30 text-indigo-200 text-xs md:text-sm border border-indigo-500/20">
+                    ※投資判断の参考情報としてご利用いただけます
+                </span>
+            </div>
+
+            <!-- === 输入卡片 === -->
+            <div class="relative max-w-xl mx-auto">
+                <!-- 卡片光晕 -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 rounded-2xl blur opacity-30 transition duration-500 group-hover:opacity-50"></div>
+                
+                <div class="relative bg-[#131825]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl text-left">
+                    <div class="mb-6">
+                        <label class="block text-white font-bold text-lg md:text-xl mb-2 flex items-center gap-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-indigo-400"></i>
+                            気になる銘柄をチェック
+                        </label>
+                        <p class="text-slate-400 text-sm">
+                            銘柄コード または 銘柄名を入力してください
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i data-lucide="search" class="h-5 w-5 text-slate-500 group-focus-within:text-indigo-400 transition-colors"></i>
+                            </div>
+                            <input
+                                type="text"
+                                id="stockInput"
+                                placeholder="例: 7203 (トヨタ自動車)"
+                                class="block w-full pl-12 pr-4 py-4 bg-[#0B0F19] border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-lg"
+                            />
+                        </div>
+
+                        <button
+                            onclick="handleAnalyze()"
+                            class="w-full relative overflow-hidden group bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-indigo-500/25 transition-all duration-300 transform active:scale-[0.98]"
+                        >
+                            <div class="shimmer-effect"></div>
+                            <div class="flex items-center justify-center gap-2 relative z-10">
+                                <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                                <span>查看分析报告（免费）</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <p class="mt-4 text-[10px] md:text-xs text-slate-500 text-center border-t border-white/5 pt-3">
+                        本サービスは「情報提供サービス」であり、投資助言ではありません。
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部波浪衔接 -->
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-slate-50 rounded-t-[50%_100%] scale-x-150 translate-y-8 z-20"></div>
+    </section>
+
+    <!-- === FOOTER / LEGAL SECTION === -->
+    <section class="bg-slate-50 pt-12 pb-12 px-4 md:px-8 text-slate-800 relative z-30">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- 警告模块 (Updated Content) -->
+            <div class="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm mb-12">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 mb-6 pb-4 border-b border-slate-100">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+                    金融商品取引法に基づく重要事項
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
+                    <!-- Column 1 -->
+                    <div class="space-y-6">
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【サービスの性質】</span>
+                            <p class="text-xs text-slate-500">本サービスは、AI技術を活用した株式情報の提供および分析ツールです。投資助言業務、投資一任業務、金融商品仲介業務には該当せず、特定の金融商品の売買を推奨・勧誘するものではありません。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【投資リスクに関する警告】</span>
+                            <p class="text-xs text-slate-500">株式投資には価格変動リスク、信用リスク、流動性リスク等が伴い、投資元本を割り込む可能性があります。過去の運用実績は将来の運用成果を保証するものではありません。 市場環境の変化により、予想外の損失が発生する可能性があります。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【情報の正確性について】</span>
+                            <p class="text-xs text-slate-500">提供される情報は、信頼できると判断した情報源から取得していますが、 その正確性、完全性、適時性を保証するものではありません。 AI分析結果は参考情報として提供されるものであり、絶対的な投資判断基準ではありません。</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-6">
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【投資判断の責任】</span>
+                            <p class="text-xs text-slate-500">最終的な投資判断は、利用者ご自身の責任において行ってください。本サービスの利用により生じたいかなる損害についても、当社は一切の責任を負いません。 投資を行う際は、証券会社等の金融商品取引業者にご相談ください。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【登録情報】</span>
+                            <p class="text-xs text-slate-500">当サービス提供者は金融商品取引業者（投資助言・代理業、投資運用業等）ではありません。 金融商品取引法第29条の登録を受けた事業者ではないため、個別の投資助言を行うことはできません。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部链接与版权 -->
+            <div class="grid md:grid-cols-4 gap-8 border-t border-slate-200 pt-10">
+                <div class="md:col-span-1">
+                    <h4 class="font-bold text-slate-900 mb-4">法的文書</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="terms.html" class="hover:text-indigo-600 transition-colors">利用規約</a></li>
+                        <li><a href="Privacy.html" class="hover:text-indigo-600 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="specified.html" class="hover:text-indigo-600 transition-colors">特定商取引法表記</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <h4 class="font-bold text-slate-900 mb-4">お問い合わせ</h4>
+                    <div class="text-sm text-slate-500 space-y-1">
+                        <p>お問い合わせフォーム</p>
+                        <p class="font-mono text-slate-700 select-all">info@aitrendplus.jp</p>
+                        <p class="text-xs text-slate-400 mt-2">受付時間: 24時間受付<br/>（返信は営業日内）</p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 text-xs text-slate-400 space-y-4">
+                    <p>運営者名：LK Co., Ltd.</p>
+                    <p>当サイトで提供される情報は投資勧誘を目的としたものではありません。 投資に関する最終決定は、利用者ご自身の判断でなさるようお願いいたします。 掲載されている情報の正確性については万全を期しておりますが、その内容の正確性、安全性、有用性を保証するものではありません。</p>
+                    <p>© 2026 LK Co., Ltd. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === LOADING OVERLAY (Hidden by default) === -->
+    <div id="loadingOverlay" class="fixed inset-0 z-50 bg-[#05080f]/95 backdrop-blur-xl flex flex-col items-center justify-center text-white p-6 hidden opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-sm relative">
+            <!-- 背景光效 -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl animate-pulse"></div>
+
+            <!-- 环形加载器 -->
+            <div class="relative w-32 h-32 mx-auto mb-10">
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle cx="64" cy="64" r="60" stroke="#1e293b" stroke-width="4" fill="transparent"></circle>
+                    <circle id="progressCircle" cx="64" cy="64" r="60" 
+                        stroke="#6366f1" 
+                        stroke-width="4" 
+                        fill="transparent" 
+                        stroke-dasharray="377" 
+                        stroke-dashoffset="377"
+                        stroke-linecap="round"
+                        class="drop-shadow-[0_0_10px_rgba(99,102,241,0.5)] circle-progress">
+                    </circle>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                   <span id="progressText" class="text-3xl font-mono font-bold tracking-tighter">0%</span>
+                </div>
+            </div>
+
+            <!-- 文字状态 -->
+            <div class="text-center h-20">
+                <div id="loadingStepText" class="transition-all duration-300 transform">
+                    <!-- Dynamic Content Here -->
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10 text-center">
+                <p class="text-[10px] text-slate-500 leading-relaxed">
+                    すべてのデ一タは公開されている市場情報を使用しており、<br/>
+                    公開市場デ一タに基づいて分析を行っています
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === RESULT MODAL (Hidden by default) === -->
+    <div id="resultModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative bg-white w-full max-w-[500px] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transform scale-95 transition-transform duration-300" id="modalContent">
+            <!-- Header -->
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-6 bg-indigo-600 rounded-full"></div>
+                    <h3 class="font-bold text-slate-800">AI銘柄情報レポート（参考情報）</h3>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 md:p-8 overflow-y-auto no-scrollbar">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-[#06C755]/10 rounded-full mb-4 ring-4 ring-[#06C755]/5">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-[#06C755]"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-3">
+                        📱 LINE で詳細な銘柄診断レポートを受け取る
+                    </h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        以下のボタンから「AI 株式アシスタント」LINE公式アカウントを追加してください。<br/>
+                        LINE追加後、診断したい銘柄コードまたは銘柄名を送信すると、AIが分析した詳細レポートを無料でお届けします。
+                    </p>
+                </div>
+
+                <!-- LINE Button -->
+                <button
+                    onclick="handleLineClick()"
+                    class="w-full group relative bg-[#06C755] hover:bg-[#05b54d] text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(6,199,85,0.39)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 mb-8 overflow-hidden"
+                >
+                    <div class="shimmer-effect"></div>
+                    <div class="flex items-center justify-center gap-3 relative z-10">
+                        <span class="text-lg">LINE追加で無料レポートを見る</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5 opacity-80"></i>
+                    </div>
+                </button>
+
+                <!-- Important Notes Box -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100 text-xs text-slate-600 space-y-3">
+                    <p class="font-bold text-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="lock" class="w-3 h-3 text-slate-400"></i>
+                        【重要】AIを活用した銘柄情報（参考）をご案内しています
+                    </p>
+                    <ul class="space-y-2.5 pl-1">
+                        <li class="flex gap-2.5 items-start">
+                            <span class="w-1 h-1 rounded-full bg-slate-400 mt-1.5 shrink-0"></span>
+                            <span>このボタンをクリックすると、LINE公式アプリまたはLINE公式サイト（第三者サービス）に移動します。</span>
+                        </li>
+                        <li class="flex gap-2.5 items-start">
+                            <span class="w-1 h-1 rounded-full bg-slate-400 mt-1.5 shrink-0"></span>
+                            <span>LINEは当サービスとは独立した外部サービスです。</span>
+                        </li>
+                        <li class="flex gap-2.5 items-start">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-green-500 mt-0.5 shrink-0"></i>
+                            <span class="font-medium text-slate-700">利用無料：LINEへの移動後も追加料金は発生しません。</span>
+                        </li>
+                        <li class="flex gap-2.5 items-start">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-green-500 mt-0.5 shrink-0"></i>
+                            <span class="font-medium text-slate-700">LINE友だち追加後、銘柄情報に関する参考レポートをご確認いただけます。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === JAVASCRIPT LOGIC === -->
+    <script>
+        // 初始化 Icons
+        lucide.createIcons();
+
+        // 模拟 k2 方法
+        const k2 = () => {
+            console.log("k2 method triggered");
+        };
+
+        // 获取 DOM 元素
+        const stockInput = document.getElementById('stockInput');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const resultModal = document.getElementById('resultModal');
+        const modalContent = document.getElementById('modalContent');
+        const loadingStepText = document.getElementById('loadingStepText');
+        const progressCircle = document.getElementById('progressCircle');
+        const progressText = document.getElementById('progressText');
+
+        // 圆周长 = 2 * PI * r (r=60) ≈ 377
+        const CIRCUMFERENCE = 377;
+        
+        // 动画控制变量
+        let progressInterval;
+        let currentProgress = 0;
+
+        function setProgressVisual(percent) {
+            const offset = CIRCUMFERENCE - (percent / 100) * CIRCUMFERENCE;
+            progressCircle.style.strokeDashoffset = offset;
+            progressText.innerText = Math.round(percent) + '%';
+        }
+
+        // 平滑进度条逻辑
+        function startProgressAnimation() {
+            currentProgress = 0;
+            setProgressVisual(0);
+            
+            // 总动画时长约 3.5秒，目标是 100%
+            // 我们使用 setInterval 来模拟连续增长
+            clearInterval(progressInterval);
+            
+            progressInterval = setInterval(() => {
+                // 非线性增长逻辑：开始快，中间慢，最后快
+                if (currentProgress < 30) {
+                    currentProgress += 1.5; // 快速启动
+                } else if (currentProgress < 70) {
+                    currentProgress += 0.4; // 数据分析阶段变慢
+                } else if (currentProgress < 95) {
+                    currentProgress += 0.8; // 冲刺
+                } else {
+                    // 95% 以上等待完成信号
+                    if (currentProgress < 99) currentProgress += 0.1;
+                }
+
+                if (currentProgress > 99) currentProgress = 99;
+                setProgressVisual(currentProgress);
+            }, 50);
+        }
+
+        function finishProgress() {
+            clearInterval(progressInterval);
+            currentProgress = 100;
+            setProgressVisual(100);
+        }
+
+        function updateLoadingText(step) {
+            loadingStepText.style.opacity = '0';
+            setTimeout(() => {
+                let html = '';
+                if (step === 1) {
+                    html = `<h3 class="text-xl font-bold mb-1">AIがレポートを作成しています</h3><p class="text-indigo-300 text-sm">数秒ほどお待ちください…</p>`;
+                } else if (step === 2) {
+                    html = `<h3 class="text-xl font-bold mb-1 text-blue-400">データ収集中</h3><div class="flex justify-center gap-1 mt-2"><span class="w-1 h-1 bg-blue-400 rounded-full animate-bounce"></span><span class="w-1 h-1 bg-blue-400 rounded-full animate-bounce delay-75"></span><span class="w-1 h-1 bg-blue-400 rounded-full animate-bounce delay-150"></span></div>`;
+                } else if (step === 3) {
+                    html = `<h3 class="text-xl font-bold mb-1 text-purple-400">AIで分析中</h3><p class="text-xs text-slate-400 font-mono mt-1">PROCESSING MARKET DATA...</p>`;
+                } else if (step === 4) {
+                    html = `<h3 class="text-xl font-bold mb-1 text-green-400">レポート作成中</h3>`;
+                }
+                loadingStepText.innerHTML = html;
+                loadingStepText.style.opacity = '1';
+            }, 200);
+        }
+
+        function handleAnalyze() {
+            const value = stockInput.value.trim();
+            if (!value) {
+                alert("銘柄コード または 銘柄名を入力してください");
+                return;
+            }
+
+            // 显示 Loading
+            loadingOverlay.classList.remove('hidden');
+            void loadingOverlay.offsetWidth;
+            loadingOverlay.classList.remove('opacity-0');
+
+            // 开始平滑动画
+            startProgressAnimation();
+
+            // Step 1: Start
+            updateLoadingText(1);
+
+            // Step 2: Data Collection (800ms)
+            setTimeout(() => {
+                updateLoadingText(2);
+            }, 800);
+
+            // Step 3: AI Analysis (2000ms)
+            setTimeout(() => {
+                updateLoadingText(3);
+            }, 2000);
+
+            // Step 4: Report Creation (3000ms)
+            setTimeout(() => {
+                updateLoadingText(4);
+            }, 3000);
+
+            // Finish (3800ms)
+            setTimeout(() => {
+                finishProgress(); // 强制跳到 100%
+                
+                setTimeout(() => {
+                    // Hide Loading
+                    loadingOverlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        loadingOverlay.classList.add('hidden');
+                        showModal();
+                    }, 300);
+                }, 500); // 在 100% 停留 0.5s
+            }, 3800);
+        }
+
+        function showModal() {
+            resultModal.classList.remove('hidden');
+            void resultModal.offsetWidth;
+            resultModal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            resultModal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                resultModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleLineClick() {
+            k2();
+            window.location.href = "https://www.qq.com";
+        }
+    </script>
+</body>
+</html>

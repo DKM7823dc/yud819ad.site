@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特定商取引法に基づく表記 - AI 銘柄情報分析</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #0B0F19; /* 深色背景 */
+            color: #e2e8f0;
+        }
+
+        /* 极光背景动画 */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        .animate-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* 自定义定义列表样式 */
+        .legal-dl {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .legal-dl {
+                grid-template-columns: 200px 1fr;
+                gap: 2rem;
+            }
+        }
+        .legal-dt {
+            font-weight: 700;
+            color: #334155;
+            display: flex;
+            align-items: center;
+        }
+        .legal-dd {
+            color: #475569;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-indigo-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- === HEADER / NAVIGATION === -->
+    <header class="relative z-20 w-full pt-8 pb-4 px-4 md:px-8 max-w-5xl mx-auto">
+        <a href="index.html" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-200 group">
+            <div class="p-2 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition-all">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </div>
+            <span class="font-medium">トップページに戻る</span>
+        </a>
+    </header>
+
+    <!-- === MAIN CONTENT === -->
+    <main class="relative w-full flex-grow pb-20 px-4">
+        
+        <!-- 背景装饰 -->
+        <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen animate-glow"></div>
+            <div class="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] mix-blend-screen"></div>
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <!-- 内容卡片 -->
+            <div class="bg-white text-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+                
+                <!-- 标题区 -->
+                <div class="bg-slate-50 border-b border-slate-200 p-8 md:p-10">
+                    <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">特定商取引法に基づく表記</h1>
+                    <p class="text-slate-500 text-sm">特定商取引法（特定商取引に関する法律）に基づき、以下の通り表記いたします。</p>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    
+                    <!-- 1. 販売業者情報 -->
+                    <h2 class="text-lg font-bold text-indigo-900 mb-6 flex items-center gap-2 pb-2 border-b border-indigo-100">
+                        <i data-lucide="building-2" class="w-5 h-5 text-indigo-600"></i>
+                        販売業者情報
+                    </h2>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">運営者名</dt>
+                        <dd class="legal-dd">LK Co., Ltd.</dd>
+                    </dl>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">連絡先・お問い合わせ</dt>
+                        <dd class="legal-dd font-mono text-indigo-600">info@aitrendplus.jp</dd>
+                    </dl>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">受付時間</dt>
+                        <dd class="legal-dd">24時間受付（返信は営業日内）</dd>
+                    </dl>
+
+                    <!-- 2. サービス内容 -->
+                    <h2 class="text-lg font-bold text-indigo-900 mb-6 mt-10 flex items-center gap-2 pb-2 border-b border-indigo-100">
+                        <i data-lucide="layers" class="w-5 h-5 text-indigo-600"></i>
+                        サービス内容
+                    </h2>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">提供サービス</dt>
+                        <dd class="legal-dd">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>AI技術を活用した株式情報の提供および分析サービス</li>
+                                <li>株価データ、チャート、テクニカル指標の表示</li>
+                                <li>AI分析レポートの生成と提供</li>
+                                <li>投資情報の提供（情報提供のみ、投資助言には該当しません）</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <!-- 3. 料金・支払い -->
+                    <h2 class="text-lg font-bold text-indigo-900 mb-6 mt-10 flex items-center gap-2 pb-2 border-b border-indigo-100">
+                        <i data-lucide="credit-card" class="w-5 h-5 text-indigo-600"></i>
+                        料金・お支払い
+                    </h2>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">サービス料金</dt>
+                        <dd class="legal-dd">
+                            <div class="mb-2">
+                                <span class="font-bold text-slate-700">基本サービス：</span>
+                                <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded font-bold ml-2">無料</span>
+                            </div>
+                            <p class="text-sm">株価情報の閲覧、AI診断機能、レポートダウンロード。<br>現在、当サービスは基本機能を無料で提供しております。今後、プレミアム機能を追加する場合は、事前にお知らせいたします。</p>
+                        </dd>
+                    </dl>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">お支払い方法</dt>
+                        <dd class="legal-dd">
+                            <p class="mb-2">現在、有料サービスは提供しておりません。</p>
+                            <p class="text-sm text-slate-500">今後、有料プランを導入する際は、以下の決済方法を予定しております。</p>
+                            <ul class="list-disc pl-5 text-sm text-slate-500 mt-1">
+                                <li>クレジットカード決済（Visa、Mastercard、JCB、American Express等）</li>
+                                <li>銀行振込</li>
+                                <li>コンビニ決済</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">サービス提供時期</dt>
+                        <dd class="legal-dd">
+                            サービスはお申し込み後、即時ご利用いただけます。<br>
+                            <span class="text-sm text-slate-500">AI診断結果の生成には、通常数秒から数十秒程度のお時間をいただきます。</span>
+                        </dd>
+                    </dl>
+
+                    <!-- 4. 返品・キャンセル -->
+                    <h2 class="text-lg font-bold text-indigo-900 mb-6 mt-10 flex items-center gap-2 pb-2 border-b border-indigo-100">
+                        <i data-lucide="refresh-ccw" class="w-5 h-5 text-indigo-600"></i>
+                        返品・キャンセルについて
+                    </h2>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">無料サービスについて</dt>
+                        <dd class="legal-dd">現在提供している無料サービスについては、いつでもご利用を停止いただけます。</dd>
+                    </dl>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">今後提供予定の<br class="hidden md:block">有料サービスについて</dt>
+                        <dd class="legal-dd">
+                            <p class="mb-2">デジタルコンテンツの性質上、原則として返品・返金はお受けできません。</p>
+                            <p class="text-sm mb-1">ただし、以下の場合は返金対応を検討いたします。</p>
+                            <ul class="list-disc pl-5 text-sm space-y-1">
+                                <li>システムの不具合により、サービスが正常に提供されなかった場合</li>
+                                <li>当社の責に帰すべき事由により、サービス提供が不可能となった場合</li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <!-- 5. その他 -->
+                    <h2 class="text-lg font-bold text-indigo-900 mb-6 mt-10 flex items-center gap-2 pb-2 border-b border-indigo-100">
+                        <i data-lucide="shield" class="w-5 h-5 text-indigo-600"></i>
+                        その他
+                    </h2>
+
+                    <dl class="legal-dl">
+                        <dt class="legal-dt">個人情報の取り扱い</dt>
+                        <dd class="legal-dd">
+                            お客様の個人情報は、個人情報保護法に基づき適切に管理いたします。詳細は<a href="#" class="text-indigo-600 hover:underline">プライバシーポリシー</a>をご確認ください。
+                        </dd>
+                    </dl>
+
+                    <!-- 免責事項 (Highlighted) -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mt-8">
+                        <h3 class="font-bold text-amber-800 mb-3 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            免責事項
+                        </h3>
+                        <div class="text-sm text-amber-900/80 space-y-3 leading-relaxed">
+                            <p><span class="font-bold">重要なお知らせ：</span>当サービスは、AI技術を活用した株式情報の提供および分析ツールであり、投資助言業務、投資一任業務、金融商品仲介業務には該当しません。</p>
+                            <p>提供される情報は参考情報としてご活用ください。株式投資には価格変動リスク、信用リスク、流動性リスク等が伴い、投資元本を割り込む可能性があります。</p>
+                            <p>最終的な投資判断は、必ずご自身の責任において行ってください。当サービスの利用により生じたいかなる損害についても、当社は一切の責任を負いません。</p>
+                        </div>
+                    </div>
+
+                    <!-- お問い合わせ CTA -->
+                    <div class="bg-slate-50 rounded-xl p-6 mt-10 border border-slate-200 text-center">
+                        <h3 class="font-bold text-slate-800 mb-2">お問い合わせ</h3>
+                        <p class="text-sm text-slate-600 mb-4">特定商取引法に関するご質問、その他お問い合わせは、以下の方法でご連絡ください。</p>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
+                            <div class="flex items-center gap-2 text-slate-700 bg-white px-4 py-2 rounded border border-slate-200">
+                                <i data-lucide="mail" class="w-4 h-4 text-indigo-500"></i>
+                                <span class="font-mono">info@aitrendplus.jp</span>
+                            </div>
+                            <span class="text-xs text-slate-400">24時間受付（返信は営業日内）</span>
+                        </div>
+
+                        <a href="contact.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                            お問い合わせフォームへ
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 text-right text-xs text-slate-400">
+                        最終更新日: 2025年1月15日
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- === FOOTER / LEGAL SECTION (与主页完全一致) === -->
+    <section class="bg-slate-50 pt-12 pb-12 px-4 md:px-8 text-slate-800 relative z-30">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- 警告模块 -->
+            <div class="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm mb-12">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 mb-6 pb-4 border-b border-slate-100">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+                    金融商品取引法に基づく重要事項
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
+                    <!-- Column 1 -->
+                    <div class="space-y-6">
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【サービスの性質】</span>
+                            <p class="text-xs text-slate-500">本サービスは、AI技術を活用した株式情報の提供および分析ツールです。投資助言業務、投資一任業務、金融商品仲介業務には該当せず、特定の金融商品の売買を推奨・勧誘するものではありません。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【投資リスクに関する警告】</span>
+                            <p class="text-xs text-slate-500">株式投資には価格変動リスク、信用リスク、流動性リスク等が伴い、投資元本を割り込む可能性があります。過去の運用実績は将来の運用成果を保証するものではありません。 市場環境の変化により、予想外の損失が発生する可能性があります。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【情報の正確性について】</span>
+                            <p class="text-xs text-slate-500">提供される情報は、信頼できると判断した情報源から取得していますが、 その正確性、完全性、適時性を保証するものではありません。 AI分析結果は参考情報として提供されるものであり、絶対的な投資判断基準ではありません。</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-6">
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【投資判断の責任】</span>
+                            <p class="text-xs text-slate-500">最終的な投資判断は、利用者ご自身の責任において行ってください。本サービスの利用により生じたいかなる損害についても、当社は一切の責任を負いません。 投資を行う際は、証券会社等の金融商品取引業者にご相談ください。</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-700 block text-xs mb-1">【登録情報】</span>
+                            <p class="text-xs text-slate-500">当サービス提供者は金融商品取引業者（投資助言・代理業、投資運用業等）ではありません。 金融商品取引法第29条の登録を受けた事業者ではないため、個別の投資助言を行うことはできません。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部链接与版权 -->
+            <div class="grid md:grid-cols-4 gap-8 border-t border-slate-200 pt-10">
+                <div class="md:col-span-1">
+                    <h4 class="font-bold text-slate-900 mb-4">法的文書</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                       <li><a href="terms.html" class="hover:text-indigo-600 transition-colors">利用規約</a></li>
+                        <li><a href="Privacy.html" class="hover:text-indigo-600 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="specified.html" class="hover:text-indigo-600 transition-colors">特定商取引法表記</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <h4 class="font-bold text-slate-900 mb-4">お問い合わせ</h4>
+                    <div class="text-sm text-slate-500 space-y-1">
+                        <p>お問い合わせフォーム</p>
+                        <p class="font-mono text-slate-700 select-all">info@aitrendplus.jp</p>
+                        <p class="text-xs text-slate-400 mt-2">受付時間: 24時間受付<br/>（返信は営業日内）</p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 text-xs text-slate-400 space-y-4">
+                    <p>運営者名：LK Co., Ltd.</p>
+                    <p>当サイトで提供される情報は投資勧誘を目的としたものではありません。 投資に関する最終決定は、利用者ご自身の判断でなさるようお願いいたします。 掲載されている情報の正確性については万全を期しておりますが、その内容の正確性、安全性、有用性を保証するものではありません。</p>
+                    <p>© 2026 LK Co., Ltd. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 初始化 Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
