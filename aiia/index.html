@@ -30,6 +30,21 @@
             animation: pulse-glow 4s ease-in-out infinite;
         }
 
+        /* 图片呼吸特效 (新增) */
+        @keyframes breathe {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 0 rgba(99, 102, 241, 0); 
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 0 30px rgba(99, 102, 241, 0.4); 
+            }
+        }
+        .animate-breathe {
+            animation: breathe 3s ease-in-out infinite;
+        }
+
         /* 按钮光扫过效果 */
         @keyframes shimmer {
             100% { transform: translateX(100%); }
@@ -97,8 +112,19 @@
             <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
         </div>
 
-        <div class="relative z-10 max-w-4xl mx-auto px-4 pt-24 text-center flex-grow">
+        <div class="relative z-10 max-w-4xl mx-auto px-4 pt-16 text-center flex-grow">
             
+            <!-- 新增：圆形呼吸图片 -->
+            <div class="mb-8 flex justify-center">
+                <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full p-[2px] bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 animate-breathe">
+                    <img 
+                        src="img/1.jpg" 
+                        alt="AI Analyst" 
+                        class="w-full h-full rounded-full object-cover border-4 border-[#0B0F19]"
+                    >
+                </div>
+            </div>
+
             <!-- 主标题 -->
             <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
                 銘柄情報<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">分析</span>
@@ -243,14 +269,7 @@
                     </ul>
                 </div>
                 
-                <div class="md:col-span-1">
-                    <h4 class="font-bold text-slate-900 mb-4">お問い合わせ</h4>
-                    <div class="text-sm text-slate-500 space-y-1">
-                        <p>お問い合わせフォーム</p>
-                        <p class="font-mono text-slate-700 select-all">info@aitrendplus.jp</p>
-                        <p class="text-xs text-slate-400 mt-2">受付時間: 24時間受付<br/>（返信は営業日内）</p>
-                    </div>
-                </div>
+               
 
                 <div class="md:col-span-2 text-xs text-slate-400 space-y-4">
                     <p>運営者名：LK Co., Ltd.</p>
@@ -346,31 +365,7 @@
                     </div>
                 </button>
 
-                <!-- Important Notes Box -->
-                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100 text-xs text-slate-600 space-y-3">
-                    <p class="font-bold text-slate-800 flex items-center gap-1.5">
-                        <i data-lucide="lock" class="w-3 h-3 text-slate-400"></i>
-                        【重要】AIを活用した銘柄情報（参考）をご案内しています
-                    </p>
-                    <ul class="space-y-2.5 pl-1">
-                        <li class="flex gap-2.5 items-start">
-                            <span class="w-1 h-1 rounded-full bg-slate-400 mt-1.5 shrink-0"></span>
-                            <span>このボタンをクリックすると、LINE公式アプリまたはLINE公式サイト（第三者サービス）に移動します。</span>
-                        </li>
-                        <li class="flex gap-2.5 items-start">
-                            <span class="w-1 h-1 rounded-full bg-slate-400 mt-1.5 shrink-0"></span>
-                            <span>LINEは当サービスとは独立した外部サービスです。</span>
-                        </li>
-                        <li class="flex gap-2.5 items-start">
-                            <i data-lucide="check" class="w-3.5 h-3.5 text-green-500 mt-0.5 shrink-0"></i>
-                            <span class="font-medium text-slate-700">利用無料：LINEへの移動後も追加料金は発生しません。</span>
-                        </li>
-                        <li class="flex gap-2.5 items-start">
-                            <i data-lucide="check" class="w-3.5 h-3.5 text-green-500 mt-0.5 shrink-0"></i>
-                            <span class="font-medium text-slate-700">LINE友だち追加後、銘柄情報に関する参考レポートをご確認いただけます。</span>
-                        </li>
-                    </ul>
-                </div>
+               
             </div>
         </div>
     </div>
