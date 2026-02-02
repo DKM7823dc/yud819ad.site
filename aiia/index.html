@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 銘柄情報分析 - Premium Report</title>
+    <title>AI 銘柄情報分析 </title>
     
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +30,7 @@
             animation: pulse-glow 4s ease-in-out infinite;
         }
 
-        /* 图片呼吸特效 (新增) */
+        /* 图片呼吸特效 */
         @keyframes breathe {
             0%, 100% { 
                 transform: scale(1); 
@@ -74,7 +74,7 @@
 
         /* 圆环加载动画 */
         .circle-progress {
-            transition: stroke-dashoffset 0.3s linear; /* 改为线性过渡，更平滑 */
+            transition: stroke-dashoffset 0.3s linear;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
@@ -114,11 +114,11 @@
 
         <div class="relative z-10 max-w-4xl mx-auto px-4 pt-16 text-center flex-grow">
             
-            <!-- 新增：圆形呼吸图片 -->
+            <!-- 圆形呼吸图片 -->
             <div class="mb-8 flex justify-center">
                 <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full p-[2px] bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 animate-breathe">
                     <img 
-                        src="img/1.jpg" 
+                        src="img/1.gif" 
                         alt="AI Analyst" 
                         class="w-full h-full rounded-full object-cover border-4 border-[#0B0F19]"
                     >
@@ -137,17 +137,17 @@
                     <div class="marquee-container w-full">
                         <div class="marquee-content flex flex-col gap-2 text-xs md:text-sm text-slate-300 text-left">
                             <!-- 这里的列表会被复制一份以实现无缝滚动 -->
-                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが分析を完了しました</div>
                             <!-- Duplicate for seamless loop -->
-                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが  の分析を完了しました</div>
-                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが  の分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">1分前 佐藤**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">3分前 田中**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">5分前 鈴木**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">8分前 高橋**さんが分析を完了しました</div>
+                            <div class="h-[20px] flex items-center truncate">12分前 伊藤**さんが分析を完了しました</div>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,8 @@
                             <div class="shimmer-effect"></div>
                             <div class="flex items-center justify-center gap-2 relative z-10">
                                 <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
-                                <span>查看分析报告（免费）</span>
+                                <!-- 修正: 中国語から日本語へ変更 -->
+                                <span>無料で分析レポートを見る</span>
                             </div>
                         </button>
                     </div>
@@ -220,7 +221,7 @@
     <section class="bg-slate-50 pt-12 pb-12 px-4 md:px-8 text-slate-800 relative z-30">
         <div class="max-w-5xl mx-auto">
             
-            <!-- 警告模块 (Updated Content) -->
+            <!-- 警告模块 -->
             <div class="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm mb-12">
                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 mb-6 pb-4 border-b border-slate-100">
                     <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
@@ -314,8 +315,9 @@
 
             <div class="mt-8 pt-6 border-t border-white/10 text-center">
                 <p class="text-[10px] text-slate-500 leading-relaxed">
-                    すべてのデ一タは公開されている市場情報を使用しており、<br/>
-                    公開市場デ一タに基づいて分析を行っています
+                    <!-- 修正: 「デ一タ」を「データ」に修正 -->
+                    すべてのデータは公開されている市場情報を使用しており、<br/>
+                    公開市場データに基づいて分析を行っています
                 </p>
             </div>
         </div>
