@@ -51,6 +51,7 @@
             .validity-text { font-size: 15px !important; }
             .footer-text { font-size: 15px !important; }
             .qr-code-image { width: 180px !important; height: 180px !important; }
+            .qr-hint-text { font-size: 16px !important; }
         }
 
         /* Gmail App specific fixes */
@@ -187,13 +188,15 @@
                                 </tr>
                             </table>
 
-                            <!-- QR Code Section - 新增部分 -->
+                            <!-- QR Code Section - 更新文案 -->
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center" style="padding-bottom: 20px;">
-                                        <p style="color: #8b949e; font-size: 15px; margin: 0 0 20px 0; font-style: italic;">
-                                            Or scan the QR code below with your phone to claim
-                                        </p>
+                                        <div style="background: linear-gradient(135deg, rgba(107, 76, 230, 0.15), rgba(0, 212, 255, 0.1)); padding: 20px 25px; border-radius: 12px; border: 2px solid rgba(107, 76, 230, 0.4); display: inline-block; max-width: 90%;">
+                                            <p class="qr-hint-text" style="color: #ffffff; font-size: 17px; margin: 0; font-weight: 700; line-height: 1.7;">
+                                                 <span style="color: #00d4ff;">Using a computer?</span> Scan the QR code below with your phone to quickly get the app and start using your discount!
+                                            </p>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
