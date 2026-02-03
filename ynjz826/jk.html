@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
- 
+ <!-- Signals Gateway Pixel Code -->
+    <script>
+    !function(a,h,e,v,n,t,s){
+      if(a.cbq)return;
+      n=a.cbq=function(){n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);};
+      if(!a._cbq)a._cbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+      t=h.createElement(e);t.async=!0; t.src=v;s=h.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+    }(window, document,'script', 'https://sgw.stape.au/sdk/2227672441176445891/events.js');
+    cbq('setHost', 'https://sgw.stape.au/');
+    cbq('init', '2227672441176445891');
+    cbq('track', 'PageView');
+    </script>
+  <!-- End Signals Gateway Pixel Code -->
 
 	
     <meta charset="UTF-8">
@@ -18,10 +31,24 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
- 
+
+	 <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D5IFIMJC77U894MD83PG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
 	
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026</title>
+    <title>2025</title>
     <style>
         * {
             margin: 0;
@@ -157,6 +184,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             margin-right: 12px;
             position: relative;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .radio-option input[type="radio"]:checked + .radio-custom {
@@ -182,6 +210,40 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             font-weight: 600;
         }
 
+        .cta-button {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(135deg, #00ff99 0%, #00dd77 100%);
+        }
+
+        .cta-button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .cta-button:disabled {
+            background: linear-gradient(135deg, #555 0%, #333 100%);
+            cursor: not-allowed;
+            opacity: 0.5;
+            box-shadow: none;
+        }
+
         .free-badge {
             background: linear-gradient(45deg, #00ff88, #00cc6a);
             color: #000;
@@ -198,6 +260,17 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         @keyframes glow {
             from { box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); }
             to { box-shadow: 0 5px 25px rgba(0, 255, 136, 0.6); }
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 68, 68, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            display: none;
         }
 
         .legal-links {
@@ -314,7 +387,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 width: 60px;
                 height: 60px;
                 margin-bottom: 20px;
-                font-size: 24px;
             }
             h1 {
                 font-size: 24px;
@@ -337,6 +409,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             .radio-option {
                 padding: 12px;
             }
+
+            .cta-button {
+                font-size: 16px;
+                padding: 14px 20px;
+            }
         }
     </style>
 </head>
@@ -344,7 +421,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="stars"></div>
     
     <div class="container">
-        <img src="https://www.jacmsotck.online/jz/j/img/1.jpg" alt="Investiční expert" class="logo">
+        <img src="img/1.jpg" alt="Investiční expert" class="logo">
         
         <div class="free-badge">100% Certifikováno</div>
         <h1>Předefinování hodnoty času</h1>
@@ -357,12 +434,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <label class="radio-option">
                         <input type="radio" name="age" value="under25">
                         <span class="radio-custom"></span>
-                        Méně než 25 let
+                        <span>Méně než 25 let</span>
                     </label>
                     <label class="radio-option">
                         <input type="radio" name="age" value="over25">
                         <span class="radio-custom"></span>
-                        Více než 25 let
+                        <span>Více než 25 let</span>
                     </label>
                 </div>
             </div>
@@ -373,20 +450,28 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <label class="radio-option">
                         <input type="radio" name="bank" value="yes">
                         <span class="radio-custom"></span>
-                        Ano
+                        <span>Ano</span>
                     </label>
                     <label class="radio-option">
                         <input type="radio" name="bank" value="no">
                         <span class="radio-custom"></span>
-                        Ne
+                        <span>Ne</span>
                     </label>
                 </div>
+            </div>
+
+            <button type="button" id="ctaButton" class="cta-button" disabled>
+                Pokračovat
+            </button>
+            
+            <div id="errorMessage" class="error-message">
+                Prosím, odpovězte na obě otázky
             </div>
         </form>
         
         <div class="footer-info">
             <div class="copyright">
-                <p>© 2026 Všechna práva vyhrazena.</p>
+                <p>© 2025 Všechna práva vyhrazena.</p>
             </div>
             <div class="contact-info"> 
                
@@ -539,17 +624,16 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             }
         });
 
-        // Check if both questions are answered and auto-submit
-        function checkAndSubmit() {
+        // Check if both questions are answered
+        function checkFormCompletion() {
             const ageValue = document.querySelector('input[name="age"]:checked');
             const bankValue = document.querySelector('input[name="bank"]:checked');
+            const ctaButton = document.getElementById('ctaButton');
             
-            // If both questions are answered, automatically redirect
             if (ageValue && bankValue) {
-                // Small delay for better UX
-                setTimeout(() => {
-                    d2();
-                }, 300);
+                ctaButton.disabled = false;
+            } else {
+                ctaButton.disabled = true;
             }
         }
 
@@ -583,6 +667,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         // Add visual feedback for radio button interactions
         document.addEventListener('DOMContentLoaded', function() {
             const radioOptions = document.querySelectorAll('.radio-option');
+            const ctaButton = document.getElementById('ctaButton');
             
             radioOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -601,10 +686,28 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                         // Update visual state
                         updateRadioVisuals();
                         
-                        // Check if both questions are answered
-                        checkAndSubmit();
+                        // Check form completion
+                        checkFormCompletion();
                     }
                 });
+            });
+
+            // CTA button click handler
+            ctaButton.addEventListener('click', function() {
+                const ageValue = document.querySelector('input[name="age"]:checked');
+                const bankValue = document.querySelector('input[name="bank"]:checked');
+                const errorMessage = document.getElementById('errorMessage');
+                
+                if (ageValue && bankValue) {
+                    // Both questions answered, proceed with redirect
+                    d2();
+                } else {
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
             });
         });
 
