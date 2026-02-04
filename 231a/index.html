@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OxyEnergy 水飞蓟护肝胶囊</title>
+    <title>OxyEnergy Milk Thistle Liver Support</title>
     <style>
         * {
             margin: 0;
@@ -71,25 +71,40 @@
             background: #fff;
         }
 
-        /* 营销元素 */
-        .view-counter {
+        /* 限时优惠标签 */
+        .flash-sale-badge {
             position: absolute;
             top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            left: 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 16px;
+            border-radius: 25px;
             font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
             z-index: 10;
-            animation: pulse 2s infinite;
+            animation: flashSale 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes flashSale {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 107, 107, 0.7); }
+        }
+
+        /* 免运费标签 */
+        .free-shipping-badge {
+            position: absolute;
+            top: 60px;
+            left: 15px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+            z-index: 10;
         }
 
         /* 内容区域 */
@@ -103,17 +118,163 @@
         }
 
         .product-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.3;
+        }
+
+        /* 查看人数 */
+        .view-counter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        .view-counter::before {
+            content: "🔥";
+            font-size: 14px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* 评分区域 */
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stars {
+            color: #FFA41C;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .rating-count {
+            color: #0066c0;
+            font-size: 13px;
+        }
+
+        /* 特性标签 - 优化为一行显示 */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            margin: 20px 0;
+        }
+
+        .feature-tag {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-icon {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        /* 紧急库存提示 */
+        .urgency-banner {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .urgency-icon {
+            font-size: 20px;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        /* 倒计时 */
+        .countdown-timer {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+        }
+
+        .countdown-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            min-width: 50px;
+        }
+
+        .countdown-number {
+            font-size: 24px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 10px;
+            opacity: 0.9;
         }
 
         .product-subtitle {
             font-size: 15px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             line-height: 1.8;
         }
 
@@ -121,24 +282,60 @@
             font-size: 14px;
             color: #555;
             line-height: 1.8;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        /* 特性标签 */
-        .features {
+        /* 信任标志 */
+        .trust-badges {
             display: flex;
+            justify-content: space-around;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 24px 0;
+            gap: 12px;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin: 20px 0;
         }
 
-        .feature-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
+        .trust-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .trust-icon {
+            font-size: 28px;
+        }
+
+        .trust-text {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
             font-weight: 600;
+        }
+
+        /* 最近购买提示 */
+        .recent-purchase {
+            background: #f0f8ff;
+            border-left: 4px solid #0066c0;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .recent-purchase strong {
+            color: #0066c0;
         }
 
         /* 评论区 */
@@ -147,13 +344,28 @@
             padding: 24px 20px;
         }
 
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .reviews-title {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .verified-badge {
+            background: #4CAF50;
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
         }
 
         .review-card {
@@ -191,6 +403,13 @@
         .review-stars {
             color: #FFA41C;
             font-size: 14px;
+        }
+
+        .verified-purchase {
+            color: #4CAF50;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 2px;
         }
 
         .review-text {
@@ -236,6 +455,12 @@
             font-size: 16px;
         }
 
+        .savings-text {
+            font-size: 11px;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
         .buy-button {
             flex: 1;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -256,29 +481,33 @@
 
         /* 间距调整 */
         .spacer {
-            height: 80px;
+            height: 90px;
         }
     </style>
 </head>
 <body>
     <!-- 轮播图区域 -->
     <div class="carousel-container">
-        <div class="view-counter">
-            已有 <span id="viewCount">873</span> 人查看
+        <div class="flash-sale-badge">
+            ⚡ 43% OFF - Limited Time
+        </div>
+        
+        <div class="free-shipping-badge">
+            🚚 FREE Shipping
         </div>
         
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-slide">
-                <img src="https://www.yud819ad.site/231a/t4.jpg" alt="产品图1">
+                <img src="https://www.yud819ad.site/231a/t4.jpg" alt="Product Image 1">
             </div>
             <div class="carousel-slide">
-                <img src="https://www.yud819ad.site/231a/t3.jpg" alt="产品图2">
+                <img src="https://www.yud819ad.site/231a/t3.jpg" alt="Product Image 2">
             </div>
             <div class="carousel-slide">
-                <img src="https://www.yud819ad.site/231a/t2.jpg" alt="产品图3">
+                <img src="https://www.yud819ad.site/231a/t2.jpg" alt="Product Image 3">
             </div>
             <div class="carousel-slide">
-                <img src="https://www.yud819ad.site/231a/t1.jpg" alt="产品图4">
+                <img src="https://www.yud819ad.site/231a/t1.jpg" alt="Product Image 4">
             </div>
         </div>
 
@@ -292,94 +521,166 @@
 
     <!-- 产品内容 -->
     <div class="content">
-        <h1 class="product-title">焕活肝能 · 轻盈由内而生</h1>
+        <h1 class="product-title">Revitalize Your Liver · Feel Light From Within</h1>
         
+        <div class="view-counter">
+            <span id="viewCount">873</span> people are viewing this
+        </div>
+
+        <div class="rating-section">
+            <div class="stars">★★★★★</div>
+            <div class="rating-text">4.9/5.0</div>
+            <div class="rating-count">(2,847 reviews)</div>
+        </div>
+
         <div class="features">
-            <span class="feature-tag">⭐ 300mg 水飞蓟</span>
-            <span class="feature-tag">🛡️ 强效抗氧化</span>
-            <span class="feature-tag">💚 肝脏排毒修复</span>
+            <div class="feature-tag">
+                <span class="feature-icon">⭐</span>
+                300mg Milk Thistle
+            </div>
+            <div class="feature-tag">
+                <span class="feature-icon">🛡️</span>
+                Powerful Antioxidant
+            </div>
+            <div class="feature-tag">
+                <span class="feature-icon">💚</span>
+                Liver Detox & Repair
+            </div>
+        </div>
+
+        <div class="countdown-timer">
+            <div class="countdown-title">⏰ FLASH SALE ENDS IN:</div>
+            <div class="countdown-display">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">12</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">34</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">56</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="urgency-banner">
+            <span class="urgency-icon">⚠️</span>
+            <span>Only <strong id="stockCount">23</strong> units left in stock!</span>
         </div>
 
         <p class="product-subtitle">
-            现代生活节奏快，熬夜、压力、饮食不规律，正在悄悄加重肝脏负担。
+            Modern lifestyle's fast pace, late nights, stress, and irregular eating quietly burden your liver.
         </p>
 
         <p class="product-description">
-            <strong>OxyEnergy 水飞蓟 300mg 高浓缩提取物</strong>，科学搭配维生素 C、肌醇与紫苏，三重协同作用，帮助肝脏排毒修复，抵御自由基侵害，提供强效抗氧化支持。
+            <strong>OxyEnergy Milk Thistle 300mg High-Concentration Extract</strong>, scientifically combined with Vitamin C, Inositol, and Pueraria. Triple synergy helps liver detoxification and repair, fights free radical damage, and provides powerful antioxidant support.
             <br><br>
-            从内在呵护肝脏机能，改善疲惫与沉重感，让身体状态逐渐回归轻盈与平衡。
-            每日一粒，持续守护你的肝脏健康，让活力与安心成为生活的日常。
+            Nourish liver function from within, improve fatigue and heaviness, gradually restore your body to a state of lightness and balance. One capsule daily, continuously protecting your liver health, making vitality and peace of mind a daily reality.
         </p>
+
+        <div class="recent-purchase">
+            💡 <strong>Sarah M.</strong> from New York purchased this 12 minutes ago
+        </div>
+
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <div class="trust-icon">✅</div>
+                <div class="trust-text">FDA Registered</div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">🏆</div>
+                <div class="trust-text">GMP Certified</div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">🌿</div>
+                <div class="trust-text">100% Natural</div>
+            </div>
+            <div class="trust-badge">
+                <div class="trust-icon">🔒</div>
+                <div class="trust-text">Secure Payment</div>
+            </div>
+        </div>
     </div>
 
     <!-- 用户评论 -->
     <div class="reviews-section">
-        <h2 class="reviews-title">
-            ⭐ 用户真实评价
-        </h2>
+        <div class="reviews-header">
+            <h2 class="reviews-title">
+                ⭐ Customer Reviews
+            </h2>
+            <span class="verified-badge">✓ Verified</span>
+        </div>
 
         <div class="review-card">
             <div class="review-header">
-                <img class="review-avatar" src="https://i.pravatar.cc/150?img=1" alt="用户头像">
+                <img class="review-avatar" src="https://i.pravatar.cc/150?img=1" alt="User Avatar">
                 <div class="review-info">
-                    <div class="review-name">李女士</div>
-                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-name">Jennifer L.</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="verified-purchase">✓ Verified Purchase</div>
                 </div>
             </div>
             <div class="review-text">
-                吃了一个月，明显感觉身体轻松了很多，以前总是觉得累，现在精神状态好多了！护肝真的很重要，推荐给经常熬夜的朋友们。
+                After one month, I noticeably feel much lighter. I used to feel tired all the time, but now my energy levels are so much better! Liver protection is really important. Highly recommend for those who often stay up late.
             </div>
         </div>
 
         <div class="review-card">
             <div class="review-header">
-                <img class="review-avatar" src="https://i.pravatar.cc/150?img=12" alt="用户头像">
+                <img class="review-avatar" src="https://i.pravatar.cc/150?img=12" alt="User Avatar">
                 <div class="review-info">
-                    <div class="review-name">张先生</div>
-                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-name">Michael Zhang</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="verified-purchase">✓ Verified Purchase</div>
                 </div>
             </div>
             <div class="review-text">
-                应酬多，经常喝酒，医生建议我护肝。这款产品成分天然，水飞蓟含量高，吃了两周感觉不错，会继续服用。
+                I have many business dinners and drink frequently. My doctor suggested liver protection. This product has natural ingredients with high milk thistle content. Felt good after two weeks, will continue taking it.
             </div>
         </div>
 
         <div class="review-card">
             <div class="review-header">
-                <img class="review-avatar" src="https://i.pravatar.cc/150?img=5" alt="用户头像">
+                <img class="review-avatar" src="https://i.pravatar.cc/150?img=5" alt="User Avatar">
                 <div class="review-info">
-                    <div class="review-name">王女士</div>
-                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-name">Emily Wang</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="verified-purchase">✓ Verified Purchase</div>
                 </div>
             </div>
             <div class="review-text">
-                胶囊很好吞服，每天一粒很方便。最重要的是成分安全，无添加，给家人买的也很放心。睡眠质量也改善了不少。
+                The capsules are easy to swallow, one per day is very convenient. Most importantly, the ingredients are safe with no additives. Feel confident buying for family members. Sleep quality has also improved significantly.
             </div>
         </div>
 
         <div class="review-card">
             <div class="review-header">
-                <img class="review-avatar" src="https://i.pravatar.cc/150?img=8" alt="用户头像">
+                <img class="review-avatar" src="https://i.pravatar.cc/150?img=8" alt="User Avatar">
                 <div class="review-info">
-                    <div class="review-name">刘先生</div>
-                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-name">David Liu</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="verified-purchase">✓ Verified Purchase</div>
                 </div>
             </div>
             <div class="review-text">
-                程序员一枚，长期加班熬夜。朋友推荐的这款护肝产品，坚持吃了快两个月，脸色都好看了，体检指标也正常了，非常满意！
+                I'm a programmer with long overtime hours and late nights. A friend recommended this liver protection product. After nearly two months, even my complexion looks better, and my physical exam indicators are normal. Very satisfied!
             </div>
         </div>
 
         <div class="review-card">
             <div class="review-header">
-                <img class="review-avatar" src="https://i.pravatar.cc/150?img=9" alt="用户头像">
+                <img class="review-avatar" src="https://i.pravatar.cc/150?img=9" alt="User Avatar">
                 <div class="review-info">
-                    <div class="review-name">陈女士</div>
-                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-name">Rachel Chen</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="verified-purchase">✓ Verified Purchase</div>
                 </div>
             </div>
             <div class="review-text">
-                产品包装精美，发货快。最关键是效果真的好，以前总觉得口苦，现在好多了。一瓶能吃三个月，性价比很高，已经回购了。
+                Beautiful packaging, fast shipping. Most importantly, the effect is really good. I used to have a bitter taste in my mouth, but now it's much better. One bottle lasts three months, great value. Already repurchased!
             </div>
         </div>
     </div>
@@ -389,13 +690,14 @@
     <!-- 底部固定购买栏 -->
     <div class="bottom-bar">
         <div class="price-box">
-            <div class="original-price">原价：¥298</div>
+            <div class="original-price">Was: $298</div>
             <div class="discount-price">
-                <span class="currency">¥</span>168
+                <span class="currency">$</span>168
             </div>
+            <div class="savings-text">Save $130 (43% OFF)</div>
         </div>
         <button class="buy-button" onclick="window.location.href='https://www.qq.com'">
-            立即购买
+            BUY NOW
         </button>
     </div>
 
@@ -421,10 +723,8 @@
             goToSlide(currentSlide);
         }
 
-        // 自动轮播
         setInterval(nextSlide, 4000);
 
-        // 指示器点击
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => goToSlide(index));
         });
@@ -434,10 +734,62 @@
         let viewCount = 873;
 
         setInterval(() => {
-            const increment = Math.floor(Math.random() * 11) + 10; // 10-20随机数
+            const increment = Math.floor(Math.random() * 11) + 10;
             viewCount += increment;
             viewCountElement.textContent = viewCount;
         }, 3000);
+
+        // 库存数量动态减少
+        const stockCountElement = document.getElementById('stockCount');
+        let stockCount = 23;
+
+        setInterval(() => {
+            if (stockCount > 5) {
+                stockCount -= Math.random() > 0.5 ? 1 : 0;
+                stockCountElement.textContent = stockCount;
+            }
+        }, 15000);
+
+        // 倒计时功能
+        let totalSeconds = 12 * 3600 + 34 * 60 + 56;
+
+        function updateCountdown() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            totalSeconds--;
+            if (totalSeconds < 0) {
+                totalSeconds = 12 * 3600 + 34 * 60 + 56;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 最近购买提示动态更新
+        const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Miami', 'Seattle', 'Boston'];
+        const names = ['Sarah M.', 'John D.', 'Emily R.', 'Michael S.', 'Jessica T.', 'David K.', 'Rachel W.', 'Chris P.'];
+        
+        function updateRecentPurchase() {
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomMinutes = Math.floor(Math.random() * 30) + 1;
+            
+            const purchaseElement = document.querySelector('.recent-purchase');
+            purchaseElement.innerHTML = `💡 <strong>${randomName}</strong> from ${randomCity} purchased this ${randomMinutes} minutes ago`;
+            
+            purchaseElement.style.animation = 'none';
+            setTimeout(() => {
+                purchaseElement.style.animation = 'slideIn 0.5s ease-out';
+            }, 10);
+        }
+
+        setInterval(updateRecentPurchase, 10000);
 
         // 触摸滑动支持
         let touchStartX = 0;
@@ -456,13 +808,11 @@
 
         function handleSwipe() {
             if (touchStartX - touchEndX > 50) {
-                // 向左滑动
                 currentSlide = (currentSlide + 1) % totalSlides;
                 goToSlide(currentSlide);
             }
             
             if (touchEndX - touchStartX > 50) {
-                // 向右滑动
                 currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
                 goToSlide(currentSlide);
             }
