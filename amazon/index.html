@@ -96,6 +96,111 @@
             letter-spacing: 0.5px;
         }
 
+        /* 价格区域 */
+        .price-section {
+            margin-bottom: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .discount-badge {
+            background: #CC0C39;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .current-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #B12704;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .price-unit {
+            font-size: 13px;
+            color: #565959;
+            display: inline-block;
+        }
+
+        .list-price {
+            font-size: 13px;
+            color: #565959;
+            margin-top: 4px;
+        }
+
+        .list-price-label {
+            text-decoration: none;
+        }
+
+        .list-price-value {
+            text-decoration: line-through;
+            margin-left: 4px;
+        }
+
+        /* 数量选择器 */
+        .quantity-section {
+            margin: 16px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quantity-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0F1111;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .quantity-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .quantity-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: #F0F2F2;
+            border: 1px solid #D5D9D9;
+            border-radius: 8px;
+            padding: 8px 40px 8px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0F1111;
+            cursor: pointer;
+            min-width: 80px;
+            transition: all 0.2s;
+        }
+
+        .quantity-select:hover {
+            background: #E3E6E6;
+            border-color: #888C8C;
+        }
+
+        .quantity-select:focus {
+            outline: none;
+            border-color: #e77600;
+            box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+        }
+
+        .quantity-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 10px;
+            color: #565959;
+        }
+
         .product-title {
             font-size: 26px;
             font-weight: 700;
@@ -531,6 +636,48 @@
     <div class="content">
         <div class="amazon-badge">Amazon's Choice</div>
         
+        <!-- 价格区域 -->
+        <div class="price-section">
+            <div>
+                <span class="discount-badge">-7%</span>
+                <span class="current-price">$27.95</span>
+                <span class="price-unit">($0.31/Count)</span>
+            </div>
+            <div class="list-price">
+                <span class="list-price-label">List Price:</span>
+                <span class="list-price-value">$29.99</span>
+            </div>
+        </div>
+
+        <!-- 数量选择器 -->
+        <div class="quantity-section">
+            <label class="quantity-label">Quantity:</label>
+            <div class="quantity-selector">
+                <select class="quantity-select" id="quantitySelect">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        
         <h1 class="product-title">Revitalize Your Liver · Feel Light From Within</h1>
         
         <div class="view-counter">
@@ -710,10 +857,10 @@
     <!-- 底部固定购买栏 -->
     <div class="bottom-bar">
         <div class="button-group">
-            <button class="cart-button" onclick="window.location.href='https://www.amazon.com/dp/B0DFYD1Y2X?th=1'">
+            <button class="cart-button" onclick="window.location.href='https://www.qq.com'">
                 Add to Cart
             </button>
-            <button class="buy-button" onclick="window.location.href='https://www.amazon.com/dp/B0DFYD1Y2X?th=1'">
+            <button class="buy-button" onclick="window.location.href='https://www.qq.com'">
                 Buy Now
             </button>
         </div>
