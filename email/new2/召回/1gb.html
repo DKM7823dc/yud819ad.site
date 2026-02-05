@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>esim</title>
+    <title>Roami - 我们想念您，为您准备了专属回归礼遇</title>
     
     <style>
         /* Reset styles */
@@ -26,6 +26,49 @@
             line-height: 1.8 !important;
         }
 
+        /* App Store Button Styles */
+        .app-store-button {
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-text {
+            font-size: 13px;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 2px;
+            opacity: 0.9;
+        }
+
+        .store-text {
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .apple-icon {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+
         /* Mobile Responsive */
         @media screen and (max-width: 600px) {
             .container { width: 100% !important; }
@@ -46,7 +89,10 @@
             .two-col-table { width: 100% !important; display: block !important; }
             .two-col-td { width: 100% !important; display: block !important; padding-right: 0 !important; padding-bottom: 15px !important; }
             .header-subtitle { font-size: 13px !important; padding: 8px 16px !important; }
-            .cta-button { font-size: 16px !important; padding: 18px 30px !important; white-space: nowrap !important; }
+            .app-store-button { font-size: 16px !important; padding: 12px 20px !important; }
+            .download-text { font-size: 12px !important; }
+            .store-text { font-size: 20px !important; }
+            .apple-icon { width: 28px !important; height: 28px !important; margin-right: 10px !important; }
             .validity-text { font-size: 15px !important; }
             .footer-text { font-size: 15px !important; }
             .qr-hint-text { font-size: 16px !important; }
@@ -139,7 +185,11 @@
                                             <tr>
                                                 <td style="padding: 40px 30px; text-align: center;">
                                                     <!-- Gift Icon -->
-                                                
+                                                    <div style="margin-bottom: 20px;">
+                                                        <div style="background-color: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                                            <span style="font-size: 40px;">🎁</span>
+                                                        </div>
+                                                    </div>
                                                     
                                                     <!-- Gift Title -->
                                                     <p style="color: rgba(255,255,255,0.9); font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 15px 0; font-weight: 700;">
@@ -161,7 +211,9 @@
                                                         <p style="color: #ffffff; font-size: 16px; line-height: 1.7; margin: 0 0 10px 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">
                                                             ✓ 覆盖全球200+国家和地区
                                                         </p>
-                                                        
+                                                        <p style="color: #ffffff; font-size: 16px; line-height: 1.7; margin: 0 0 10px 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">
+                                                            ✓ 即开即用，无需等待
+                                                        </p>
                                                         <p style="color: #ffffff; font-size: 16px; line-height: 1.7; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">
                                                             ✓ 有效期30天
                                                         </p>
@@ -177,8 +229,19 @@
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center" style="padding-bottom: 15px;">
-                                        <a href="https://apps.apple.com/app/id6747476845" target="_blank" class="cta-button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; font-size: 18px; font-weight: 800; text-decoration: none; padding: 20px 50px; border-radius: 50px; display: inline-block; box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); transition: transform 0.3s; letter-spacing: 0.5px;">
-                                            打开App立刻领取
+                                        <a href="https://apps.apple.com/app/id6747476845" target="_blank" class="app-store-button" style="background-color: #000000; color: #ffffff; font-size: 18px; font-weight: 600; text-decoration: none; padding: 14px 24px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td style="vertical-align: middle;">
+                                                        <!-- Apple Icon SVG as Data URI -->
+                                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI0LjY5MSAxNi41NjVDMjQuNjY5IDEzLjc0NCAyNi45NDggMTIuMzc2IDI3LjA2MyAxMi4zMDZDMjUuNzYgMTAuMzk2IDIzLjY5NiAxMC4xNDkgMjIuOTQ4IDEwLjEyM0MyMS4wOTIgOS45MyAxOS4yOTQgMTEuMjQ3IDE4LjM1IDExLjI0N0MxNy4zODEgMTEuMjQ3IDE1Ljg4NyAxMC4xNDYgMTQuMzIgMTAuMTc3QzEyLjIyMSAxMC4yNCAxMC4yNTggMTEuNDEzIDkuMjEzIDEzLjI5NUM3LjEwMiAxNy4wOTMgOC42NzIgMjIuNjU5IDEwLjcyMyAyNS43MDFDMTEuNzMzIDI3LjIgMTIuOTE3IDI4Ljg3MyAxNC40OCAyOC44MTdDMTYuMDE0IDI4Ljc1NSAxNi41OTcgMjcuODQ0IDE4LjQ0IDI3Ljg0NEMyMC4yNTkgMjcuODQ0IDIwLjc4OCAyOC44MTcgMjIuMzg4IDI4Ljc4MUMyNC4wMyAyOC43NTUgMjUuMDY2IDI3LjI2OSAyNi4wNDggMjUuNzYxQzI3LjIzMyAyNC4wNDMgMjcuNzEzIDIyLjM1NCAyNy43MzkgMjIuMjdDMjcuNjk5IDIyLjI1NSAyNC43MTggMjEuMDk3IDI0LjY5MSAxNi41NjVaTTIxLjU4MSA4LjAwOTQ4QzIyLjM5NiA3LjAyNzQ4IDIyLjk1MiA1LjY5NzQ4IDIyLjc5MyA0LjM1NzQyQzIxLjY0NSA0LjQxNjQyIDIwLjIzNyA1LjE2NTQyIDE5LjM4MyA2LjEyMzQyQzE4LjY0MyA2Ljk2MjQyIDE3Ljk5MiA4LjMyODQyIDE4LjE2NSA5LjYzMDQyQzE5LjQ0NSA5LjcyNDQyIDIwLjc0NyA4Ljk2NjQ4IDIxLjU4MSA4LjAwOTQ4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Apple" class="apple-icon" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 12px;" />
+                                                    </td>
+                                                    <td style="vertical-align: middle; text-align: left;">
+                                                        <span class="download-text" style="font-size: 13px; font-weight: 400; display: block; margin-bottom: 2px; opacity: 0.9; color: #ffffff;">Download on the</span>
+                                                        <span class="store-text" style="font-size: 22px; font-weight: 700; display: block; letter-spacing: 0.5px; color: #ffffff;">App Store</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </a>
                                     </td>
                                 </tr>
@@ -197,7 +260,7 @@
                                     <td align="center" style="padding-bottom: 45px;">
                                         <div style="background: linear-gradient(135deg, #f5f7ff, #e8f0fe); padding: 20px 25px; border-radius: 12px; border: 2px solid #667eea; display: inline-block; max-width: 90%;">
                                             <p class="qr-hint-text" style="color: #1a1a1a; font-size: 17px; margin: 0; font-weight: 700; line-height: 1.7; text-align: center;">
-                                                请前往App Store搜索 <span style="color: #667eea;">roami</span> 即可下载领取
+                                                或者：前往App Store搜索 <span style="color: #667eea;">roami</span> 即可下载领取
                                             </p>
                                         </div>
                                     </td>
