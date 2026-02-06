@@ -202,11 +202,11 @@
         }
 
         .product-title {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
             color: #1a1a1a;
             margin-bottom: 12px;
-            line-height: 1.3;
+            line-height: 1.4;
         }
         
         /* 查看人数 */
@@ -494,51 +494,16 @@
         .review-card {
             background: white;
             border-radius: 12px;
-            padding: 16px;
+            padding: 0;
             margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
         }
 
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .review-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            margin-right: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .review-info {
-            flex: 1;
-        }
-
-        .review-name {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .review-stars {
-            color: #FFA41C;
-            font-size: 14px;
-        }
-
-        .verified-purchase {
-            color: #4CAF50;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        .review-text {
-            font-size: 13px;
-            color: #555;
-            line-height: 1.6;
+        .review-card img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* 底部固定栏 - 优化布局 */
@@ -636,6 +601,8 @@
     <div class="content">
         <div class="amazon-badge">Amazon's Choice</div>
         
+        <h1 class="product-title">OxyEnergy Silymarin Milk Thistle 300mg Extract with Vitamin C, Inositol & Pueraria, Liver Detox & Repair Support, Antioxidant Support, 90 Vegetarian Capsules</h1>
+        
         <!-- 价格区域 -->
         <div class="price-section">
             <div>
@@ -677,8 +644,6 @@
                 </select>
             </div>
         </div>
-        
-        <h1 class="product-title">Revitalize Your Liver · Feel Light From Within</h1>
         
         <div class="view-counter">
             <span id="viewCount">873</span> people are viewing this
@@ -796,59 +761,35 @@
         </div>
 
         <div class="review-card">
-            <div class="review-header">
-                <img class="review-avatar" src="150.jpg" alt="User Avatar">
-                <div class="review-info">
-                    <div class="review-name">Jennifer L.</div>
-                    <div class="review-stars">★★★★★</div>
-                    <div class="verified-purchase">✓ Verified Purchase</div>
-                </div>
-            </div>
-            <div class="review-text">
-                After one month, I noticeably feel much lighter. I used to feel tired all the time, but now my energy levels are so much better! Liver protection is really important. Highly recommend for those who often stay up late.
-            </div>
+            <img src="https://www.yud819ad.site/amazon/img/c1.png" alt="Customer Review 1">
         </div>
 
         <div class="review-card">
-            <div class="review-header">
-                <img class="review-avatar" src="160.jpg" alt="User Avatar">
-                <div class="review-info">
-                    <div class="review-name">Michael Zhang</div>
-                    <div class="review-stars">★★★★★</div>
-                    <div class="verified-purchase">✓ Verified Purchase</div>
-                </div>
-            </div>
-            <div class="review-text">
-                I have many business dinners and drink frequently. My doctor suggested liver protection. This product has natural ingredients with high milk thistle content. Felt good after two weeks, will continue taking it.
-            </div>
+            <img src="https://www.yud819ad.site/amazon/img/c2.png" alt="Customer Review 2">
         </div>
 
         <div class="review-card">
-            <div class="review-header">
-                <img class="review-avatar" src="170.jpg" alt="User Avatar">
-                <div class="review-info">
-                    <div class="review-name">Emily Wang</div>
-                    <div class="review-stars">★★★★★</div>
-                    <div class="verified-purchase">✓ Verified Purchase</div>
-                </div>
-            </div>
-            <div class="review-text">
-                The capsules are easy to swallow, one per day is very convenient. Most importantly, the ingredients are safe with no additives. Feel confident buying for family members. Sleep quality has also improved significantly.
-            </div>
+            <img src="https://www.yud819ad.site/amazon/img/c3.png" alt="Customer Review 3">
         </div>
  
         <div class="review-card">
-            <div class="review-header">
-                <img class="review-avatar" src="180.jpg" alt="User Avatar">
-                <div class="review-info">
-                    <div class="review-name">Rachel Chen</div>
-                    <div class="review-stars">★★★★★</div>
-                    <div class="verified-purchase">✓ Verified Purchase</div>
-                </div>
-            </div>
-            <div class="review-text">
-                Beautiful packaging, fast shipping. Most importantly, the effect is really good. I used to have a bitter taste in my mouth, but now it's much better. One bottle lasts three months, great value. Already repurchased!
-            </div>
+            <img src="https://www.yud819ad.site/amazon/img/c4.png" alt="Customer Review 4">
+        </div>
+
+        <div class="review-card">
+            <img src="https://www.yud819ad.site/amazon/img/c5.png" alt="Customer Review 5">
+        </div>
+
+        <div class="review-card">
+            <img src="https://www.yud819ad.site/amazon/img/c6.png" alt="Customer Review 6">
+        </div>
+
+        <div class="review-card">
+            <img src="https://www.yud819ad.site/amazon/img/c7.png" alt="Customer Review 7">
+        </div>
+
+        <div class="review-card">
+            <img src="https://www.yud819ad.site/amazon/img/c8.png" alt="Customer Review 8">
         </div>
     </div>
 
@@ -983,5 +924,6 @@
             }
         }
     </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
