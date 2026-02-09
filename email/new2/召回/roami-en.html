@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>esim</title>
+    
+    <style>
+        /* Reset styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); }
+        table { border-collapse: collapse; }
+        a { text-decoration: none; }
+        
+        /* Gmail Mobile Fix */
+        u + .body { min-width: 100vw; }
+        
+        /* Highlight Utility */
+        .highlight-cyan {
+            color: #1e88e5;
+            font-weight: 800;
+        }
+
+        /* 增大基础字体 */
+        .text-base {
+            font-size: 17px !important;
+            line-height: 1.8 !important;
+        }
+
+        /* App Store Button Styles */
+        .app-store-button {
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-text {
+            font-size: 13px;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 2px;
+            opacity: 0.9;
+        }
+
+        .store-text {
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .apple-icon {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+
+        /* Countdown Timer Styles */
+        .countdown-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            margin-top: 15px;
+            white-space: nowrap;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 600px) {
+            .container { width: 100% !important; }
+            .content-padding { padding: 25px 20px !important; }
+            
+            /* Header 移动端优化 - 只显示2行 */
+            .header-banner { padding: 30px 20px !important; }
+            .header-title { font-size: 22px !important; line-height: 1.4 !important; }
+            
+            /* 移动端字体增大 */
+            .text-base { font-size: 18px !important; line-height: 1.9 !important; }
+            .text-greeting { font-size: 22px !important; }
+            .text-intro { font-size: 19px !important; line-height: 1.9 !important; }
+            .text-important { font-size: 19px !important; line-height: 1.9 !important; }
+            .text-section-title { font-size: 26px !important; }
+            .no-card-text { font-size: 15px !important; }
+            
+            /* 移动端礼品卡文案单行显示 - 缩小字体适配 */
+            .gift-amount { font-size: 28px !important; white-space: nowrap !important; }
+            .gift-description { font-size: 16px !important; white-space: nowrap !important; }
+            .countdown-badge { font-size: 12px !important; padding: 6px 12px !important; white-space: nowrap !important; }
+            .status-text { font-size: 14px !important; white-space: nowrap !important; }
+            
+            .two-col-table { width: 100% !important; display: block !important; }
+            .two-col-td { width: 100% !important; display: block !important; padding-right: 0 !important; padding-bottom: 15px !important; }
+            .header-subtitle { font-size: 13px !important; padding: 8px 16px !important; }
+            .app-store-button { font-size: 16px !important; padding: 12px 20px !important; }
+            .download-text { font-size: 12px !important; }
+            .store-text { font-size: 20px !important; }
+            .apple-icon { width: 28px !important; height: 28px !important; margin-right: 10px !important; }
+            .validity-text { font-size: 15px !important; }
+            .footer-text { font-size: 15px !important; }
+            .qr-hint-text { font-size: 16px !important; }
+            .step-number { font-size: 32px !important; }
+            .step-title { font-size: 18px !important; }
+            .step-description { font-size: 17px !important; }
+            
+            /* Why Choose Us 移动端间距紧凑 */
+            .benefit-item { padding: 0 0 12px 0 !important; }
+        }
+
+        /* Gmail App specific fixes */
+        @media screen and (max-width: 600px) {
+            .gmailfix { min-width: 100vw !important; }
+        }
+    </style>
+</head>
+<body class="body" style="margin: 0; padding: 0; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);">
+
+    <!-- Main Wrapper -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="gmailfix" style="margin: 0; padding: 0;">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                
+                <!-- Email Container -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); margin: 0 auto;">
+                    
+                    <!-- Header Banner -->
+                    <tr>
+                        <td class="header-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 45px 40px; text-align: center;">
+                            <h1 class="header-title" style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 900; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word;">
+                                Free 1GB eSIM Data<br>Your Exclusive Welcome Back Gift
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <!-- Main Content -->
+                    <tr>
+                        <td class="content-padding" style="padding: 45px 40px; background-color: #ffffff;">
+                            
+                            <!-- Salutation -->
+                            <p class="text-greeting" style="color: #1a1a1a; font-size: 20px; font-weight: bold; margin: 0 0 25px 0;">
+                                Dear Traveler,
+                            </p>
+                            
+                            <!-- Introduction -->
+                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0 0 20px 0;">
+                                I'm Sophia, Customer Success Director at Roami. Thank you for choosing us as your travel companion in the past—this trust has always been close to our hearts.
+                            </p>
+
+                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0 0 40px 0;">
+                                To express our gratitude, we're offering you <strong style="color: #667eea;">1GB of universal global eSIM data</strong> (covering 200+ countries), ready to activate and use immediately. Because we understand: seamless connectivity is the foundation of your freedom to explore the world.
+                            </p>
+
+                            <!-- Gift Package -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px;">
+                                <tr>
+                                    <td>
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4); position: relative; overflow: hidden;">
+                                            <tr>
+                                                <td style="padding: 30px 30px; text-align: center;">
+                                                    
+                                                    <!-- Gift Amount -->
+                                                    <div class="gift-amount" style="color: #ffffff; font-weight: 900; font-size: 48px; margin: 0 0 8px 0; line-height: 1; text-shadow: 0 4px 12px rgba(0,0,0,0.3); white-space: nowrap;">
+                                                        1GB Global eSIM Data
+                                                    </div>
+                                                    
+                                                    <!-- Gift Description -->
+                                                    <p class="gift-description" style="color: #ffffff; font-size: 20px; margin: 0 0 5px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space: nowrap;">
+                                                        Available in 200+ Countries
+                                                    </p>
+
+                                                    <!-- Countdown Badge -->
+                                                    <div class="countdown-badge" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; display: inline-block; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); margin-top: 12px; margin-bottom: 12px; white-space: nowrap;">
+                                                        ⏰ Last 48 Hours
+                                                    </div>
+                                                    
+                                                    <!-- Status -->
+                                                    <div style="background-color: rgba(255,255,255,0.15); padding: 12px 20px; border-radius: 12px; margin: 0 auto; max-width: 300px; backdrop-filter: blur(10px);">
+                                                        <p class="status-text" style="color: #ffffff; font-size: 16px; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2); white-space: nowrap;">
+                                                            <span style="color: #4ade80; font-size: 20px; margin-right: 5px;">✓</span> Activated · Ready to Claim
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CTA Button -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 15px;">
+                                        <a href="https://apps.apple.com/app/id6747476845" target="_blank" class="app-store-button" style="background-color: #000000; color: #ffffff; font-size: 18px; font-weight: 600; text-decoration: none; padding: 14px 24px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td style="vertical-align: middle;">
+                                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI0LjY5MSAxNi41NjVDMjQuNjY5IDEzLjc0NCAyNi45NDggMTIuMzc2IDI3LjA2MyAxMi4zMDZDMjUuNzYgMTAuMzk2IDIzLjY5NiAxMC4xNDkgMjIuOTQ4IDEwLjEyM0MyMS4wOTIgOS45MyAxOS4yOTQgMTEuMjQ3IDE4LjM1IDExLjI0N0MxNy4zODEgMTEuMjQ3IDE1Ljg4NyAxMC4xNDYgMTQuMzIgMTAuMTc3QzEyLjIyMSAxMC4yNCAxMC4yNTggMTEuNDEzIDkuMjEzIDEzLjI5NUM3LjEwMiAxNy4wOTMgOC42NzIgMjIuNjU5IDEwLjcyMyAyNS43MDFDMTEuNzMzIDI3LjIgMTIuOTE3IDI4Ljg3MyAxNC40OCAyOC44MTdDMTYuMDE0IDI4Ljc1NSAxNi41OTcgMjcuODQ0IDE4LjQ0IDI3Ljg0NEMyMC4yNTkgMjcuODQ0IDIwLjc4OCAyOC44MTcgMjIuMzg4IDI4Ljc4MUMyNC4wMyAyOC43NTUgMjUuMDY2IDI3LjI2OSAyNi4wNDggMjUuNzYxQzI3LjIzMyAyNC4wNDMgMjcuNzEzIDIyLjM1NCAyNy43MzkgMjIuMjdDMjcuNjk5IDIyLjI1NSAyNC43MTggMjEuMDk3IDI0LjY5MSAxNi41NjVaTTIxLjU4MSA4LjAwOTQ4QzIyLjM5NiA3LjAyNzQ4IDIyLjk1MiA1LjY5NzQ4IDIyLjc5MyA0LjM1NzQyQzIxLjY0NSA0LjQxNjQyIDIwLjIzNyA1LjE2NTQyIDE5LjM4MyA2LjEyMzQyQzE4LjY0MyA2Ljk2MjQyIDE3Ljk5MiA4LjMyODQyIDE4LjE2NSA5LjYzMDQyQzE5LjQ0NSA5LjcyNDQyIDIwLjc0NyA4Ljk2NjQ4IDIxLjU4MSA4LjAwOTQ4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Apple" class="apple-icon" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 12px;" />
+                                                    </td>
+                                                    <td style="vertical-align: middle; text-align: left;">
+                                                        <span class="download-text" style="font-size: 13px; font-weight: 400; display: block; margin-bottom: 2px; opacity: 0.9; color: #ffffff;">Download on the</span>
+                                                        <span class="store-text" style="font-size: 22px; font-weight: 700; display: block; letter-spacing: 0.5px; color: #ffffff;">App Store</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- No Credit Card Required Text -->
+                                <tr>
+                                    <td align="center" style="padding-bottom: 45px;">
+                                        <p class="no-card-text" style="color: #10b981; font-size: 16px; font-weight: 600; margin: 0;">
+                                            ✓ Claim instantly, no credit card required
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <hr style="border: 0; border-top: 2px solid #e8f0fe; margin: 0 0 40px 0;">
+
+                            <!-- Steps Section -->
+                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 30px 0; text-align: center;">
+                                Claim in Just 3 Easy Steps
+                            </h3>
+
+                            <!-- Step 1 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">1</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            Click the button above to download the latest app
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            Head to the App Store to download Roami
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Step 2 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">2</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            Register a new account with your email
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            Complete registration quickly and start your journey
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Step 3 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">3</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            Claim your 1GB data in "Profile"
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            Go to Profile and claim your exclusive data package with one tap
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <hr style="border: 0; border-top: 2px solid #e8f0fe; margin: 0 0 40px 0;">
+
+                            <!-- Why Choose Us Section -->
+                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 20px 0; text-align: center;">
+                                Why Choose Us?
+                            </h3>
+
+                            <!-- Benefits Grid -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Zero Cost Trial:</strong> Claim by registering the app
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Global Coverage:</strong> Available in 200+ countries and regions
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Customer Support:</strong> 24/7 live customer service
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Refund Guarantee:</strong> Refundable if unable to use
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Support Notice -->
+                            <div style="background: linear-gradient(135deg, #e8f5ff, #d4ebff); padding: 25px; border-radius: 12px; border: 2px solid #2563eb; margin-bottom: 40px; text-align: center;">
+                                <p class="text-intro" style="color: #1e40af; font-size: 18px; line-height: 1.8; margin: 0; font-weight: 600;">
+                                    If you encounter any issues downloading or using the Roami app, please contact our in-app live support, and we'll assist you promptly.
+                                </p>
+                            </div>
+
+                            <!-- Signature -->
+                            <div style="padding: 25px 0 0 0;">
+                                <p style="color: #1a1a1a; font-size: 17px; margin: 0 0 8px 0; font-weight: 600;">
+                                    Sincerely,
+                                </p>
+                                <p style="color: #667eea; font-size: 19px; margin: 0 0 5px 0; font-weight: 800;">
+                                    Sophia
+                                </p>
+                                <p style="color: #757575; font-size: 15px; margin: 0 0 3px 0;">
+                                    Senior Customer Success Director | Your Travel Companion
+                                </p>
+                                <p style="color: #757575; font-size: 15px; margin: 0;">
+                                    Roami Team
+                                </p>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f0f4ff; padding: 25px; text-align: center;">
+                            <p style="color: #757575; font-size: 14px; margin: 0 0 8px 0; font-weight: 500;">
+                                &copy; 2026 Roami. All rights reserved.
+                            </p>
+                           
+                        </td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
