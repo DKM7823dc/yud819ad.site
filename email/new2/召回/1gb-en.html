@@ -80,6 +80,7 @@
             display: inline-block;
             box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
             margin-top: 15px;
+            white-space: nowrap;
         }
 
         /* Mobile Responsive */
@@ -98,7 +99,12 @@
             .text-important { font-size: 19px !important; line-height: 1.9 !important; }
             .text-section-title { font-size: 26px !important; }
             
-            .gift-amount { font-size: 48px !important; }
+            /* 移动端礼品卡文案单行显示 */
+            .gift-amount { font-size: 36px !important; white-space: nowrap !important; }
+            .gift-description { font-size: 16px !important; white-space: nowrap !important; }
+            .countdown-badge { font-size: 12px !important; padding: 6px 12px !important; white-space: nowrap !important; }
+            .status-text { font-size: 14px !important; white-space: nowrap !important; }
+            
             .two-col-table { width: 100% !important; display: block !important; }
             .two-col-td { width: 100% !important; display: block !important; padding-right: 0 !important; padding-bottom: 15px !important; }
             .header-subtitle { font-size: 13px !important; padding: 8px 16px !important; }
@@ -109,7 +115,6 @@
             .validity-text { font-size: 15px !important; }
             .footer-text { font-size: 15px !important; }
             .qr-hint-text { font-size: 16px !important; }
-            .countdown-badge { font-size: 13px !important; padding: 6px 14px !important; }
             .step-number { font-size: 32px !important; }
             .step-title { font-size: 18px !important; }
             .step-description { font-size: 17px !important; }
@@ -167,23 +172,23 @@
                                                 <td style="padding: 30px 30px; text-align: center;">
                                                     
                                                     <!-- Gift Amount -->
-                                                    <div class="gift-amount" style="color: #ffffff; font-weight: 900; font-size: 56px; margin: 0 0 8px 0; line-height: 1; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                                    <div class="gift-amount" style="color: #ffffff; font-weight: 900; font-size: 56px; margin: 0 0 8px 0; line-height: 1; text-shadow: 0 4px 12px rgba(0,0,0,0.3); white-space: nowrap;">
                                                         1GB Global Data
                                                     </div>
                                                     
                                                     <!-- Gift Description -->
-                                                    <p style="color: #ffffff; font-size: 20px; margin: 0 0 5px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                                    <p class="gift-description" style="color: #ffffff; font-size: 20px; margin: 0 0 5px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space: nowrap;">
                                                         Available in 200+ Countries
                                                     </p>
 
                                                     <!-- Countdown Badge -->
-                                                    <div class="countdown-badge" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; display: inline-block; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); margin-top: 12px; margin-bottom: 12px;">
+                                                    <div class="countdown-badge" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; display: inline-block; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); margin-top: 12px; margin-bottom: 12px; white-space: nowrap;">
                                                         ⏰ Last 48 Hours
                                                     </div>
                                                     
                                                     <!-- Status -->
                                                     <div style="background-color: rgba(255,255,255,0.15); padding: 12px 20px; border-radius: 12px; margin: 0 auto; max-width: 300px; backdrop-filter: blur(10px);">
-                                                        <p style="color: #ffffff; font-size: 16px; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">
+                                                        <p class="status-text" style="color: #ffffff; font-size: 16px; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2); white-space: nowrap;">
                                                             <span style="color: #4ade80; font-size: 20px; margin-right: 5px;">✓</span> Activated · Ready to Claim
                                                         </p>
                                                     </div>
