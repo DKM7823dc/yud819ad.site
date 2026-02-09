@@ -7,7 +7,8 @@
     
     <style>
         /* Reset styles */
-        body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); }
         table { border-collapse: collapse; }
         a { text-decoration: none; }
         
@@ -88,7 +89,7 @@
             .container { width: 100% !important; }
             .content-padding { padding: 25px 20px !important; }
             
-            /* Header 移动端优化 */
+            /* Header 移动端优化 - 只显示2行 */
             .header-banner { padding: 30px 20px !important; }
             .header-title { font-size: 22px !important; line-height: 1.4 !important; }
             
@@ -118,6 +119,9 @@
             .step-number { font-size: 32px !important; }
             .step-title { font-size: 18px !important; }
             .step-description { font-size: 17px !important; }
+            
+            /* Why Choose Us 移动端间距紧凑 */
+            .benefit-item { padding: 0 0 12px 0 !important; }
         }
 
         /* Gmail App specific fixes */
@@ -129,17 +133,17 @@
 <body class="body" style="margin: 0; padding: 0; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);">
 
     <!-- Main Wrapper -->
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="gmailfix">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="gmailfix" style="margin: 0; padding: 0;">
         <tr>
-            <td align="center" style="padding: 40px 15px;">
+            <td align="center" style="padding: 40px 0;">
                 
                 <!-- Email Container -->
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08);">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); margin: 0 auto;">
                     
                     <!-- Header Banner -->
                     <tr>
                         <td class="header-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 45px 40px; text-align: center;">
-                            <h1 class="header-title" style="color: #ffffff; margin: 0 0 15px 0; font-size: 28px; font-weight: 900; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word;">
+                            <h1 class="header-title" style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 900; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word;">
                                 Free 1GB Global Data<br>Your Exclusive Welcome Back Gift
                             </h1>
                         </td>
@@ -289,15 +293,15 @@
                             <hr style="border: 0; border-top: 2px solid #e8f0fe; margin: 0 0 40px 0;">
 
                             <!-- Why Choose Us Section -->
-                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 25px 0; text-align: center;">
+                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 20px 0; text-align: center;">
                                 Why Choose Us?
                             </h3>
 
                             <!-- Benefits Grid -->
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
                                 <tr>
-                                    <td style="padding: 0 0 20px 0;">
-                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 20px 25px;">
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
                                             <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
                                                 <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Zero Cost Trial:</strong> Claim by registering the app
                                             </p>
@@ -305,8 +309,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 0 0 20px 0;">
-                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 20px 25px;">
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
                                             <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
                                                 <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Global Coverage:</strong> Available in 200+ countries and regions
                                             </p>
@@ -314,8 +318,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 0 0 20px 0;">
-                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 20px 25px;">
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
                                             <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
                                                 <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Customer Support:</strong> 24/7 live customer service
                                             </p>
@@ -323,8 +327,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 0;">
-                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 20px 25px;">
+                                    <td class="benefit-item" style="padding: 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
                                             <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
                                                 <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">Refund Guarantee:</strong> Refundable if unable to use
                                             </p>
