@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Roami</title>
+    
+    <style>
+        /* Reset styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); }
+        table { border-collapse: collapse; }
+        a { text-decoration: none; }
+        
+        /* Gmail Mobile Fix */
+        u + .body { min-width: 100vw; }
+        
+        /* Highlight Utility */
+        .highlight-cyan {
+            color: #1e88e5;
+            font-weight: 800;
+        }
+
+        /* 增大基础字体 */
+        .text-base {
+            font-size: 17px !important;
+            line-height: 1.8 !important;
+        }
+
+        /* App Store Button Styles */
+        .app-store-button {
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-text {
+            font-size: 13px;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 2px;
+            opacity: 0.9;
+        }
+
+        .store-text {
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .apple-icon {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+
+        /* Countdown Timer Styles */
+        .countdown-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            margin-top: 15px;
+            white-space: nowrap;
+        }
+
+        /* Coupon Styles */
+        .coupon-container {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .coupon-cutout {
+            position: relative;
+        }
+
+        .coupon-cutout:before,
+        .coupon-cutout:after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .coupon-cutout:before {
+            left: -12px;
+        }
+
+        .coupon-cutout:after {
+            right: -12px;
+        }
+
+        .dashed-line {
+            border-top: 2px dashed rgba(255, 255, 255, 0.3);
+            margin: 0 20px;
+        }
+
+        .promo-code-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 2px dashed #667eea;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .promo-code {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: 900;
+            color: #667eea;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .scissors-icon {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: scissors 2s ease-in-out infinite;
+        }
+
+        @keyframes scissors {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 600px) {
+            .container { width: 100% !important; }
+            .content-padding { padding: 25px 20px !important; }
+            
+            /* Header 移动端优化 */
+            .header-banner { padding: 30px 20px !important; }
+            .header-title { font-size: 22px !important; line-height: 1.4 !important; }
+            
+            /* 移动端字体增大 */
+            .text-base { font-size: 18px !important; line-height: 1.9 !important; }
+            .text-greeting { font-size: 22px !important; }
+            .text-intro { font-size: 19px !important; line-height: 1.9 !important; }
+            .text-important { font-size: 19px !important; line-height: 1.9 !important; }
+            .text-section-title { font-size: 26px !important; }
+            .no-card-text { font-size: 15px !important; }
+            
+            /* 移动端优惠券样式 */
+            .coupon-discount { font-size: 42px !important; }
+            .coupon-description { font-size: 16px !important; }
+            .promo-code { font-size: 24px !important; letter-spacing: 2px !important; }
+            .promo-code-box { padding: 10px 20px !important; }
+            .countdown-badge { font-size: 12px !important; padding: 6px 12px !important; }
+            .status-text { font-size: 14px !important; }
+            .scissors-icon { font-size: 28px !important; }
+            
+            .coupon-cutout:before,
+            .coupon-cutout:after {
+                width: 20px !important;
+                height: 20px !important;
+            }
+            
+            .coupon-cutout:before {
+                left: -10px !important;
+            }
+            
+            .coupon-cutout:after {
+                right: -10px !important;
+            }
+            
+            .two-col-table { width: 100% !important; display: block !important; }
+            .two-col-td { width: 100% !important; display: block !important; padding-right: 0 !important; padding-bottom: 15px !important; }
+            .header-subtitle { font-size: 13px !important; padding: 8px 16px !important; }
+            .app-store-button { font-size: 16px !important; padding: 12px 20px !important; }
+            .download-text { font-size: 12px !important; }
+            .store-text { font-size: 20px !important; }
+            .apple-icon { width: 28px !important; height: 28px !important; margin-right: 10px !important; }
+            .validity-text { font-size: 15px !important; }
+            .footer-text { font-size: 15px !important; }
+            .qr-hint-text { font-size: 16px !important; }
+            .step-number { font-size: 32px !important; }
+            .step-title { font-size: 18px !important; }
+            .step-description { font-size: 17px !important; }
+            
+            /* Why Choose Us 移动端间距紧凑 */
+            .benefit-item { padding: 0 0 12px 0 !important; }
+        }
+
+        /* Gmail App specific fixes */
+        @media screen and (max-width: 600px) {
+            .gmailfix { min-width: 100vw !important; }
+        }
+    </style>
+</head>
+<body class="body" style="margin: 0; padding: 0; background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);">
+
+    <!-- Main Wrapper -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="gmailfix" style="margin: 0; padding: 0;">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                
+                <!-- Email Container -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); margin: 0 auto;">
+                    
+                    <!-- Header Banner -->
+                    <tr>
+                        <td class="header-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 45px 40px; text-align: center;">
+                            <h1 class="header-title" style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 900; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word;">
+                                所有 eSIM 享 35% 折扣
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <!-- Main Content -->
+                    <tr>
+                        <td class="content-padding" style="padding: 45px 40px; background-color: #ffffff;">
+                            
+                            <!-- Salutation -->
+                            <p class="text-greeting" style="color: #1a1a1a; font-size: 20px; font-weight: bold; margin: 0 0 25px 0;">
+                                亲爱的旅行者，
+                            </p>
+                            
+                            <!-- Introduction -->
+                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0 0 20px 0;">
+                                我是 Sophia，Roami 的客户服务总监。感谢您选择我们作为您的旅行伙伴——这份信任一直是我们珍视的。
+                            </p>
+
+                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0 0 40px 0;">
+                                为了表达我们的感激之情，我们为您提供<strong style="color: #667eea;">所有 eSIM 套餐 35% 的独家折扣</strong>（涵盖 200 多个国家）。因为我们明白：不间断的连接是您自由探索世界的基础。
+                            </p>
+
+                            <!-- Coupon Package -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px;">
+                                <tr>
+                                    <td>
+                                        <div class="coupon-container" style="position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);">
+                                            
+                                            <!-- Top Section -->
+                                            <div style="padding: 0 30px 20px 30px; text-align: center;">
+                                                
+                                                <!-- Discount Amount -->
+                                                <div class="coupon-discount" style="color: #ffffff; font-weight: 900; font-size: 56px; margin: 0 0 10px 0; line-height: 1; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                                    35% 折扣
+                                                </div>
+                                                
+                                                <!-- Description -->
+                                                <p class="coupon-description" style="color: #ffffff; font-size: 18px; margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                                    所有 eSIM 套餐 • 200+ 国家
+                                                </p>
+                                            </div>
+
+                                            <!-- Dashed Line -->
+                                            <div class="dashed-line coupon-cutout" style="border-top: 2px dashed rgba(255, 255, 255, 0.3); margin: 0 20px; position: relative;">
+                                            </div>
+
+                                            <!-- Bottom Section -->
+                                            <div style="padding: 20px 30px 25px 30px; text-align: center;">
+                                                
+                                                <!-- Promo Code Label -->
+                                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; margin: 0 0 12px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                                    您的优惠码
+                                                </p>
+                                                
+                                                <!-- Promo Code Box -->
+                                                <div class="promo-code-box" style="background: rgba(255, 255, 255, 0.95); padding: 12px 24px; border-radius: 12px; border: 2px dashed #667eea; display: inline-block; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                                                    <span class="promo-code" style="font-family: 'Courier New', monospace; font-size: 28px; font-weight: 900; color: #667eea; letter-spacing: 3px;">esim35</span>
+                                                </div>
+
+                                                <!-- Countdown Badge -->
+                                                <div class="countdown-badge" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; display: inline-block; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); margin-top: 15px; white-space: nowrap;">
+                                                    ⏰ 7 天内有效
+                                                </div>
+                                                
+                                                <!-- Status -->
+                                                <div style="margin-top: 15px;">
+                                                    <p class="status-text" style="color: #ffffff; font-size: 15px; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">
+                                                        <span style="color: #4ade80; font-size: 18px; margin-right: 5px;">✓</span> 准备使用
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CTA Button -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 15px;">
+                                        <a href="https://apps.apple.com/app/id6747127122" target="_blank" class="app-store-button" style="background-color: #000000; color: #ffffff; font-size: 18px; font-weight: 700; text-decoration: none; padding: 16px 32px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                            在 App Store 下载
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- No Credit Card Required Text -->
+                                <tr>
+                                    <td align="center" style="padding-bottom: 45px;">
+                                        <p class="no-card-text" style="color: #10b981; font-size: 16px; font-weight: 600; margin: 0;">
+                                            ✓ 立即获得，无需信用卡
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <hr style="border: 0; border-top: 2px solid #e8f0fe; margin: 0 0 40px 0;">
+
+                            <!-- Steps Section -->
+                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 30px 0; text-align: center;">
+                                三步轻松获得折扣
+                            </h3>
+
+                            <!-- Step 1 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">1</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            下载 Roami 应用程序
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            点击上方按钮，从 App Store 获取最新版本
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Step 2 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">2</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            选择目的地和套餐
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            浏览超过 200 个国家和地区的 eSIM 套餐
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Step 3 -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+                                <tr>
+                                    <td style="vertical-align: top; width: 60px; padding-right: 20px;">
+                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="step-number" style="color: #ffffff; font-size: 28px; font-weight: 900;">3</span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="step-title" style="color: #1a1a1a; font-size: 19px; font-weight: 700; margin: 0 0 8px 0;">
+                                            结账时输入优惠码「ESIM35」
+                                        </h4>
+                                        <p class="step-description" style="color: #757575; font-size: 17px; line-height: 1.6; margin: 0;">
+                                            使用您的独家 35% 折扣，享受即时优惠
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <hr style="border: 0; border-top: 2px solid #e8f0fe; margin: 0 0 40px 0;">
+
+                            <!-- Why Choose Us Section -->
+                            <h3 class="text-section-title" style="color: #1a1a1a; font-size: 24px; font-weight: 800; margin: 0 0 20px 0; text-align: center;">
+                                为何选择我们？
+                            </h3>
+
+                            <!-- Benefits Grid -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">独家优惠：</strong>所有 eSIM 套餐享 35% 折扣
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">全球覆盖：</strong>超过 200 个国家和地区可用
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0 0 15px 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">客户支持：</strong>24/7 全天候服务
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="benefit-item" style="padding: 0;">
+                                        <div style="background: linear-gradient(135deg, #f5f7ff 0%, #e8f0fe 100%); border-left: 4px solid #667eea; border-radius: 12px; padding: 18px 25px;">
+                                            <p class="text-intro" style="color: #424242; font-size: 18px; line-height: 1.8; margin: 0;">
+                                                <span style="color: #667eea; font-weight: 800;">✓</span> <strong style="color: #1a1a1a;">退款保证：</strong>如无法使用可退款
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Support Notice -->
+                            <div style="background: linear-gradient(135deg, #e8f5ff, #d4ebff); padding: 25px; border-radius: 12px; border: 2px solid #2563eb; margin-bottom: 40px; text-align: center;">
+                                <p class="text-intro" style="color: #1e40af; font-size: 18px; line-height: 1.8; margin: 0; font-weight: 600;">
+                                    如果您在下载或使用 Roami 应用程序时遇到任何问题，请联系我们的应用内客服，我们将立即为您提供协助。
+                                </p>
+                            </div>
+
+                            <!-- Signature -->
+                            <div style="padding: 25px 0 0 0;">
+                                <p style="color: #1a1a1a; font-size: 17px; margin: 0 0 8px 0; font-weight: 600;">
+                                    此致敬礼，
+                                </p>
+                                <p style="color: #667eea; font-size: 19px; margin: 0 0 5px 0; font-weight: 800;">
+                                    Sophia
+                                </p>
+                                <p style="color: #757575; font-size: 15px; margin: 0 0 3px 0;">
+                                    客户服务总监 | 您的旅行伙伴
+                                </p>
+                                <p style="color: #757575; font-size: 15px; margin: 0;">
+                                    Roami 团队
+                                </p>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f0f4ff; padding: 25px; text-align: center;">
+                            <p style="color: #757575; font-size: 14px; margin: 0 0 8px 0; font-weight: 500;">
+                                &copy; 2026 Roami. 版权所有。
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+ 
+</body>
+</html>
