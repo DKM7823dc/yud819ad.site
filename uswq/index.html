@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { 
-            font-family: 'Inter', sans-serif; 
+        * {
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -20,7 +20,7 @@
         }
 
         /* ========== HERO GRADIENT & ANIMATIONS ========== */
-        .hero-gradient { 
+        .hero-gradient {
             background: linear-gradient(135deg, #0a0f1e 0%, #0d2045 50%, #0a0f1e 100%);
             position: relative;
         }
@@ -41,23 +41,12 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
         }
 
-        /* Gradient text animation */
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -72,22 +61,18 @@
             animation: gradientShift 4s ease infinite;
         }
 
-        /* Enhanced glow effects */
-        .glow-blue { 
+        .glow-blue {
             box-shadow: 0 0 80px rgba(59,130,246,0.35), 0 0 40px rgba(59,130,246,0.2);
             transition: all 0.4s ease;
         }
-        
         .glow-blue:hover {
             box-shadow: 0 0 120px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.3);
         }
 
-        /* Card hover effects */
-        .hover-lift { 
+        .hover-lift {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
-        
         .hover-lift::before {
             content: '';
             position: absolute;
@@ -97,43 +82,29 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
         .hover-lift:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
-        
-        .hover-lift:hover::before {
-            opacity: 1;
-        }
+        .hover-lift:hover::before { opacity: 1; }
 
-        /* Floating button animation */
-        .float-btn { 
+        .float-btn {
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse-float 3s ease-in-out infinite;
         }
-        
-        .float-btn:hover { 
-            transform: translateX(-8px) scale(1.05);
-        }
+        .float-btn:hover { transform: translateX(-8px) scale(1.05); }
 
         @keyframes pulse-float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
 
-        /* Modal backdrop blur */
-        .modal-backdrop { 
+        .modal-backdrop {
             backdrop-filter: blur(12px);
             animation: fadeIn 0.3s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Marquee animation */
         .marquee-wrapper {
             overflow: hidden;
             white-space: nowrap;
@@ -142,53 +113,35 @@
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        
-        .marquee-content { 
+        .marquee-content {
             display: inline-flex;
             gap: 1.5rem;
             animation: marqueeScroll 40s linear infinite;
         }
-        
-        .marquee-wrapper:hover .marquee-content { 
-            animation-play-state: paused;
-        }
-        
+        .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
         @keyframes marqueeScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(calc(-50% - 0.75rem)); }
         }
 
-        /* Grid background */
         .grid-bg {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: gridMove 20s linear infinite;
         }
-
         @keyframes gridMove {
             0% { background-position: 0 0; }
             100% { background-position: 50px 50px; }
         }
 
-        /* Pulse border animation */
         @keyframes pulse-border {
-            0%, 100% { 
-                border-color: rgba(59,130,246,0.4);
-                box-shadow: 0 0 20px rgba(59,130,246,0.2);
-            }
-            50% { 
-                border-color: rgba(59,130,246,0.9);
-                box-shadow: 0 0 40px rgba(59,130,246,0.4);
-            }
+            0%, 100% { border-color: rgba(59,130,246,0.4); box-shadow: 0 0 20px rgba(59,130,246,0.2); }
+            50% { border-color: rgba(59,130,246,0.9); box-shadow: 0 0 40px rgba(59,130,246,0.4); }
         }
-        
-        .animate-pulse-border { 
-            animation: pulse-border 3s ease-in-out infinite;
-        }
+        .animate-pulse-border { animation: pulse-border 3s ease-in-out infinite; }
 
-        /* Tag pill with animation */
         .tag-pill {
             background: rgba(59,130,246,0.12);
             color: #93c5fd;
@@ -200,197 +153,281 @@
             transition: all 0.3s ease;
             display: inline-block;
         }
-        
         .tag-pill:hover {
             background: rgba(59,130,246,0.2);
             border-color: rgba(59,130,246,0.5);
             transform: translateY(-2px);
         }
 
-        /* Scrollbar styling */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(180deg, #3b82f6, #2563eb);
-            border-radius: 4px;
-        }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6, #2563eb); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
 
-        /* Hero background image effects */
-        .hero-bg-image {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-        
+        .hero-bg-image { position: absolute; inset: 0; z-index: 0; }
         .hero-bg-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.12;
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.12;
             animation: zoomSlow 30s ease-in-out infinite alternate;
         }
+        @keyframes zoomSlow { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        @keyframes zoomSlow {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        
         .hero-bg-overlay {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background: linear-gradient(to right, rgba(10,15,30,0.95), rgba(10,15,30,0.7), transparent);
             z-index: 1;
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
+        .hero-content { position: relative; z-index: 2; }
 
-        /* Stats counter animation */
-        .stat-number {
-            display: inline-block;
-            animation: countUp 2s ease-out;
-        }
+        .stat-number { display: inline-block; animation: countUp 2s ease-out; }
+        @keyframes countUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Scroll indicator bounce */
         @keyframes bounce {
             0%, 100% { transform: translate(-50%, 0); }
             50% { transform: translate(-50%, 10px); }
         }
 
-        /* Button ripple effect */
-        .btn-ripple {
-            position: relative;
-            overflow: hidden;
-        }
-
+        .btn-ripple { position: relative; overflow: hidden; }
         .btn-ripple::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 0; height: 0; border-radius: 50%;
             background: rgba(255,255,255,0.3);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
+        .btn-ripple:active::after { width: 300px; height: 300px; }
 
-        .btn-ripple:active::after {
-            width: 300px;
-            height: 300px;
-        }
+        .icon-rotate { transition: transform 0.4s ease; }
+        .hover-lift:hover .icon-rotate { transform: rotate(15deg) scale(1.1); }
 
-        /* Icon rotation on hover */
-        .icon-rotate {
-            transition: transform 0.4s ease;
-        }
-
-        .hover-lift:hover .icon-rotate {
-            transform: rotate(15deg) scale(1.1);
-        }
-
-        /* Navbar scroll effect */
         .navbar-scrolled {
             background: rgba(2, 6, 23, 0.95) !important;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Section fade-in animation */
         .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 0; transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
+        .fade-in-section.visible { opacity: 1; transform: translateY(0); }
 
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced team card hover */
-        .team-card {
-            overflow: hidden;
-            position: relative;
-        }
-
+        .team-card { overflow: hidden; position: relative; }
         .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
             transition: left 0.5s ease;
         }
+        .team-card:hover::before { left: 100%; }
 
-        .team-card:hover::before {
-            left: 100%;
-        }
+        .magazine-col { column-count: 1; column-gap: 2.5rem; }
+        @media (min-width: 1024px) { .magazine-col { column-count: 2; } }
 
-        /* Process step connection line */
-        .process-line {
-            position: relative;
-        }
+        @media (max-width: 768px) { .hero-gradient { padding-top: 80px; } }
 
-        .process-line::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #3b82f6, transparent);
-            transform: translateY(-50%);
-        }
-
-        /* Magazine column layout */
-        .magazine-col { 
-            column-count: 1;
-            column-gap: 2.5rem;
-        }
-        
-        @media (min-width: 1024px) { 
-            .magazine-col { column-count: 2; }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-gradient {
-                padding-top: 80px;
-            }
-        }
-
-        /* Loading animation for images */
-        .img-loading {
-            background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s ease-in-out infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* CTA section pulse */
         @keyframes ctaPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.02); }
         }
+        .cta-pulse { animation: ctaPulse 3s ease-in-out infinite; }
 
-        .cta-pulse {
-            animation: ctaPulse 3s ease-in-out infinite;
+        /* ========== PROBLEMS SECTION - BENTO GRID ========== */
+        .problems-bento {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
+        @media (min-width: 768px) {
+            .problems-bento {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 1.25rem;
+            }
+        }
+        .bento-item {
+            position: relative;
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        .bento-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(239, 68, 68, 0.08);
+        }
+        .bento-item:hover::before { opacity: 1; }
+        .bento-item > * { position: relative; z-index: 1; }
+
+        @media (min-width: 768px) {
+            .bento-wide { grid-column: span 7; }
+            .bento-narrow { grid-column: span 5; }
+            .bento-third { grid-column: span 4; }
+        }
+
+        .bento-icon-ring {
+            width: 52px; height: 52px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            transition: all 0.4s ease;
+        }
+        .bento-item:hover .bento-icon-ring {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0.1));
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+            transform: scale(1.08);
+        }
+
+        /* ========== CASES SECTION ========== */
+        .case-hero-card {
+            position: relative;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .case-hero-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 50px rgba(59,130,246,0.1);
+        }
+        .case-amount {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .case-amount-sm {
+            font-size: 1.75rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .case-grid-card {
+            position: relative;
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+        .case-grid-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .case-number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+        .case-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(59,130,246,0.3), transparent);
+            margin: 1rem 0;
+        }
+
+        /* ========== WHY US SECTION ========== */
+        .why-card {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+        .why-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(59,130,246,0.2);
+            position: absolute;
+            top: -0.5rem;
+            right: 1.25rem;
+            z-index: 0;
+            transition: all 0.5s ease;
+            user-select: none;
+        }
+        .why-card:hover .why-number {
+            -webkit-text-stroke: 1.5px rgba(59,130,246,0.4);
+            transform: scale(1.05);
+        }
+        .why-icon-box {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s ease;
+        }
+        .why-card:hover .why-icon-box {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(59,130,246,0.3);
+        }
+        .why-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+        @media (min-width: 768px) {
+            .why-feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .why-feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .why-card-inner {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+        .why-card-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: inherit;
+            transition: border-color 0.4s ease;
+        }
+        .why-card:hover .why-card-bg {
+            border-color: rgba(59,130,246,0.4);
+        }
+        .why-card-shine {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 50%, transparent 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .why-card:hover .why-card-shine { opacity: 1; }
     </style>
 </head>
 <body class="bg-slate-950 text-white antialiased">
@@ -473,7 +510,6 @@
 
 <!-- ========== HERO SECTION ========== -->
 <section class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
-    <!-- Animated particles -->
     <div class="particles">
         <div class="particle" style="left: 10%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 0s;"></div>
         <div class="particle" style="left: 20%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 2s;"></div>
@@ -485,32 +521,27 @@
         <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-duration: 23s; animation-delay: 4s;"></div>
         <div class="particle" style="left: 90%; width: 4px; height: 4px; animation-duration: 16s; animation-delay: 1s;"></div>
     </div>
-
     <div class="hero-bg-image">
-        <img src="https://www.yud819ad.site/uswq/img/6.webp" alt="" />
+        <img src="https://www.yud819ad.site/uswq/img/6.webp" alt="" >
     </div>
     <div class="hero-bg-overlay"></div>
     <div class="absolute inset-0 grid-bg opacity-[0.05] z-[1]"></div>
 
     <div class="hero-content max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center w-full">
-        <!-- Left -->
         <div class="fade-in-section">
             <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/40 rounded-full px-5 py-2.5 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider backdrop-blur-sm">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
                 Trusted by Institutions Worldwide
             </div>
-
             <h1 class="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] mb-7">
                 <span class="text-slate-100">Achieving</span><br>
                 <span class="gradient-text">Digital Asset</span><br>
                 <span class="text-slate-100">Recovery</span><br>
                 <span class="text-blue-400">Success<sup class="text-2xl">®</sup></span>
             </h1>
-
             <p class="text-slate-200 text-xl leading-relaxed mb-10 max-w-lg">
                 Your crypto assets are always at risk. You need professional tracing and recovery consulting to minimize fraud losses and recover stolen assets. Partner with us to protect your digital wealth, trace illicit fund flows, and safeguard your future in the blockchain era.
             </p>
-
             <div class="flex flex-wrap gap-4">
                 <button onclick="openModal()"
                         class="btn-ripple group flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 sm:px-8 py-4 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:-translate-y-1 whitespace-nowrap">
@@ -519,8 +550,6 @@
                     <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </button>
             </div>
-
-            <!-- No Upfront Fee -->
             <div class="mt-6 flex items-center gap-3 bg-green-500/15 border border-green-500/40 rounded-xl px-5 py-3 max-w-md backdrop-blur-sm hover-lift">
                 <div class="w-10 h-10 bg-green-500/25 rounded-lg flex items-center justify-center shrink-0">
                     <i class="fas fa-shield-check text-green-400 text-lg icon-rotate"></i>
@@ -529,8 +558,6 @@
                     No Upfront Fees – We Only Get Paid When You Successfully Recover Your Funds
                 </p>
             </div>
-
-            <!-- Stats -->
             <div class="mt-14 grid grid-cols-3 gap-6 pt-10 border-t border-slate-800/50">
                 <div class="stat-number">
                     <p class="text-3xl font-black text-blue-400">$1B+</p>
@@ -546,15 +573,12 @@
                 </div>
             </div>
         </div>
-
-        <!-- Right Image -->
         <div class="relative hidden lg:block fade-in-section" style="animation-delay: 0.3s;">
             <div class="relative rounded-3xl overflow-hidden glow-blue">
                 <img src="https://www.yud819ad.site/uswq/img/6.webp" alt="Digital Asset Recovery"
-                     class="w-full aspect-[1/1] object-cover"/>
+                     class="w-full aspect-[1/1] object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
             </div>
-            <!-- Badge top-left -->
             <div class="absolute top-6 left-6 bg-slate-900/95 backdrop-blur-md border border-slate-700/50 rounded-2xl p-4 shadow-2xl hover-lift">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
@@ -566,7 +590,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Badge bottom-right -->
             <div class="absolute bottom-6 right-6 bg-slate-900/95 backdrop-blur-md border border-slate-700/50 rounded-2xl p-4 shadow-2xl hover-lift">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
@@ -581,8 +604,6 @@
             <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         </div>
     </div>
-
-    <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 z-[2]" style="animation: bounce 2s ease-in-out infinite;">
         <span class="text-[10px] uppercase tracking-widest font-semibold">Scroll</span>
         <i class="fas fa-chevron-down text-xs"></i>
@@ -597,10 +618,7 @@
             <h2 class="text-3xl md:text-4xl font-black text-white">General Process for Crypto Tracing & Recovery</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-5 rounded-full"></div>
         </div>
-
-        <!-- Compact Grid Layout -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-            <!-- Step 1 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">1</div>
@@ -611,8 +629,6 @@
                 <h3 class="text-base font-bold text-white mb-2">Visualization & On-Chain Tracing</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Complete on-chain fund flow visualization and tracing.</p>
             </div>
-
-            <!-- Step 2 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">2</div>
@@ -623,8 +639,6 @@
                 <h3 class="text-base font-bold text-white mb-2">Address Clustering & Entity Attribution</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Connect anonymous wallets to real-world entities.</p>
             </div>
-
-            <!-- Step 3 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">3</div>
@@ -635,8 +649,6 @@
                 <h3 class="text-base font-bold text-white mb-2">Cross-Chain / DEX / Mixer Path Analysis</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Follow funds through bridges and obfuscation protocols.</p>
             </div>
-
-            <!-- Step 4 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">4</div>
@@ -647,8 +659,6 @@
                 <h3 class="text-base font-bold text-white mb-2">Behavioral Pattern & Timeline Analysis</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Build detailed timelines of suspicious activity.</p>
             </div>
-
-            <!-- Step 5 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">5</div>
@@ -659,8 +669,6 @@
                 <h3 class="text-base font-bold text-white mb-2">Global Exchange & Forensics Collaboration</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Leverage relationships to obtain KYC data and freeze orders.</p>
             </div>
-
-            <!-- Step 6 -->
             <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">6</div>
@@ -672,8 +680,6 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Generate legally rigorous documentation for international courts.</p>
             </div>
         </div>
-
-        <!-- Final Step -->
         <div class="hover-lift bg-gradient-to-br from-blue-900/40 to-slate-800 border-2 border-blue-500/60 animate-pulse-border rounded-2xl p-6 max-w-3xl mx-auto">
             <div class="flex items-center gap-4 mb-3">
                 <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shrink-0 font-black text-white shadow-xl shadow-blue-600/60">7</div>
@@ -684,7 +690,6 @@
             </div>
             <p class="text-slate-300 text-base leading-relaxed pl-16">Coordinate with multi-jurisdictional lawyers to initiate civil and criminal recovery litigation. We transform on-chain evidence into real-world legal action to freeze and recover your assets globally.</p>
         </div>
-
         <div class="text-center mt-12">
             <button onclick="openModal()"
                     class="btn-ripple group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-10 py-4 rounded-2xl text-base font-black transition-all duration-300 shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:-translate-y-1">
@@ -700,11 +705,10 @@
 <section id="about" class="py-28 px-6 bg-slate-950 fade-in-section">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-16 items-start">
-            <!-- Sticky Image -->
             <div class="lg:w-2/5 shrink-0 w-full">
                 <div class="sticky top-24">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl glow-blue">
-                        <img src="img/a1.webp" alt="Our Team" class="w-full aspect-[1/1] object-cover"/>
+                        <img src="img/a1.webp" alt="Our Team" class="w-full aspect-[1/1] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
                     </div>
                     <div class="absolute -bottom-5 -right-5 bg-gradient-to-br from-blue-600 to-blue-700 text-white p-6 rounded-2xl shadow-2xl shadow-blue-600/50 hidden md:block">
@@ -713,25 +717,19 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Content -->
             <div class="lg:w-3/5">
                 <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">About Our Firm</p>
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Who We Are</h2>
                 <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mb-10"></div>
-
                 <p class="text-xl text-slate-200 font-medium leading-relaxed mb-8 border-l-4 border-blue-600 pl-6 hover-lift">
                     Our exceptional team members include lawyers who have served as ambassadors and members of Congress, representing the U.S. Department of Justice, Securities and Exchange Commission (SEC), Treasury, IRS, and other government agencies.
                 </p>
-
                 <div class="magazine-col text-slate-300 text-base leading-relaxed">
                     <p class="mb-5">These attorneys possess extensive experience in international asset recovery and forfeiture, money laundering investigations, fraud investigations, and the operations and policies of bribery and corruption cases.</p>
                     <p class="mb-5">We understand the complexities of the modern financial system and the lengths to which malicious actors will go to hide illicitly obtained assets. Our methodology bridges the gap between complex technological realities and the rigid requirements of international courts.</p>
                     <p class="mb-5">Additionally, our team features numerous lawyers proficient in foreign languages, enabling us to review information and conduct asset investigations in the native languages of fraudsters and their co-conspirators, thereby acquiring critical information more deeply and rapidly.</p>
                     <p>This linguistic advantage is crucial in cross-border cases where evidence is often obscured by language barriers and local jurisdictional nuances. When you partner with us, you gain an ally with the resources, knowledge, and tenacity to pursue your case to the fullest extent of the law, anywhere in the world.</p>
                 </div>
-
-                <!-- Feature Pills -->
                 <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
                         <i class="fas fa-shield-halved text-blue-400 icon-rotate"></i>
@@ -755,61 +753,93 @@
     </div>
 </section>
 
-<!-- ========== PROBLEMS WE SOLVE ========== -->
-<section class="py-28 px-6 bg-slate-900 fade-in-section">
-    <div class="max-w-7xl mx-auto">
+<!-- ========== PROBLEMS WE SOLVE — BENTO GRID ========== -->
+<section class="py-28 px-6 bg-slate-900 relative overflow-hidden fade-in-section">
+    <!-- Ambient background glow -->
+    <div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/[0.04] rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-600/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto">
         <div class="text-center mb-16">
-            <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Challenges We Address</p>
+            <p class="text-red-400 font-bold tracking-widest uppercase text-xs mb-4">Challenges We Address</p>
             <h2 class="text-4xl md:text-5xl font-black text-white">Problems We Can Solve</h2>
-            <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
+            <div class="w-20 h-1 bg-gradient-to-r from-red-500 to-red-400 mx-auto mt-6 rounded-full"></div>
+            <p class="text-slate-400 mt-6 max-w-2xl mx-auto text-base leading-relaxed">From sophisticated crypto fraud to multi-layered offshore concealment — we dismantle the complexity and recover what's yours.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-triangle-exclamation text-red-400 text-lg icon-rotate"></i>
+        <div class="problems-bento">
+            <!-- Row 1: wide + narrow -->
+            <div class="bento-item bento-wide" style="background: linear-gradient(160deg, #1a1225 0%, #15192b 50%, #111827 100%);">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-red-500/[0.06] rounded-full blur-[60px] pointer-events-none"></div>
+                <div class="flex flex-col sm:flex-row sm:items-start gap-5">
+                    <div class="bento-icon-ring shrink-0">
+                        <i class="fas fa-triangle-exclamation text-red-400 text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-white mb-2 leading-snug">Ponzi Schemes & Crypto Hedge Fund Fraud</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Complex investment fraud including cryptocurrency Ponzi structures and fraudulent fund operations.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-red-300/80 bg-red-500/10 border border-red-500/15 rounded-full px-3 py-1">Investment Fraud</span>
+                            <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-red-300/80 bg-red-500/10 border border-red-500/15 rounded-full px-3 py-1">Multi-Layer Schemes</span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-base font-bold text-white mb-2 leading-snug">Ponzi Schemes & Crypto Hedge Fund Fraud</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Complex investment fraud including cryptocurrency Ponzi structures and fraudulent fund operations.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-building-columns text-red-400 text-lg icon-rotate"></i>
+
+            <div class="bento-item bento-narrow" style="background: linear-gradient(160deg, #17131f 0%, #141a2a 100%);">
+                <div class="bento-icon-ring mb-4">
+                    <i class="fas fa-building-columns text-red-400 text-lg"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Offshore Trusts & Multi-Layer Corporate Structures</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Assets concealed through complex offshore trusts and multi-layered shell company arrangements.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fab fa-bitcoin text-red-400 text-lg icon-rotate"></i>
+
+            <!-- Row 2: narrow + wide -->
+            <div class="bento-item bento-narrow" style="background: linear-gradient(160deg, #151020 0%, #131927 100%);">
+                <div class="bento-icon-ring mb-4">
+                    <i class="fab fa-bitcoin text-red-400 text-lg"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Exchange & Cold Wallet Asset Transfers</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Crypto transferred through exchange accounts and cold wallets requiring specialized blockchain forensics.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-scale-balanced text-red-400 text-lg icon-rotate"></i>
+
+            <div class="bento-item bento-wide" style="background: linear-gradient(160deg, #191320 0%, #141b2c 50%, #111827 100%);">
+                <div class="absolute bottom-0 left-0 w-40 h-40 bg-red-500/[0.05] rounded-full blur-[50px] pointer-events-none"></div>
+                <div class="flex flex-col sm:flex-row sm:items-start gap-5">
+                    <div class="bento-icon-ring shrink-0">
+                        <i class="fas fa-scale-balanced text-red-400 text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-white mb-2 leading-snug">Cross-Border Judgment Enforcement Difficulties</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Challenges enforcing judgments across jurisdictions where legal cooperation varies significantly.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-red-300/80 bg-red-500/10 border border-red-500/15 rounded-full px-3 py-1">Multi-Jurisdiction</span>
+                            <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-red-300/80 bg-red-500/10 border border-red-500/15 rounded-full px-3 py-1">Legal Cooperation</span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-base font-bold text-white mb-2 leading-snug">Cross-Border Judgment Enforcement Difficulties</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Challenges enforcing judgments across jurisdictions where legal cooperation varies significantly.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-lock text-red-400 text-lg icon-rotate"></i>
+
+            <!-- Row 3: three equal -->
+            <div class="bento-item bento-third" style="background: linear-gradient(160deg, #161120 0%, #131826 100%);">
+                <div class="bento-icon-ring mb-4">
+                    <i class="fas fa-lock text-red-400 text-lg"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Bank Secrecy & Data Protection Regulations</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Legal obstacles from banking secrecy laws and GDPR data protection regulations blocking evidence gathering.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-eye-slash text-red-400 text-lg icon-rotate"></i>
+
+            <div class="bento-item bento-third" style="background: linear-gradient(160deg, #181225 0%, #151a2b 100%);">
+                <div class="bento-icon-ring mb-4">
+                    <i class="fas fa-eye-slash text-red-400 text-lg"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Blockchain Privacy Protocol Tracing Challenges</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Tracing difficulties caused by privacy protocols, zero-knowledge proofs, and advanced obfuscation technologies.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group md:col-span-2 lg:col-span-1">
-                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-gavel text-red-400 text-lg icon-rotate"></i>
+
+            <div class="bento-item bento-third" style="background: linear-gradient(160deg, #15101d 0%, #121828 100%);">
+                <div class="bento-icon-ring mb-4">
+                    <i class="fas fa-gavel text-red-400 text-lg"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Bankruptcy & Multi-Jurisdictional Conflict Procedures</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Complex intersections between bankruptcy liquidation proceedings and conflicting procedures across multiple jurisdictions.</p>
@@ -826,10 +856,7 @@
             <h2 class="text-4xl md:text-5xl font-black text-white">Our Core Capabilities</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
         </div>
-
         <div class="grid lg:grid-cols-2 gap-6">
-
-            <!-- Cap 1 -->
             <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
                     <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
@@ -848,8 +875,6 @@
                     <li class="flex items-center gap-3 text-slate-300 text-sm"><i class="fas fa-check-circle text-blue-400 shrink-0"></i>Digital asset evidence preservation</li>
                 </ul>
             </div>
-
-            <!-- Cap 2 -->
             <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
                     <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
@@ -874,8 +899,6 @@
                     <li class="flex items-center gap-3 text-slate-300 text-sm"><i class="fas fa-check-circle text-blue-400 shrink-0"></i>Enforce default judgments & cross-border recognition</li>
                 </ul>
             </div>
-
-            <!-- Cap 3 -->
             <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
                     <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
@@ -895,8 +918,6 @@
                     <li class="flex items-center gap-3 text-slate-300 text-sm"><i class="fas fa-check-circle text-blue-400 shrink-0"></i>Beneficial ownership identification</li>
                 </ul>
             </div>
-
-            <!-- Cap 4 -->
             <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
                     <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
@@ -915,17 +936,18 @@
                     <li class="flex items-center gap-3 text-slate-300 text-sm"><i class="fas fa-check-circle text-blue-400 shrink-0"></i>Cross-border liquidation conflict coordination</li>
                 </ul>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- ========== REPRESENTATIVE CASES ========== -->
+<!-- ========== REPRESENTATIVE CASES — REDESIGNED ========== -->
 <section id="cases" class="py-28 px-6 bg-slate-900 relative overflow-hidden fade-in-section">
     <div class="absolute inset-0">
-        <img src="img/a2.jpg" alt="" class="w-full h-full object-cover opacity-[0.04]"/>
+        <img src="img/a2.jpg" alt="" class="w-full h-full object-cover opacity-[0.04]">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
     </div>
+    <!-- Ambient glow -->
+    <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-blue-600/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto">
         <div class="text-center mb-16">
@@ -935,7 +957,7 @@
         </div>
 
         <!-- Stats Banner -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-center shadow-2xl shadow-blue-600/30 hover-lift">
                 <p class="text-4xl font-black text-white">$1B+</p>
                 <p class="text-blue-100 text-xs mt-2 font-medium uppercase tracking-wider">Total Recovered</p>
@@ -954,134 +976,217 @@
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 01</span>
-                    <span class="text-xl font-black text-blue-400">$90M</span>
+        <!-- Hero Cases (top 2 largest) -->
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <!-- CASE 04 — $1.05B (biggest) -->
+            <div class="case-hero-card" style="background: linear-gradient(145deg, #0c1a3a 0%, #0d1528 40%, #111827 100%); border: 1px solid rgba(59,130,246,0.3);">
+                <div class="absolute top-0 right-0 w-60 h-60 bg-blue-500/[0.06] rounded-full blur-[80px] pointer-events-none"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="case-number-badge bg-blue-500/20 text-blue-300 border border-blue-500/30">04</span>
+                        <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Landmark Recovery</span>
+                    </div>
+                    <div class="case-amount mb-4">$1.05B</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Hedge Fund Group Litigation</h3>
+                    <div class="case-divider"></div>
+                    <p class="text-slate-300 text-sm leading-relaxed">Employed Hague Convention cross-border evidence gathering. Overcame bank secrecy and GDPR obstacles. Recovered $1.05B through a series of settlements.</p>
+                    <div class="flex flex-wrap gap-2 mt-5">
+                        <span class="tag-pill">Hague Convention</span>
+                        <span class="tag-pill">GDPR</span>
+                        <span class="tag-pill">Settlement</span>
+                    </div>
                 </div>
-                <h3 class="text-base font-bold text-white mb-2">Crypto Ponzi Scheme Recovery</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Represented court-appointed receiver, traced and recovered crypto assets across Australia, Cayman, China, UK, and USA via on-chain forensic analysis.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/50 border border-blue-500/40 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 02</span>
-                    <span class="text-xl font-black text-blue-400">$860M+</span>
+            <!-- CASE 02 — $860M+ -->
+            <div class="case-hero-card" style="background: linear-gradient(145deg, #0f1530 0%, #0e1425 40%, #111827 100%); border: 1px solid rgba(59,130,246,0.2);">
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/[0.05] rounded-full blur-[70px] pointer-events-none"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="case-number-badge bg-blue-500/20 text-blue-300 border border-blue-500/30">02</span>
+                        <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Major Litigation</span>
+                    </div>
+                    <div class="case-amount mb-4">$860M+</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Crypto Hedge Fund Litigation</h3>
+                    <div class="case-divider"></div>
+                    <p class="text-slate-300 text-sm leading-relaxed">Filed suits against multiple crypto hedge funds. Penetrated complex offshore trusts and blockchain structures across Bermuda, BVI, Cayman, Switzerland, UK, and USA.</p>
+                    <div class="flex flex-wrap gap-2 mt-5">
+                        <span class="tag-pill">Offshore Trusts</span>
+                        <span class="tag-pill">6 Jurisdictions</span>
+                    </div>
                 </div>
-                <h3 class="text-base font-bold text-white mb-2">Crypto Hedge Fund Litigation</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Filed suits against multiple crypto hedge funds. Penetrated complex offshore trusts and blockchain structures across Bermuda, BVI, Cayman, Switzerland, UK, and USA.</p>
             </div>
+        </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
+        <!-- Remaining Cases Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- CASE 03 — $500M+ -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #111827, #0f172a);">
                 <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 03</span>
-                    <span class="text-xl font-black text-blue-400">$500M+</span>
+                    <span class="case-number-badge bg-slate-700/60 text-slate-400 border border-slate-600/50 text-[10px]">03</span>
+                    <div class="case-amount-sm">$500M+</div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Cayman Fund Fraudulent Transfer</h3>
+                <div class="case-divider"></div>
                 <p class="text-slate-300 text-sm leading-relaxed">Froze assets across multiple European countries including crypto accounts. Ran parallel litigation to recover losses from a Cayman-connected fund fraud scheme.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
+            <!-- CASE 05 — $180M -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #111827, #0f172a);">
                 <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 04</span>
-                    <span class="text-xl font-black text-blue-400">$1.05B</span>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">Hedge Fund Group Litigation</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Employed Hague Convention cross-border evidence gathering. Overcame bank secrecy and GDPR obstacles. Recovered $1.05B through a series of settlements.</p>
-            </div>
-
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 05</span>
-                    <span class="text-xl font-black text-blue-400">$180M</span>
+                    <span class="case-number-badge bg-slate-700/60 text-slate-400 border border-slate-600/50 text-[10px]">05</span>
+                    <div class="case-amount-sm">$180M</div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">NY Judgment Enforcement</h3>
+                <div class="case-divider"></div>
                 <p class="text-slate-300 text-sm leading-relaxed">Enforced $180M New York judgment internationally. Froze $61M in Gibraltar and Switzerland. Recovered crypto and returned it to U.S. courts.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
+            <!-- CASE 07 — ~$100M -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #111827, #0f172a);">
                 <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 06</span>
-                    <span class="text-xl font-black text-blue-400">$79M</span>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">Crypto Fraud Summary Judgment</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Secured $79M summary judgment in crypto fraud case. Enforced across multiple American countries, handling complex multi-jurisdiction liquidation conflicts.</p>
-            </div>
-
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 07</span>
-                    <span class="text-xl font-black text-blue-400">~$100M</span>
+                    <span class="case-number-badge bg-slate-700/60 text-slate-400 border border-slate-600/50 text-[10px]">07</span>
+                    <div class="case-amount-sm">~$100M</div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Divorce Hidden Crypto Assets</h3>
+                <div class="case-divider"></div>
                 <p class="text-slate-300 text-sm leading-relaxed">Traced $120M in hidden assets. Discovered crypto wallets in Switzerland and USA. Achieved a settlement of nearly $100M for the client.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/50 border border-blue-500/40 rounded-2xl p-6">
+            <!-- CASE 01 — $90M -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #111827, #0f172a);">
                 <div class="flex items-center justify-between mb-4">
-                    <span class="tag-pill">CASE 08</span>
-                    <span class="text-xl font-black text-blue-400">Billions</span>
+                    <span class="case-number-badge bg-slate-700/60 text-slate-400 border border-slate-600/50 text-[10px]">01</span>
+                    <div class="case-amount-sm">$90M</div>
                 </div>
-                <h3 class="text-base font-bold text-white mb-2">Sovereign Wealth Fund Case</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">Involved billions in losses including unauthorized crypto transfers. Developed a comprehensive global asset recovery strategy spanning multiple continents.</p>
+                <h3 class="text-base font-bold text-white mb-2">Crypto Ponzi Scheme Recovery</h3>
+                <div class="case-divider"></div>
+                <p class="text-slate-300 text-sm leading-relaxed">Represented court-appointed receiver, traced and recovered crypto assets across Australia, Cayman, China, UK, and USA via on-chain forensic analysis.</p>
             </div>
 
+            <!-- CASE 06 — $79M -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #111827, #0f172a);">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="case-number-badge bg-slate-700/60 text-slate-400 border border-slate-600/50 text-[10px]">06</span>
+                    <div class="case-amount-sm">$79M</div>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2">Crypto Fraud Summary Judgment</h3>
+                <div class="case-divider"></div>
+                <p class="text-slate-300 text-sm leading-relaxed">Secured $79M summary judgment in crypto fraud case. Enforced across multiple American countries, handling complex multi-jurisdiction liquidation conflicts.</p>
+            </div>
+
+            <!-- CASE 08 — Billions -->
+            <div class="case-grid-card" style="background: linear-gradient(160deg, #0d1a30, #0f172a); border-color: rgba(59,130,246,0.3);">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.06] rounded-full blur-[40px] pointer-events-none"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="case-number-badge bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px]">08</span>
+                        <div class="case-amount-sm">Billions</div>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Sovereign Wealth Fund Case</h3>
+                    <div class="case-divider"></div>
+                    <p class="text-slate-300 text-sm leading-relaxed">Involved billions in losses including unauthorized crypto transfers. Developed a comprehensive global asset recovery strategy spanning multiple continents.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ========== WHY US ========== -->
-<section class="py-28 px-6 bg-slate-950 fade-in-section">
-    <div class="max-w-7xl mx-auto">
+<!-- ========== WHY US — REDESIGNED ========== -->
+<section class="py-28 px-6 bg-slate-950 relative overflow-hidden fade-in-section">
+    <!-- Ambient glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/[0.04] rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Our Advantage</p>
             <h2 class="text-4xl md:text-5xl font-black text-white">Why Choose Us</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-microscope text-blue-400 text-xl icon-rotate"></i>
+
+        <div class="why-feature-grid">
+            <!-- 01 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">01</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-microscope text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Cutting-Edge Blockchain Forensics</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">We combine proprietary software with industry-leading tools to trace assets across every blockchain network, no matter how obfuscated.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">Cutting-Edge Blockchain Forensics</h3>
-                <p class="text-slate-300 text-base leading-relaxed">We combine proprietary software with industry-leading tools to trace assets across every blockchain network, no matter how obfuscated.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-user-shield text-blue-400 text-xl icon-rotate"></i>
+
+            <!-- 02 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">02</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-user-shield text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Former Government Officials</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Our attorneys previously served at the DOJ, SEC, IRS, and Treasury, giving us unparalleled insight into investigative and enforcement strategies.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">Former Government Officials</h3>
-                <p class="text-slate-300 text-base leading-relaxed">Our attorneys previously served at the DOJ, SEC, IRS, and Treasury, giving us unparalleled insight into investigative and enforcement strategies.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-globe-americas text-blue-400 text-xl icon-rotate"></i>
+
+            <!-- 03 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">03</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-globe-americas text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">True Global Reach</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">We have successfully operated in 20+ jurisdictions, with established relationships with courts, regulators, and exchanges worldwide.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">True Global Reach</h3>
-                <p class="text-slate-300 text-base leading-relaxed">We have successfully operated in 20+ jurisdictions, with established relationships with courts, regulators, and exchanges worldwide.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-language text-blue-400 text-xl icon-rotate"></i>
+
+            <!-- 04 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">04</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-language text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Multilingual Capability</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">We investigate in the native languages of fraudsters, enabling us to uncover critical evidence faster and more accurately than any competitor.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">Multilingual Capability</h3>
-                <p class="text-slate-300 text-base leading-relaxed">We investigate in the native languages of fraudsters, enabling us to uncover critical evidence faster and more accurately than any competitor.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-chart-line text-blue-400 text-xl icon-rotate"></i>
+
+            <!-- 05 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">05</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Proven Billion-Dollar Track Record</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Our results speak for themselves — over $1 billion in recovered assets across some of the most complex crypto fraud cases of the last decade.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">Proven Billion-Dollar Track Record</h3>
-                <p class="text-slate-300 text-base leading-relaxed">Our results speak for themselves — over $1 billion in recovered assets across some of the most complex crypto fraud cases of the last decade.</p>
             </div>
-            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-lock-open text-blue-400 text-xl icon-rotate"></i>
+
+            <!-- 06 -->
+            <div class="why-card">
+                <div class="why-card-bg"></div>
+                <div class="why-card-shine"></div>
+                <span class="why-number">06</span>
+                <div class="why-card-inner">
+                    <div class="why-icon-box bg-gradient-to-br from-blue-600/20 to-blue-700/10 border border-blue-500/20 mb-5">
+                        <i class="fas fa-lock-open text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">End-to-End Service</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">From initial tracing to final recovery, we handle every aspect of your case — forensics, legal strategy, and courtroom execution — under one roof.</p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-3">End-to-End Service</h3>
-                <p class="text-slate-300 text-base leading-relaxed">From initial tracing to final recovery, we handle every aspect of your case — forensics, legal strategy, and courtroom execution — under one roof.</p>
             </div>
         </div>
     </div>
@@ -1090,18 +1195,16 @@
 <!-- ========== WHO WE SERVE ========== -->
 <section class="py-28 px-6 bg-slate-900 relative overflow-hidden fade-in-section">
     <div class="absolute inset-0">
-        <img src="img/a1.webp" alt="" class="w-full h-full object-cover opacity-[0.06]"/>
+        <img src="img/a1.webp" alt="" class="w-full h-full object-cover opacity-[0.06]">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
     </div>
     <div class="relative max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-16 items-center">
-
             <div class="lg:w-1/2">
                 <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Clientele</p>
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Who We Serve</h2>
                 <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mb-8"></div>
                 <p class="text-slate-300 leading-relaxed mb-10 text-base">We work with a diverse range of clients facing complex digital asset recovery challenges — from institutional investors to individual high-net-worth clients dealing with fraud and misappropriation.</p>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
                         <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-user-tie text-blue-400 text-sm icon-rotate"></i></div>
@@ -1137,10 +1240,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="lg:w-1/2 relative w-full">
                 <div class="rounded-3xl overflow-hidden glow-blue">
-                    <img src="img/a3.jpg" alt="Who We Serve" class="w-full aspect-[4/3] object-cover"/>
+                    <img src="img/a3.jpg" alt="Who We Serve" class="w-full aspect-[4/3] object-cover">
                     <div class="absolute inset-0 bg-gradient-to-tr from-slate-900/70 via-transparent to-transparent"></div>
                 </div>
                 <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl shadow-2xl shadow-blue-600/40 hidden md:block">
@@ -1160,10 +1262,8 @@
         <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
         <p class="text-slate-400 mt-6 max-w-2xl mx-auto text-base leading-relaxed">Our team combines former government officials, international attorneys, blockchain forensics experts, and financial investigators to provide unparalleled asset recovery services.</p>
     </div>
-
     <div class="marquee-wrapper py-4">
         <div class="marquee-content">
-            <!-- Set 1 -->
             <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
                 <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -1194,7 +1294,6 @@
                     <div><p class="text-white font-bold text-sm">Partner</p><p class="text-blue-400 text-xs">Fraud Investigation</p></div>
                 </div>
             </div>
-            <!-- Set 2 (duplicate) -->
             <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
                 <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -1233,28 +1332,23 @@
 <section class="py-28 px-6 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 relative overflow-hidden fade-in-section">
     <div class="absolute inset-0 grid-bg opacity-[0.06]"></div>
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
     <div class="relative max-w-3xl mx-auto text-center cta-pulse">
         <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/40 rounded-full px-5 py-2.5 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider backdrop-blur-sm">
             <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
             Available 24/7 for Emergency Consultations
         </div>
-
         <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
             Ready to Recover<br><span class="gradient-text">Your Assets?</span>
         </h2>
-
         <p class="text-slate-200 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Contact us now for a confidential consultation. Our global experts are ready to analyze your case and build a comprehensive recovery strategy.
         </p>
-
         <button onclick="openModal()"
                 class="btn-ripple group inline-flex items-center gap-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 active:bg-blue-800 text-white px-12 py-5 rounded-2xl text-xl font-black transition-all duration-300 shadow-2xl shadow-blue-600/50 hover:shadow-blue-600/70 hover:-translate-y-2">
             <i class="fas fa-headset text-xl"></i>
             Contact Us Now
             <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
         </button>
-
         <p class="text-slate-500 text-xs mt-6 tracking-wide">Strict confidentiality &nbsp;·&nbsp; Free initial consultation &nbsp;·&nbsp; Global coverage</p>
     </div>
 </section>
@@ -1281,7 +1375,6 @@
                 </a>
             </div>
         </div>
-
         <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white text-xs">
             <p>© 2025 Digital Asset Recovery Services. All Rights Reserved.</p>
             <div class="flex gap-6">
@@ -1294,45 +1387,32 @@
 </footer>
 
 <script>
-    // m1 method - WhatsApp
-    function m1() {
-        window.open('https://wa.me/12123', '_blank');
-    }
+    function m1() { window.open('https://wa.me/12123', '_blank'); }
+    function m2() { window.open('https://www.qq.com', '_blank'); }
 
-    // m2 method - Telegram
-    function m2() {
-        window.open('https://www.qq.com', '_blank');
-    }
-
-    // Modal controls
     function openModal() {
-        const modal = document.getElementById('contactModal');
+        var modal = document.getElementById('contactModal');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
     }
-
     function closeModal() {
-        const modal = document.getElementById('contactModal');
+        var modal = document.getElementById('contactModal');
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
     }
 
-    // Click outside to close
     document.getElementById('contactModal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
+        if (e.target === this) { closeModal(); }
     });
-
-    // Escape key to close
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Escape') { closeModal(); }
     });
 
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
+            var target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1340,40 +1420,25 @@
         });
     });
 
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 100) {
             navbar.classList.add('navbar-scrolled');
         } else {
             navbar.classList.remove('navbar-scrolled');
         }
-        
-        lastScroll = currentScroll;
     });
 
-    // Intersection Observer for fade-in sections
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    var observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('visible'); }
         });
     }, observerOptions);
-
-    document.querySelectorAll('.fade-in-section').forEach(section => {
+    document.querySelectorAll('.fade-in-section').forEach(function(section) {
         observer.observe(section);
     });
 </script>
- 
+
 </body>
 </html>
