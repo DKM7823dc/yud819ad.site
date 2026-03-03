@@ -8,105 +8,412 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Inter', sans-serif; }
+        * { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            overflow-x: hidden;
+        }
+
+        /* ========== HERO GRADIENT & ANIMATIONS ========== */
         .hero-gradient { 
             background: linear-gradient(135deg, #0a0f1e 0%, #0d2045 50%, #0a0f1e 100%);
             position: relative;
         }
 
-        .marquee-wrapper {
-            overflow: hidden; white-space: nowrap; width: 100%; position: relative;
-            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        /* Floating particles background */
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
         }
-        .marquee-content { display: inline-flex; gap: 1.5rem; animation: marqueeScroll 32s linear infinite; }
-        .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(59,130,246,0.8), transparent);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Gradient text animation */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb, #60a5fa);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        /* Enhanced glow effects */
+        .glow-blue { 
+            box-shadow: 0 0 80px rgba(59,130,246,0.35), 0 0 40px rgba(59,130,246,0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .glow-blue:hover {
+            box-shadow: 0 0 120px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.3);
+        }
+
+        /* Card hover effects */
+        .hover-lift { 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .hover-lift::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        
+        .hover-lift:hover::before {
+            opacity: 1;
+        }
+
+        /* Floating button animation */
+        .float-btn { 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse-float 3s ease-in-out infinite;
+        }
+        
+        .float-btn:hover { 
+            transform: translateX(-8px) scale(1.05);
+        }
+
+        @keyframes pulse-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Modal backdrop blur */
+        .modal-backdrop { 
+            backdrop-filter: blur(12px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Marquee animation */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .marquee-content { 
+            display: inline-flex;
+            gap: 1.5rem;
+            animation: marqueeScroll 40s linear infinite;
+        }
+        
+        .marquee-wrapper:hover .marquee-content { 
+            animation-play-state: paused;
+        }
+        
         @keyframes marqueeScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(calc(-50% - 0.75rem)); }
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .glow-blue { box-shadow: 0 0 50px rgba(59,130,246,0.25); }
-        .hover-lift { transition: all 0.3s ease; }
-        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .float-btn { transition: all 0.3s ease; }
-        .float-btn:hover { transform: translateX(-6px); }
-        .modal-backdrop { backdrop-filter: blur(10px); }
-
-        .magazine-col { column-count: 1; column-gap: 2.5rem; }
-        @media (min-width: 1024px) { .magazine-col { column-count: 2; } }
-
+        /* Grid background */
         .grid-bg {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='white' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
+            background-image: 
+                linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
         }
 
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Pulse border animation */
         @keyframes pulse-border {
-            0%, 100% { border-color: rgba(59,130,246,0.4); }
-            50% { border-color: rgba(59,130,246,0.9); }
+            0%, 100% { 
+                border-color: rgba(59,130,246,0.4);
+                box-shadow: 0 0 20px rgba(59,130,246,0.2);
+            }
+            50% { 
+                border-color: rgba(59,130,246,0.9);
+                box-shadow: 0 0 40px rgba(59,130,246,0.4);
+            }
         }
-        .animate-pulse-border { animation: pulse-border 2.5s ease-in-out infinite; }
+        
+        .animate-pulse-border { 
+            animation: pulse-border 3s ease-in-out infinite;
+        }
 
+        /* Tag pill with animation */
         .tag-pill {
             background: rgba(59,130,246,0.12);
             color: #93c5fd;
             border: 1px solid rgba(59,130,246,0.25);
-            font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .tag-pill:hover {
+            background: rgba(59,130,246,0.2);
+            border-color: rgba(59,130,246,0.5);
+            transform: translateY(-2px);
         }
 
-        ::-webkit-scrollbar { width: 6px; }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #3b82f6, #2563eb);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
 
-        /* Hero background image */
+        /* Hero background image effects */
         .hero-bg-image {
             position: absolute;
             inset: 0;
             z-index: 0;
         }
+        
         .hero-bg-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.15;
+            opacity: 0.12;
+            animation: zoomSlow 30s ease-in-out infinite alternate;
         }
+
+        @keyframes zoomSlow {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
         .hero-bg-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(to right, rgba(10,15,30,0.95), rgba(10,15,30,0.7), transparent);
             z-index: 1;
         }
+        
         .hero-content {
             position: relative;
             z-index: 2;
+        }
+
+        /* Stats counter animation */
+        .stat-number {
+            display: inline-block;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll indicator bounce */
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        /* Button ripple effect */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Icon rotation on hover */
+        .icon-rotate {
+            transition: transform 0.4s ease;
+        }
+
+        .hover-lift:hover .icon-rotate {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* Navbar scroll effect */
+        .navbar-scrolled {
+            background: rgba(2, 6, 23, 0.95) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Section fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced team card hover */
+        .team-card {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        /* Process step connection line */
+        .process-line {
+            position: relative;
+        }
+
+        .process-line::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, transparent);
+            transform: translateY(-50%);
+        }
+
+        /* Magazine column layout */
+        .magazine-col { 
+            column-count: 1;
+            column-gap: 2.5rem;
+        }
+        
+        @media (min-width: 1024px) { 
+            .magazine-col { column-count: 2; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                padding-top: 80px;
+            }
+        }
+
+        /* Loading animation for images */
+        .img-loading {
+            background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* CTA section pulse */
+        @keyframes ctaPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .cta-pulse {
+            animation: ctaPulse 3s ease-in-out infinite;
         }
     </style>
 </head>
 <body class="bg-slate-950 text-white antialiased">
 
 <!-- ========== FLOATING CONTACT BUTTONS (RIGHT SIDE) ========== -->
-<div class="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+<div class="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
     <a href="javascript:void(0)" onclick="m1()"
-       class="float-btn flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white pl-3 pr-4 py-3 rounded-l-2xl shadow-xl shadow-green-900/40">
+       class="float-btn flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white pl-3 pr-4 py-3 rounded-l-2xl shadow-2xl shadow-green-900/50">
         <i class="fab fa-whatsapp text-xl"></i>
         <span class="text-sm font-semibold hidden sm:inline">WhatsApp</span>
     </a>
     <a href="javascript:void(0)" onclick="m2()"
-       class="float-btn flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white pl-3 pr-4 py-3 rounded-l-2xl shadow-xl shadow-blue-900/40">
+       class="float-btn flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white pl-3 pr-4 py-3 rounded-l-2xl shadow-2xl shadow-blue-900/50">
         <i class="fab fa-telegram text-xl"></i>
         <span class="text-sm font-semibold hidden sm:inline">Telegram</span>
     </a>
 </div>
 
-<!-- ========== CONTACT MODAL (k2 METHOD) ========== -->
-<div id="contactModal" class="fixed inset-0 z-[100] hidden items-center justify-center modal-backdrop bg-black/75">
-    <div class="bg-slate-900 border border-slate-600 rounded-3xl p-10 max-w-sm w-full mx-4 shadow-2xl animate-pulse-border">
+<!-- ========== CONTACT MODAL ========== -->
+<div id="contactModal" class="fixed inset-0 z-[100] hidden items-center justify-center modal-backdrop bg-black/80">
+    <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-600 rounded-3xl p-10 max-w-sm w-full mx-4 shadow-2xl animate-pulse-border transform transition-all duration-300 scale-95 hover:scale-100">
         <div class="text-center mb-8">
-            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-blue-600/40">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-blue-600/50 icon-rotate">
                 <i class="fas fa-headset text-2xl text-white"></i>
             </div>
             <h3 class="text-2xl font-black text-white">Contact Our Experts</h3>
@@ -114,55 +421,82 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
             <a href="javascript:void(0)" onclick="m1()"
-               class="flex flex-col items-center gap-3 bg-green-500 hover:bg-green-400 active:scale-95 p-6 rounded-2xl transition-all duration-200 shadow-lg shadow-green-900/30">
+               class="btn-ripple flex flex-col items-center gap-3 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 active:scale-95 p-6 rounded-2xl transition-all duration-200 shadow-lg shadow-green-900/40">
                 <i class="fab fa-whatsapp text-4xl text-white"></i>
                 <span class="text-white font-bold text-sm">WhatsApp</span>
             </a>
             <a href="javascript:void(0)" onclick="m2()"
-               class="flex flex-col items-center gap-3 bg-blue-500 hover:bg-blue-400 active:scale-95 p-6 rounded-2xl transition-all duration-200 shadow-lg shadow-blue-900/30">
+               class="btn-ripple flex flex-col items-center gap-3 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 active:scale-95 p-6 rounded-2xl transition-all duration-200 shadow-lg shadow-blue-900/40">
                 <i class="fab fa-telegram text-4xl text-white"></i>
                 <span class="text-white font-bold text-sm">Telegram</span>
             </a>
         </div>
-        <button onclick="closeModal()" class="mt-6 w-full text-slate-400 hover:text-slate-200 text-sm transition-colors py-2 rounded-xl hover:bg-slate-800">
+        <button onclick="closeModal()" class="mt-6 w-full text-slate-400 hover:text-slate-200 text-sm transition-colors py-3 rounded-xl hover:bg-slate-800/50">
             <i class="fas fa-times mr-2"></i>Close
         </button>
     </div>
 </div>
 
 <!-- ========== NAVIGATION ========== -->
-<nav class="fixed top-0 left-0 right-0 z-40 bg-slate-950/85 backdrop-blur-lg border-b border-slate-800/60">
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/60 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/30">
-                <i class="fas fa-shield-halved text-white text-sm"></i>
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/40 icon-rotate">
+                <i class="fas fa-shield-halved text-white text-base"></i>
             </div>
             <span class="text-lg font-black text-white tracking-tight">Asset<span class="text-blue-400">Recovery</span><span class="text-blue-400">®</span></span>
         </div>
         <div class="hidden md:flex items-center gap-8 text-sm text-slate-300 font-medium">
-            <a href="#process" class="hover:text-white transition-colors">Process</a>
-            <a href="#about" class="hover:text-white transition-colors">About</a>
-            <a href="#capabilities" class="hover:text-white transition-colors">Capabilities</a>
-            <a href="#cases" class="hover:text-white transition-colors">Cases</a>
-            <a href="#team" class="hover:text-white transition-colors">Team</a>
+            <a href="#process" class="hover:text-white transition-colors relative group">
+                Process
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#about" class="hover:text-white transition-colors relative group">
+                About
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#capabilities" class="hover:text-white transition-colors relative group">
+                Capabilities
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#cases" class="hover:text-white transition-colors relative group">
+                Cases
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#team" class="hover:text-white transition-colors relative group">
+                Team
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
         </div>
-       
     </div>
 </nav>
 
 <!-- ========== HERO SECTION ========== -->
 <section class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
+    <!-- Animated particles -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; width: 3px; height: 3px; animation-duration: 20s; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; width: 5px; height: 5px; animation-duration: 22s; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; width: 4px; height: 4px; animation-duration: 19s; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; width: 6px; height: 6px; animation-duration: 21s; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; width: 3px; height: 3px; animation-duration: 17s; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-duration: 23s; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 90%; width: 4px; height: 4px; animation-duration: 16s; animation-delay: 1s;"></div>
+    </div>
+
     <div class="hero-bg-image">
         <img src="https://www.yud819ad.site/uswq/img/6.webp" alt="" />
     </div>
     <div class="hero-bg-overlay"></div>
-    <div class="absolute inset-0 grid-bg opacity-[0.03] z-[1]"></div>
+    <div class="absolute inset-0 grid-bg opacity-[0.05] z-[1]"></div>
 
     <div class="hero-content max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center w-full">
         <!-- Left -->
-        <div>
-            <div class="inline-flex items-center gap-2 bg-blue-600/15 border border-blue-500/30 rounded-full px-4 py-2 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        <div class="fade-in-section">
+            <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/40 rounded-full px-5 py-2.5 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider backdrop-blur-sm">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
                 Trusted by Institutions Worldwide
             </div>
 
@@ -179,17 +513,17 @@
 
             <div class="flex flex-wrap gap-4">
                 <button onclick="openModal()"
-                        class="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-6 sm:px-8 py-4 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1 whitespace-nowrap">
+                        class="btn-ripple group flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 sm:px-8 py-4 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:-translate-y-1 whitespace-nowrap">
                     <i class="fas fa-search-dollar"></i>
                     <span>What Can We Find For You?</span>
                     <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </button>
             </div>
 
-            <!-- NEW: No Upfront Fee Text -->
-            <div class="mt-6 flex items-center gap-3 bg-green-500/10 border border-green-500/30 rounded-xl px-5 py-3 max-w-md">
-                <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center shrink-0">
-                    <i class="fas fa-shield-check text-green-400 text-lg"></i>
+            <!-- No Upfront Fee -->
+            <div class="mt-6 flex items-center gap-3 bg-green-500/15 border border-green-500/40 rounded-xl px-5 py-3 max-w-md backdrop-blur-sm hover-lift">
+                <div class="w-10 h-10 bg-green-500/25 rounded-lg flex items-center justify-center shrink-0">
+                    <i class="fas fa-shield-check text-green-400 text-lg icon-rotate"></i>
                 </div>
                 <p class="text-green-100 text-sm font-semibold leading-tight">
                     No Upfront Fees – We Only Get Paid When You Successfully Recover Your Funds
@@ -197,33 +531,33 @@
             </div>
 
             <!-- Stats -->
-            <div class="mt-14 grid grid-cols-3 gap-6 pt-10 border-t border-slate-800">
-                <div>
+            <div class="mt-14 grid grid-cols-3 gap-6 pt-10 border-t border-slate-800/50">
+                <div class="stat-number">
                     <p class="text-3xl font-black text-blue-400">$1B+</p>
                     <p class="text-slate-400 text-xs mt-1 font-medium uppercase tracking-wider">Assets Recovered</p>
                 </div>
-                <div>
+                <div class="stat-number" style="animation-delay: 0.2s;">
                     <p class="text-3xl font-black text-blue-400">20+</p>
                     <p class="text-slate-400 text-xs mt-1 font-medium uppercase tracking-wider">Jurisdictions</p>
                 </div>
-                <div>
+                <div class="stat-number" style="animation-delay: 0.4s;">
                     <p class="text-3xl font-black text-blue-400">500+</p>
                     <p class="text-slate-400 text-xs mt-1 font-medium uppercase tracking-wider">Cases Resolved</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Image - Square (visible on desktop) -->
-        <div class="relative hidden lg:block">
+        <!-- Right Image -->
+        <div class="relative hidden lg:block fade-in-section" style="animation-delay: 0.3s;">
             <div class="relative rounded-3xl overflow-hidden glow-blue">
                 <img src="https://www.yud819ad.site/uswq/img/6.webp" alt="Digital Asset Recovery"
                      class="w-full aspect-[1/1] object-cover"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
             </div>
             <!-- Badge top-left -->
-            <div class="absolute top-6 left-6 bg-slate-900/95 backdrop-blur border border-slate-700 rounded-2xl p-4 shadow-xl">
+            <div class="absolute top-6 left-6 bg-slate-900/95 backdrop-blur-md border border-slate-700/50 rounded-2xl p-4 shadow-2xl hover-lift">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-green-500/15 rounded-xl flex items-center justify-center">
+                    <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
                         <i class="fas fa-check-circle text-green-400"></i>
                     </div>
                     <div>
@@ -233,9 +567,9 @@
                 </div>
             </div>
             <!-- Badge bottom-right -->
-            <div class="absolute bottom-6 right-6 bg-slate-900/95 backdrop-blur border border-slate-700 rounded-2xl p-4 shadow-xl">
+            <div class="absolute bottom-6 right-6 bg-slate-900/95 backdrop-blur-md border border-slate-700/50 rounded-2xl p-4 shadow-2xl hover-lift">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-blue-500/15 rounded-xl flex items-center justify-center">
+                    <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
                         <i class="fas fa-globe text-blue-400"></i>
                     </div>
                     <div>
@@ -244,19 +578,19 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-600/8 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         </div>
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 animate-bounce z-[2]">
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 z-[2]" style="animation: bounce 2s ease-in-out infinite;">
         <span class="text-[10px] uppercase tracking-widest font-semibold">Scroll</span>
         <i class="fas fa-chevron-down text-xs"></i>
     </div>
 </section>
 
-<!-- ========== PROCESS SECTION (COMPACT VERSION) ========== -->
-<section id="process" class="py-20 px-6 bg-slate-900">
+<!-- ========== PROCESS SECTION ========== -->
+<section id="process" class="py-20 px-6 bg-slate-900 fade-in-section">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
             <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-3">Our Methodology</p>
@@ -267,11 +601,11 @@
         <!-- Compact Grid Layout -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
             <!-- Step 1 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">1</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-diagram-project text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">1</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-diagram-project text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Visualization & On-Chain Tracing</h3>
@@ -279,11 +613,11 @@
             </div>
 
             <!-- Step 2 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">2</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-fingerprint text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">2</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-fingerprint text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Address Clustering & Entity Attribution</h3>
@@ -291,11 +625,11 @@
             </div>
 
             <!-- Step 3 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">3</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-route text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">3</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-route text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Cross-Chain / DEX / Mixer Path Analysis</h3>
@@ -303,11 +637,11 @@
             </div>
 
             <!-- Step 4 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">4</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-clock-rotate-left text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">4</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-clock-rotate-left text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Behavioral Pattern & Timeline Analysis</h3>
@@ -315,11 +649,11 @@
             </div>
 
             <!-- Step 5 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">5</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-handshake text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">5</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-handshake text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Global Exchange & Forensics Collaboration</h3>
@@ -327,11 +661,11 @@
             </div>
 
             <!-- Step 6 -->
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-xl p-5">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-xl p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/30">6</div>
-                    <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-file-contract text-blue-400 text-sm"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shrink-0 font-black text-white text-sm shadow-lg shadow-blue-600/40">6</div>
+                    <div class="w-8 h-8 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fas fa-file-contract text-blue-400 text-sm icon-rotate"></i>
                     </div>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2">Court-Admissible Forensic Reports</h3>
@@ -339,12 +673,12 @@
             </div>
         </div>
 
-        <!-- Final Step (Highlighted) -->
-        <div class="hover-lift bg-gradient-to-br from-blue-900/30 to-slate-800 border-2 border-blue-500/50 animate-pulse-border rounded-2xl p-6 max-w-3xl mx-auto">
+        <!-- Final Step -->
+        <div class="hover-lift bg-gradient-to-br from-blue-900/40 to-slate-800 border-2 border-blue-500/60 animate-pulse-border rounded-2xl p-6 max-w-3xl mx-auto">
             <div class="flex items-center gap-4 mb-3">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shrink-0 font-black text-white shadow-xl shadow-blue-600/50">7</div>
-                <div class="w-10 h-10 bg-blue-600/30 rounded-xl flex items-center justify-center shrink-0">
-                    <i class="fas fa-gavel text-blue-300 text-lg"></i>
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shrink-0 font-black text-white shadow-xl shadow-blue-600/60">7</div>
+                <div class="w-10 h-10 bg-blue-600/35 rounded-xl flex items-center justify-center shrink-0">
+                    <i class="fas fa-gavel text-blue-300 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-xl font-bold text-white">Multi-Jurisdictional Litigation & Recovery</h3>
             </div>
@@ -353,7 +687,7 @@
 
         <div class="text-center mt-12">
             <button onclick="openModal()"
-                    class="group inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-2xl text-base font-black transition-all duration-300 shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1">
+                    class="btn-ripple group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-10 py-4 rounded-2xl text-base font-black transition-all duration-300 shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:-translate-y-1">
                 <i class="fas fa-magnifying-glass-dollar"></i>
                 What Can We Help You Find?
                 <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
@@ -363,17 +697,17 @@
 </section>
 
 <!-- ========== WHO WE ARE ========== -->
-<section id="about" class="py-28 px-6 bg-slate-950">
+<section id="about" class="py-28 px-6 bg-slate-950 fade-in-section">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-16 items-start">
-            <!-- Sticky Image - Square -->
+            <!-- Sticky Image -->
             <div class="lg:w-2/5 shrink-0 w-full">
                 <div class="sticky top-24">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl glow-blue">
                         <img src="img/a1.webp" alt="Our Team" class="w-full aspect-[1/1] object-cover"/>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
                     </div>
-                    <div class="absolute -bottom-5 -right-5 bg-blue-600 text-white p-6 rounded-2xl shadow-2xl shadow-blue-600/40 hidden md:block">
+                    <div class="absolute -bottom-5 -right-5 bg-gradient-to-br from-blue-600 to-blue-700 text-white p-6 rounded-2xl shadow-2xl shadow-blue-600/50 hidden md:block">
                         <p class="text-4xl font-black">20+</p>
                         <p class="text-blue-100 text-sm font-medium mt-1">Years of Legal<br>Excellence</p>
                     </div>
@@ -386,7 +720,7 @@
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Who We Are</h2>
                 <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mb-10"></div>
 
-                <p class="text-xl text-slate-200 font-medium leading-relaxed mb-8 border-l-4 border-blue-600 pl-6">
+                <p class="text-xl text-slate-200 font-medium leading-relaxed mb-8 border-l-4 border-blue-600 pl-6 hover-lift">
                     Our exceptional team members include lawyers who have served as ambassadors and members of Congress, representing the U.S. Department of Justice, Securities and Exchange Commission (SEC), Treasury, IRS, and other government agencies.
                 </p>
 
@@ -399,20 +733,20 @@
 
                 <!-- Feature Pills -->
                 <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="flex items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <i class="fas fa-shield-halved text-blue-400"></i>
+                    <div class="flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <i class="fas fa-shield-halved text-blue-400 icon-rotate"></i>
                         <span class="text-slate-200 text-sm font-medium">DOJ & SEC Alumni</span>
                     </div>
-                    <div class="flex items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <i class="fas fa-globe text-blue-400"></i>
+                    <div class="flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <i class="fas fa-globe text-blue-400 icon-rotate"></i>
                         <span class="text-slate-200 text-sm font-medium">Multi-Language Capability</span>
                     </div>
-                    <div class="flex items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <i class="fas fa-landmark text-blue-400"></i>
+                    <div class="flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <i class="fas fa-landmark text-blue-400 icon-rotate"></i>
                         <span class="text-slate-200 text-sm font-medium">Congressional Experience</span>
                     </div>
-                    <div class="flex items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <i class="fas fa-link text-blue-400"></i>
+                    <div class="flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <i class="fas fa-link text-blue-400 icon-rotate"></i>
                         <span class="text-slate-200 text-sm font-medium">Blockchain Forensics</span>
                     </div>
                 </div>
@@ -422,7 +756,7 @@
 </section>
 
 <!-- ========== PROBLEMS WE SOLVE ========== -->
-<section class="py-28 px-6 bg-slate-900">
+<section class="py-28 px-6 bg-slate-900 fade-in-section">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Challenges We Address</p>
@@ -431,51 +765,51 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-triangle-exclamation text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-triangle-exclamation text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Ponzi Schemes & Crypto Hedge Fund Fraud</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Complex investment fraud including cryptocurrency Ponzi structures and fraudulent fund operations.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-building-columns text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-building-columns text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Offshore Trusts & Multi-Layer Corporate Structures</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Assets concealed through complex offshore trusts and multi-layered shell company arrangements.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fab fa-bitcoin text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fab fa-bitcoin text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Exchange & Cold Wallet Asset Transfers</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Crypto transferred through exchange accounts and cold wallets requiring specialized blockchain forensics.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-scale-balanced text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-scale-balanced text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Cross-Border Judgment Enforcement Difficulties</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Challenges enforcing judgments across jurisdictions where legal cooperation varies significantly.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-lock text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-lock text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Bank Secrecy & Data Protection Regulations</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Legal obstacles from banking secrecy laws and GDPR data protection regulations blocking evidence gathering.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-eye-slash text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-eye-slash text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Blockchain Privacy Protocol Tracing Challenges</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Tracing difficulties caused by privacy protocols, zero-knowledge proofs, and advanced obfuscation technologies.</p>
             </div>
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-red-500/40 rounded-2xl p-6 group md:col-span-2 lg:col-span-1">
-                <div class="w-11 h-11 bg-red-500/10 group-hover:bg-red-500/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                    <i class="fas fa-gavel text-red-400 text-lg"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-red-500/50 rounded-2xl p-6 group md:col-span-2 lg:col-span-1">
+                <div class="w-11 h-11 bg-red-500/15 group-hover:bg-red-500/25 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <i class="fas fa-gavel text-red-400 text-lg icon-rotate"></i>
                 </div>
                 <h3 class="text-base font-bold text-white mb-2 leading-snug">Bankruptcy & Multi-Jurisdictional Conflict Procedures</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Complex intersections between bankruptcy liquidation proceedings and conflicting procedures across multiple jurisdictions.</p>
@@ -485,7 +819,7 @@
 </section>
 
 <!-- ========== CORE CAPABILITIES ========== -->
-<section id="capabilities" class="py-28 px-6 bg-slate-950">
+<section id="capabilities" class="py-28 px-6 bg-slate-950 fade-in-section">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">What We Do Best</p>
@@ -496,9 +830,9 @@
         <div class="grid lg:grid-cols-2 gap-6">
 
             <!-- Cap 1 -->
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-3xl p-8 group">
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
-                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
                         <i class="fas fa-link text-white text-xl"></i>
                     </div>
                     <div>
@@ -516,9 +850,9 @@
             </div>
 
             <!-- Cap 2 -->
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-3xl p-8 group">
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
-                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
                         <i class="fas fa-snowflake text-white text-xl"></i>
                     </div>
                     <div>
@@ -542,9 +876,9 @@
             </div>
 
             <!-- Cap 3 -->
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-3xl p-8 group">
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
-                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
                         <i class="fas fa-layer-group text-white text-xl"></i>
                     </div>
                     <div>
@@ -563,9 +897,9 @@
             </div>
 
             <!-- Cap 4 -->
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-3xl p-8 group">
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-3xl p-8 group">
                 <div class="flex items-start gap-5 mb-7">
-                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/40 group-hover:scale-110 transition-transform">
                         <i class="fas fa-earth-americas text-white text-xl"></i>
                     </div>
                     <div>
@@ -587,7 +921,7 @@
 </section>
 
 <!-- ========== REPRESENTATIVE CASES ========== -->
-<section id="cases" class="py-28 px-6 bg-slate-900 relative overflow-hidden">
+<section id="cases" class="py-28 px-6 bg-slate-900 relative overflow-hidden fade-in-section">
     <div class="absolute inset-0">
         <img src="img/a2.jpg" alt="" class="w-full h-full object-cover opacity-[0.04]"/>
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
@@ -602,19 +936,19 @@
 
         <!-- Stats Banner -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
-            <div class="bg-blue-600 rounded-2xl p-6 text-center shadow-xl shadow-blue-600/20">
+            <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-center shadow-2xl shadow-blue-600/30 hover-lift">
                 <p class="text-4xl font-black text-white">$1B+</p>
                 <p class="text-blue-100 text-xs mt-2 font-medium uppercase tracking-wider">Total Recovered</p>
             </div>
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 text-center">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 text-center hover-lift">
                 <p class="text-4xl font-black text-blue-400">8</p>
                 <p class="text-slate-300 text-xs mt-2 font-medium uppercase tracking-wider">Major Cases</p>
             </div>
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 text-center">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 text-center hover-lift">
                 <p class="text-4xl font-black text-blue-400">20+</p>
                 <p class="text-slate-300 text-xs mt-2 font-medium uppercase tracking-wider">Jurisdictions</p>
             </div>
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 text-center">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 text-center hover-lift">
                 <p class="text-4xl font-black text-blue-400">100%</p>
                 <p class="text-slate-300 text-xs mt-2 font-medium uppercase tracking-wider">Legal Compliance</p>
             </div>
@@ -622,7 +956,7 @@
 
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 01</span>
                     <span class="text-xl font-black text-blue-400">$90M</span>
@@ -631,7 +965,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Represented court-appointed receiver, traced and recovered crypto assets across Australia, Cayman, China, UK, and USA via on-chain forensic analysis.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/40 border border-blue-500/30 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/50 border border-blue-500/40 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 02</span>
                     <span class="text-xl font-black text-blue-400">$860M+</span>
@@ -640,7 +974,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Filed suits against multiple crypto hedge funds. Penetrated complex offshore trusts and blockchain structures across Bermuda, BVI, Cayman, Switzerland, UK, and USA.</p>
             </div>
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 03</span>
                     <span class="text-xl font-black text-blue-400">$500M+</span>
@@ -649,7 +983,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Froze assets across multiple European countries including crypto accounts. Ran parallel litigation to recover losses from a Cayman-connected fund fraud scheme.</p>
             </div>
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 04</span>
                     <span class="text-xl font-black text-blue-400">$1.05B</span>
@@ -658,7 +992,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Employed Hague Convention cross-border evidence gathering. Overcame bank secrecy and GDPR obstacles. Recovered $1.05B through a series of settlements.</p>
             </div>
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 05</span>
                     <span class="text-xl font-black text-blue-400">$180M</span>
@@ -667,7 +1001,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Enforced $180M New York judgment internationally. Froze $61M in Gibraltar and Switzerland. Recovered crypto and returned it to U.S. courts.</p>
             </div>
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 06</span>
                     <span class="text-xl font-black text-blue-400">$79M</span>
@@ -676,7 +1010,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Secured $79M summary judgment in crypto fraud case. Enforced across multiple American countries, handling complex multi-jurisdiction liquidation conflicts.</p>
             </div>
 
-            <div class="hover-lift bg-slate-800 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 07</span>
                     <span class="text-xl font-black text-blue-400">~$100M</span>
@@ -685,7 +1019,7 @@
                 <p class="text-slate-300 text-sm leading-relaxed">Traced $120M in hidden assets. Discovered crypto wallets in Switzerland and USA. Achieved a settlement of nearly $100M for the client.</p>
             </div>
 
-            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/40 border border-blue-500/30 rounded-2xl p-6">
+            <div class="hover-lift bg-gradient-to-br from-slate-800 to-blue-950/50 border border-blue-500/40 rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-4">
                     <span class="tag-pill">CASE 08</span>
                     <span class="text-xl font-black text-blue-400">Billions</span>
@@ -699,7 +1033,7 @@
 </section>
 
 <!-- ========== WHY US ========== -->
-<section class="py-28 px-6 bg-slate-950">
+<section class="py-28 px-6 bg-slate-950 fade-in-section">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Our Advantage</p>
@@ -707,44 +1041,44 @@
             <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-microscope text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-microscope text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">Cutting-Edge Blockchain Forensics</h3>
                 <p class="text-slate-300 text-base leading-relaxed">We combine proprietary software with industry-leading tools to trace assets across every blockchain network, no matter how obfuscated.</p>
             </div>
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-user-shield text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-user-shield text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">Former Government Officials</h3>
                 <p class="text-slate-300 text-base leading-relaxed">Our attorneys previously served at the DOJ, SEC, IRS, and Treasury, giving us unparalleled insight into investigative and enforcement strategies.</p>
             </div>
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-globe-americas text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-globe-americas text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">True Global Reach</h3>
                 <p class="text-slate-300 text-base leading-relaxed">We have successfully operated in 20+ jurisdictions, with established relationships with courts, regulators, and exchanges worldwide.</p>
             </div>
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-language text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-language text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">Multilingual Capability</h3>
                 <p class="text-slate-300 text-base leading-relaxed">We investigate in the native languages of fraudsters, enabling us to uncover critical evidence faster and more accurately than any competitor.</p>
             </div>
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-chart-line text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">Proven Billion-Dollar Track Record</h3>
                 <p class="text-slate-300 text-base leading-relaxed">Our results speak for themselves — over $1 billion in recovered assets across some of the most complex crypto fraud cases of the last decade.</p>
             </div>
-            <div class="hover-lift bg-slate-900 border border-slate-700 hover:border-blue-500/40 rounded-2xl p-8 text-center group">
-                <div class="w-14 h-14 bg-blue-600/15 group-hover:bg-blue-600/25 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
-                    <i class="fas fa-lock-open text-blue-400 text-xl"></i>
+            <div class="hover-lift bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-8 text-center group">
+                <div class="w-14 h-14 bg-blue-600/20 group-hover:bg-blue-600/30 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors">
+                    <i class="fas fa-lock-open text-blue-400 text-xl icon-rotate"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">End-to-End Service</h3>
                 <p class="text-slate-300 text-base leading-relaxed">From initial tracing to final recovery, we handle every aspect of your case — forensics, legal strategy, and courtroom execution — under one roof.</p>
@@ -754,7 +1088,7 @@
 </section>
 
 <!-- ========== WHO WE SERVE ========== -->
-<section class="py-28 px-6 bg-slate-900 relative overflow-hidden">
+<section class="py-28 px-6 bg-slate-900 relative overflow-hidden fade-in-section">
     <div class="absolute inset-0">
         <img src="img/a1.webp" alt="" class="w-full h-full object-cover opacity-[0.06]"/>
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
@@ -769,36 +1103,36 @@
                 <p class="text-slate-300 leading-relaxed mb-10 text-base">We work with a diverse range of clients facing complex digital asset recovery challenges — from institutional investors to individual high-net-worth clients dealing with fraud and misappropriation.</p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-user-tie text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-user-tie text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Court-Appointed Receivers</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-balance-scale text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-balance-scale text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Liquidators</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-file-invoice text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-file-invoice text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Bankruptcy Administrators</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-landmark-dome text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-landmark-dome text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Sovereign Wealth Funds</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-chart-pie text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-chart-pie text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Investment Funds</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-shield-halved text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-shield-halved text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Fraud Victim Institutions</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-gem text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-gem text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">High Net Worth Individuals</span>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-xl p-4 hover-lift">
-                        <div class="w-9 h-9 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-briefcase text-blue-400 text-sm"></i></div>
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 rounded-xl p-4 hover-lift">
+                        <div class="w-9 h-9 bg-blue-600/25 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-briefcase text-blue-400 text-sm icon-rotate"></i></div>
                         <span class="text-slate-200 font-medium text-sm">Cross-Border Legal Teams</span>
                     </div>
                 </div>
@@ -809,7 +1143,7 @@
                     <img src="img/a3.jpg" alt="Who We Serve" class="w-full aspect-[4/3] object-cover"/>
                     <div class="absolute inset-0 bg-gradient-to-tr from-slate-900/70 via-transparent to-transparent"></div>
                 </div>
-                <div class="absolute -bottom-6 -left-6 bg-blue-600 p-6 rounded-2xl shadow-2xl shadow-blue-600/30 hidden md:block">
+                <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl shadow-2xl shadow-blue-600/40 hidden md:block">
                     <p class="text-3xl font-black text-white">$1B+</p>
                     <p class="text-blue-100 text-xs mt-1 font-medium">Successfully<br>Recovered</p>
                 </div>
@@ -819,7 +1153,7 @@
 </section>
 
 <!-- ========== TEAM CAROUSEL ========== -->
-<section id="team" class="py-28 bg-slate-950 overflow-hidden">
+<section id="team" class="py-28 bg-slate-950 overflow-hidden fade-in-section">
     <div class="max-w-7xl mx-auto px-6 text-center mb-16">
         <p class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-4">Elite Professionals</p>
         <h2 class="text-3xl md:text-4xl font-black text-white">Our Expert Team</h2>
@@ -830,63 +1164,63 @@
     <div class="marquee-wrapper py-4">
         <div class="marquee-content">
             <!-- Set 1 -->
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Senior Counsel</p><p class="text-blue-400 text-xs">Blockchain Forensics</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/4.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/4.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Managing Partner</p><p class="text-blue-400 text-xs">International Recovery</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/3.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/3.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Lead Investigator</p><p class="text-blue-400 text-xs">Cross-Border Litigation</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/2.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/2.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Senior Associate</p><p class="text-blue-400 text-xs">Digital Asset Specialist</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/1.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/1.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Partner</p><p class="text-blue-400 text-xs">Fraud Investigation</p></div>
                 </div>
             </div>
-            <!-- Set 2 (duplicate for seamless loop) -->
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <!-- Set 2 (duplicate) -->
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/5.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Senior Counsel</p><p class="text-blue-400 text-xs">Blockchain Forensics</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/4.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/4.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Managing Partner</p><p class="text-blue-400 text-xs">International Recovery</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/3.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/3.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Lead Investigator</p><p class="text-blue-400 text-xs">Cross-Border Litigation</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/2.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/2.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Senior Associate</p><p class="text-blue-400 text-xs">Digital Asset Specialist</p></div>
                 </div>
             </div>
-            <div style="width:300px;height:360px;" class="shrink-0 relative rounded-2xl overflow-hidden group bg-slate-800 border border-slate-700/60">
-                <img src="https://www.yud819ad.site/uswq/img/1.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Team Member">
+            <div style="width:300px;height:360px;" class="team-card shrink-0 relative rounded-2xl overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60">
+                <img src="https://www.yud819ad.site/uswq/img/1.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Team Member">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                     <div><p class="text-white font-bold text-sm">Partner</p><p class="text-blue-400 text-xs">Fraud Investigation</p></div>
                 </div>
@@ -896,13 +1230,13 @@
 </section>
 
 <!-- ========== FINAL CTA ========== -->
-<section class="py-28 px-6 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 relative overflow-hidden">
-    <div class="absolute inset-0 grid-bg opacity-[0.04]"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+<section class="py-28 px-6 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 relative overflow-hidden fade-in-section">
+    <div class="absolute inset-0 grid-bg opacity-[0.06]"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="relative max-w-3xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 bg-blue-600/15 border border-blue-500/30 rounded-full px-5 py-2.5 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider">
-            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+    <div class="relative max-w-3xl mx-auto text-center cta-pulse">
+        <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/40 rounded-full px-5 py-2.5 text-blue-300 text-xs font-semibold mb-8 uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
             Available 24/7 for Emergency Consultations
         </div>
 
@@ -915,7 +1249,7 @@
         </p>
 
         <button onclick="openModal()"
-                class="group inline-flex items-center gap-4 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-12 py-5 rounded-2xl text-xl font-black transition-all duration-300 shadow-2xl shadow-blue-600/40 hover:shadow-blue-600/60 hover:-translate-y-2">
+                class="btn-ripple group inline-flex items-center gap-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 active:bg-blue-800 text-white px-12 py-5 rounded-2xl text-xl font-black transition-all duration-300 shadow-2xl shadow-blue-600/50 hover:shadow-blue-600/70 hover:-translate-y-2">
             <i class="fas fa-headset text-xl"></i>
             Contact Us Now
             <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
@@ -931,7 +1265,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <div class="text-center md:text-left">
                 <div class="flex items-center gap-3 justify-center md:justify-start mb-5">
-                    <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/30">
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/40">
                         <i class="fas fa-shield-halved text-white text-sm"></i>
                     </div>
                     <span class="text-lg font-black text-white tracking-tight">Asset<span class="text-blue-400">Recovery®</span></span>
@@ -939,10 +1273,10 @@
                 <p class="text-slate-500 text-sm leading-relaxed max-w-md">Global leaders in digital asset tracing, blockchain forensics, and multi-jurisdictional asset recovery. Protecting your financial future in the blockchain era.</p>
             </div>
             <div class="flex gap-3">
-                <a href="javascript:void(0)" onclick="m1()" class="w-10 h-10 bg-slate-800 hover:bg-green-600 border border-slate-700 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200">
+                <a href="javascript:void(0)" onclick="m1()" class="w-10 h-10 bg-slate-800 hover:bg-green-600 border border-slate-700 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 hover:scale-110">
                     <i class="fab fa-whatsapp text-base"></i>
                 </a>
-                <a href="javascript:void(0)" onclick="m2()" class="w-10 h-10 bg-slate-800 hover:bg-blue-600 border border-slate-700 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200">
+                <a href="javascript:void(0)" onclick="m2()" class="w-10 h-10 bg-slate-800 hover:bg-blue-600 border border-slate-700 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 hover:scale-110">
                     <i class="fab fa-telegram text-base"></i>
                 </a>
             </div>
@@ -965,12 +1299,12 @@
         window.open('https://wa.me/12123', '_blank');
     }
 
-    // m2 method - Telegram (redirecting to qq.com as requested)
+    // m2 method - Telegram
     function m2() {
         window.open('https://www.qq.com', '_blank');
     }
 
-    // k2 method — contact platform selection modal
+    // Modal controls
     function openModal() {
         const modal = document.getElementById('contactModal');
         modal.classList.remove('hidden');
@@ -1005,8 +1339,41 @@
             }
         });
     });
-</script>
 
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v67327c56f0bb4ef8b305cae61679db8f1769101564043" integrity="sha512-rdcWY47ByXd76cbCFzznIcEaCN71jqkWBBqlwhF1SY7KubdLKZiEGeP7AyieKZlGP9hbY/MhGrwXzJC/HulNyg==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            navbar.classList.remove('navbar-scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+
+    // Intersection Observer for fade-in sections
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+ 
 </body>
 </html>
