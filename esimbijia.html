@@ -295,13 +295,21 @@
         }
         .floating-btn-primary {
             flex: 1;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
             padding: 14px 10px; background: linear-gradient(135deg, #6366f1, #a855f7);
             color: #fff; border: none; border-radius: 14px;
             font-size: 14px; font-weight: 700; cursor: pointer;
             font-family: inherit; box-shadow: 0 8px 32px rgba(99,102,241,0.4);
             animation: breathing 3s ease-in-out infinite;
-            white-space: nowrap;
+            white-space: nowrap; position: relative; overflow: hidden;
+        }
+        .floating-btn-primary .btn-off-badge {
+            padding: 2px 6px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
         .floating-btn-secondary {
             flex: 1;
@@ -439,8 +447,8 @@
 <div class="scroll-indicator" id="scrollIndicator"></div>
 <div class="toast" id="toast">✅ Code copied to clipboard</div>
 
-<!-- Bottom Sheet Modal -->
-<div class="modal-overlay" id="compareModal" onclick="closeModal(event)">
+<!-- Bottom Sheet Modal: Compare -->
+<div class="modal-overlay" id="compareModal" onclick="closeModal(event, 'compareModal')">
     <div class="modal-sheet">
         <div class="modal-handle"></div>
         <div class="modal-icon"><i class="fab fa-apple"></i></div>
@@ -448,7 +456,21 @@
         <div class="modal-desc">We're taking you to the App Store to compare plans and find the best price for your destination.</div>
         <div class="modal-countdown">
             <div class="modal-spinner"></div>
-            <span id="countdownText">Redirecting in 2s...</span>
+            <span id="compareCountdown">Redirecting in 2s...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Sheet Modal: View All Plans -->
+<div class="modal-overlay" id="plansModal" onclick="closeModal(event, 'plansModal')">
+    <div class="modal-sheet">
+        <div class="modal-handle"></div>
+        <div class="modal-icon">🌍</div>
+        <div class="modal-title">190+ Destinations Available</div>
+        <div class="modal-desc">Opening the Roami app with all plans and your exclusive 35% OFF discount applied automatically. Don't miss out!</div>
+        <div class="modal-countdown">
+            <div class="modal-spinner"></div>
+            <span id="plansCountdown">Redirecting in 2s...</span>
         </div>
     </div>
 </div>
@@ -904,11 +926,11 @@
 <!-- Floating Mobile CTA -->
 <div class="floating-cta" id="floatingCta">
     <div class="floating-cta-inner">
-        <button class="floating-btn-primary" onclick="k2()">
-            <i class="fas fa-th-large"></i> View All Plans
+        <button class="floating-btn-primary" onclick="showPlansModal()">
+            <i class="fas fa-th-large"></i> View All Plans <span class="btn-off-badge">35% OFF</span>
         </button>
-        <button class="floating-btn-secondary" onclick="m2()">
-            <i class="fas fa-balance-scale"></i> Compare Prices
+        <button class="floating-btn-secondary" onclick="showCompareModal()">
+            <i class="fas fa-balance-scale"></i> Compare
         </button>
     </div>
 </div>
@@ -918,9 +940,9 @@
         window.open('https://apple.com', '_blank');
     }
 
-    function m2() {
+    function showCompareModal() {
         var modal = document.getElementById('compareModal');
-        var countdownText = document.getElementById('countdownText');
+        var countdownText = document.getElementById('compareCountdown');
         modal.classList.add('show');
         countdownText.textContent = 'Redirecting in 2s...';
 
@@ -937,9 +959,28 @@
         }, 2000);
     }
 
-    function closeModal(event) {
+    function showPlansModal() {
+        var modal = document.getElementById('plansModal');
+        var countdownText = document.getElementById('plansCountdown');
+        modal.classList.add('show');
+        countdownText.textContent = 'Redirecting in 2s...';
+
+        setTimeout(function() {
+            countdownText.textContent = 'Redirecting in 1s...';
+        }, 1000);
+
+        setTimeout(function() {
+            countdownText.textContent = 'Redirecting now...';
+            window.open('https://apple.com', '_blank');
+            setTimeout(function() {
+                modal.classList.remove('show');
+            }, 400);
+        }, 2000);
+    }
+
+    function closeModal(event, modalId) {
         if (event.target === event.currentTarget) {
-            document.getElementById('compareModal').classList.remove('show');
+            document.getElementById(modalId).classList.remove('show');
         }
     }
 
