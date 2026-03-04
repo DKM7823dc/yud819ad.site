@@ -164,36 +164,51 @@
         .package-card {
             background: #fafafa; border: 1px solid #f0f0f0; border-radius: 18px;
             padding: 20px; transition: all 0.3s; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
         }
         .package-card:hover {
             border-color: #d4d0ff; background: #faf8ff;
             transform: translateY(-4px); box-shadow: 0 16px 40px rgba(99,102,241,0.1);
         }
+        .package-card:has(.popular-tag) .flag-region {
+            padding-right: 70px;
+        }
         .popular-tag {
             position: absolute; top: 12px; right: 12px;
             padding: 3px 10px; background: linear-gradient(135deg, #6366f1, #a855f7);
             color: #fff; border-radius: 50px; font-size: 10px; font-weight: 700;
+            white-space: nowrap; z-index: 2;
         }
-        .flag-region { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-        .flag-emoji { font-size: 34px; line-height: 1; }
-        .region-info h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 1px; }
-        .region-info .tag { font-size: 11px; color: #a855f7; font-weight: 500; }
+        .flag-region { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; min-width: 0; }
+        .flag-emoji { font-size: 34px; line-height: 1; flex-shrink: 0; }
+        .region-info { min-width: 0; flex: 1; }
+        .region-info h3 {
+            font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 1px;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .region-info .tag {
+            font-size: 11px; color: #a855f7; font-weight: 500;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            display: block;
+        }
 
         .package-features { margin-bottom: 12px; }
         .package-features li {
             display: flex; align-items: center; gap: 8px;
             padding: 3px 0; font-size: 12px; color: #6b7280; list-style: none;
         }
-        .package-features li i { color: #22c55e; font-size: 10px; }
+        .package-features li i { color: #22c55e; font-size: 10px; flex-shrink: 0; }
+
+        .card-bottom { margin-top: auto; }
 
         .price-row {
-            display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px;
+            display: flex; align-items: baseline; gap: 6px; margin-bottom: 14px;
         }
         .price-now {
             font-size: 28px; font-weight: 900; color: #1a1a2e; letter-spacing: -1px;
         }
-        .price-from {
-            font-size: 13px; color: #9ca3af; font-weight: 500;
+        .price-unit {
+            font-size: 12px; color: #9ca3af; font-weight: 500;
         }
 
         .pkg-btn {
@@ -346,12 +361,18 @@
 
         /* Toast */
         .toast {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px);
+            position: fixed; bottom: 100px; left: 50%;
+            transform: translateX(-50%) translateY(40px);
             background: #1a1a2e; color: #fff; padding: 12px 24px;
             border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 9999;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events: none;
+            pointer-events: none;
+            opacity: 0; visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast.show {
+            opacity: 1; visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
 
         /* Scroll Indicator */
         .scroll-indicator {
@@ -387,11 +408,13 @@
             .region-info .tag { font-size: 10px; }
             .package-features { display: none; }
             .price-now { font-size: 22px; }
-            .price-from { font-size: 11px; }
+            .price-unit { font-size: 10px; }
             .price-row { margin-bottom: 10px; }
             .pkg-btn { padding: 10px 8px; border-radius: 10px; font-size: 12px; gap: 5px; }
             .pkg-btn .fa-apple { font-size: 14px; }
             .popular-tag { font-size: 9px; padding: 2px 7px; top: 8px; right: 8px; }
+            .package-card:has(.popular-tag) .flag-region { padding-right: 0; }
+            .package-card:has(.popular-tag) { padding-top: 30px; }
             .reviews { padding: 28px 0; }
             .reviews-grid { grid-template-columns: 1fr; gap: 10px; }
             .review-card { padding: 18px; }
@@ -501,7 +524,6 @@
         <p class="section-desc fade-in">190+ countries covered · Use code <strong>esim35</strong> for 35% off</p>
         <div class="packages-grid">
 
-            <!-- USA -->
             <div class="package-card fade-in">
                 <span class="popular-tag">🔥 Popular</span>
                 <div class="flag-region">
@@ -516,16 +538,17 @@
                     <li><i class="fas fa-check"></i> Coverage in All 50 States</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- China -->
             <div class="package-card fade-in">
                 <span class="popular-tag">🔥 Popular</span>
                 <div class="flag-region">
@@ -540,16 +563,17 @@
                     <li><i class="fas fa-check"></i> Mainland Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- UK -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇬🇧</span>
@@ -563,22 +587,23 @@
                     <li><i class="fas fa-check"></i> Full UK Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Turkey -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇹🇷</span>
                     <div class="region-info">
                         <h3>Turkey</h3>
-                        <span class="tag">Turkcell / Vodafone TR</span>
+                        <span class="tag">Turkcell / Vodafone</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -586,22 +611,23 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Germany -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇩🇪</span>
                     <div class="region-info">
                         <h3>Germany</h3>
-                        <span class="tag">Telekom / Vodafone DE</span>
+                        <span class="tag">Telekom / Vodafone</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -609,22 +635,23 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- France -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇫🇷</span>
                     <div class="region-info">
                         <h3>France</h3>
-                        <span class="tag">Orange / SFR / Bouygues</span>
+                        <span class="tag">Orange / SFR</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -632,22 +659,23 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Spain -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇪🇸</span>
                     <div class="region-info">
                         <h3>Spain</h3>
-                        <span class="tag">Movistar / Vodafone ES</span>
+                        <span class="tag">Movistar / Vodafone</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -655,22 +683,23 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Hong Kong -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇭🇰</span>
                     <div class="region-info">
                         <h3>Hong Kong</h3>
-                        <span class="tag">CSL / 3HK / SmarTone</span>
+                        <span class="tag">CSL / 3HK</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -678,16 +707,17 @@
                     <li><i class="fas fa-check"></i> Full Territory Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Europe -->
             <div class="package-card fade-in">
                 <span class="popular-tag">⭐ Best Value</span>
                 <div class="flag-region">
@@ -702,22 +732,23 @@
                     <li><i class="fas fa-check"></i> 30+ Countries Covered</li>
                     <li><i class="fas fa-check"></i> One Plan, Multi-Country</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Mexico -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇲🇽</span>
                     <div class="region-info">
                         <h3>Mexico</h3>
-                        <span class="tag">Telcel / Movistar MX</span>
+                        <span class="tag">Telcel / Movistar</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -725,16 +756,17 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Canada -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇨🇦</span>
@@ -748,22 +780,23 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
-            <!-- Japan -->
             <div class="package-card fade-in">
                 <div class="flag-region">
                     <span class="flag-emoji">🇯🇵</span>
                     <div class="region-info">
                         <h3>Japan</h3>
-                        <span class="tag">NTT Docomo / SoftBank</span>
+                        <span class="tag">Docomo / SoftBank</span>
                     </div>
                 </div>
                 <ul class="package-features">
@@ -771,13 +804,15 @@
                     <li><i class="fas fa-check"></i> Full Country Coverage</li>
                     <li><i class="fas fa-check"></i> Instant Activation</li>
                 </ul>
-                <div class="price-row">
-                    <span class="price-now">$1.99</span>
-                    <span class="price-from">/ starts from</span>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">from</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Get eSIM
+                    </button>
                 </div>
-                <button class="pkg-btn" onclick="k2()">
-                    <i class="fab fa-apple"></i> Get eSIM
-                </button>
             </div>
 
         </div>
