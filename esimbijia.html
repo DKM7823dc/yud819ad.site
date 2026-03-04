@@ -296,27 +296,34 @@
         .floating-btn-primary {
             flex: 1;
             display: flex; align-items: center; justify-content: center; gap: 6px;
-            padding: 14px 10px; background: linear-gradient(135deg, #6366f1, #a855f7);
+            padding: 12px 10px; background: linear-gradient(135deg, #6366f1, #a855f7);
             color: #fff; border: none; border-radius: 14px;
-            font-size: 14px; font-weight: 700; cursor: pointer;
+            font-size: 13px; font-weight: 700; cursor: pointer;
             font-family: inherit; box-shadow: 0 8px 32px rgba(99,102,241,0.4);
             animation: breathing 3s ease-in-out infinite;
-            white-space: nowrap; position: relative; overflow: hidden;
+            position: relative; overflow: hidden;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+        .floating-btn-primary .btn-text {
+            display: flex; align-items: center; gap: 6px;
+            white-space: nowrap;
         }
         .floating-btn-primary .btn-off-badge {
-            padding: 2px 6px;
+            padding: 2px 8px;
             background: rgba(255,255,255,0.25);
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
         .floating-btn-secondary {
-            flex: 1;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 10px; background: #fff;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 12px 14px; background: #fff;
             color: #1a1a2e; border: 2px solid #e5e7eb; border-radius: 14px;
-            font-size: 14px; font-weight: 700; cursor: pointer;
+            font-size: 13px; font-weight: 700; cursor: pointer;
             font-family: inherit; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             white-space: nowrap;
         }
@@ -435,8 +442,8 @@
             .final-cta .urgency-final { font-size: 12px; padding: 6px 14px; }
             footer { padding: 28px 0 100px; }
             .section-desc { margin-bottom: 24px; }
-            .floating-btn-primary { font-size: 13px; padding: 13px 8px; }
-            .floating-btn-secondary { font-size: 13px; padding: 13px 8px; }
+            .floating-btn-primary { font-size: 12px; padding: 10px 8px; }
+            .floating-btn-secondary { font-size: 12px; padding: 10px 12px; }
         }
 
         @media (min-width: 641px) and (max-width: 768px) {
@@ -941,7 +948,8 @@
 <div class="floating-cta" id="floatingCta">
     <div class="floating-cta-inner">
         <button class="floating-btn-primary" onclick="showPlansModal()">
-            <i class="fas fa-th-large"></i> View All Plans <span class="btn-off-badge">35% OFF</span>
+            <span class="btn-text"><i class="fas fa-th-large"></i> View All Plans</span>
+            <span class="btn-off-badge">35% OFF</span>
         </button>
         <button class="floating-btn-secondary" onclick="showCompareModal()">
             <i class="fas fa-balance-scale"></i> Compare
