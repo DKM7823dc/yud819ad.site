@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>새로운 친구와 연결하기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pink: {
+                            light: '#FF70E5',
+                            DEFAULT: '#FF2ED2',
+                            dark: '#D800AA',
+                        },
+                        blue: {
+                            light: '#70B8FF',
+                            DEFAULT: '#2E8AFF',
+                            dark: '#0066E0',
+                        },
+                        teal: '#00EEFF',
+                        yellow: '#FFDD00',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite',
+                        'color-shift': 'colorShift 10s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(255, 46, 210, 0.8), 0 0 30px rgba(255, 46, 210, 0.6)' },
+                            '50%': { boxShadow: '0 0 25px rgba(46, 138, 255, 0.8), 0 0 40px rgba(46, 138, 255, 0.6)' },
+                        },
+                        colorShift: {
+                            '0%, 100%': { borderColor: '#FF2ED2' },
+                            '50%': { borderColor: '#2E8AFF' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #020E20 0%, #051A36 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            background-image:
+                radial-gradient(#FF2ED2 1px, transparent 1px),
+                radial-gradient(#2E8AFF 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.1;
+        }
+
+        .neon-text-blue {
+            text-shadow:
+                0 0 5px rgba(46, 138, 255, 0.8),
+                0 0 10px rgba(46, 138, 255, 0.5),
+                0 0 15px rgba(46, 138, 255, 0.3);
+        }
+
+        .neon-text-pink {
+            text-shadow:
+                0 0 5px rgba(255, 46, 210, 0.8),
+                0 0 10px rgba(255, 46, 210, 0.5),
+                0 0 15px rgba(255, 46, 210, 0.3);
+        }
+
+        .image-glow {
+            box-shadow:
+                0 0 15px rgba(255, 46, 210, 0.5),
+                0 0 30px rgba(46, 138, 255, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(5, 26, 54, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 46, 210, 0.2);
+            box-shadow: 0 8px 32px rgba(46, 138, 255, 0.15);
+        }
+
+        .glass-card-alt {
+            background: rgba(10, 30, 60, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(46, 138, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 46, 210, 0.1);
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: inherit;
+        }
+
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, #FF2ED2, #2E8AFF, #00EEFF, #FF2ED2);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-neon {
+            background: linear-gradient(90deg, #FF2ED2, #2E8AFF);
+            border: none;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 0 10px rgba(255, 46, 210, 0.8),
+                0 0 20px rgba(46, 138, 255, 0.4);
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, #2E8AFF, #00EEFF);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn-neon:hover::before { opacity: 1; }
+
+        .btn-neon-outline {
+            background: transparent;
+            border: 2px solid;
+            border-image: linear-gradient(90deg, #FF2ED2, #2E8AFF) 1;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon-outline:hover {
+            background: linear-gradient(90deg, rgba(255,46,210,0.15), rgba(46,138,255,0.15));
+            transform: translateY(-2px);
+        }
+
+        .line-icon {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #06C755, #04A847);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            animation: glow-green 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(6, 199, 85, 0.4);
+        }
+
+        @keyframes glow-green {
+            0%, 100% { box-shadow: 0 0 15px rgba(6, 199, 85, 0.6), 0 0 30px rgba(6, 199, 85, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(6, 199, 85, 0.9), 0 0 50px rgba(6, 199, 85, 0.5); }
+        }
+
+        .notification {
+            position: absolute;
+            top: -5px; right: -5px;
+            width: 22px; height: 22px;
+            background-color: #FF2ED2;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid white;
+            box-shadow: 0 0 8px rgba(255, 46, 210, 0.6);
+        }
+
+        .profile-stat {
+            background: linear-gradient(90deg, rgba(255, 46, 210, 0.1), rgba(46, 138, 255, 0.1));
+            border: 1px solid rgba(255, 46, 210, 0.3);
+            border-radius: 9999px;
+            padding: 0.3rem 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 0.5rem;
+        }
+
+        .image-grid > div:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+        .image-grid > div:nth-child(2) { grid-column: 3 / 5; grid-row: 1 / 2; }
+        .image-grid > div:nth-child(3) { grid-column: 3 / 4; grid-row: 2 / 3; }
+        .image-grid > div:nth-child(4) { grid-column: 4 / 5; grid-row: 2 / 3; }
+
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, auto);
+            }
+            .image-grid > div:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 2; }
+            .image-grid > div:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 2; }
+            .image-grid > div:nth-child(3) { grid-column: 1 / 2; grid-row: 2 / 3; }
+            .image-grid > div:nth-child(4) { grid-column: 2 / 3; grid-row: 2 / 3; }
+        }
+
+        /* ===== Hero Section ===== */
+        .hero-section {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: auto;
+                padding-top: 1rem;
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        .hero-avatar-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: conic-gradient(from 0deg, #FF2ED2, #2E8AFF, #00EEFF, #FF2ED2) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .hero-avatar {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        @media (min-width: 769px) {
+            .hero-avatar { width: 220px; height: 220px; }
+        }
+
+        .hero-online-dot {
+            position: absolute;
+            bottom: 8px; right: 8px;
+            width: 18px; height: 18px;
+            background: #06C755;
+            border-radius: 50%;
+            border: 3px solid #051A36;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-fade-1 { animation: heroFadeUp 0.6s 0.1s both; }
+        .hero-fade-2 { animation: heroFadeUp 0.6s 0.25s both; }
+        .hero-fade-3 { animation: heroFadeUp 0.6s 0.4s both; }
+        .hero-fade-4 { animation: heroFadeUp 0.6s 0.55s both; }
+        .hero-fade-5 { animation: heroFadeUp 0.6s 0.7s both; }
+
+        .hero-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.5;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+        }
+
+        /* ===== New: Gallery hover zoom ===== */
+        .gallery-img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-img-wrap img {
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .gallery-img-wrap:hover img {
+            transform: scale(1.08);
+            filter: brightness(1.1);
+        }
+
+        .gallery-img-wrap .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,26,54,0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 0.75rem;
+        }
+
+        .gallery-img-wrap:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* ===== New: Scroll reveal ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== New: Stat counter ===== */
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 1rem;
+            background: rgba(5, 26, 54, 0.6);
+            border: 1px solid rgba(255, 46, 210, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(46, 138, 255, 0.3);
+        }
+
+        /* ===== New: Timeline ===== */
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #FF2ED2, #2E8AFF, #00EEFF);
+        }
+
+        .timeline-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF2ED2, #2E8AFF);
+            position: absolute;
+            left: 15px;
+            top: 4px;
+            box-shadow: 0 0 10px rgba(255, 46, 210, 0.6);
+        }
+
+        /* ===== New: Chat bubble ===== */
+        .chat-bubble {
+            position: relative;
+            background: linear-gradient(135deg, rgba(46, 138, 255, 0.15), rgba(255, 46, 210, 0.1));
+            border: 1px solid rgba(46, 138, 255, 0.25);
+            border-radius: 1rem 1rem 1rem 0.25rem;
+            padding: 1rem 1.25rem;
+            max-width: 85%;
+        }
+
+        .chat-bubble-right {
+            border-radius: 1rem 1rem 0.25rem 1rem;
+            background: linear-gradient(135deg, rgba(255, 46, 210, 0.15), rgba(46, 138, 255, 0.1));
+            border: 1px solid rgba(255, 46, 210, 0.25);
+            margin-left: auto;
+        }
+
+        .chat-typing span {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #2E8AFF;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* ===== Divider ===== */
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #FF2ED2, #2E8AFF, #00EEFF, transparent);
+            margin: 2.5rem 0;
+            opacity: 0.5;
+        }
+
+        /* ===== Marquee ===== */
+        .marquee-track {
+            display: flex;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== Footer wave ===== */
+        .footer-glow {
+            background: radial-gradient(ellipse at center bottom, rgba(255, 46, 210, 0.15) 0%, transparent 70%);
+        }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 1rem;
+            box-shadow: 0 0 40px rgba(255, 46, 210, 0.4), 0 0 80px rgba(46, 138, 255, 0.2);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+        /* Floating hearts */
+        .floating-hearts {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            animation: riseHeart linear forwards;
+            opacity: 0;
+            font-size: 1.2rem;
+        }
+
+        @keyframes riseHeart {
+            0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1) rotate(30deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <!-- Floating Hearts Container -->
+    <div class="floating-hearts" id="hearts-container"></div>
+
+    <!-- LINE Fixed Icon -->
+    <div class="line-icon" onclick="openSite()">
+        <i class="fab fa-line text-white text-3xl"></i>
+        <div class="notification">1</div>
+    </div>
+
+    <div class="relative min-h-screen">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+        <div class="absolute top-20 left-10 w-40 h-40 rounded-full bg-pink-dark/20 blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-blue-dark/20 blur-3xl"></div>
+        <div class="absolute top-1/3 right-1/4 w-32 h-32 rounded-full bg-teal/5 blur-3xl"></div>
+
+        <div class="container mx-auto px-4 py-6 relative z-10">
+            <div class="max-w-4xl mx-auto">
+
+                <!-- ===== Hero Section (Unchanged) ===== -->
+                <div class="hero-section">
+                    <div class="hero-particle" style="width:6px;height:6px;background:#FF2ED2;top:12%;left:8%;animation-delay:0s;"></div>
+                    <div class="hero-particle" style="width:4px;height:4px;background:#2E8AFF;top:25%;right:12%;animation-delay:1.5s;"></div>
+                    <div class="hero-particle" style="width:5px;height:5px;background:#00EEFF;bottom:20%;left:15%;animation-delay:3s;"></div>
+                    <div class="hero-particle" style="width:4px;height:4px;background:#FF70E5;bottom:30%;right:18%;animation-delay:4s;"></div>
+                    <div class="hero-particle" style="width:3px;height:3px;background:#FFDD00;top:40%;left:5%;animation-delay:2s;"></div>
+
+                    <div class="flex flex-col items-center text-center px-2">
+                        <div class="hero-avatar-wrap hero-fade-1 mb-5">
+                            <div class="hero-avatar-ring"></div>
+                            <img src="img/1.jpg" alt="태현 프로필" class="hero-avatar">
+                            <div class="hero-online-dot"></div>
+                        </div>
+
+                        <div class="hero-fade-2 mb-3">
+                            <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                                <span class="bg-gradient-to-r from-pink to-blue text-transparent bg-clip-text">태현</span>
+                            </h1>
+                            <p class="text-gray-400 text-base mt-1">27세 · <span class="text-teal">온라인</span></p>
+                        </div>
+
+                        <p class="hero-fade-3 text-gray-300 text-sm md:text-base max-w-md leading-relaxed mb-4">
+                            저는 여행과 맛있는 음식을 사랑해요. 당신과 제 이야기를 나눌 수 있다면 정말 기쁠 거예요! 삶의 즐거움을 아는 멋진 분이라면, 친구가 되고 싶어요.
+                        </p>
+
+                        <div class="hero-fade-4 flex flex-wrap justify-center mb-6">
+                            <div class="profile-stat">
+                                <i class="fas fa-plane text-blue-light"></i>
+                                <span>여행 애호가</span>
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-utensils text-teal"></i>
+                                <span>미식가</span>
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-book text-yellow"></i>
+                                <span>피트니스</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-fade-5 w-full max-w-xs">
+                            <button onclick="openSite()" class="btn-neon px-6 py-3.5 rounded-full animate-pulse-fast flex items-center justify-center text-lg w-full">
+                                <i class="fab fa-line mr-2 text-xl"></i>
+                                LINE으로 채팅하기
+                            </button>
+                            <p class="text-xs text-gray-500 mt-3">함께 이야기를 나눠요 💬</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Stats Section ===== -->
+                <div class="reveal grid grid-cols-3 gap-3 md:gap-4 mb-8">
+                    <div class="stat-card">
+                        <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink to-blue text-transparent bg-clip-text stat-num" data-target="12">0</div>
+                        <div class="text-xs md:text-sm text-gray-400 mt-1">방문한 나라</div>
+                        <i class="fas fa-globe-asia text-blue-light/40 text-2xl mt-2"></i>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal to-blue text-transparent bg-clip-text stat-num" data-target="365">0</div>
+                        <div class="text-xs md:text-sm text-gray-400 mt-1">피트니스 일수</div>
+                        <i class="fas fa-dumbbell text-teal/40 text-2xl mt-2"></i>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-light to-pink text-transparent bg-clip-text stat-num" data-target="89">0</div>
+                        <div class="text-xs md:text-sm text-gray-400 mt-1">맛집 탐방</div>
+                        <i class="fas fa-utensils text-pink-light/40 text-2xl mt-2"></i>
+                    </div>
+                </div>
+
+                <div class="neon-divider"></div>
+
+                <!-- ===== About Me Section ===== -->
+                <div class="reveal glass-card rounded-2xl p-5 md:p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-circle text-pink"></i>
+                        <span class="neon-text-pink">나에 대해 알아보기</span>
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink/20 to-blue/20 flex items-center justify-center flex-shrink-0 border border-pink/20">
+                                    <i class="fas fa-map-marker-alt text-pink-light"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">위치</div>
+                                    <div class="text-white font-medium">서울, 대한민국</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue/20 to-teal/10 flex items-center justify-center flex-shrink-0 border border-blue/20">
+                                    <i class="fas fa-briefcase text-blue-light"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">직업</div>
+                                    <div class="text-white font-medium">디자이너 & 콘텐츠 크리에이터</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal/20 to-blue/10 flex items-center justify-center flex-shrink-0 border border-teal/30">
+                                    <i class="fas fa-graduation-cap text-teal"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">학력</div>
+                                    <div class="text-white font-medium">서울대학교 시각디자인</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow/20 to-pink/10 flex items-center justify-center flex-shrink-0 border border-yellow/20">
+                                    <i class="fas fa-star text-yellow"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">별자리</div>
+                                    <div class="text-white font-medium">물병자리 ♒</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink/20 to-pink-light/10 flex items-center justify-center flex-shrink-0 border border-pink/20">
+                                    <i class="fas fa-heart text-pink-light"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">MBTI</div>
+                                    <div class="text-white font-medium">ENFP 🌟</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue/20 to-pink/10 flex items-center justify-center flex-shrink-0 border border-blue/20">
+                                    <i class="fas fa-language text-blue-light"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400">언어</div>
+                                    <div class="text-white font-medium">한국어 · 영어 · 일본어</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Chat Preview Section ===== -->
+                <div class="reveal glass-card-alt rounded-2xl p-5 md:p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-comments text-blue"></i>
+                        <span class="neon-text-blue">태현과의 대화 미리보기</span>
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="flex items-end gap-2">
+                            <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                <img src="img/1.jpg" class="w-full h-full object-cover object-top" alt="">
+                            </div>
+                            <div class="chat-bubble">
+                                <p class="text-sm text-gray-200">안녕하세요! 😊 만나서 반가워요. 혹시 여행 좋아하세요?</p>
+                                <p class="text-xs text-gray-500 mt-1">오후 3:24</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end gap-2 justify-end">
+                            <div class="chat-bubble chat-bubble-right">
+                                <p class="text-sm text-gray-200">네! 저도 여행 정말 좋아해요 ✈️</p>
+                                <p class="text-xs text-gray-500 mt-1 text-right">오후 3:25</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end gap-2">
+                            <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                <img src="img/1.jpg" class="w-full h-full object-cover object-top" alt="">
+                            </div>
+                            <div class="chat-bubble">
+                                <p class="text-sm text-gray-200">정말요? 그럼 우리 같이 여행 이야기 많이 해요! 제가 최근에 다녀온 곳이 진짜 예쁘거든요 🌸</p>
+                                <p class="text-xs text-gray-500 mt-1">오후 3:25</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end gap-2">
+                            <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                <img src="img/1.jpg" class="w-full h-full object-cover object-top" alt="">
+                            </div>
+                            <div class="chat-bubble" style="padding: 0.75rem 1.25rem;">
+                                <div class="chat-typing">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <button onclick="openSite()" class="btn-neon px-6 py-3 rounded-full inline-flex items-center text-sm">
+                            <i class="fab fa-line mr-2 text-lg"></i>
+                            대화 계속하기
+                        </button>
+                    </div>
+                </div>
+
+                <div class="neon-divider"></div>
+
+                <!-- ===== Interests / Lifestyle Section ===== -->
+                <div class="reveal mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-sparkles text-teal" style="text-shadow: 0 0 8px rgba(0,238,255,0.5);"></i>
+                        <span class="neon-text-blue">관심사 & 라이프스타일</span>
+                    </h2>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">🌍</div>
+                            <div class="font-semibold text-sm">세계 여행</div>
+                            <div class="text-xs text-gray-400 mt-1">새로운 문화 탐험</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">🍳</div>
+                            <div class="font-semibold text-sm">요리</div>
+                            <div class="text-xs text-gray-400 mt-1">맛있는 음식 만들기</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">💪</div>
+                            <div class="font-semibold text-sm">피트니스</div>
+                            <div class="text-xs text-gray-400 mt-1">건강한 삶 추구</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">📸</div>
+                            <div class="font-semibold text-sm">사진 촬영</div>
+                            <div class="text-xs text-gray-400 mt-1">순간을 담다</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">🎵</div>
+                            <div class="font-semibold text-sm">음악 감상</div>
+                            <div class="text-xs text-gray-400 mt-1">K-POP & 재즈</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300 cursor-default">
+                            <div class="text-3xl mb-2">☕</div>
+                            <div class="font-semibold text-sm">카페 탐방</div>
+                            <div class="text-xs text-gray-400 mt-1">분위기 좋은 곳</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neon-divider"></div>
+
+                <!-- ===== Timeline / Story Section ===== -->
+                <div class="reveal glass-card rounded-2xl p-5 md:p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+                        <i class="fas fa-route text-pink"></i>
+                        <span class="neon-text-pink">나의 이야기</span>
+                    </h2>
+
+                    <div class="relative pl-10 space-y-6">
+                        <div class="timeline-line"></div>
+
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <div class="ml-4">
+                                <div class="text-xs text-teal font-semibold mb-1">최근</div>
+                                <div class="font-medium">🇯🇵 도쿄 여행에서 돌아왔어요</div>
+                                <p class="text-sm text-gray-400 mt-1">시부야의 야경이 정말 아름다웠어요. 라멘도 진짜 맛있었고요!</p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg, #2E8AFF, #00EEFF);"></div>
+                            <div class="ml-4">
+                                <div class="text-xs text-blue-light font-semibold mb-1">3개월 전</div>
+                                <div class="font-medium">💼 새로운 프로젝트 시작</div>
+                                <p class="text-sm text-gray-400 mt-1">프리랜서 디자이너로서 브랜딩 프로젝트를 진행하고 있어요.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg, #00EEFF, #FFDD00);"></div>
+                            <div class="ml-4">
+                                <div class="text-xs text-yellow font-semibold mb-1">6개월 전</div>
+                                <div class="font-medium">🏃‍♂️ 마라톤 완주!</div>
+                                <p class="text-sm text-gray-400 mt-1">서울 마라톤 10km 코스를 완주했어요. 정말 뿌듯했답니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neon-divider"></div>
+
+                <!-- ===== Photo Gallery Section ===== -->
+                <div class="reveal glass-card rounded-2xl p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-3 flex items-center gap-2">
+                        <i class="fas fa-images text-blue"></i>
+                        <span class="neon-text-blue">나의 포토 갤러리</span>
+                    </h2>
+
+                    <div class="image-grid">
+                        <div class="gradient-border rounded-lg gallery-img-wrap cursor-pointer" onclick="openLightbox('img/2.jpg')">
+                            <img src="img/2.jpg" alt="태현 사진 1" class="w-full h-full object-cover">
+                            <div class="gallery-overlay">
+                                <span class="text-xs font-medium"><i class="fas fa-search-plus mr-1"></i>보기</span>
+                            </div>
+                        </div>
+
+                        <div class="gradient-border rounded-lg gallery-img-wrap cursor-pointer" onclick="openLightbox('img/3.jpg')">
+                            <img src="img/3.jpg" alt="태현 사진 2" class="w-full h-full object-cover">
+                            <div class="gallery-overlay">
+                                <span class="text-xs font-medium"><i class="fas fa-search-plus mr-1"></i>보기</span>
+                            </div>
+                        </div>
+
+                        <div class="gradient-border rounded-lg gallery-img-wrap cursor-pointer" onclick="openLightbox('img/4.jpg')">
+                            <img src="img/4.jpg" alt="태현 사진 3" class="w-full h-full object-cover">
+                            <div class="gallery-overlay">
+                                <span class="text-xs font-medium"><i class="fas fa-search-plus mr-1"></i>보기</span>
+                            </div>
+                        </div>
+
+                        <div class="gradient-border rounded-lg gallery-img-wrap cursor-pointer" onclick="openLightbox('img/1.jpg')">
+                            <img src="img/1.jpg" alt="태현 사진 4" class="w-full h-full object-cover">
+                            <div class="gallery-overlay">
+                                <span class="text-xs font-medium"><i class="fas fa-search-plus mr-1"></i>보기</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neon-divider"></div>
+
+                <!-- ===== Compatibility / Ideal Friend Section ===== -->
+                <div class="reveal glass-card-alt rounded-2xl p-5 md:p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-hand-holding-heart text-pink-light"></i>
+                        <span class="neon-text-pink">이런 분을 만나고 싶어요</span>
+                    </h2>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-pink/5 to-transparent border border-pink/10">
+                            <div class="text-2xl">😊</div>
+                            <div>
+                                <div class="font-medium text-sm">긍정적인 에너지를 가진 분</div>
+                                <div class="text-xs text-gray-400">밝은 웃음으로 서로 힘이 되어줄 수 있는 사이</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-blue/5 to-transparent border border-blue/10">
+                            <div class="text-2xl">🎯</div>
+                            <div>
+                                <div class="font-medium text-sm">목표가 있고 열정적인 분</div>
+                                <div class="text-xs text-gray-400">함께 성장하며 꿈을 응원할 수 있는 관계</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-teal/5 to-transparent border border-teal/10">
+                            <div class="text-2xl">💬</div>
+                            <div>
+                                <div class="font-medium text-sm">대화를 즐기는 분</div>
+                                <div class="text-xs text-gray-400">일상의 소소한 이야기부터 깊은 대화까지</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Final CTA Section ===== -->
+                <div class="reveal glass-card rounded-2xl p-6 md:p-8 text-center mb-8 relative overflow-hidden">
+                    <!-- Background decoration -->
+                    <div class="absolute inset-0 opacity-5">
+                        <div class="absolute top-0 left-1/4 w-32 h-32 bg-pink rounded-full blur-3xl"></div>
+                        <div class="absolute bottom-0 right-1/4 w-40 h-40 bg-blue rounded-full blur-3xl"></div>
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="text-4xl mb-3">💫</div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 bg-gradient-to-r from-pink via-blue-light to-teal text-transparent bg-clip-text">
+                            새로운 인연의 시작
+                        </h3>
+                        <p class="text-gray-300 mb-2 italic text-sm md:text-base">
+                            "진심 어린 만남과 의미 있는 대화를 믿어요."
+                        </p>
+                        <p class="text-gray-400 mb-6 text-sm">
+                            서로 알아가는 과정이 가장 아름다운 이야기가 될 거예요.
+                        </p>
+
+                        <button onclick="openSite()" class="btn-neon px-8 py-4 rounded-full text-lg inline-flex items-center mx-auto animate-pulse-fast">
+                            <i class="fab fa-line mr-2 text-xl"></i>
+                            지금 바로 연결하기
+                        </button>
+
+                        <div class="flex items-center justify-center gap-4 mt-5 text-xs text-gray-500">
+                            <span class="flex items-center gap-1"><i class="fas fa-shield-alt text-teal/60"></i> 안전한 대화</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-clock text-blue-light/60"></i> 빠른 응답</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-heart text-pink-light/60"></i> 진심 어린 소통</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center pb-8 text-xs text-gray-600">
+                    <p>© 2026 태현 · All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSite() {
+            window.location.href = "https://www.baidu.com";
+        }
+
+        // Lightbox
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Stat counter animation
+        function animateCounters() {
+            document.querySelectorAll('.stat-num').forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'));
+                const duration = 1500;
+                const start = performance.now();
+
+                function update(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(target * eased);
+                    if (progress < 1) requestAnimationFrame(update);
+                    else el.textContent = target;
+                }
+                requestAnimationFrame(update);
+            });
+        }
+
+        const statSection = document.querySelector('.stat-num');
+        if (statSection) {
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+            statObserver.observe(statSection.closest('.reveal') || statSection);
+        }
+
+        // Floating hearts effect
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const emojis = ['💖', '💕', '✨', '💗', '💫', '🌸'];
+            heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+            heart.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        setInterval(createHeart, 2500);
+
+        // Keyboard escape for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
