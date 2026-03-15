@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Advertencias de Riesgo Financiero - Servicios de Análisis Financiero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        accent: '#FF6B35',
+                        success: '#10B981',
+                        warning: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white">
+
+    <!-- Dark mode detection -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 dark:bg-red-900/30 rounded-full mb-4">
+                    <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold mb-4 text-red-600 dark:text-red-400">
+                    ⚠️ ADVERTENCIAS DE RIESGO FINANCIERO
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    Información Crítica Sobre Riesgos de Inversión y Limitaciones de Servicio
+                </p>
+            </div>
+            
+            <div class="space-y-8 text-gray-700 dark:text-gray-300">
+                <section>
+                    <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 p-6 rounded-lg mb-6">
+                        <h2 class="text-xl font-bold text-red-800 dark:text-red-300 mb-4">🚨 AVISO CRÍTICO - LEER OBLIGATORIAMENTE</h2>
+                        <p class="text-red-700 dark:text-red-300 font-semibold mb-4">
+                            ESTE DOCUMENTO CONTIENE INFORMACIÓN ESENCIAL SOBRE LOS RIESGOS ASOCIADOS CON LAS INVERSIONES FINANCIERAS. ES OBLIGATORIO LEER Y COMPRENDER COMPLETAMENTE ESTAS ADVERTENCIAS ANTES DE UTILIZAR CUALQUIER INFORMACIÓN DE NUESTROS SERVICIOS.
+                        </p>
+                        <p class="text-sm text-red-600 dark:text-red-400">
+                            <strong>Fecha de última actualización:</strong> Diciembre 2024<br>
+                            <strong>Versión:</strong> 1.0<br>
+                            <strong>Cumplimiento:</strong> Regulaciones EU, MiFID II, Google Financial Services Policy
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">1. NATURALEZA DE NUESTROS SERVICIOS</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-400 p-4 rounded-lg">
+                            <h3 class="font-bold text-green-800 dark:text-green-300 mb-3">✅ LO QUE SOMOS:</h3>
+                            <ul class="text-sm space-y-2 text-green-700 dark:text-green-300">
+                                <li>• Proveedor de contenido educativo financiero</li>
+                                <li>• Fuente de información general sobre mercados</li>
+                                <li>• Plataforma de análisis educativo</li>
+                                <li>• Servicio de noticias y tendencias financieras</li>
+                                <li>• Comunidad educativa sobre inversiones</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-400 p-4 rounded-lg">
+                            <h3 class="font-bold text-red-800 dark:text-red-300 mb-3">❌ LO QUE NO SOMOS:</h3>
+                            <ul class="text-sm space-y-2 text-red-700 dark:text-red-300">
+                                <li>• Asesor financiero autorizado</li>
+                                <li>• Empresa de servicios de inversión</li>
+                                <li>• Gestor de carteras regulado</li>
+                                <li>• Intermediario de valores (broker)</li>
+                                <li>• Proveedor de asesoramiento personalizado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-400 p-4 rounded-lg">
+                        <p class="text-sm text-yellow-800 dark:text-yellow-300">
+                            <strong>DECLARACIÓN IMPORTANTE:</strong> No estamos autorizados por ninguna autoridad financiera para proporcionar asesoramiento de inversión, servicios de intermediación o gestión de carteras. Toda la información proporcionada es únicamente para fines educativos e informativos.
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">2. RIESGOS GENERALES DE INVERSIÓN</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4">
+                            <h3 class="font-bold text-red-800 dark:text-red-300 mb-3">2.1 Riesgo de Pérdida de Capital</h3>
+                            <p class="text-red-700 dark:text-red-300 text-sm mb-2">
+                                <strong>ADVERTENCIA CRÍTICA:</strong> Todas las inversiones conllevan el riesgo de pérdida financiera significativa.
+                            </p>
+                            <ul class="text-sm space-y-1 text-red-600 dark:text-red-400">
+                                <li>• Puede perder parte o la totalidad de su inversión inicial</li>
+                                <li>• Las pérdidas pueden exceder su inversión inicial en ciertos productos</li>
+                                <li>• No existe garantía de recuperación de capital invertido</li>
+                                <li>• Las condiciones del mercado pueden cambiar rápidamente</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 p-4">
+                            <h3 class="font-bold text-orange-800 dark:text-orange-300 mb-3">2.2 Volatilidad del Mercado</h3>
+                            <ul class="text-sm space-y-1 text-orange-700 dark:text-orange-300">
+                                <li>• Los precios de los valores fluctúan constantemente</li>
+                                <li>• La volatilidad puede ser extrema en períodos de incertidumbre</li>
+                                <li>• Los movimientos del mercado pueden ser impredecibles</li>
+                                <li>• Factores externos pueden afectar dramáticamente los precios</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-500 p-4">
+                            <h3 class="font-bold text-purple-800 dark:text-purple-300 mb-3">2.3 Rendimientos Pasados No Garantizan Resultados Futuros</h3>
+                            <ul class="text-sm space-y-1 text-purple-700 dark:text-purple-300">
+                                <li>• Los resultados históricos no predicen el rendimiento futuro</li>
+                                <li>• Las condiciones del mercado cambian constantemente</li>
+                                <li>• Factores económicos únicos afectan cada período</li>
+                                <li>• No existen patrones garantizados en los mercados financieros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">3. RIESGOS ESPECÍFICOS POR TIPO DE INVERSIÓN</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">📈 Acciones y Valores</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Riesgo de quiebra empresarial</li>
+                                    <li>• Volatilidad sectorial</li>
+                                    <li>• Riesgos regulatorios</li>
+                                    <li>• Dilución de acciones</li>
+                                    <li>• Riesgo de liquidez</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">💰 Criptomonedas</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Extrema volatilidad</li>
+                                    <li>• Falta de regulación</li>
+                                    <li>• Riesgos tecnológicos</li>
+                                    <li>• Posible pérdida total</li>
+                                    <li>• Riesgos de ciberseguridad</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">🏦 Bonos y Deuda</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Riesgo de crédito</li>
+                                    <li>• Riesgo de tasa de interés</li>
+                                    <li>• Riesgo de inflación</li>
+                                    <li>• Riesgo de reinversión</li>
+                                    <li>• Riesgo de call (rescate)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">🌍 Inversiones Internacionales</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Riesgo de tipo de cambio</li>
+                                    <li>• Riesgo político</li>
+                                    <li>• Riesgos regulatorios extranjeros</li>
+                                    <li>• Diferentes estándares contables</li>
+                                    <li>• Barreras de liquidez</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">⚡ Productos Derivados</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Apalancamiento extremo</li>
+                                    <li>• Pérdidas ilimitadas potenciales</li>
+                                    <li>• Complejidad del producto</li>
+                                    <li>• Riesgo de contraparte</li>
+                                    <li>• Vencimientos y ejercicios</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">🏠 Bienes Raíces</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Illiquidez del mercado</li>
+                                    <li>• Costos de transacción altos</li>
+                                    <li>• Riesgos de ubicación</li>
+                                    <li>• Cambios regulatorios</li>
+                                    <li>• Costos de mantenimiento</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">4. LIMITACIONES DE NUESTRO CONTENIDO</h2>
+                    
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-500 p-6 rounded-lg mb-6">
+                        <h3 class="font-bold text-yellow-800 dark:text-yellow-300 mb-4">⚠️ EXENCIONES CRÍTICAS DE RESPONSABILIDAD</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">4.1 Naturaleza del Contenido:</h4>
+                                <ul class="text-sm space-y-1 text-yellow-700 dark:text-yellow-300">
+                                    <li>• Todo el contenido es únicamente educativo e informativo</li>
+                                    <li>• No constituye asesoramiento financiero personalizado</li>
+                                    <li>• No considera su situación financiera individual</li>
+                                    <li>• No es una recomendación de compra o venta</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">4.2 Limitaciones de Exactitud:</h4>
+                                <ul class="text-sm space-y-1 text-yellow-700 dark:text-yellow-300">
+                                    <li>• La información puede contener errores u omisiones</li>
+                                    <li>• Los datos pueden estar desactualizados</li>
+                                    <li>• No garantizamos la precisión de terceros</li>
+                                    <li>• Las fuentes pueden ser incompletas</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">4.3 Sin Garantías:</h4>
+                                <ul class="text-sm space-y-1 text-yellow-700 dark:text-yellow-300">
+                                    <li>• No garantizamos resultados de inversión</li>
+                                    <li>• No prometemos rendimientos específicos</li>
+                                    <li>• No aseguramos la disponibilidad continua del servicio</li>
+                                    <li>• No garantizamos la idoneidad para propósitos específicos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">5. FACTORES DE RIESGO ECONÓMICO Y DE MERCADO</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                            <h4 class="font-bold text-red-800 dark:text-red-300 mb-3">💹 Riesgos Macroeconómicos</h4>
+                            <ul class="text-sm space-y-1 text-red-700 dark:text-red-300">
+                                <li>• Recesiones económicas</li>
+                                <li>• Cambios en políticas fiscales</li>
+                                <li>• Fluctuaciones de tasas de interés</li>
+                                <li>• Inflación y deflación</li>
+                                <li>• Crisis financieras sistémicas</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+                            <h4 class="font-bold text-orange-800 dark:text-orange-300 mb-3">🌍 Riesgos Geopolíticos</h4>
+                            <ul class="text-sm space-y-1 text-orange-700 dark:text-orange-300">
+                                <li>• Guerras y conflictos</li>
+                                <li>• Tensiones comerciales</li>
+                                <li>• Cambios regulatorios</li>
+                                <li>• Inestabilidad política</li>
+                                <li>• Sanciones internacionales</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                            <h4 class="font-bold text-purple-800 dark:text-purple-300 mb-3">⚡ Riesgos Tecnológicos</h4>
+                            <ul class="text-sm space-y-1 text-purple-700 dark:text-purple-300">
+                                <li>• Ciberataques</li>
+                                <li>• Fallos de sistemas</li>
+                                <li>• Obsolescencia tecnológica</li>
+                                <li>• Disrupciones digitales</li>
+                                <li>• Errores de algoritmos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">6. ADVERTENCIAS ESPECÍFICAS SOBRE RENDIMIENTOS</h2>
+                    
+                    <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 p-6 rounded-lg">
+                        <h3 class="font-bold text-red-800 dark:text-red-300 mb-4 text-lg">🚨 ADVERTENCIA CRÍTICA SOBRE EXPECTATIVAS DE RENDIMIENTO</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded border-l-4 border-red-500">
+                                <h4 class="font-semibold text-red-800 dark:text-red-300 mb-2">Sobre las Cifras Mencionadas ("20,000€ al mes"):</h4>
+                                <ul class="text-sm space-y-2 text-red-700 dark:text-red-300">
+                                    <li>• Son ejemplos hipotéticos únicamente para fines educativos</li>
+                                    <li>• NO representan rendimientos garantizados o típicos</li>
+                                    <li>• NO reflejan resultados reales de usuarios</li>
+                                    <li>• Los resultados individuales varían significativamente</li>
+                                    <li>• La mayoría de inversores no logran tales rendimientos</li>
+                                    <li>• Estas cifras NO constituyen promesas o predicciones</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded border-l-4 border-red-500">
+                                <h4 class="font-semibold text-red-800 dark:text-red-300 mb-2">Realidad Estadística de las Inversiones:</h4>
+                                <ul class="text-sm space-y-2 text-red-700 dark:text-red-300">
+                                    <li>• La mayoría de inversores individuales obtienen rendimientos por debajo del mercado</li>
+                                    <li>• Muchos inversores experimentan pérdidas significativas</li>
+                                    <li>• Los costos de transacción reducen los rendimientos netos</li>
+                                    <li>• Los impuestos afectan sustancialmente las ganancias</li>
+                                    <li>• El timing del mercado es extremadamente difícil</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">7. RECOMENDACIONES OBLIGATORIAS</h2>
+                    
+                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-500 p-6 rounded-lg">
+                        <h3 class="font-bold text-blue-800 dark:text-blue-300 mb-4">✅ ANTES DE TOMAR CUALQUIER DECISIÓN DE INVERSIÓN:</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Consulte Profesionales Cualificados:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Asesor financiero certificado</li>
+                                    <li>• Contador público autorizado</li>
+                                    <li>• Abogado especializado en inversiones</li>
+                                    <li>• Planificador financiero independiente</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold mb-3">Evalúe Su Situación Personal:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Objetivos financieros específicos</li>
+                                    <li>• Tolerancia al riesgo personal</li>
+                                    <li>• Horizonte temporal de inversión</li>
+                                    <li>• Situación financiera actual</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-blue-100 dark:bg-blue-800/30 rounded">
+                            <p class="text-sm font-semibold text-blue-800 dark:text-blue-300">
+                                <strong>REGLA DE ORO:</strong> Nunca invierta dinero que no puede permitirse perder completamente. Mantenga siempre un fondo de emergencia antes de considerar inversiones de riesgo.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">8. CUMPLIMIENTO REGULATORIO</h2>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
+                        <h3 class="font-bold mb-4">Cumplimiento con Regulaciones Europeas e Internacionales:</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">🇪🇺 Unión Europea:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• MiFID II (Directiva sobre Mercados de Instrumentos Financieros)</li>
+                                    <li>• RGPD (Reglamento General de Protección de Datos)</li>
+                                    <li>• Directiva de Servicios de Inversión</li>
+                                    <li>• Normativas de protección al consumidor</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold mb-3">🌐 Plataformas Digitales:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Google Financial Services Policy</li>
+                                    <li>• Políticas de publicidad financiera</li>
+                                    <li>• Estándares de transparencia</li>
+                                    <li>• Requisitos de divulgación</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-4 bg-yellow-100 dark:bg-yellow-800/30 rounded">
+                            <p class="text-sm text-yellow-800 dark:text-yellow-300">
+                                <strong>Declaración de Cumplimiento:</strong> Este documento y nuestros servicios cumplen con todas las regulaciones aplicables para servicios de información financiera educativa en la Unión Europea.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-6">9. RECURSOS ADICIONALES Y EDUCACIÓN</h2>
+                    
+                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-500 p-6 rounded-lg">
+                        <h3 class="font-bold text-green-800 dark:text-green-300 mb-4">📚 Fuentes Recomendadas de Educación Financiera:</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Organismos Oficiales:</h4>
+                                <ul class="text-sm space-y-1 text-green-700 dark:text-green-300">
+                                    <li>• Banco Central Europeo (BCE)</li>
+                                    <li>• Autoridades supervisoras nacionales</li>
+                                    <li>• ESMA (Autoridad Europea de Valores y Mercados)</li>
+                                    <li>• Institutos de educación financiera</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold mb-3">Recursos Educativos:</h4>
+                                <ul class="text-sm space-y-1 text-green-700 dark:text-green-300">
+                                    <li>• Cursos de finanzas personales</li>
+                                    <li>• Literatura académica sobre inversiones</li>
+                                    <li>• Simuladores de inversión</li>
+                                    <li>• Asesoramiento financiero independiente</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="border-t border-gray-300 dark:border-gray-600 pt-8 mt-8">
+                    <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 p-8 rounded-lg">
+                        <h2 class="text-xl font-bold text-red-800 dark:text-red-300 mb-6 text-center">
+                            🚨 DECLARACIÓN FINAL DE RESPONSABILIDAD DEL USUARIO
+                        </h2>
+                        
+                        <div class="space-y-4 text-sm text-red-700 dark:text-red-300">
+                            <p class="font-semibold">
+                                Al utilizar nuestros servicios o contenido, usted declara expresamente que:
+                            </p>
+                            
+                            <ol class="space-y-3 list-decimal list-inside">
+                                <li><strong>Ha leído y comprendido completamente</strong> todas las advertencias de riesgo contenidas en este documento</li>
+                                <li><strong>Comprende que las inversiones conllevan riesgos significativos</strong> y puede perder dinero, incluyendo potencialmente su inversión completa</li>
+                                <li><strong>Reconoce que nuestro contenido es únicamente educativo</strong> y no constituye asesoramiento financiero personalizado</li>
+                                <li><strong>No utilizará nuestro contenido como única base</strong> para tomar decisiones de inversión</li>
+                                <li><strong>Consultará con asesores financieros cualificados</strong> antes de realizar cualquier inversión</li>
+                                <li><strong>Acepta total responsabilidad</strong> por todas sus decisiones de inversión</li>
+                                <li><strong>Comprende que no garantizamos rendimientos</strong> ni resultados específicos</li>
+                                <li><strong>Acepta que las cifras mencionadas son ejemplos hipotéticos</strong> y no promesas de rendimiento</li>
+                                <li><strong>Libera a Servicios de Análisis Financiero</strong> de cualquier responsabilidad por pérdidas financieras resultantes del uso de nuestro contenido</li>
+                                <li><strong>Confirma que tiene la edad legal</strong> y capacidad para asumir riesgos financieros</li>
+                            </ol>
+
+                            <div class="mt-6 p-4 bg-red-100 dark:bg-red-800/50 rounded border-2 border-red-600">
+                                <p class="font-bold text-center text-red-800 dark:text-red-200">
+                                    SI NO ESTÁ DE ACUERDO CON CUALQUIERA DE LOS PUNTOS ANTERIORES,<br>
+                                    NO UTILICE NUESTROS SERVICIOS NI CONTENIDO.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8 pt-6 border-t border-gray-300 dark:border-gray-600">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <strong>Servicios de Análisis Financiero</strong><br>
+                        Advertencias de Riesgo Financiero<br>
+                        Última actualización: Diciembre 2024<br>
+                        Versión: 1.0<br>
+                        <em>Documento de divulgación de riesgos obligatorio</em>
+                    </p>
+                    
+                    <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
+                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                            Este documento ha sido preparado de acuerdo con las regulaciones europeas e internacionales para la divulgación de riesgos en servicios de información financiera. Para consultas sobre este documento, contacte a través de los canales oficiales especificando "CONSULTA RIESGOS" en su mensaje.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
