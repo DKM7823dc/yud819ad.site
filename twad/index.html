@@ -28,6 +28,23 @@
         .text-shadow {
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
+
+        /* 動態提示淡入淡出 */
+        @keyframes fade-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .live-dot {
+            animation: fade-blink 1.5s infinite;
+        }
+
+        /* 動態提示列依序出現 */
+        @keyframes slide-in {
+            0% { opacity: 0; transform: translateX(-10px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .hint-1 { animation: slide-in 0.5s ease forwards; }
+        .hint-2 { animation: slide-in 0.5s ease 0.3s forwards; opacity: 0; }
     </style>
 </head>
 <body class="h-screen w-screen overflow-hidden m-0 p-0 font-sans text-white">
@@ -35,42 +52,47 @@
     <!-- 背景容器 -->
     <div class="relative w-full h-full bg-custom flex flex-col justify-center items-center">
         
-        <!-- 黑色遮罩層：加深一點以確保文字在雜亂背景上可見 -->
+        <!-- 黑色遮罩層 -->
         <div class="absolute inset-0 bg-slate-900/30 z-0"></div>
 
         <!-- 主要內容區域 -->
         <div class="relative z-10 w-full max-w-md px-6 flex flex-col items-center justify-center h-full">
-            
-       
 
             <!-- 中間文案區塊 (帶有輕微毛玻璃背景) -->
             <div class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 mb-8 shadow-lg">
-                <p class="text-center text-lg mb-6 font-medium leading-relaxed">
-                    我們是一個專注於<br>建立真誠交流的社交平台
+
+                <!-- 標題 -->
+                <h1 class="text-center text-2xl font-bold mb-2 leading-snug text-shadow">
+                    附近有人正在等你聊天
+                </h1>
+
+                <!-- 副標題：在線人數 -->
+                <p class="text-center text-base font-semibold text-green-300 mb-5 flex items-center justify-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-green-400 live-dot"></span>
+                    👉 已有 2,387 人在線
                 </p>
-                
-                <!-- 列表區域 -->
-                <div class="space-y-3 pl-2">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xl">✔️</span>
-                        <span class="text-lg tracking-wide">認識志同道合的朋友</span>
+
+                <!-- 分隔線 -->
+                <div class="border-t border-white/20 mb-5"></div>
+
+                <!-- 動態提示區域 -->
+                <div class="space-y-3 pl-1">
+                    <div class="hint-1 flex items-center space-x-3 bg-white/10 rounded-xl px-4 py-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 live-dot flex-shrink-0"></span>
+                        <span class="text-base tracking-wide">👉 剛剛有人加入聊天</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xl">✔️</span>
-                        <span class="text-lg tracking-wide">分享生活與興趣</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xl">✔️</span>
-                        <span class="text-lg tracking-wide">擴展你的社交圈</span>
+                    <div class="hint-2 flex items-center space-x-3 bg-white/10 rounded-xl px-4 py-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-pink-400 live-dot flex-shrink-0" style="animation-delay: 0.7s;"></span>
+                        <span class="text-base tracking-wide">👉 有人正在發送訊息…</span>
                     </div>
                 </div>
+
             </div>
 
             <!-- 行動號召按鈕 -->
             <button onclick="k2()" class="btn-pulse w-full max-w-xs py-4 bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-full shadow-xl transition-all duration-300 active:scale-95 border border-blue-400">
-               了解更多
+                👉👉 立即進入聊天
             </button>
- 
 
         </div>
     </div>
@@ -78,13 +100,8 @@
     <script>
         // 定義 k2 方法
         function k2() {
-            // 跳轉邏輯
             window.location.href = "https://line.me/ti/p/9SmfwdBbm4";
         }
     </script>
 </body>
 </html>
-
-
-
-
