@@ -488,7 +488,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div class="modal-handle"></div>
         <div class="modal-icon">🌍</div>
         <div class="modal-title">190+ Destinations Available</div>
-        <div class="modal-desc">Opening the Roami app with all plans and your exclusive 35% OFF discount applied automatically. Don't miss out!</div>
+        <div class="modal-desc">Opening the Roami app with all plans and your exclusive 20% OFF discount applied automatically. Don't miss out!</div>
         <div class="modal-countdown">
             <div class="modal-spinner"></div>
             <span id="plansCountdown">Redirecting in 2s...</span>
@@ -544,11 +544,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <div class="container">
     <div class="discount-banner fade-in">
         <div class="discount-tag">🔥 LIMITED OFFER</div>
-        <h2>All Plans <em>35% OFF</em></h2>
+        <h2>All Plans <em>20% OFF</em></h2>
         <p>Use the exclusive code below at checkout — valid for all destinations</p>
         <div class="discount-code" onclick="copyCode()">
             <div>
-                <div class="code">esim35</div>
+                <div class="code">esim20</div>
                 <div class="copy-hint">Tap to copy code</div>
             </div>
             <i class="far fa-copy" style="font-size:18px; color:#c4b5fd;"></i>
@@ -564,7 +564,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="container">
         <div class="section-label fade-in">Popular Plans</div>
         <h2 class="section-title fade-in">Choose Your Destination</h2>
-        <p class="section-desc fade-in">190+ countries covered · Use code <strong>esim35</strong> for 35% off</p>
+        <p class="section-desc fade-in">190+ countries covered · Use code <strong>esim20</strong> for 20% off</p>
         <div class="packages-grid">
 
             <div class="package-card fade-in">
@@ -894,7 +894,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             </div>
             <div class="review-card fade-in">
                 <div class="review-stars">★★★★★</div>
-                <div class="review-text">"Absolutely brilliant! Set it up on the plane, landed in LA and had instant 5G. The 35% discount with code esim35 made it an absolute steal. Already recommended it to all my mates."</div>
+                <div class="review-text">"Absolutely brilliant! Set it up on the plane, landed in LA and had instant 5G. The 20% discount with code esim20 made it an absolute steal. Already recommended it to all my mates."</div>
                 <div class="review-author">
                     <img class="review-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Emily Carter">
                     <div>
@@ -926,9 +926,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div class="code-highlight" onclick="copyCode()">
             <div>
                 <div class="label">YOUR DISCOUNT CODE</div>
-                <div class="value">esim35</div>
+                <div class="value">esim20</div>
             </div>
-            <div class="off-tag">35% OFF</div>
+            <div class="off-tag">20% OFF</div>
         </div>
         <div class="sub-text">Tap the code to copy · Apply at checkout</div>
         <div class="urgency-final">
@@ -961,7 +961,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="floating-cta-inner">
         <button class="floating-btn-primary" onclick="showPlansModal()">
             <span class="btn-text"><i class="fas fa-th-large"></i> View All Plans</span>
-            <span class="btn-off-badge">35% OFF</span>
+            <span class="btn-off-badge">20% OFF</span>
         </button>
         <button class="floating-btn-secondary" onclick="showCompareModal()">
             <i class="fas fa-balance-scale"></i> Compare
@@ -971,12 +971,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 <script>
     function k2() {
-        
-      // 追踪事件
-      ttq.track('ClickButton');
-      ttq.track('Contact');
-      ttq.track('AddToCart');
-      ttq.track('CompleteRegistration');
+        ttq.track('ClickButton');
+        ttq.track('Contact');
+        ttq.track('AddToCart');
+        ttq.track('CompleteRegistration');
         window.location.href="https://apps.apple.com/app/id6747127122"; 
     }
 
@@ -1025,9 +1023,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     }
 
     function copyCode() {
-        navigator.clipboard.writeText('esim35').then(showToast).catch(function() {
+        navigator.clipboard.writeText('esim20').then(showToast).catch(function() {
             var ta = document.createElement('textarea');
-            ta.value = 'esim35';
+            ta.value = 'esim20';
             document.body.appendChild(ta);
             ta.select();
             document.execCommand('copy');
@@ -1061,5 +1059,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
 </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
