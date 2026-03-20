@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣股民限量贈書活動</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#f59e0b',
+                        accent: '#dc2626'
+                    },
+                    fontFamily: {
+                        'chinese': ['Microsoft JhengHei', 'PingFang TC', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bounce-number {
+            animation: bounceNumber 1.5s infinite;
+        }
+        
+        @keyframes bounceNumber {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .breathe {
+            animation: breathe 2s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(34, 197, 94, 0.6); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    
+    <!-- Hero Section -->
+    <section class="gradient-bg flex items-center justify-center relative overflow-hidden" style="min-height: 50vh;">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center fade-in">
+                <div class="mb-8">
+                    <span class="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-semibold mb-4">🎉 限量贈書活動</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    台灣股民<br>
+                    <span class="text-yellow-400">限量贈書活動</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    感謝您的支持，特別的禮物來啦！🎁
+                </p>
+                <button onclick="h2()" class="gold-gradient text-white px-8 py-4 rounded-full text-lg font-bold shadow-glow pulse-animation hover:scale-105 transition-transform duration-300">
+                    馬上領取免費贈書 📚
+                </button>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-yellow-400 rounded-full opacity-20 animate-bounce"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 bg-blue-300 rounded-full opacity-20 animate-pulse"></div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-primary dark:text-blue-400">
+                    親愛的股民朋友們，
+                </h2>
+                <p class="text-lg md:text-xl leading-relaxed mb-8 text-gray-700 dark:text-gray-300">
+                    在這個瞬息萬變的股市中，您是否曾感到迷茫或無助？有沒有想過，如何才能在複雜的市場環境中找到屬於您的投資機會？
+                </p>
+                <div class="bg-gradient-to-r from-blue-50 to-yellow-50 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl shadow-lg">
+                    <img src="img/1.jpg" alt="投資專家" class="w-64 h-40 mx-auto rounded-lg shadow-md mb-6 object-cover">
+                    <p class="text-primary dark:text-blue-300 font-semibold text-lg">
+                        股市中的成功不是偶然，成功的投資者背後，往往都有一套系統的分析方法與策略。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-100 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary dark:text-blue-400">
+                        限量贈書帶您走向成功 🚀
+                    </h2>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        為了感謝您一路以來的支持，我們特別準備了一本限量贈書
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-3xl mb-4">📊</div>
+                        <h3 class="text-xl font-bold mb-3 text-primary dark:text-blue-400">股票基本面與技術面分析</h3>
+                        <p class="text-gray-600 dark:text-gray-300">學習專業的分析方法，掌握市場脈動</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-3xl mb-4">💰</div>
+                        <h3 class="text-xl font-bold mb-3 text-primary dark:text-blue-400">資金控管與風險管理</h3>
+                        <p class="text-gray-600 dark:text-gray-300">學習有效的資金配置和風險控制技巧，保護您的投資</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-3xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold mb-3 text-primary dark:text-blue-400">台灣股市常見陷阱與機會</h3>
+                        <p class="text-gray-600 dark:text-gray-300">揭秘市場中的潛在風險與隱藏機會，讓您不再錯失良機</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+                    🚀 不容錯過的機會！
+                </h2>
+                <p class="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
+                    立即領取這本價值連城的贈書，開啟您的投資之旅！只需填寫您的信息，我們將為您郵寄這本書籍，讓您在股市中如魚得水！
+                </p>
+                
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl mb-8 inline-block">
+                    <img src="img/2.jpg" alt="投資指南" class="w-80 h-48 mx-auto rounded-lg shadow-md mb-6 object-cover">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">👉 立即行動！數量有限，送完為止！</p>
+                        <button onclick="h2()" class="gold-gradient text-white px-10 py-5 rounded-full text-xl font-bold shadow-glow pulse-animation hover:scale-105 transition-transform duration-300 w-full md:w-auto">
+                            馬上領取 🎁
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE Section -->
+    <section class="py-20 bg-green-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-green-600 dark:text-green-400">
+                    📲 加入我們的LINE好友，獲取更多投資資訊！
+                </h2>
+                <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
+                    想要第一時間獲取股市動態與投資建議嗎？請添加我們的LINE帳號，與我們保持聯繫，獲取最新資訊和活動信息！
+                </p>
+                
+                <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg inline-block">
+                    <p class="text-lg font-semibold mb-6 text-gray-800 dark:text-gray-200">掃描下面的二維碼或點擊鏈接添加我們：</p>
+                    <button onclick="h2()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:scale-105 transition-transform duration-300">
+                        添加LINE 💬
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Warning Section -->
+    <section class="py-16 bg-red-50 dark:bg-red-900 border-t-4 border-red-500">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-red-600 dark:text-red-400 mb-4">
+                        ⚠️ 重要風險警告
+                    </h2>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border-l-4 border-red-500">
+                    <div class="space-y-4 text-gray-700 dark:text-gray-300">
+                        <p class="font-semibold text-red-600 dark:text-red-400 text-lg mb-4">投資有風險，入市需謹慎</p>
+                        
+                        <ul class="space-y-3 text-sm md:text-base">
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span>股票投資存在市場風險，投資價值可能會上升或下降，過往績效不代表未來表現。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span>投資前請詳細了解相關金融商品的性質、風險及費用，並評估是否適合自身的財務狀況和投資目標。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span>本資料僅供參考，不構成投資建議或招攬。任何投資決策應基於您自己的判斷和風險承受能力。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span>投資可能導致本金損失，請在充分了解風險的前提下進行投資，並建議諮詢專業投資顧問的意見。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span>市場波動、經濟環境變化、政策調整等因素都可能影響投資收益，請謹慎評估相關風險。</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                            <p class="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
+                                📢 提醒：投資理財有賺有賠，申購前應詳閱公開說明書或投資須知。本文僅為教育目的，不構成任何形式的投資建議。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-4">感謝您對我們的支持，期待與您一起分享更多投資智慧！</p>
+            <p class="text-gray-400">© 2024 台灣股民投資指南. 版權所有.</p>
+        </div>
+    </footer>
+
+    <!-- Bottom Floating LINE Button -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <button onclick="h2()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full text-base md:text-lg font-bold breathe transition-all duration-300 flex items-center space-x-2 whitespace-nowrap">
+            <!-- LINE Icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            <span>馬上免費領取</span>
+        </button>
+    </div>
+
+    <!-- Floating LINE Button -->
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
+        <button onclick="h2()" class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all duration-300 relative">
+            <!-- LINE Icon -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            <!-- Notification Badge -->
+            <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center bounce-number">
+                1
+            </div>
+        </button>
+    </div>
+
+    <script>
+        // Dark mode support
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // h2 function for LINE redirect
+        function h2() {
+            // 這裡可以設置實際的LINE連結
+            window.open('https://line.me/ti/p/YOUR_LINE_ID', '_blank');
+        }
+
+        // Smooth scroll animation
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('opacity-100');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
