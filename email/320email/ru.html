@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Roami eSIM Пожелания мира и безопасности</title>
+  <style type="text/css">
+
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      background-color: #eceef1;
+      font-family: 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
+                   'Helvetica Neue', 'Microsoft YaHei', '微软雅黑', sans-serif;
+      color: #2c2c2c;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .email-wrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 16px 48px;
+    }
+
+    .body {
+      background-color: #ffffff;
+      padding: 44px 52px 48px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .greeting {
+      font-size: 14px;
+      color: #999999;
+      margin-bottom: 26px;
+      letter-spacing: 0.03em;
+    }
+
+    .paragraph {
+      font-size: 15px;
+      line-height: 2;
+      color: #3d3d3d;
+      letter-spacing: 0.03em;
+      margin-bottom: 18px;
+    }
+
+    .quote-block {
+      background-color: #f9f7f3;
+      border-radius: 10px;
+      border-left: 3px solid #d4af37;
+      padding: 22px 24px 22px 28px;
+      margin: 28px 0 32px;
+    }
+    .quote-block p {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: #4a3c1e;
+      letter-spacing: 0.03em;
+      margin: 0;
+    }
+
+    .gift-card {
+      background-color: #042f1e;
+      background: -webkit-linear-gradient(200deg, #042f1e 0%, #064e3b 100%);
+      background: linear-gradient(160deg, #042f1e 0%, #064e3b 100%);
+      border-radius: 14px;
+      padding: 32px 28px 28px;
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .gift-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #a8c5b8;
+      margin-bottom: 16px;
+    }
+
+    .gift-code {
+      display: block;
+      font-family: 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', monospace;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: #d4af37;
+      line-height: 1;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .gift-code-sub {
+      display: block;
+      font-size: 12px;
+      color: #6ea88e;
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+
+    .cta-wrap { text-align: center; }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #000000 !important;
+      text-decoration: none !important;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 13px 40px;
+      border-radius: 12px;
+      font-family: 'PingFang SC', 'Noto Sans SC', -apple-system, 'Microsoft YaHei', sans-serif;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      max-width: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 36px 0;
+    }
+
+    .sig-closing {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #3d3d3d;
+      letter-spacing: 0.02em;
+      margin-bottom: 22px;
+    }
+
+    .sig-block {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-align-items: center;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .sig-avatar {
+      width: 40px; height: 40px; min-width: 40px;
+      background-color: #064e3b;
+      border-radius: 50%;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-flex-shrink: 0;
+      flex-shrink: 0;
+    }
+
+    .sig-avatar span {
+      font-size: 15px;
+      font-weight: 600;
+      color: #d4af37;
+      line-height: 1;
+    }
+
+    .sig-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+      letter-spacing: 0.02em;
+    }
+
+    .sig-title {
+      font-size: 12px;
+      color: #aaaaaa;
+      margin-top: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    .footer {
+      background-color: #f0f5f3;
+      border-top: 1px solid #c9ddd6;
+      border-radius: 0 0 16px 16px;
+      padding: 24px 52px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 13px;
+      font-weight: 600;
+      color: #7aab97;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .footer-brand span { color: #c9a227; }
+
+    .footer p {
+      font-size: 11px;
+      color: #9ab5ab;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+    }
+
+    /* ══ iPhone / Android 响应式 ══ */
+    @media screen and (max-width: 600px) {
+
+      .email-wrapper { padding: 0 0 20px !important; }
+
+      .body {
+        border-radius: 0 !important;
+        padding: 22px 18px 26px !important;
+      }
+      .greeting { font-size: 13.5px !important; margin-bottom: 16px !important; }
+      .paragraph {
+        font-size: 14px !important;
+        line-height: 1.9 !important;
+        margin-bottom: 14px !important;
+      }
+
+      .quote-block {
+        padding: 16px 14px 16px 18px !important;
+        margin: 18px 0 20px !important;
+        border-radius: 8px !important;
+      }
+      .quote-block p { font-size: 13.5px !important; line-height: 1.85 !important; }
+
+      .gift-card {
+        padding: 22px 18px 20px !important;
+        margin: 20px 0 !important;
+        border-radius: 12px !important;
+      }
+      .gift-label { font-size: 10px !important; margin-bottom: 12px !important; }
+      .gift-code {
+        font-size: 26px !important;
+        letter-spacing: 0.18em !important;
+        margin-bottom: 6px !important;
+      }
+      .gift-code-sub { font-size: 11px !important; margin-bottom: 20px !important; }
+
+      .cta-button {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+        border-radius: 10px !important;
+        -webkit-box-sizing: border-box !important;
+        box-sizing: border-box !important;
+      }
+
+      .divider { margin: 22px 0 !important; }
+
+      .sig-closing { font-size: 14px !important; margin-bottom: 16px !important; }
+      .sig-avatar {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+      }
+      .sig-avatar span { font-size: 14px !important; }
+      .sig-name { font-size: 14px !important; }
+      .sig-title { font-size: 11.5px !important; }
+
+      .footer {
+        border-radius: 0 !important;
+        padding: 16px 18px !important;
+      }
+      .footer-brand { font-size: 12px !important; margin-bottom: 8px !important; }
+      .footer p { font-size: 11px !important; line-height: 1.65 !important; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#eceef1;line-height:1px;">
+    Roami eSIM выражает самые искренние пожелания мира. Пусть вы и ваша семья будете в безопасности и благополучии.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <div class="email-wrapper">
+
+    <!-- ── BODY ── -->
+    <div class="body" style="background-color:#ffffff;padding:44px 52px 48px;border-radius:16px 16px 0 0;">
+
+      <p class="greeting" style="font-size:14px;color:#999999;margin-bottom:26px;letter-spacing:0.03em;">
+        Дорогой друг, здравствуйте:
+      </p>
+
+      <p class="paragraph" style="font-size:15px;line-height:2;color:#3d3d3d;letter-spacing:0.03em;margin-bottom:18px;">
+        Недавняя ситуация на Ближнем Востоке волнует весь мир. С каждым обновлением новостей нас больше всего заботит, всё ли в порядке с вами — тем, кто когда-то выбрал Roami eSIM для своих путешествий по миру.
+      </p>
+
+      <p class="paragraph" style="font-size:15px;line-height:2;color:#3d3d3d;letter-spacing:0.03em;margin-bottom:18px;">
+        Единственная цель этого письма — передать вам и вашей семье самые искренние пожелания мира и безопасности.
+      </p>
+
+      <div class="quote-block" style="background-color:#f9f7f3;border-radius:10px;border-left:3px solid #d4af37;padding:22px 24px 22px 28px;margin:28px 0 32px;">
+        <p style="font-size:14.5px;line-height:1.95;color:#4a3c1e;letter-spacing:0.03em;margin:0;">
+          Вы — самый ценный пользователь Roami eSIM. Мы искренне желаем, чтобы в это неспокойное время вы и ваши близкие были вдали от опасности, и чтобы всё было благополучно. Если вам нужна какая-либо поддержка, пожалуйста, свяжитесь с нами в любое время.
+        </p>
+      </div>
+
+      <p class="paragraph" style="font-size:15px;line-height:2;color:#3d3d3d;letter-spacing:0.03em;margin-bottom:18px;">
+        Мы приготовили для вас небольшой знак внимания. Вы можете использовать его в будущем, когда вам понадобится спокойно отправиться в путь.
+      </p>
+
+      <!-- ── 礼品卡 ── -->
+      <div class="gift-card" style="background-color:#064e3b;border-radius:14px;padding:32px 28px 28px;margin:32px 0;text-align:center;">
+        <span class="gift-label" style="display:block;font-size:11px;letter-spacing:0.14em;color:#a8c5b8;margin-bottom:16px;">
+          ВАШ ЭКСКЛЮЗИВНЫЙ ПРОМОКОД МИРА
+        </span>
+        <div class="gift-code" style="display:block;font-size:36px;font-weight:700;letter-spacing:0.3em;color:#d4af37;line-height:1;margin-bottom:8px;word-break:break-all;">
+          PEACE
+        </div>
+        <span class="gift-code-sub" style="display:block;font-size:12px;color:#6ea88e;letter-spacing:0.04em;margin-bottom:28px;">
+          Используйте этот эксклюзивный код, чтобы обезопасить ваше путешествие
+        </span>
+        <div class="cta-wrap" style="text-align:center;">
+          <a href="https://apps.apple.com/app/id6747127122" class="cta-button"
+             style="display:inline-block;background-color:#ffffff;color:#000000;text-decoration:none;font-size:15px;font-weight:600;letter-spacing:0.02em;padding:13px 40px;border-radius:12px;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-tap-highlight-color:transparent;">
+            Использовать сейчас
+          </a>
+        </div>
+      </div>
+
+      <hr class="divider" style="border:none;border-top:1px solid #f0f0f0;margin:36px 0;" />
+
+      <p class="sig-closing" style="font-size:15px;line-height:1.9;color:#3d3d3d;letter-spacing:0.02em;margin-bottom:22px;">
+        Искренне желаем вам мира.
+      </p>
+      <div class="sig-block" style="display:flex;align-items:center;gap:14px;">
+        <div class="sig-avatar" style="width:40px;height:40px;min-width:40px;background-color:#064e3b;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:15px;font-weight:600;color:#d4af37;line-height:1;">A</span>
+        </div>
+        <div>
+          <div class="sig-name" style="font-size:15px;font-weight:600;color:#111827;letter-spacing:0.02em;">Anna</div>
+          <div class="sig-title" style="font-size:12px;color:#aaaaaa;margin-top:3px;letter-spacing:0.03em;">Старший менеджер по работе с клиентами Roami eSIM</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <div class="footer" style="background-color:#f0f5f3;border-top:1px solid #c9ddd6;border-radius:0 0 16px 16px;padding:24px 52px;text-align:center;">
+      <div class="footer-brand" style="font-size:13px;font-weight:600;color:#7aab97;letter-spacing:0.1em;margin-bottom:10px;">
+        Roami <span style="color:#c9a227;">eSIM</span>
+      </div>
+      <p style="font-size:11px;color:#9ab5ab;line-height:1.75;letter-spacing:0.02em;">
+        Это письмо отправлено на ваш зарегистрированный адрес электронной почты, так как вы ранее пользовались услугами Roami eSIM.<br />Если у вас есть какие-либо вопросы, пожалуйста, свяжитесь с нашей службой поддержки.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
