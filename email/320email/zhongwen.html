@@ -2,17 +2,33 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Roami eSIM 平安祝福</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap');
+  <style type="text/css">
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
     body {
       background-color: #eceef1;
-      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-family: 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
+                   'Helvetica Neue', 'Microsoft YaHei', '微软雅黑', sans-serif;
       color: #2c2c2c;
       -webkit-font-smoothing: antialiased;
     }
@@ -24,111 +40,107 @@
       padding: 40px 16px 48px;
     }
 
-    /* ── Header ── */
     .header {
+      background-color: #111827;
+      background: -webkit-linear-gradient(300deg, #111827 0%, #1a2744 55%, #0d2157 100%);
       background: linear-gradient(150deg, #111827 0%, #1a2744 55%, #0d2157 100%);
       border-radius: 16px 16px 0 0;
       padding: 24px 52px 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .header-inner {
-      position: relative; z-index: 1;
+      display: -webkit-flex;
       display: flex;
+      -webkit-align-items: center;
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
     }
 
     .logo-row {
+      display: -webkit-flex;
       display: flex;
+      -webkit-align-items: center;
       align-items: center;
       gap: 10px;
+      -webkit-flex-shrink: 0;
       flex-shrink: 0;
     }
 
     .logo-icon {
       width: 30px; height: 30px;
+      background-color: #d4af37;
+      background: -webkit-linear-gradient(315deg, #d4af37 0%, #f0cd6a 100%);
       background: linear-gradient(135deg, #d4af37 0%, #f0cd6a 100%);
       border-radius: 7px;
-      display: flex;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-align-items: center;
       align-items: center;
+      -webkit-justify-content: center;
       justify-content: center;
+      -webkit-flex-shrink: 0;
       flex-shrink: 0;
     }
 
-    .logo-icon svg { width: 16px; height: 16px; }
+    .logo-icon svg { width: 16px; height: 16px; display: block; }
 
     .logo-name {
       font-size: 15px;
       font-weight: 600;
-      color: #fff;
+      color: #ffffff;
       letter-spacing: 0.06em;
       line-height: 1.2;
     }
-
     .logo-name span { color: #d4af37; }
 
+    /* ── 仅此处改动：#7a8090 → #ffffff ── */
     .logo-sub {
       font-size: 9.5px;
-      color: rgba(255,255,255,0.32);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      color: #ffffff;
+      letter-spacing: 0.1em;
       margin-top: 2px;
     }
 
     .header-sep {
-      width: 1px;
-      height: 32px;
-      background: rgba(255,255,255,0.1);
+      width: 1px; height: 32px;
+      background-color: #2a3550;
+      -webkit-flex-shrink: 0;
       flex-shrink: 0;
     }
 
-    .header-title-block { flex: 1; }
+    .header-title-block {
+      -webkit-flex: 1;
+      flex: 1;
+      min-width: 0;
+    }
 
     .header-eyebrow {
+      display: block;
       font-size: 9.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      letter-spacing: 0.14em;
       color: #d4af37;
-      opacity: 0.85;
       margin-bottom: 5px;
     }
 
     .header-h1 {
-      font-family: 'Noto Serif SC', serif;
+      font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
       font-size: 20px;
       font-weight: 700;
       color: #ffffff;
       line-height: 1.45;
       letter-spacing: 0.02em;
+      margin: 0; padding: 0;
     }
+    .header-h1 em { font-style: normal; color: #d4af37; }
 
-    .header-h1 em {
-      font-style: normal;
-      color: #d4af37;
-    }
-
-    /* ── Body ── */
     .body {
-      background: #ffffff;
+      background-color: #ffffff;
       padding: 44px 52px 48px;
     }
 
     .greeting {
       font-size: 14px;
-      color: #999;
+      color: #999999;
       margin-bottom: 26px;
       letter-spacing: 0.03em;
     }
@@ -141,128 +153,84 @@
       margin-bottom: 18px;
     }
 
-    /* ── Quote block ── */
     .quote-block {
-      position: relative;
-      background: #f9f7f3;
+      background-color: #f9f7f3;
       border-radius: 10px;
+      border-left: 3px solid #d4af37;
       padding: 22px 24px 22px 28px;
       margin: 28px 0 32px;
     }
-
-    .quote-block::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 12px; bottom: 12px;
-      width: 3px;
-      background: linear-gradient(180deg, #d4af37 0%, rgba(212,175,55,0.3) 100%);
-      border-radius: 0 2px 2px 0;
-    }
-
     .quote-block p {
       font-size: 14.5px;
       line-height: 1.95;
       color: #4a3c1e;
       letter-spacing: 0.03em;
+      margin: 0;
     }
 
-    /* ── Gift card ── */
     .gift-card {
+      background-color: #0d1b3e;
+      background: -webkit-linear-gradient(200deg, #0d1b3e 0%, #111827 100%);
       background: linear-gradient(160deg, #0d1b3e 0%, #111827 100%);
       border-radius: 14px;
       padding: 32px 28px 28px;
       margin: 32px 0;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gift-card::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 180px; height: 180px;
-      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .gift-card::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: -40px;
-      width: 140px; height: 140px;
-      background: radial-gradient(circle, rgba(99,148,255,0.08) 0%, transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .gift-label {
-      position: relative; z-index: 1;
+      display: block;
       font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.14em;
+      color: #b0bac8;
       margin-bottom: 16px;
     }
 
     .gift-code {
-      position: relative; z-index: 1;
-      font-family: 'Noto Sans SC', monospace;
+      display: block;
+      font-family: 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', monospace;
       font-size: 36px;
       font-weight: 700;
       letter-spacing: 0.3em;
       color: #d4af37;
       line-height: 1;
       margin-bottom: 8px;
+      word-break: break-all;
     }
 
     .gift-code-sub {
-      position: relative; z-index: 1;
+      display: block;
       font-size: 12px;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.06em;
+      color: #8899aa;
+      letter-spacing: 0.04em;
       margin-bottom: 28px;
     }
 
-    /* ── CTA ── */
+    .cta-wrap { text-align: center; }
+
     .cta-button {
-      position: relative; z-index: 1;
       display: inline-block;
-      background: #ffffff;
-      color: #000000;
-      text-decoration: none;
+      background-color: #ffffff;
+      color: #000000 !important;
+      text-decoration: none !important;
       font-size: 15px;
       font-weight: 600;
       letter-spacing: 0.02em;
       padding: 13px 40px;
       border-radius: 12px;
-      border: none;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 16px rgba(0,0,0,0.35);
-      transition: all 0.18s ease;
-      font-family: 'Noto Sans SC', -apple-system, sans-serif;
-      cursor: pointer;
+      font-family: 'PingFang SC', 'Noto Sans SC', -apple-system, 'Microsoft YaHei', sans-serif;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      max-width: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .cta-button:hover {
-      background: #f0f0f0;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 6px 20px rgba(0,0,0,0.4);
-      transform: translateY(-1px);
-    }
-
-    .cta-button:active {
-      transform: translateY(0);
-      background: #e8e8e8;
-    }
-
-    /* ── Divider ── */
     .divider {
       border: none;
       border-top: 1px solid #f0f0f0;
       margin: 36px 0;
     }
 
-    /* ── Signature ── */
     .sig-closing {
       font-size: 15px;
       line-height: 1.9;
@@ -272,16 +240,24 @@
     }
 
     .sig-block {
+      display: -webkit-flex;
       display: flex;
+      -webkit-align-items: center;
       align-items: center;
       gap: 14px;
     }
 
     .sig-avatar {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, #1a2744, #0d2157);
+      width: 40px; height: 40px; min-width: 40px;
+      background-color: #1a2744;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-flex-shrink: 0;
       flex-shrink: 0;
     }
 
@@ -289,6 +265,7 @@
       font-size: 15px;
       font-weight: 600;
       color: #d4af37;
+      line-height: 1;
     }
 
     .sig-name {
@@ -300,14 +277,13 @@
 
     .sig-title {
       font-size: 12px;
-      color: #aaa;
+      color: #aaaaaa;
       margin-top: 3px;
       letter-spacing: 0.03em;
     }
 
-    /* ── Footer ── */
     .footer {
-      background: #f3f4f6;
+      background-color: #f3f4f6;
       border-top: 1px solid #e8e9eb;
       border-radius: 0 0 16px 16px;
       padding: 24px 52px;
@@ -317,12 +293,11 @@
     .footer-brand {
       font-size: 13px;
       font-weight: 600;
-      color: #bbb;
+      color: #bbbbbb;
       letter-spacing: 0.1em;
       margin-bottom: 10px;
     }
-
-    .footer-brand span { color: #c9a227; opacity: 0.8; }
+    .footer-brand span { color: #c9a227; }
 
     .footer p {
       font-size: 11px;
@@ -331,187 +306,167 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── Mobile：紧凑间距 ── */
-    @media (max-width: 480px) {
-      /* 外层几乎无上下留白 */
-      .email-wrapper {
-        padding: 0 0 16px;
-      }
+    @media screen and (max-width: 600px) {
 
-      /* Header */
+      .email-wrapper { padding: 0 0 20px !important; }
+
       .header {
-        border-radius: 0;
-        padding: 14px 16px 12px;
+        border-radius: 0 !important;
+        padding: 16px 16px 14px !important;
       }
+      .header-inner { gap: 10px !important; }
+      .logo-icon { width: 26px !important; height: 26px !important; }
+      .logo-icon svg { width: 13px !important; height: 13px !important; }
+      .logo-name { font-size: 13px !important; }
+      .logo-sub { font-size: 8.5px !important; }
+      .header-sep { height: 22px !important; }
+      .header-eyebrow { font-size: 8.5px !important; margin-bottom: 3px !important; }
+      .header-h1 { font-size: 16px !important; }
 
-      .header-inner { gap: 10px; }
-
-      .logo-icon { width: 26px; height: 26px; }
-      .logo-icon svg { width: 13px; height: 13px; }
-      .logo-name { font-size: 13px; }
-      .logo-sub { font-size: 8.5px; }
-      .header-sep { height: 22px; }
-      .header-eyebrow { font-size: 8.5px; margin-bottom: 3px; }
-      .header-h1 { font-size: 15px; }
-
-      /* Body */
-      .body {
-        padding: 20px 16px 24px;
-      }
-
-      .greeting {
-        font-size: 13px;
-        margin-bottom: 14px;
-      }
-
+      .body { padding: 22px 18px 26px !important; }
+      .greeting { font-size: 13.5px !important; margin-bottom: 16px !important; }
       .paragraph {
-        font-size: 13.5px;
-        line-height: 1.8;
-        margin-bottom: 12px;
+        font-size: 14px !important;
+        line-height: 1.9 !important;
+        margin-bottom: 14px !important;
       }
 
-      /* Quote */
       .quote-block {
-        padding: 14px 14px 14px 18px;
-        margin: 16px 0 18px;
-        border-radius: 8px;
+        padding: 16px 14px 16px 18px !important;
+        margin: 18px 0 20px !important;
+        border-radius: 8px !important;
       }
+      .quote-block p { font-size: 13.5px !important; line-height: 1.85 !important; }
 
-      .quote-block p {
-        font-size: 13px;
-        line-height: 1.8;
-      }
-
-      /* Gift card */
       .gift-card {
-        padding: 20px 16px 18px;
-        margin: 18px 0;
-        border-radius: 12px;
+        padding: 22px 18px 20px !important;
+        margin: 20px 0 !important;
+        border-radius: 12px !important;
       }
-
-      .gift-label {
-        font-size: 10px;
-        margin-bottom: 10px;
-      }
-
+      .gift-label { font-size: 10px !important; margin-bottom: 12px !important; }
       .gift-code {
-        font-size: 28px;
-        letter-spacing: 0.22em;
-        margin-bottom: 6px;
+        font-size: 26px !important;
+        letter-spacing: 0.18em !important;
+        margin-bottom: 6px !important;
       }
-
-      .gift-code-sub {
-        font-size: 11px;
-        margin-bottom: 18px;
-      }
+      .gift-code-sub { font-size: 11px !important; margin-bottom: 20px !important; }
 
       .cta-button {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 12px 16px;
-        font-size: 14px;
-        border-radius: 10px;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+        border-radius: 10px !important;
+        -webkit-box-sizing: border-box !important;
+        box-sizing: border-box !important;
       }
 
-      /* Divider */
-      .divider { margin: 20px 0; }
+      .divider { margin: 22px 0 !important; }
 
-      /* Signature */
-      .sig-closing {
-        font-size: 13.5px;
-        margin-bottom: 14px;
+      .sig-closing { font-size: 14px !important; margin-bottom: 16px !important; }
+      .sig-avatar {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
       }
+      .sig-avatar span { font-size: 14px !important; }
+      .sig-name { font-size: 14px !important; }
+      .sig-title { font-size: 11.5px !important; }
 
-      .sig-avatar { width: 34px; height: 34px; }
-      .sig-avatar span { font-size: 13px; }
-      .sig-name { font-size: 13.5px; }
-      .sig-title { font-size: 11px; }
-
-      /* Footer */
       .footer {
-        border-radius: 0;
-        padding: 14px 16px;
+        border-radius: 0 !important;
+        padding: 16px 18px !important;
       }
-
-      .footer-brand { font-size: 12px; margin-bottom: 6px; }
-      .footer p { font-size: 10.5px; line-height: 1.6; }
+      .footer-brand { font-size: 12px !important; margin-bottom: 8px !important; }
+      .footer p { font-size: 11px !important; line-height: 1.65 !important; }
     }
+
   </style>
 </head>
 <body>
 
-<div class="email-wrapper">
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#eceef1;line-height:1px;">
+    Roami eSIM 致以最诚挚的平安祝愿，愿您和家人远离危险，一切安好。&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
 
-  <div class="header">
-    <div class="header-inner">
-      <div class="logo-row">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 6.5C5.5 2 18.5 2 23 6.5M5 11c3.8-3.8 10.2-3.8 14 0M9 15.5c1.9-1.9 5.1-1.9 7 0M12 20h.01" stroke="#1a1a2e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          </svg>
+  <div class="email-wrapper">
+
+    <div class="header">
+      <div class="header-inner">
+
+        <div class="logo-row">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+              <path d="M1 6.5C5.5 2 18.5 2 23 6.5M5 11c3.8-3.8 10.2-3.8 14 0M9 15.5c1.9-1.9 5.1-1.9 7 0M12 20h.01"
+                stroke="#1a1a2e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="logo-name">Roami <span>eSIM</span></div>
+            <div class="logo-sub">全球网络连接</div>
+          </div>
         </div>
+
+        <div class="header-sep"></div>
+
+        <div class="header-title-block">
+          <span class="header-eyebrow">一份平安的心意</span>
+          <h1 class="header-h1">致老朋友的<em>平安祝愿</em></h1>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="body">
+
+      <p class="greeting">亲爱的 Roami eSIM 老朋友，您好：</p>
+
+      <p class="paragraph">
+        近期中东地区的局势牵动着世界的心。每当新闻更新，我们最关心的，是曾让 Roami eSIM 陪伴全球出行的您，是否一切安好。
+      </p>
+
+      <p class="paragraph">
+        这封邮件的唯一目的，就是向您和您的家人，致以最诚挚的平安祝愿。
+      </p>
+
+      <div class="quote-block">
+        <p>您是 Roami eSIM 最珍贵的用户。我们衷心祝愿，在战火纷飞之际，您与所爱之人远离危险，一切平安顺遂。如果需要任何支持，请随时联系我们。</p>
+      </div>
+
+      <p class="paragraph">
+        我们为您预留了一份心意。在您未来任何需要安心启程的时刻，都可以使用它。
+      </p>
+
+      <div class="gift-card">
+        <span class="gift-label">您的专属平安祝福码</span>
+        <div class="gift-code">PEACE</div>
+        <span class="gift-code-sub">使用此专属码，开启您的下一段旅程</span>
+        <div class="cta-wrap">
+          <a href="https://www.qq.com" class="cta-button">马上使用</a>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <p class="sig-closing">衷心祝愿平安。</p>
+      <div class="sig-block">
+        <div class="sig-avatar"><span>A</span></div>
         <div>
-          <div class="logo-name">Roami <span>eSIM</span></div>
-          <div class="logo-sub">Global Connectivity</div>
+          <div class="sig-name">Anna</div>
+          <div class="sig-title">Roami eSIM 高级客户经理</div>
         </div>
       </div>
 
-      <div class="header-sep"></div>
-
-      <div class="header-title-block">
-        <div class="header-eyebrow">A message of peace</div>
-        <h1 class="header-h1">致老朋友的<em>平安祝愿</em></h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="body">
-
-    <p class="greeting">亲爱的 Roami eSIM 老朋友，您好：</p>
-
-    <p class="paragraph">
-      近期中东地区的局势牵动着世界的心。每当新闻更新，我们最关心的，是曾让 Roami eSIM 陪伴全球出行的您，是否一切安好。
-    </p>
-
-    <p class="paragraph">
-      这封邮件的唯一目的，就是向您和您的家人，致以最诚挚的平安祝愿。
-    </p>
-
-    <div class="quote-block">
-      <p>您是 Roami eSIM 最珍贵的用户。我们衷心祝愿，在战火纷飞之际，您与所爱之人远离危险，一切平安顺遂。如果需要任何支持，请随时联系我。</p>
     </div>
 
-    <p class="paragraph">
-      我们为您预留了一份心意。在您未来任何需要安心启程的时刻，都可以使用它。
-    </p>
-
-    <div class="gift-card">
-      <p class="gift-label">您的专属平安祝福码</p>
-      <div class="gift-code">PEACE</div>
-      <p class="gift-code-sub">Your personal peace blessing code</p>
-      <a href="https://www.qq.com" class="cta-button">马上使用</a>
-    </div>
-
-    <hr class="divider" />
-
-    <p class="sig-closing">衷心祝愿平安。</p>
-    <div class="sig-block">
-      <div class="sig-avatar"><span>A</span></div>
-      <div>
-        <div class="sig-name">Anna</div>
-        <div class="sig-title">Roami eSIM 高级客户经理</div>
-      </div>
+    <div class="footer">
+      <div class="footer-brand">Roami <span>eSIM</span></div>
+      <p>本邮件发送至您的注册邮箱，因为您曾使用过 Roami eSIM 服务。<br />如有任何疑问，请联系我们的客服支持团队。</p>
     </div>
 
   </div>
-
-  <div class="footer">
-    <div class="footer-brand">Roami <span>eSIM</span></div>
-    <p>本邮件发送至您的注册邮箱，因为您曾使用过 Roami eSIM 服务。<br />如有任何疑问，请联系客服支持团队。</p>
-  </div>
-
-</div>
 
 </body>
 </html>
