@@ -217,7 +217,6 @@
       margin-bottom: 8px;
     }
 
-    /* 修复：提升副标题可读性 */
     .gift-code-sub {
       position: relative; z-index: 1;
       font-size: 12px;
@@ -332,22 +331,111 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── Mobile ── */
+    /* ── Mobile：紧凑间距 ── */
     @media (max-width: 480px) {
-      .email-wrapper { padding: 20px 10px 32px; }
-      .header { padding: 18px 22px; border-radius: 12px 12px 0 0; }
-      .header-h1 { font-size: 17px; }
-      .header-sep { height: 26px; }
-      .body { padding: 32px 24px 36px; }
-      .footer { padding: 22px 24px; border-radius: 0 0 12px 12px; }
-      .gift-code { font-size: 30px; letter-spacing: 0.25em; }
-      .gift-card { padding: 28px 20px 24px; }
+      /* 外层几乎无上下留白 */
+      .email-wrapper {
+        padding: 0 0 16px;
+      }
+
+      /* Header */
+      .header {
+        border-radius: 0;
+        padding: 14px 16px 12px;
+      }
+
+      .header-inner { gap: 10px; }
+
+      .logo-icon { width: 26px; height: 26px; }
+      .logo-icon svg { width: 13px; height: 13px; }
+      .logo-name { font-size: 13px; }
+      .logo-sub { font-size: 8.5px; }
+      .header-sep { height: 22px; }
+      .header-eyebrow { font-size: 8.5px; margin-bottom: 3px; }
+      .header-h1 { font-size: 15px; }
+
+      /* Body */
+      .body {
+        padding: 20px 16px 24px;
+      }
+
+      .greeting {
+        font-size: 13px;
+        margin-bottom: 14px;
+      }
+
+      .paragraph {
+        font-size: 13.5px;
+        line-height: 1.8;
+        margin-bottom: 12px;
+      }
+
+      /* Quote */
+      .quote-block {
+        padding: 14px 14px 14px 18px;
+        margin: 16px 0 18px;
+        border-radius: 8px;
+      }
+
+      .quote-block p {
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      /* Gift card */
+      .gift-card {
+        padding: 20px 16px 18px;
+        margin: 18px 0;
+        border-radius: 12px;
+      }
+
+      .gift-label {
+        font-size: 10px;
+        margin-bottom: 10px;
+      }
+
+      .gift-code {
+        font-size: 28px;
+        letter-spacing: 0.22em;
+        margin-bottom: 6px;
+      }
+
+      .gift-code-sub {
+        font-size: 11px;
+        margin-bottom: 18px;
+      }
+
       .cta-button {
         display: block;
         width: 100%;
         text-align: center;
-        padding: 14px 20px;
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 10px;
       }
+
+      /* Divider */
+      .divider { margin: 20px 0; }
+
+      /* Signature */
+      .sig-closing {
+        font-size: 13.5px;
+        margin-bottom: 14px;
+      }
+
+      .sig-avatar { width: 34px; height: 34px; }
+      .sig-avatar span { font-size: 13px; }
+      .sig-name { font-size: 13.5px; }
+      .sig-title { font-size: 11px; }
+
+      /* Footer */
+      .footer {
+        border-radius: 0;
+        padding: 14px 16px;
+      }
+
+      .footer-brand { font-size: 12px; margin-bottom: 6px; }
+      .footer p { font-size: 10.5px; line-height: 1.6; }
     }
   </style>
 </head>
