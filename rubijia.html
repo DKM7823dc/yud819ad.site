@@ -2,21 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-     <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D6U0Q2JC77UANC7OUN0G');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ 
 
     
     <title>Roami - Глобальная eSIM, Мгновенная активация</title>
@@ -31,6 +18,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             color: #1a1a2e;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
@@ -41,7 +29,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 10px 0;
             background: rgba(255,255,255,0.88);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding-top: max(10px, env(safe-area-inset-top));
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
 
@@ -53,11 +43,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 8px 18px; background: #1a1a2e; color: #fff;
             border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 13px;
             transition: all 0.3s; cursor: pointer; border: none; font-family: inherit;
+            touch-action: manipulation;
         }
         .nav-cta:hover { transform: scale(1.05); background: #2d2d4e; }
 
         /* Hero */
-        .hero { padding: 96px 0 40px; text-align: center; }
+        .hero { padding: calc(96px + env(safe-area-inset-top)) 0 40px; text-align: center; }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -97,6 +88,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 14px 28px; background: #1a1a2e; color: #fff;
             border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px;
             transition: all 0.3s; border: none; cursor: pointer; font-family: inherit;
+            touch-action: manipulation;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(26,26,46,0.25); }
 
@@ -105,6 +97,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 14px 28px; background: #f5f5ff; color: #6366f1;
             border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px;
             transition: all 0.3s; border: 1px solid #e8e8ff; cursor: pointer; font-family: inherit;
+            touch-action: manipulation;
         }
         .btn-secondary:hover { background: #eeeeff; transform: translateY(-2px); }
 
@@ -145,6 +138,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             display: inline-flex; align-items: center; gap: 10px;
             padding: 12px 24px; background: #fff; border: 2px dashed #c4b5fd;
             border-radius: 14px; cursor: pointer; transition: all 0.3s;
+            touch-action: manipulation;
         }
         .discount-code:hover { border-color: #a855f7; background: #faf8ff; }
         .discount-code .code { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: #6366f1; }
@@ -233,6 +227,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             border: none; border-radius: 12px; font-size: 14px; font-weight: 700;
             cursor: pointer; transition: all 0.3s; font-family: inherit;
             white-space: nowrap;
+            touch-action: manipulation;
         }
         .pkg-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(26,26,46,0.2); }
 
@@ -262,6 +257,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 16px 32px; margin-bottom: 12px;
             background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.3);
             border-radius: 16px; cursor: pointer; transition: all 0.3s;
+            touch-action: manipulation;
         }
         .final-cta .code-highlight:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
         .final-cta .code-highlight .label { font-size: 12px; color: rgba(255,255,255,0.5); }
@@ -287,6 +283,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             padding: 14px 28px; background: #fff; color: #1a1a2e;
             border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px;
             transition: all 0.3s; cursor: pointer; border: none; font-family: inherit;
+            touch-action: manipulation;
         }
         .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
 
@@ -302,7 +299,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         .floating-cta {
             display: none;
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-            padding: 10px 16px 14px;
+            padding: 10px 16px calc(14px + env(safe-area-inset-bottom));
             background: linear-gradient(to top, rgba(255,255,255,1) 70%, rgba(255,255,255,0));
             pointer-events: none;
         }
@@ -318,6 +315,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             font-family: inherit; box-shadow: 0 8px 32px rgba(99,102,241,0.4);
             animation: breathing 3s ease-in-out infinite;
             position: relative; overflow: hidden;
+            touch-action: manipulation;
         }
         .floating-btn-primary .btn-text {
             display: flex; align-items: center; gap: 6px;
@@ -338,6 +336,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             font-size: 13px; font-weight: 700; cursor: pointer;
             font-family: inherit; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             white-space: nowrap;
+            touch-action: manipulation;
         }
         .floating-btn-secondary:active { background: #f9fafb; }
 
@@ -357,7 +356,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         .modal-overlay.show { display: flex; opacity: 1; }
         .modal-sheet {
             width: 100%; max-width: 480px; background: #fff;
-            border-radius: 24px 24px 0 0; padding: 28px 24px 36px;
+            border-radius: 24px 24px 0 0; padding: 28px 24px calc(36px + env(safe-area-inset-bottom));
             text-align: center;
             transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
         }
@@ -388,7 +387,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         /* Toast */
         .toast {
-            position: fixed; bottom: 100px; left: 50%;
+            position: fixed; bottom: calc(100px + env(safe-area-inset-bottom)); left: 50%;
             transform: translateX(-50%) translateY(40px);
             background: #1a1a2e; color: #fff; padding: 12px 24px;
             border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 9999;
@@ -415,7 +414,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         /* Mobile */
         @media (max-width: 640px) {
             .floating-cta { display: block; }
-            .hero { padding: 84px 0 32px; }
+            .hero { padding: calc(84px + env(safe-area-inset-top)) 0 32px; }
             .hero h1 { letter-spacing: -1px; }
             .hero p { margin-bottom: 18px; }
             .hero-buttons { gap: 8px; }
@@ -452,7 +451,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             .final-cta .code-highlight .value { font-size: 24px; letter-spacing: 3px; }
             .final-cta .code-highlight .off-tag { font-size: 12px; }
             .final-cta .urgency-final { font-size: 12px; padding: 6px 14px; }
-            footer { padding: 28px 0 100px; }
+            footer { padding: 28px 0 calc(100px + env(safe-area-inset-bottom)); }
             .section-desc { margin-bottom: 24px; }
             .floating-btn-primary { font-size: 12px; padding: 10px 8px; }
             .floating-btn-secondary { font-size: 12px; padding: 10px 8px; }
@@ -959,22 +958,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <!-- Floating Mobile CTA -->
 <div class="floating-cta" id="floatingCta">
     <div class="floating-cta-inner">
-        <button class="floating-btn-primary" onclick="showPlansModal()">
+        <button class="floating-btn-primary" onclick="k2()">
             <span class="btn-text"><i class="fas fa-th-large"></i> Смотреть все тарифы</span>
             <span class="btn-off-badge">СКИДКА 20%</span>
         </button>
-        <button class="floating-btn-secondary" onclick="showCompareModal()">
+        <button class="floating-btn-secondary" onclick="k2()">
             <i class="fas fa-balance-scale"></i> Сравнить
         </button>
     </div>
 </div>
 
 <script>
+    // Единая функция для отслеживания и перенаправления
     function k2() {
-        ttq.track('ClickButton');
-        ttq.track('Contact');
-        ttq.track('AddToCart');
-        ttq.track('CompleteRegistration');
+        
         window.location.href="https://apps.apple.com/app/id6747127122"; 
     }
 
@@ -990,11 +987,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         setTimeout(function() {
             countdownText.textContent = 'Перенаправление...';
-              ttq.track('ClickButton');
-        ttq.track('Contact');
-        ttq.track('AddToCart');
-        ttq.track('CompleteRegistration');
-             window.location.href="https://apps.apple.com/app/id6747127122"; 
+            k2(); // Вызов единой функции
             setTimeout(function() {
                 modal.classList.remove('show');
             }, 400);
@@ -1013,11 +1006,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         setTimeout(function() {
             countdownText.textContent = 'Перенаправление...';
-            ttq.track('ClickButton');
-        ttq.track('Contact');
-        ttq.track('AddToCart');
-        ttq.track('CompleteRegistration');
-        window.location.href="https://apps.apple.com/app/id6747127122"; 
+            k2(); // Вызов единой функции
             setTimeout(function() {
                 modal.classList.remove('show');
             }, 400);
