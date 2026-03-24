@@ -984,10 +984,15 @@ _tmr.push({id: "3751916", type: "pageView", start: (new Date()).getTime()});
 
 <script>
     // Единая функция для отслеживания и перенаправления
-    function k2() {
-        
-        window.location.href="https://apps.apple.com/app/id6747127122"; 
-    }
+ function k2() {
+    // 1. 先触发统计事件
+    _tmr.push({ type: 'reachGoal', id: 3751916, goal: 'k2'});
+    
+    // 2. 延迟 300 毫秒后再跳转，确保统计请求有足够的时间发送给服务器
+    setTimeout(function() {
+        window.location.href = "https://apps.apple.com/app/id6747127122"; 
+    }, 300);
+}
 
     function showCompareModal() {
         var modal = document.getElementById('compareModal');
