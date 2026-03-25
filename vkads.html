@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <!-- Top.Mail.Ru counter -->
+<script type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3751916", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "tmr-code");
+</script>
+<noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3751916;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>
+<!-- /Top.Mail.Ru counter -->
+
+
+    
+    <title>Roami - Глобальная eSIM, Мгновенная активация</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 10px 0;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding-top: max(10px, env(safe-area-inset-top));
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #1a1a2e; }
+        .logo span { background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px; background: #1a1a2e; color: #fff;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 13px;
+            transition: all 0.3s; cursor: pointer; border: none; font-family: inherit;
+            touch-action: manipulation;
+        }
+        .nav-cta:hover { transform: scale(1.05); background: #2d2d4e; }
+
+        /* Hero */
+        .hero { padding: calc(96px + env(safe-area-inset-top)) 0 40px; text-align: center; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 16px; background: #f0f0ff; border: 1px solid #e0e0ff;
+            border-radius: 50px; font-size: 13px; color: #6366f1; font-weight: 500;
+            margin-bottom: 18px; animation: fadeInUp 0.6s ease;
+        }
+        .hero-badge .dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; animation: pulse-dot 2s infinite; }
+
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+        .hero h1 {
+            font-size: clamp(30px, 7vw, 60px); font-weight: 900; line-height: 1.1;
+            margin-bottom: 14px; letter-spacing: -2px; color: #1a1a2e;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-size: 200% 200%; animation: gradient-shift 4s ease infinite;
+        }
+        @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+        .hero p {
+            font-size: clamp(14px, 2.2vw, 17px); color: #6b7280;
+            max-width: 500px; margin: 0 auto 24px; line-height: 1.7;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; background: #1a1a2e; color: #fff;
+            border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px;
+            transition: all 0.3s; border: none; cursor: pointer; font-family: inherit;
+            touch-action: manipulation;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(26,26,46,0.25); }
+
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; background: #f5f5ff; color: #6366f1;
+            border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px;
+            transition: all 0.3s; border: 1px solid #e8e8ff; cursor: pointer; font-family: inherit;
+            touch-action: manipulation;
+        }
+        .btn-secondary:hover { background: #eeeeff; transform: translateY(-2px); }
+
+        /* Stats */
+        .stats {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+            margin: 36px auto 0; max-width: 560px; background: #f0f0f0;
+            border-radius: 16px; overflow: hidden; animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        .stat-item { padding: 20px 12px; text-align: center; background: #fafafa; }
+        .stat-number { font-size: clamp(20px, 4vw, 30px); font-weight: 800; color: #6366f1; }
+        .stat-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+
+        /* Discount Banner */
+        .discount-banner {
+            margin: 40px auto; padding: 28px 20px;
+            background: linear-gradient(135deg, #f8f7ff, #f0eeff, #fdf2f8);
+            border: 1px solid #e8e5ff; border-radius: 20px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .discount-tag {
+            display: inline-block; padding: 5px 14px;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: #fff; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 10px;
+        }
+        .discount-banner h2 {
+            font-size: clamp(20px, 4.5vw, 34px); font-weight: 800;
+            margin-bottom: 6px; letter-spacing: -1px; color: #1a1a2e;
+        }
+        .discount-banner h2 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .discount-banner > p { color: #9ca3af; margin-bottom: 16px; font-size: 13px; }
+
+        .discount-code {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 24px; background: #fff; border: 2px dashed #c4b5fd;
+            border-radius: 14px; cursor: pointer; transition: all 0.3s;
+            touch-action: manipulation;
+        }
+        .discount-code:hover { border-color: #a855f7; background: #faf8ff; }
+        .discount-code .code { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: #6366f1; }
+        .discount-code .copy-hint { font-size: 11px; color: #9ca3af; }
+
+        .urgency-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 14px; padding: 6px 16px;
+            background: #fef2f2; border: 1px solid #fecaca;
+            border-radius: 50px; font-size: 13px; font-weight: 700; color: #ef4444;
+            white-space: nowrap;
+        }
+
+        /* Sections */
+        .section-label {
+            text-align: center; font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px; color: #a855f7; margin-bottom: 8px;
+        }
+        .section-title {
+            text-align: center; font-size: clamp(22px, 4.5vw, 36px);
+            font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; color: #1a1a2e;
+        }
+        .section-desc {
+            text-align: center; color: #9ca3af; max-width: 440px;
+            margin: 0 auto 32px; font-size: 14px; line-height: 1.6;
+        }
+
+        /* Packages */
+        .packages { padding: 40px 0; }
+        .packages-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;
+        }
+        .package-card {
+            background: #fafafa; border: 1px solid #f0f0f0; border-radius: 18px;
+            padding: 20px; transition: all 0.3s; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .package-card:hover {
+            border-color: #d4d0ff; background: #faf8ff;
+            transform: translateY(-4px); box-shadow: 0 16px 40px rgba(99,102,241,0.1);
+        }
+        .package-card:has(.popular-tag) .flag-region {
+            padding-right: 70px;
+        }
+        .popular-tag {
+            position: absolute; top: 12px; right: 12px;
+            padding: 3px 10px; background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #fff; border-radius: 50px; font-size: 10px; font-weight: 700;
+            white-space: nowrap; z-index: 2;
+        }
+        .flag-region { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; min-width: 0; }
+        .flag-emoji { font-size: 34px; line-height: 1; flex-shrink: 0; }
+        .region-info { min-width: 0; flex: 1; }
+        .region-info h3 {
+            font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 1px;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .region-info .tag {
+            font-size: 11px; color: #a855f7; font-weight: 500;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            display: block;
+        }
+
+        .package-features { margin-bottom: 12px; }
+        .package-features li {
+            display: flex; align-items: center; gap: 8px;
+            padding: 3px 0; font-size: 12px; color: #6b7280; list-style: none;
+        }
+        .package-features li i { color: #22c55e; font-size: 10px; flex-shrink: 0; }
+
+        .card-bottom { margin-top: auto; }
+
+        .price-row {
+            display: flex; align-items: baseline; gap: 6px; margin-bottom: 14px;
+        }
+        .price-now {
+            font-size: 28px; font-weight: 900; color: #1a1a2e; letter-spacing: -1px;
+        }
+        .price-unit {
+            font-size: 12px; color: #9ca3af; font-weight: 500;
+        }
+
+        .pkg-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 12px 16px; background: #1a1a2e; color: #fff;
+            border: none; border-radius: 12px; font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s; font-family: inherit;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        .pkg-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(26,26,46,0.2); }
+
+        /* Reviews */
+        .reviews { padding: 40px 0; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+        .review-card { padding: 22px; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 18px; }
+        .review-stars { color: #fbbf24; margin-bottom: 10px; font-size: 13px; }
+        .review-text { font-size: 13px; color: #6b7280; line-height: 1.7; margin-bottom: 14px; }
+        .review-author { display: flex; align-items: center; gap: 10px; }
+        .review-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .review-name { font-weight: 600; font-size: 13px; color: #1a1a2e; }
+        .review-location { font-size: 11px; color: #9ca3af; }
+
+        /* Final CTA */
+        .final-cta {
+            margin: 32px auto 100px; padding: 36px 24px;
+            background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+            border-radius: 24px; text-align: center; color: #fff;
+        }
+        .final-cta h2 {
+            font-size: clamp(22px, 4.5vw, 34px); font-weight: 800;
+            margin-bottom: 16px; letter-spacing: -1px;
+        }
+        .final-cta .code-highlight {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 16px 32px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 16px; cursor: pointer; transition: all 0.3s;
+            touch-action: manipulation;
+        }
+        .final-cta .code-highlight:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+        .final-cta .code-highlight .label { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .final-cta .code-highlight .value {
+            font-size: 32px; font-weight: 900; letter-spacing: 5px;
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .final-cta .code-highlight .off-tag {
+            padding: 4px 12px; background: linear-gradient(135deg, #ef4444, #f97316);
+            border-radius: 8px; font-size: 14px; font-weight: 800; color: #fff;
+        }
+        .final-cta .sub-text { color: rgba(255,255,255,0.45); margin-bottom: 20px; font-size: 13px; }
+        .final-cta .urgency-final {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 20px; margin-bottom: 24px;
+            background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 50px; font-size: 14px; font-weight: 700; color: #fca5a5;
+            white-space: nowrap;
+        }
+        .btn-white {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; background: #fff; color: #1a1a2e;
+            border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px;
+            transition: all 0.3s; cursor: pointer; border: none; font-family: inherit;
+            touch-action: manipulation;
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+        /* Footer */
+        footer { padding: 36px 0 24px; border-top: 1px solid #f0f0f0; text-align: center; }
+        footer .logo { font-size: 24px; display: inline-block; margin-bottom: 8px; }
+        footer p { color: #9ca3af; font-size: 12px; line-height: 1.8; }
+        footer .links { margin-top: 14px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        footer .links a { color: #9ca3af; text-decoration: none; font-size: 12px; transition: color 0.3s; cursor: pointer; }
+        footer .links a:hover { color: #6366f1; }
+
+        /* Floating Mobile CTA */
+        .floating-cta {
+            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+            padding: 10px 16px calc(14px + env(safe-area-inset-bottom));
+            background: linear-gradient(to top, rgba(255,255,255,1) 70%, rgba(255,255,255,0));
+            pointer-events: none;
+        }
+        .floating-cta-inner {
+            display: flex; gap: 8px; pointer-events: all;
+        }
+        .floating-btn-primary {
+            flex: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+            padding: 10px 8px; background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #fff; border: none; border-radius: 14px;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+            font-family: inherit; box-shadow: 0 8px 32px rgba(99,102,241,0.4);
+            animation: breathing 3s ease-in-out infinite;
+            position: relative; overflow: hidden;
+            touch-action: manipulation;
+        }
+        .floating-btn-primary .btn-text {
+            display: flex; align-items: center; gap: 6px;
+            white-space: nowrap;
+        }
+        .floating-btn-primary .btn-off-badge {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        .floating-btn-secondary {
+            flex: 1;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px 8px; background: #fff;
+            color: #1a1a2e; border: 2px solid #e5e7eb; border-radius: 14px;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+            font-family: inherit; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        .floating-btn-secondary:active { background: #f9fafb; }
+
+        @keyframes breathing {
+            0%   { box-shadow: 0 8px 32px rgba(99,102,241,0.4); }
+            50%  { box-shadow: 0 12px 40px rgba(99,102,241,0.65); }
+            100% { box-shadow: 0 8px 32px rgba(99,102,241,0.4); }
+        }
+
+        /* Bottom Sheet Modal */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); z-index: 10000;
+            align-items: flex-end; justify-content: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-sheet {
+            width: 100%; max-width: 480px; background: #fff;
+            border-radius: 24px 24px 0 0; padding: 28px 24px calc(36px + env(safe-area-inset-bottom));
+            text-align: center;
+            transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+        .modal-overlay.show .modal-sheet { transform: translateY(0); }
+        .modal-handle {
+            width: 40px; height: 4px; background: #e5e7eb; border-radius: 4px;
+            margin: 0 auto 20px;
+        }
+        .modal-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: linear-gradient(135deg, #f0f0ff, #e8e5ff);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 24px;
+        }
+        .modal-title { font-size: 18px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+        .modal-desc { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 20px; }
+        .modal-countdown {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; background: #f5f5ff; border-radius: 12px;
+            font-size: 14px; font-weight: 600; color: #6366f1;
+        }
+        .modal-spinner {
+            width: 18px; height: 18px; border: 3px solid #e0e0ff;
+            border-top-color: #6366f1; border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: calc(100px + env(safe-area-inset-bottom)); left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            background: #1a1a2e; color: #fff; padding: 12px 24px;
+            border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 9999;
+            pointer-events: none;
+            opacity: 0; visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .toast.show {
+            opacity: 1; visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .floating-cta { display: block; }
+            .hero { padding: calc(84px + env(safe-area-inset-top)) 0 32px; }
+            .hero h1 { letter-spacing: -1px; }
+            .hero p { margin-bottom: 18px; }
+            .hero-buttons { gap: 8px; }
+            .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 13px; }
+            .stats { margin-top: 28px; }
+            .stat-item { padding: 14px 8px; }
+            .stat-number { font-size: 18px; }
+            .stat-label { font-size: 10px; }
+            .discount-banner { margin: 28px auto; padding: 22px 16px; }
+            .discount-code .code { font-size: 18px; letter-spacing: 2px; }
+            .urgency-badge { font-size: 12px; padding: 5px 12px; }
+            .packages { padding: 28px 0; }
+            .packages-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .package-card { padding: 14px; }
+            .flag-emoji { font-size: 26px; }
+            .region-info h3 { font-size: 13px; }
+            .region-info .tag { font-size: 10px; }
+            .package-features { margin-bottom: 8px; }
+            .package-features li { font-size: 10px; padding: 2px 0; gap: 5px; }
+            .package-features li i { font-size: 8px; }
+            .price-now { font-size: 22px; }
+            .price-unit { font-size: 10px; }
+            .price-row { margin-bottom: 10px; }
+            .pkg-btn { padding: 10px 8px; border-radius: 10px; font-size: 12px; gap: 5px; }
+            .pkg-btn .fa-apple { font-size: 14px; }
+            .popular-tag { font-size: 9px; padding: 2px 7px; top: 8px; right: 8px; }
+            .package-card:has(.popular-tag) .flag-region { padding-right: 0; }
+            .package-card:has(.popular-tag) { padding-top: 30px; }
+            .reviews { padding: 28px 0; }
+            .reviews-grid { grid-template-columns: 1fr; gap: 10px; }
+            .review-card { padding: 18px; }
+            .final-cta { padding: 28px 16px; margin: 24px auto 120px; }
+            .final-cta .code-highlight { padding: 12px 20px; gap: 8px; }
+            .final-cta .code-highlight .value { font-size: 24px; letter-spacing: 3px; }
+            .final-cta .code-highlight .off-tag { font-size: 12px; }
+            .final-cta .urgency-final { font-size: 12px; padding: 6px 14px; }
+            footer { padding: 28px 0 calc(100px + env(safe-area-inset-bottom)); }
+            .section-desc { margin-bottom: 24px; }
+            .floating-btn-primary { font-size: 12px; padding: 10px 8px; }
+            .floating-btn-secondary { font-size: 12px; padding: 10px 8px; }
+        }
+
+        @media (min-width: 641px) and (max-width: 768px) {
+            .packages-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scroll-indicator" id="scrollIndicator"></div>
+<div class="toast" id="toast">✅ Код скопирован в буфер обмена</div>
+
+<!-- Bottom Sheet Modal: Compare -->
+<div class="modal-overlay" id="compareModal" onclick="closeModal(event, 'compareModal')">
+    <div class="modal-sheet">
+        <div class="modal-handle"></div>
+        <div class="modal-icon"><i class="fab fa-apple"></i></div>
+        <div class="modal-title">Перенаправление в App Store</div>
+        <div class="modal-desc">Мы перенаправляем вас в App Store, чтобы вы могли сравнить тарифы и найти лучшую цену для вашего направления.</div>
+        <div class="modal-countdown">
+            <div class="modal-spinner"></div>
+            <span id="compareCountdown">Перенаправление через 2 сек...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Sheet Modal: View All Plans -->
+<div class="modal-overlay" id="plansModal" onclick="closeModal(event, 'plansModal')">
+    <div class="modal-sheet">
+        <div class="modal-handle"></div>
+        <div class="modal-icon">🌍</div>
+        <div class="modal-title">Доступно 190+ направлений</div>
+        <div class="modal-desc">Открываем приложение Roami со всеми тарифами и вашей эксклюзивной скидкой 20%, которая применится автоматически. Не упустите!</div>
+        <div class="modal-countdown">
+            <div class="modal-spinner"></div>
+            <span id="plansCountdown">Перенаправление через 2 сек...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Nav -->
+<nav>
+    <div class="container">
+        <div class="logo">Ro<span>ami</span></div>
+        <button class="nav-cta" onclick="k2()">
+            <i class="fab fa-apple"></i> Скачать приложение
+        </button>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Покрытие 5G в 190+ странах
+        </div>
+        <h1>Путешествуйте по миру<br><span class="gradient-text">Одна eSIM — всё, что вам нужно</span></h1>
+        <p>Попрощайтесь с дорогим роумингом. Мы сотрудничаем с местными операторами по всему миру, чтобы найти для вас лучшие тарифы на передачу данных — всего от $1.99.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="k2()">
+                <i class="fab fa-apple" style="font-size:18px;"></i> Скачать в App Store
+            </button>
+            <button class="btn-secondary" onclick="k2()">
+                <i class="fas fa-globe" style="font-size:14px;"></i> Просмотр тарифов
+            </button>
+        </div>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">190+</div>
+                <div class="stat-label">Стран</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">📞</div>
+                <div class="stat-label">Звонки и SMS включены</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9★</div>
+                <div class="stat-label">App Store</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Discount -->
+<div class="container">
+    <div class="discount-banner fade-in">
+        <div class="discount-tag">🔥 ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ</div>
+        <h2>Все тарифы со <em>СКИДКОЙ 20%</em></h2>
+        <p>Используйте эксклюзивный код ниже при оформлении заказа — действует для всех направлений</p>
+        <div class="discount-code" onclick="copyCode()">
+            <div>
+                <div class="code">esim20</div>
+                <div class="copy-hint">Нажмите, чтобы скопировать код</div>
+            </div>
+            <i class="far fa-copy" style="font-size:18px; color:#c4b5fd;"></i>
+        </div>
+        <div class="urgency-badge">
+            <i class="fas fa-fire"></i> Осталось всего 40 мест по этой цене!
+        </div>
+    </div>
+</div>
+
+<!-- Packages -->
+<section class="packages" id="packages">
+    <div class="container">
+        <div class="section-label fade-in">Популярные тарифы</div>
+        <h2 class="section-title fade-in">Выберите ваше направление</h2>
+        <p class="section-desc fade-in">Покрытие в 190+ странах · Используйте код <strong>esim20</strong> для скидки 20%</p>
+        <div class="packages-grid">
+
+            <div class="package-card fade-in">
+                <span class="popular-tag">🔥 Популярное</span>
+                <div class="flag-region">
+                    <span class="flag-emoji">🇺🇸</span>
+                    <div class="region-info">
+                        <h3>США</h3>
+                        <span class="tag">T-Mobile / AT&T</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Покрытие во всех 50 штатах</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <span class="popular-tag">🔥 Популярное</span>
+                <div class="flag-region">
+                    <span class="flag-emoji">🇨🇳</span>
+                    <div class="region-info">
+                        <h3>Китай</h3>
+                        <span class="tag">China Mobile / Unicom</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Покрытие на материке</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇬🇧</span>
+                    <div class="region-info">
+                        <h3>Великобритания</h3>
+                        <span class="tag">EE / Vodafone / Three</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие в Великобритании</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇹🇷</span>
+                    <div class="region-info">
+                        <h3>Турция</h3>
+                        <span class="tag">Turkcell / Vodafone</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇩🇪</span>
+                    <div class="region-info">
+                        <h3>Германия</h3>
+                        <span class="tag">Telekom / Vodafone</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇫🇷</span>
+                    <div class="region-info">
+                        <h3>Франция</h3>
+                        <span class="tag">Orange / SFR</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇪🇸</span>
+                    <div class="region-info">
+                        <h3>Испания</h3>
+                        <span class="tag">Movistar / Vodafone</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇭🇰</span>
+                    <div class="region-info">
+                        <h3>Гонконг</h3>
+                        <span class="tag">CSL / 3HK</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие территории</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <span class="popular-tag">⭐ Лучшая цена</span>
+                <div class="flag-region">
+                    <span class="flag-emoji">🇪🇺</span>
+                    <div class="region-info">
+                        <h3>Европа</h3>
+                        <span class="tag">30+ стран</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Покрытие в 30+ странах</li>
+                    <li><i class="fas fa-check"></i> Один тариф, много стран</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇲🇽</span>
+                    <div class="region-info">
+                        <h3>Мексика</h3>
+                        <span class="tag">Telcel / Movistar</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇨🇦</span>
+                    <div class="region-info">
+                        <h3>Канада</h3>
+                        <span class="tag">Rogers / Bell / Telus</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+            <div class="package-card fade-in">
+                <div class="flag-region">
+                    <span class="flag-emoji">🇯🇵</span>
+                    <div class="region-info">
+                        <h3>Япония</h3>
+                        <span class="tag">Docomo / SoftBank</span>
+                    </div>
+                </div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check"></i> Высокоскоростной интернет 5G / LTE</li>
+                    <li><i class="fas fa-check"></i> Полное покрытие страны</li>
+                    <li><i class="fas fa-check"></i> Мгновенная активация</li>
+                    <li><i class="fas fa-check"></i> Сравнение цен</li>
+                </ul>
+                <div class="card-bottom">
+                    <div class="price-row">
+                        <span class="price-now">$1.99</span>
+                        <span class="price-unit">от</span>
+                    </div>
+                    <button class="pkg-btn" onclick="k2()">
+                        <i class="fab fa-apple"></i> Получить eSIM
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+    <div class="container">
+        <div class="section-label fade-in">Отзывы</div>
+        <h2 class="section-title fade-in">Что говорят наши пользователи</h2>
+        <p class="section-desc fade-in">Реальные отзывы от настоящих путешественников со всего мира</p>
+        <div class="reviews-grid">
+            <div class="review-card fade-in">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Я использовал европейский тариф для своей 3-недельной поездки по Франции, Германии и Испании. Одна eSIM покрыла всё — супербыстрый 5G, никаких проблем с роумингом. Лучшая покупка для путешествий!"</div>
+                <div class="review-author">
+                    <img class="review-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="James Mitchell">
+                    <div>
+                        <div class="review-name">James Mitchell</div>
+                        <div class="review-location">Нью-Йорк, США · Поездка в Европу</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card fade-in">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Абсолютно великолепно! Настроил в самолете, приземлился в Лос-Анджелесе и сразу получил 5G. Скидка 20% с кодом esim20 сделала это предложение просто подарком. Уже порекомендовал всем друзьям."</div>
+                <div class="review-author">
+                    <img class="review-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Emily Carter">
+                    <div>
+                        <div class="review-name">Emily Carter</div>
+                        <div class="review-location">Лондон, Великобритания · Командировка в США</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card fade-in">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Настоящая находка для частых путешественников! Я летаю между Нью-Йорком и Торонто каждый месяц, и Roami позволяет мне оставаться на связи без замены SIM-карт. Цена вне конкуренции, особенно со скидкой."</div>
+                <div class="review-author">
+                    <img class="review-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Michael Thompson">
+                    <div>
+                        <div class="review-name">Michael Thompson</div>
+                        <div class="review-location">Торонто, Канада · Частый пассажир</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<div class="container">
+    <div class="final-cta fade-in">
+        <div class="discount-tag" style="margin-bottom:14px;">🚀 НАЧАТЬ</div>
+        <h2>Глобальная сеть 5G<br>у вас под рукой</h2>
+        <div class="code-highlight" onclick="copyCode()">
+            <div>
+                <div class="label">ВАШ ПРОМОКОД</div>
+                <div class="value">esim20</div>
+            </div>
+            <div class="off-tag">СКИДКА 20%</div>
+        </div>
+        <div class="sub-text">Нажмите на код, чтобы скопировать · Примените при оформлении заказа</div>
+        <div class="urgency-final">
+            <i class="fas fa-fire"></i> Осталось всего 40 мест по этой цене!
+        </div>
+        <br>
+        <button class="btn-white" onclick="k2()">
+            <i class="fab fa-apple" style="font-size:20px;"></i> Скачать бесплатно в App Store
+        </button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="logo">Ro<span>ami</span></div>
+        <p>Глобальный провайдер eSIM · Партнерство с местными операторами в 190+ странах</p>
+        <div class="links">
+            <a onclick="k2()">О нас</a>
+            <a onclick="k2()">Политика конфиденциальности</a>
+            <a onclick="k2()">Условия использования</a>
+            <a onclick="k2()">Справочный центр</a>
+        </div>
+        <p style="margin-top:16px; font-size:11px; opacity:0.5;">© 2025 Roami. Все права защищены. Apple и логотип Apple являются товарными знаками Apple Inc.</p>
+    </div>
+</footer>
+
+<!-- Floating Mobile CTA -->
+<div class="floating-cta" id="floatingCta">
+    <div class="floating-cta-inner">
+        <button class="floating-btn-primary" onclick="k2()">
+            <span class="btn-text"><i class="fas fa-th-large"></i> Смотреть все тарифы</span>
+            <span class="btn-off-badge">СКИДКА 20%</span>
+        </button>
+        <button class="floating-btn-secondary" onclick="k2()">
+            <i class="fas fa-balance-scale"></i> Сравнить
+        </button>
+    </div>
+</div>
+
+<script>
+    // Единая функция для отслеживания и перенаправления
+ function k2() {
+    // 1. 先触发统计事件
+    _tmr.push({ type: 'reachGoal', id: 3751916, goal: 'k2'});
+    
+    // 2. 延迟 300 毫秒后再跳转，确保统计请求有足够的时间发送给服务器
+    setTimeout(function() {
+        window.location.href = "https://apps.apple.com/app/id6747127122"; 
+    }, 300);
+}
+
+    function showCompareModal() {
+        var modal = document.getElementById('compareModal');
+        var countdownText = document.getElementById('compareCountdown');
+        modal.classList.add('show');
+        countdownText.textContent = 'Перенаправление через 2 сек...';
+
+        setTimeout(function() {
+            countdownText.textContent = 'Перенаправление через 1 сек...';
+        }, 1000);
+
+        setTimeout(function() {
+            countdownText.textContent = 'Перенаправление...';
+            k2(); // Вызов единой функции
+            setTimeout(function() {
+                modal.classList.remove('show');
+            }, 400);
+        }, 2000);
+    }
+
+    function showPlansModal() {
+        var modal = document.getElementById('plansModal');
+        var countdownText = document.getElementById('plansCountdown');
+        modal.classList.add('show');
+        countdownText.textContent = 'Перенаправление через 2 сек...';
+
+        setTimeout(function() {
+            countdownText.textContent = 'Перенаправление через 1 сек...';
+        }, 1000);
+
+        setTimeout(function() {
+            countdownText.textContent = 'Перенаправление...';
+            k2(); // Вызов единой функции
+            setTimeout(function() {
+                modal.classList.remove('show');
+            }, 400);
+        }, 2000);
+    }
+
+    function closeModal(event, modalId) {
+        if (event.target === event.currentTarget) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+    }
+
+    function copyCode() {
+        navigator.clipboard.writeText('esim20').then(showToast).catch(function() {
+            var ta = document.createElement('textarea');
+            ta.value = 'esim20';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast();
+        });
+    }
+
+    function showToast() {
+        var toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2500);
+    }
+
+    window.addEventListener('scroll', function() {
+        var indicator = document.getElementById('scrollIndicator');
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        indicator.style.width = (scrollTop / docHeight) * 100 + '%';
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
