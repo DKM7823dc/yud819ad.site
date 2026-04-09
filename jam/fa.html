@@ -627,9 +627,9 @@
         <p>&copy; 2026 SHEIN Recrutement. Tous droits réservés.</p>
     </footer>
 
-    <!-- Floating Bottom Button -->
-    <div class="fixed bottom-0 left-0 w-full p-4 z-40 bg-white/90 backdrop-blur border-t border-gray-200 flex justify-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-        <button onclick="k2()" class="w-full max-w-md bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold py-3.5 rounded-full shadow-lg transform transition hover:scale-105">
+    <!-- Floating Bottom Button (Optimized to not be on a separate full-width layer) -->
+    <div class="fixed bottom-6 left-0 w-full px-4 z-40 flex justify-center pointer-events-none">
+        <button onclick="k2()" class="w-full max-w-md bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold py-3.5 rounded-full shadow-xl transform transition hover:scale-105 pointer-events-auto">
             Postuler maintenant
         </button>
     </div>
