@@ -67,11 +67,19 @@
         }
         function toggleMission(element) {
             const details = element.querySelector('.mission-details');
+            const chevron = element.querySelector('.chevron-icon');
+            
             if (details.classList.contains('hidden')) {
+                // Ouvrir
                 details.classList.remove('hidden');
                 details.style.animation = 'fadeIn 0.3s ease-in-out';
+                if(chevron) chevron.classList.add('rotate-180', 'text-orange-500');
+                element.classList.add('border-orange-300', 'shadow-md');
             } else {
+                // Fermer
                 details.classList.add('hidden');
+                if(chevron) chevron.classList.remove('rotate-180', 'text-orange-500');
+                element.classList.remove('border-orange-300', 'shadow-md');
             }
         }
     </script>
@@ -180,12 +188,22 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Mission 1 -->
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md hover:border-orange-300 transition cursor-pointer flex flex-col" onclick="toggleMission(this)">
-                    <div class="flex flex-col gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-gray-800">Gestion des commandes</h3>
-                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">150-250 € / jour</span>
+                <div class="group bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-300 transition-all duration-300 cursor-pointer flex flex-col" onclick="toggleMission(this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col gap-3">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                Gestion des commandes
+                            </h3>
+                            <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">150-250 € / jour</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                            <i class="fas fa-chevron-down transition-transform duration-300 chevron-icon"></i>
+                        </div>
                     </div>
-                    <div class="mission-details hidden mt-4 flex-grow flex flex-col">
+                    <div class="mission-details hidden mt-4 flex-grow flex flex-col border-t border-gray-100 pt-4">
                         <p class="text-gray-600 mb-4 text-sm">Traiter les commandes, gérer les stocks et suivre les expéditions.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Débutants acceptés</span>
@@ -196,12 +214,22 @@
                 </div>
 
                 <!-- Mission 2 -->
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md hover:border-orange-300 transition cursor-pointer flex flex-col" onclick="toggleMission(this)">
-                    <div class="flex flex-col gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-gray-800">Service client</h3>
-                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">180-300 € / jour</span>
+                <div class="group bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-300 transition-all duration-300 cursor-pointer flex flex-col" onclick="toggleMission(this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col gap-3">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                Service client
+                            </h3>
+                            <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">180-300 € / jour</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                            <i class="fas fa-chevron-down transition-transform duration-300 chevron-icon"></i>
+                        </div>
                     </div>
-                    <div class="mission-details hidden mt-4 flex-grow flex flex-col">
+                    <div class="mission-details hidden mt-4 flex-grow flex flex-col border-t border-gray-100 pt-4">
                         <p class="text-gray-600 mb-4 text-sm">Répondre aux clients par chat et e-mail. Résoudre rapidement les demandes.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Bilingues privilégiés</span>
@@ -212,12 +240,22 @@
                 </div>
 
                 <!-- Mission 3 -->
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md hover:border-orange-300 transition cursor-pointer flex flex-col" onclick="toggleMission(this)">
-                    <div class="flex flex-col gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-gray-800">Gestion des données</h3>
-                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">200-350 € / jour</span>
+                <div class="group bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-300 transition-all duration-300 cursor-pointer flex flex-col" onclick="toggleMission(this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col gap-3">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                Gestion des données
+                            </h3>
+                            <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">200-350 € / jour</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                            <i class="fas fa-chevron-down transition-transform duration-300 chevron-icon"></i>
+                        </div>
                     </div>
-                    <div class="mission-details hidden mt-4 flex-grow flex flex-col">
+                    <div class="mission-details hidden mt-4 flex-grow flex flex-col border-t border-gray-100 pt-4">
                         <p class="text-gray-600 mb-4 text-sm">Mettre à jour les listes de produits, classer et optimiser les données.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Excel requis</span>
@@ -227,12 +265,22 @@
                 </div>
 
                 <!-- Mission 4 -->
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md hover:border-orange-300 transition cursor-pointer flex flex-col" onclick="toggleMission(this)">
-                    <div class="flex flex-col gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-gray-800">Modération de contenu</h3>
-                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">220-400 € / jour</span>
+                <div class="group bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-300 transition-all duration-300 cursor-pointer flex flex-col" onclick="toggleMission(this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col gap-3">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                Modération de contenu
+                            </h3>
+                            <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full w-max">220-400 € / jour</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                            <i class="fas fa-chevron-down transition-transform duration-300 chevron-icon"></i>
+                        </div>
                     </div>
-                    <div class="mission-details hidden mt-4 flex-grow flex flex-col">
+                    <div class="mission-details hidden mt-4 flex-grow flex flex-col border-t border-gray-100 pt-4">
                         <p class="text-gray-600 mb-4 text-sm">Vérifiez les avis clients, modérez les images et le contenu utilisateur.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Rigueur</span>
@@ -1018,7 +1066,6 @@
         }
         document.addEventListener('mouseleave', (e) => { if(e.clientY < 0) showExitModal(); });
         
-        // Modal delay changed to 60 seconds
         setTimeout(showExitModal, 60000);
 
         const toastData = [
@@ -1052,7 +1099,6 @@
         function scheduleNextToast() {
             if (toastCount >= 4) return;
             
-            // Do not show toast if the application modal is open
             const isAppModalOpen = !document.getElementById('app-modal').classList.contains('invisible');
             
             if (!isAppModalOpen) {
@@ -1253,7 +1299,6 @@
             document.getElementById('sum-hours').innerText = appData.hours + 'h / par semaine';
             document.getElementById('sum-earnings').innerText = monthlyText;
 
-            // Reset buttons for step 3
             const btnWa = document.getElementById('btn-wa');
             btnWa.disabled = true;
             btnWa.classList.add('cursor-not-allowed', 'bg-gray-200', 'text-gray-400');
@@ -1289,7 +1334,6 @@ Je confirme ma sélection et suis disponible pour démarrer. Merci de m'accompag
                 btnCopy.classList.remove('bg-orange-500');
                 btnCopy.classList.add('bg-green-500');
 
-                // Enable WhatsApp button with official WhatsApp colors
                 const btnWa = document.getElementById('btn-wa');
                 btnWa.disabled = false;
                 btnWa.classList.remove('cursor-not-allowed', 'bg-gray-200', 'text-gray-400');
