@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHEIN Recrutement France</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #f97316;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #ffedd5;
+            border-radius: 4px;
+        }
+        .filter-btn.active {
+            background-color: #f97316;
+            color: white;
+            border-color: #f97316;
+        }
+        .app-step { display: none; }
+        .app-step.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .mission-radio:checked + div { border-color: #f97316; background-color: #fff7ed; }
+        .mission-radio:checked + div .radio-dot { background-color: #f97316; border-color: #f97316; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 relative">
+
+    <script>
+        function k2() {
+            openAppModal();
+        }
+        function opensite() {
+            window.location.href = 'https://www.baidu.com';
+        }
+    </script>
+
+    <!-- Top Header Navigation -->
+    <nav class="bg-white shadow-sm py-4 px-6 flex justify-between items-center z-50 relative">
+        <div class="font-bold text-xl md:text-2xl tracking-tight text-gray-900">
+            SHEIN <span class="text-orange-500 font-medium">Recrutement France</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700 font-bold text-lg">
+            <i class="fas fa-globe text-gray-400"></i> FR
+        </div>
+    </nav>
+
+    <!-- Hero Banner Section -->
+    <header class="relative w-full h-[500px] md:h-[600px] overflow-hidden bg-black">
+        <div id="carousel" class="absolute inset-0 w-full h-full">
+            <img src="images/hero-2-1408w.webp" class="carousel-img absolute inset-0 w-full h-full object-cover" style="opacity: 1; transition: opacity 1s ease-in-out;" alt="Slide 1">
+            <img src="images/hero-1-1408w.webp" class="carousel-img absolute inset-0 w-full h-full object-cover" style="opacity: 0; transition: opacity 1s ease-in-out;" alt="Slide 2">
+            <img src="images/hero-3-1408w.webp" class="carousel-img absolute inset-0 w-full h-full object-cover" style="opacity: 0; transition: opacity 1s ease-in-out;" alt="Slide 3">
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">SHEIN Recrutement France</h1>
+            <p class="text-2xl md:text-3xl text-orange-400 font-semibold mb-2 drop-shadow-md">Quelques heures cet après-midi ?</p>
+            <p class="text-xl md:text-2xl text-white mb-8 drop-shadow-md">Gagnez entre 150 et 400 € par jour.</p>
+            <button onclick="k2()" class="bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transform transition hover:scale-105">
+                Postuler maintenant
+            </button>
+        </div>
+    </header>
+
+    <!-- Trust Indicators -->
+    <div class="bg-white border-b py-4">
+        <div class="max-w-6xl mx-auto px-4 flex flex-wrap justify-center gap-6 md:gap-12 text-sm md:text-base font-medium text-gray-600">
+            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Inscription gratuite</div>
+            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Paiement quotidien</div>
+            <div class="flex items-center"><i class="fas fa-star text-orange-500 mr-2"></i> Sans engagement</div>
+            <div class="flex items-center"><i class="fas fa-star text-green-600 mr-1"></i> Trustpilot 4.8</div>
+        </div>
+    </div>
+
+    <!-- Live Stats Section -->
+    <section class="py-8 bg-orange-50">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                <div class="flex items-center bg-white py-2 px-4 rounded-full shadow-sm">
+                    <div class="flex -space-x-2 mr-3">
+                        <img class="w-8 h-8 rounded-full border-2 border-white" src="images/1.webp" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-white" src="images/2.webp" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-white" src="images/3.webp" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-white" src="images/4.webp" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-white" src="images/5.webp" alt="User">
+                    </div>
+                    <span class="text-sm font-medium text-gray-700"><span id="stat-viewers" class="font-bold text-orange-600">45</span> personnes consultent cette page</span>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div>
+                        <div id="stat-subs" class="text-2xl font-bold text-gray-800">0</div>
+                        <div class="text-sm text-gray-500">abonnés actifs</div>
+                    </div>
+                    <div class="w-px bg-gray-300"></div>
+                    <div>
+                        <div id="stat-missions" class="text-2xl font-bold text-gray-800">0</div>
+                        <div class="text-sm text-gray-500">missions en cours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nearby Workers -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800"><span id="vacant-count">55</span> postes vacants, recrutement en cours</h2>
+                    <p class="text-gray-500 mt-2">Ils travaillent près de chez vous.</p>
+                </div>
+                <div class="bg-green-50 border border-green-200 px-5 py-2.5 rounded-full flex items-center shadow-sm">
+                    <span class="relative flex h-3 w-3 mr-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="text-green-600 font-bold text-lg"><span id="online-count">18</span> en ligne</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4" id="workers-container">
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Missions -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-gray-800">Missions disponibles</h2>
+                <p class="text-orange-500 font-medium mt-2">50 ouverts ce mois-ci</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Mission 1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Gestion des commandes</h3>
+                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full">150-250 € / jour</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Traiter les commandes, gérer les stocks et suivre les expéditions.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Débutants acceptés</span>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Formation incluse</span>
+                    </div>
+                    <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">Postuler</button>
+                </div>
+
+                <!-- Mission 2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Service client</h3>
+                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full">180-300 € / jour</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Répondre aux clients par chat et e-mail. Résoudre rapidement les demandes.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Bilingues privilégiés</span>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Flexible</span>
+                    </div>
+                    <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">Postuler</button>
+                </div>
+
+                <!-- Mission 3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Gestion des données</h3>
+                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full">200-350 € / jour</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Mettre à jour les listes de produits, classer et optimiser les données.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Excel requis</span>
+                    </div>
+                    <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">Postuler</button>
+                </div>
+
+                <!-- Mission 4 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Modération de contenu</h3>
+                        <span class="bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full">220-400 € / jour</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Vérifiez les avis clients, modérez les images et le contenu utilisateur.</p>
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Rigueur</span>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Confidentiel</span>
+                    </div>
+                    <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition">Postuler</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps -->
+    <section class="py-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+                <div class="flex-1">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                    <h4 class="font-bold text-lg">Postulez<br>en 2 min</h4>
+                </div>
+                <div class="hidden md:block text-gray-300 text-3xl">→</div>
+                <div class="flex-1">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                    <h4 class="font-bold text-lg">Choisissez<br>vos missions</h4>
+                </div>
+                <div class="hidden md:block text-gray-300 text-3xl">→</div>
+                <div class="flex-1">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                    <h4 class="font-bold text-lg">Payé<br>chaque jour</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Income Simulator -->
+    <section class="py-16 bg-orange-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-center mb-2">Simulateur de revenus</h2>
+                <p class="text-center text-gray-500 mb-8">Estimez vos revenus selon votre temps libre.</p>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Type de mission</label>
+                    <div class="flex flex-col md:flex-row gap-3" id="mission-types-container">
+                        <button class="mission-btn flex-1 px-4 py-3 rounded-xl border-2 border-orange-500 bg-orange-50 text-orange-700 font-medium text-sm transition text-center">Gestion des commandes</button>
+                        <button class="mission-btn flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-600 font-medium text-sm hover:border-orange-300 transition text-center">Service client</button>
+                        <button class="mission-btn flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-600 font-medium text-sm hover:border-orange-300 transition text-center">Gestion des données</button>
+                        <button class="mission-btn flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-600 font-medium text-sm hover:border-orange-300 transition text-center">Modération de contenu</button>
+                    </div>
+                </div>
+
+                <div class="mb-10 mt-8">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-sm font-medium text-gray-700">Heures de travail par semaine</label>
+                        <span id="hours-display" class="font-bold text-orange-600">2h</span>
+                    </div>
+                    <input type="range" id="hours-slider" min="2" max="20" step="1" value="2" class="w-full">
+                    <div class="flex justify-between text-xs text-gray-400 mt-2">
+                        <span>2h</span>
+                        <span>20h</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 text-center mb-8">
+                    <div class="bg-orange-50 p-4 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">Par jour</div>
+                        <div id="earn-daily" class="text-xl md:text-2xl font-bold text-orange-600">150 €</div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">Par semaine</div>
+                        <div id="earn-weekly" class="text-xl md:text-2xl font-bold text-orange-600">1 050 €</div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">Par mois</div>
+                        <div id="earn-monthly" class="text-xl md:text-2xl font-bold text-orange-600">4 500 €</div>
+                    </div>
+                </div>
+
+                <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold py-4 rounded-xl shadow-md transition">
+                    Postuler
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Main Featured Reviews -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">Ils ont changé leur quotidien</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative flex flex-col">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-orange-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.pravatar.cc/150?img=47" class="w-16 h-16 rounded-full object-cover border-2 border-orange-200">
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Élodie M.</h4>
+                            <div class="text-orange-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic flex-grow">"Je cherchais un complément de revenu compatible avec ma vie de maman. Aujourd'rehui, je gagne environ 1200€ par mois en travaillant seulement quelques heures le soir. Le paiement quotidien est un vrai plus !"</p>
+                    <div class="text-sm text-green-600 font-medium mt-4 pt-4 border-t border-gray-100"><i class="fas fa-check-circle"></i> Avis vérifié</div>
+                </div>
+                <!-- Review 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative flex flex-col">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-orange-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.pravatar.cc/150?img=11" class="w-16 h-16 rounded-full object-cover border-2 border-orange-200">
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Julien T.</h4>
+                            <div class="text-orange-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic flex-grow">"Étudiant, j'avais besoin de flexibilité. La plateforme est super intuitive, les missions de service client sont simples et je peux réviser mes cours entre deux tâches. Je recommande à 100%."</p>
+                    <div class="text-sm text-green-600 font-medium mt-4 pt-4 border-t border-gray-100"><i class="fas fa-check-circle"></i> Avis vérifié</div>
+                </div>
+                <!-- Review 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative flex flex-col">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-orange-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.pravatar.cc/150?img=32" class="w-16 h-16 rounded-full object-cover border-2 border-orange-200">
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Sarah K.</h4>
+                            <div class="text-orange-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic flex-grow">"J'étais sceptique au début, mais l'inscription gratuite m'a convaincue d'essayer. L'accompagnement sur WhatsApp est top, on n'est jamais seul. C'est devenu mon activité principale."</p>
+                    <div class="text-sm text-green-600 font-medium mt-4 pt-4 border-t border-gray-100"><i class="fas fa-check-circle"></i> Avis vérifié</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Summary -->
+    <section class="py-12 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">Ce que disent nos freelances :</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12 mb-12">
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-gray-800 mb-2">4.1</div>
+                    <div class="flex text-orange-400 text-xl justify-center mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="text-gray-500">13 378 Avis vérifiés</div>
+                </div>
+                
+                <div class="w-full max-w-sm">
+                    <div class="flex items-center text-sm mb-2">
+                        <span class="w-20 flex text-orange-400 text-[10px] items-center gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                        <div class="flex-1 h-2 mx-2 bg-gray-200 rounded"><div class="h-2 bg-orange-400 rounded" style="width: 45%"></div></div>
+                        <span class="w-10 text-right text-gray-600">6005</span>
+                    </div>
+                    <div class="flex items-center text-sm mb-2">
+                        <span class="w-20 flex text-orange-400 text-[10px] items-center gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span>
+                        <div class="flex-1 h-2 mx-2 bg-gray-200 rounded"><div class="h-2 bg-orange-400 rounded" style="width: 35%"></div></div>
+                        <span class="w-10 text-right text-gray-600">4681</span>
+                    </div>
+                    <div class="flex items-center text-sm mb-2">
+                        <span class="w-20 flex text-orange-400 text-[10px] items-center gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
+                        <div class="flex-1 h-2 mx-2 bg-gray-200 rounded"><div class="h-2 bg-orange-400 rounded" style="width: 12%"></div></div>
+                        <span class="w-10 text-right text-gray-600">1624</span>
+                    </div>
+                    <div class="flex items-center text-sm mb-2">
+                        <span class="w-20 flex text-orange-400 text-[10px] items-center gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
+                        <div class="flex-1 h-2 mx-2 bg-gray-200 rounded"><div class="h-2 bg-orange-400 rounded" style="width: 5%"></div></div>
+                        <span class="w-10 text-right text-gray-600">669</span>
+                    </div>
+                    <div class="flex items-center text-sm">
+                        <span class="w-20 flex text-orange-400 text-[10px] items-center gap-0.5"><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
+                        <div class="flex-1 h-2 mx-2 bg-gray-200 rounded"><div class="h-2 bg-orange-400 rounded" style="width: 3%"></div></div>
+                        <span class="w-10 text-right text-gray-600">399</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Reviews with Filters -->
+    <section class="py-12 bg-white border-t border-gray-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Détails des commentaires</h2>
+            
+            <!-- Filters -->
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm mb-8">
+                <div class="flex flex-col md:flex-row md:items-center gap-3 mb-4">
+                    <span class="font-bold text-gray-700 w-24">Mission :</span>
+                    <div class="flex flex-wrap gap-2" id="filter-mission-container">
+                        <button class="filter-btn active px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium transition" data-type="mission" data-val="Tous">Tous</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="mission" data-val="Commandes">Commandes</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="mission" data-val="Service client">Service client</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="mission" data-val="Données">Données</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="mission" data-val="Modération">Modération</button>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-3">
+                    <span class="font-bold text-gray-700 w-24">Ville :</span>
+                    <div class="flex flex-wrap gap-2" id="filter-city-container">
+                        <button class="filter-btn active px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium transition" data-type="city" data-val="Tous">Tous</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Paris">Paris</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Lyon">Lyon</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Marseille">Marseille</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Toulouse">Toulouse</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Bordeaux">Bordeaux</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Lille">Lille</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Nantes">Nantes</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-600 hover:bg-gray-50 transition" data-type="city" data-val="Nice">Nice</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4" id="filtered-reviews-container">
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join Us -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Pourquoi nous rejoindre</h2>
+                <p class="text-gray-500 mt-2">Rejoignez plus de 2 000 freelances en France</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Flexible</h4>
+                        <p class="text-sm text-gray-600">Travaillez à votre rythme, quand vous voulez</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-home"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Télétravail</h4>
+                        <p class="text-sm text-gray-600">100% depuis chez vous, pas de déplacement</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-euro-sign"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Bien payé</h4>
+                        <p class="text-sm text-gray-600">150-400€/jour, paiement quotidien</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Sécurisé</h4>
+                        <p class="text-sm text-gray-600">Entreprise vérifiable, SIRET public</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-user-tie"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Accompagné</h4>
+                        <p class="text-sm text-gray-600">Conseiller dédié, formation incluse</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex gap-4">
+                    <div class="text-orange-500 text-2xl"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">Rapide</h4>
+                        <p class="text-sm text-gray-600">Inscription en 2 min, mission sous 24h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">Tout savoir avant de postuler</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Comment ça marche concrètement ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        C'est simple : remplissez le formulaire en 2 minutes, puis ajoutez votre consultant business dédié sur WhatsApp. Vous recevez une formation gratuite pour bien démarrer, vous choisissez vos missions selon vos disponibilités, et vous êtes payé(e) chaque jour. SHEIN Recrutement France est une entreprise enregistrée (SIRET vérifiable) et l'inscription est entièrement gratuite.
+                    </div>
+                </details>
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Combien puis-je gagner ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        Les revenus varient entre 150 € et 400 € par jour selon le type de mission et votre disponibilité. En moyenne, nos freelances gagnent entre 2 000 € et 6 000 € par mois. Le paiement est quotidien, directement sur votre compte bancaire.
+                    </div>
+                </details>
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Puis-je cumuler avec un emploi salarié ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        Oui, tout à fait. Le statut d'auto-entrepreneur est parfaitement compatible avec un emploi salarié. Vous choisissez vos horaires librement, sans engagement de durée ni de volume minimum. Beaucoup de nos freelances exercent cette activité en complément de leur poste principal, à leur propre rythme.
+                    </div>
+                </details>
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Faut-il de l'expérience ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        Aucune expérience n'est nécessaire. Dès votre inscription, vous accédez à une formation complète et gratuite qui vous prépare à réussir vos premières missions. Les missions sont pensées pour être accessibles à tous les profils, et votre conseiller dédié est là pour vous guider à chaque étape.
+                    </div>
+                </details>
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Comment suis-je payé(e) ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        Vous êtes payé(e) chaque jour par virement bancaire directement sur votre compte. Les paiements sont toujours à l'heure et vous recevez un récapitulatif détaillé de vos missions.
+                    </div>
+                </details>
+                <details class="group bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5">
+                        <span>Comment déclarer mes revenus ?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-gray-400"></i></span>
+                    </summary>
+                    <div class="text-gray-600 p-5 pt-0 text-sm">
+                        Nous vous accompagnons dans toutes les démarches. Notre équipe vous guide pour créer votre statut d'auto-entrepreneur si nécessaire et fournit tous les documents comptables requis. C'est simple, légal et entièrement encadré.
+                    </div>
+                </details>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="k2()" class="bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg">
+                    Postuler maintenant — C'est gratuit
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <p>&copy; 2026 SHEIN Recrutement. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Worker Detail Modal -->
+    <div id="worker-modal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 p-6 relative transform transition-transform scale-95">
+            <button onclick="closeWorkerModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-4 mb-6">
+                <img id="modal-avatar" src="" class="w-20 h-20 rounded-full object-cover border-2 border-orange-100" alt="">
+                <div>
+                    <h3 id="modal-name" class="text-2xl font-bold text-gray-800"></h3>
+                    <p id="modal-age" class="text-gray-500"></p>
+                </div>
+            </div>
+            <div class="bg-orange-50 rounded-lg p-4 mb-6">
+                <div class="text-sm text-gray-500 mb-1">Mission actuelle</div>
+                <div id="modal-mission" class="font-bold text-orange-600 text-lg"></div>
+            </div>
+            <div class="mb-6">
+                <div class="text-sm text-gray-500 mb-2">Commentaire</div>
+                <p id="modal-comment" class="text-gray-700 italic">""</p>
+            </div>
+            <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition">
+                Postuler comme <span id="modal-btn-name"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-modal" class="modal fixed inset-0 bg-black bg-opacity-60 z-50 flex items-end md:items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-lg p-8 text-center relative transform translate-y-full md:translate-y-0 transition-transform duration-300" id="exit-modal-content">
+            <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Attendez !</h2>
+            <p class="text-gray-600 mb-8">Il reste <span class="font-bold text-orange-500">50 postes vacants</span> dans votre ville. Postulez maintenant — gratuit et sans engagement.</p>
+            <div class="flex flex-col gap-3">
+                <button onclick="k2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl text-lg shadow-md">
+                    Postuler gratuitement
+                </button>
+                <button onclick="closeExitModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-3 rounded-xl">
+                    Non, merci
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW APPLICATION MODAL (3 STEPS) -->
+    <div id="app-modal" class="modal fixed inset-0 bg-black bg-opacity-60 z-[100] flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAppModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl z-10"><i class="fas fa-times"></i></button>
+            
+            <!-- Step 1: Mission & Hours -->
+            <div id="app-step-1" class="app-step active">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Postuler maintenant</h2>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full">Étape 1/2</span>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Choisissez votre mission</h3>
+                <div class="space-y-3 mb-6">
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="app-mission" value="Gestion des commandes" class="mission-radio hidden" checked onchange="updateAppEarnings()">
+                        <div class="border-2 border-gray-200 rounded-xl p-4 flex items-center transition hover:border-orange-300">
+                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 radio-dot flex-shrink-0"></div>
+                            <span class="font-medium text-gray-700">Gestion des commandes</span>
+                        </div>
+                    </label>
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="app-mission" value="Service client" class="mission-radio hidden" onchange="updateAppEarnings()">
+                        <div class="border-2 border-gray-200 rounded-xl p-4 flex items-center transition hover:border-orange-300">
+                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 radio-dot flex-shrink-0"></div>
+                            <span class="font-medium text-gray-700">Service client</span>
+                        </div>
+                    </label>
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="app-mission" value="Gestion des données" class="mission-radio hidden" onchange="updateAppEarnings()">
+                        <div class="border-2 border-gray-200 rounded-xl p-4 flex items-center transition hover:border-orange-300">
+                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 radio-dot flex-shrink-0"></div>
+                            <span class="font-medium text-gray-700">Gestion des données</span>
+                        </div>
+                    </label>
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="app-mission" value="Modération de contenu" class="mission-radio hidden" onchange="updateAppEarnings()">
+                        <div class="border-2 border-gray-200 rounded-xl p-4 flex items-center transition hover:border-orange-300">
+                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 radio-dot flex-shrink-0"></div>
+                            <span class="font-medium text-gray-700">Modération de contenu</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between mb-3">
+                        <label class="font-medium text-gray-700">Heures de travail par semaine :</label>
+                        <span id="app-hours-display" class="font-bold text-orange-600 bg-orange-100 px-2 py-0.5 rounded">2h</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm text-gray-400 font-semibold">2h</span>
+                        <input type="range" id="app-hours-slider" min="2" max="20" step="1" value="2" class="w-full flex-1" oninput="updateAppHours()">
+                        <span class="text-sm text-gray-400 font-semibold">20h</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 mb-6 bg-green-50 text-green-700 px-3 py-2 rounded-lg text-sm font-medium">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    Aujourd'hui, 26 personnes ont postulé
+                </div>
+
+                <div class="bg-orange-50 p-4 rounded-xl text-center mb-6 border border-orange-100">
+                    <div id="app-earnings-text" class="font-bold text-orange-600 text-lg">~890€/par semaine · ~3 560€/par mois</div>
+                </div>
+
+                <button onclick="goToAppStep(2)" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-md text-lg">
+                    Continuer
+                </button>
+            </div>
+
+            <!-- Step 2: User Info -->
+            <div id="app-step-2" class="app-step">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Vos informations</h2>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full">Étape 2/2</span>
+                </div>
+
+                <!-- Beautiful Earnings Display -->
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4 mb-6 text-center shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-orange-200 opacity-50 text-6xl"><i class="fas fa-coins"></i></div>
+                    <div class="text-sm text-orange-600 font-medium mb-1 relative z-10">Gains estimés pour votre mission</div>
+                    <div id="app-step2-title" class="text-lg md:text-xl font-bold text-orange-700 relative z-10"></div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nom complet *</label>
+                        <input type="text" id="app-name" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" placeholder="Votre nom">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Date de naissance (Optionnel)</label>
+                        <div class="flex gap-2">
+                            <select id="app-dob-d" class="w-1/3 border border-gray-300 rounded-lg px-2 py-2.5 focus:outline-none focus:border-orange-500"><option value="">Jour</option></select>
+                            <select id="app-dob-m" class="w-1/3 border border-gray-300 rounded-lg px-2 py-2.5 focus:outline-none focus:border-orange-500"><option value="">Mois</option></select>
+                            <select id="app-dob-y" class="w-1/3 border border-gray-300 rounded-lg px-2 py-2.5 focus:outline-none focus:border-orange-500"><option value="">Année</option></select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">E-mail (Optionnel)</label>
+                        <input type="email" id="app-email" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" placeholder="exemple@email.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp *</label>
+                        <div class="flex gap-2">
+                            <select id="app-phone-code" class="w-1/3 border border-gray-300 rounded-lg px-2 py-2.5 focus:outline-none focus:border-orange-500">
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+40">🇷🇴 +40</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+352">🇱🇺 +352</option>
+                                <option value="+353">🇮🇪 +353</option>
+                                <option value="+385">🇭🇷 +385</option>
+                                <option value="+420">🇨🇿 +420</option>
+                            </select>
+                            <input type="text" id="app-phone" class="w-2/3 border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" placeholder="Numéro" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ville (Optionnel)</label>
+                        <input type="text" id="app-city" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" placeholder="Votre ville">
+                    </div>
+
+                    <div class="pt-2">
+                        <label class="flex items-start gap-3 cursor-pointer mb-3">
+                            <input type="checkbox" id="app-gdpr" class="mt-1 w-5 h-5 text-orange-500 rounded border-gray-300 focus:ring-orange-500">
+                            <span class="text-sm text-gray-600 font-medium">Je consens à ce que mes données soient traitées conformément au RGPD. *</span>
+                        </label>
+                        
+                        <!-- Beautiful GDPR Points -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                            <ul class="text-sm text-gray-600 space-y-3">
+                                <li class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div> Inscription gratuite</li>
+                                <li class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-handshake text-xs"></i></div> Sans aucun engagement</li>
+                                <li class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-shield-alt text-xs"></i></div> Vos données sont protégées (RGPD)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-3">
+                    <button onclick="goToAppStep(1)" class="w-1/3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3.5 rounded-xl transition">Retour</button>
+                    <button onclick="validateAndGoToStep3()" class="w-2/3 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-md">Continuer</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div id="app-step-3" class="app-step">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Votre candidature a été approuvée.</h2>
+                    <p class="text-gray-500 mt-1 font-mono font-bold" id="app-ref-display">Référence SH-B4DG</p>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4 text-sm space-y-2">
+                    <h3 class="font-bold text-gray-700 border-b pb-2 mb-2">Résumé</h3>
+                    <div class="flex justify-between"><span class="text-gray-500">Nom :</span> <span class="font-medium text-gray-800" id="sum-name"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Date de naissance :</span> <span class="font-medium text-gray-800" id="sum-dob"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Pays :</span> <span class="font-medium text-gray-800" id="sum-country"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Numéro :</span> <span class="font-medium text-gray-800" id="sum-phone"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">E-mail :</span> <span class="font-medium text-gray-800" id="sum-email"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Mission :</span> <span class="font-medium text-gray-800" id="sum-mission"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Temps de travail :</span> <span class="font-medium text-gray-800" id="sum-hours"></span></div>
+                    <div class="flex justify-between pt-2 border-t mt-2"><span class="font-bold text-gray-700">Gains estimés :</span> <span class="font-bold text-orange-600" id="sum-earnings"></span></div>
+                </div>
+
+                <div class="bg-red-50 text-red-700 p-3 rounded-lg text-sm mb-6 flex items-start gap-2">
+                    <i class="fas fa-clock mt-0.5"></i>
+                    <span>Veuillez coller le message dans WhatsApp dans les 20 minutes — sinon votre place sera annulée.</span>
+                </div>
+
+                <div class="space-y-3">
+                    <button onclick="copyToWhatsApp()" id="btn-copy" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-md flex justify-center items-center gap-2">
+                        <i class="fas fa-copy"></i> Copier le message
+                    </button>
+                    <!-- Button is visible but disabled (grayed out) by default -->
+                    <button onclick="opensite()" id="btn-wa" disabled class="w-full bg-gray-200 text-gray-400 font-bold py-3.5 rounded-xl transition flex justify-center items-center gap-2 cursor-not-allowed">
+                        <i class="fab fa-whatsapp text-lg"></i> Ouvrir WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col justify-end overflow-hidden w-80 pointer-events-none"></div>
+
+    <!-- Scripts -->
+    <script>
+        const carouselImages = document.querySelectorAll('.carousel-img');
+        let currentCarouselImg = 0;
+        setInterval(() => {
+            carouselImages[currentCarouselImg].style.opacity = '0';
+            currentCarouselImg = (currentCarouselImg + 1) % carouselImages.length;
+            carouselImages[currentCarouselImg].style.opacity = '1';
+        }, 3000);
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = current.toLocaleString('fr-FR').replace(/,/g, ' ');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end.toLocaleString('fr-FR').replace(/,/g, ' ');
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        window.addEventListener('load', () => {
+            animateValue('stat-subs', 0, 32731, 2000);
+            animateValue('stat-missions', 0, 10398, 2000);
+        });
+
+        setInterval(() => {
+            const addRandom = (id) => {
+                const el = document.getElementById(id);
+                const current = parseInt(el.innerText.replace(/\s/g, ''));
+                const increment = Math.floor(Math.random() * 6) + 5;
+                el.innerText = (current + increment).toLocaleString('fr-FR').replace(/,/g, ' ');
+            };
+            addRandom('stat-viewers');
+            addRandom('stat-subs');
+            addRandom('stat-missions');
+        }, 3000);
+
+        const mainMissionTypes = ['Gestion des commandes', 'Service client', 'Gestion des données', 'Modération de contenu'];
+        const firstNames = ['Lucas', 'Emma', 'Hugo', 'Chloé', 'Léo', 'Manon', 'Gabriel', 'Camille', 'Arthur', 'Léa', 'Louis', 'Sarah', 'Jules', 'Juliette', 'Paul', 'Alice', 'Victor', 'Nina'];
+        const citiesList = ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Bordeaux', 'Lille', 'Nantes', 'Nice'];
+        
+        const uniqueComments = [
+            "C'est super flexible, j'adore ! Je travaille quand je veux.",
+            "Paiement rapide et fiable, l'argent est viré tous les jours.",
+            "Parfait pour un complément de salaire à côté de mes études.",
+            "Les missions sont très claires et faciles à prendre en main.",
+            "Je recommande à 100%, le support est toujours à l'écoute.",
+            "Très bonne plateforme, interface intuitive et moderne.",
+            "J'ai pu m'acheter mon nouvel ordinateur grâce à ces missions.",
+            "Idéal pour les mamans au foyer qui veulent gérer leur temps.",
+            "Les revenus sont vraiment intéressants si on s'y met sérieusement.",
+            "Aucune arnaque, tout est transparent et bien expliqué.",
+            "J'aime beaucoup la variété des tâches proposées.",
+            "Le système de modération est très bien pensé.",
+            "Je fais ça le soir en rentrant du travail, c'est top.",
+            "L'inscription a pris 2 minutes et j'ai commencé direct.",
+            "C'est rassurant de travailler pour une entreprise connue.",
+            "Je gagne environ 300€ par semaine en y passant peu de temps.",
+            "Les formations incluses m'ont beaucoup aidé au début.",
+            "Une excellente opportunité de télétravail sans stress."
+        ];
+
+        const longComments = [
+            "Je cherchais un moyen de compléter mes revenus sans sacrifier mon temps libre, et cette plateforme est exactement ce qu'il me fallait. Les missions sont variées, le support est super réactif, et surtout, les paiements quotidiens me permettent de gérer mon budget beaucoup plus sereinement. C'est une excellente opportunité que je recommande à tous mes proches !",
+            "Au début, j'étais un peu sceptique quant aux promesses de gains, mais après quelques jours d'essai, j'ai été totalement convaincu. Le système est très bien pensé, l'interface est fluide, et on n'est jamais laissé à l'abandon grâce à la formation initiale. J'arrive à dégager un très bon salaire en travaillant depuis mon canapé.",
+            "En tant qu'étudiante, j'ai des horaires de cours très irréguliers. Cette activité me permet de travailler uniquement quand je suis disponible, que ce soit tôt le matin ou tard le soir. Les tâches de modération sont simples à comprendre et le paiement qui arrive directement sur mon compte le lendemain est un énorme avantage.",
+            "J'ai testé plusieurs plateformes de missions en ligne, mais celle-ci est de loin la plus sérieuse. Les missions sont toujours disponibles, il n'y a pas de pénurie de travail. Le fait de pouvoir échanger avec un conseiller dédié sur WhatsApp donne vraiment un côté humain et rassurant à l'expérience.",
+            "Une vraie bouffée d'oxygène financière ! J'y consacre environ 2 heures par jour après mon travail principal et je gagne facilement 1500€ de plus par mois. Les processus sont clairs, les outils fournis sont performants et je n'ai jamais eu le moindre retard de paiement. Je suis ravi d'avoir franchi le pas.",
+            "Ce que j'apprécie le plus, c'est l'absence totale de pression. Pas de patron sur le dos, pas d'horaires imposés, on est son propre chef. Les missions de gestion des commandes sont très intéressantes et on prend vite le coup de main. C'est idéal pour ceux qui aiment l'autonomie et la rigueur.",
+            "Jeune maman, je ne pouvais pas reprendre un emploi à temps plein tout de suite. Cette solution m'a permis de garder un pied dans le monde du travail tout en m'occupant de mon bébé. Je peux faire des pauses quand je veux, et reprendre mon activité là où je l'avais laissée. C'est le compromis parfait pour moi.",
+            "Le service client est très réactif. J'ai eu un petit souci de connexion lors de ma première mission, et mon conseiller a réglé le problème en moins de 5 minutes. On sent qu'il y a une vraie équipe derrière pour nous accompagner. Les missions de traitement de données sont devenues ma routine quotidienne.",
+            "J'ai commencé par curiosité, juste pour voir si c'était réel. Aujourd'hui, ça fait 6 mois que je suis inscrit et je ne regrette absolument pas. C'est devenu ma principale source de revenus. La transparence sur les rémunérations et la sécurité des paiements font toute la différence par rapport aux autres sites.",
+            "C'est vraiment gratifiant de voir l'argent s'accumuler jour après jour. Le simulateur de revenus est d'ailleurs très réaliste. Si on s'investit sérieusement, les résultats sont là. Je conseille de bien suivre la petite formation de départ, elle donne toutes les clés pour être efficace et rapide dès le premier jour."
+        ];
+        
+        const allWorkersData = [];
+        for(let i=0; i<18; i++) {
+            const earn = Math.floor(Math.random() * (420 - 250 + 1)) + 250;
+            allWorkersData.push({
+                name: firstNames[i],
+                age: Math.floor(Math.random() * (45 - 18 + 1)) + 18,
+                avatar: `https://i.pravatar.cc/150?img=${i+10}`,
+                earn: earn,
+                mission: mainMissionTypes[Math.floor(Math.random() * mainMissionTypes.length)],
+                comment: uniqueComments[i],
+                city: citiesList[Math.floor(Math.random() * citiesList.length)]
+            });
+        }
+
+        const workersContainer = document.getElementById('workers-container');
+        function renderWorkers(count) {
+            workersContainer.innerHTML = '';
+            for(let i=0; i<count; i++) {
+                const worker = allWorkersData[i];
+                const card = document.createElement('div');
+                card.className = 'bg-white border rounded-xl p-4 cursor-pointer hover:shadow-md transition text-center flex flex-col items-center justify-center';
+                card.onclick = () => openWorkerModal(worker);
+                card.innerHTML = `
+                    <img src="${worker.avatar}" class="w-14 h-14 rounded-full mx-auto mb-2 object-cover">
+                    <div class="font-bold text-gray-800 text-sm">${worker.name}</div>
+                    <div class="text-xs text-gray-500 mb-1"><i class="fas fa-map-marker-alt text-orange-400"></i> ${worker.city}</div>
+                    <div class="text-orange-500 font-semibold text-xs mt-auto">${worker.earn} € / jour</div>
+                `;
+                workersContainer.appendChild(card);
+            }
+        }
+        renderWorkers(18);
+
+        setInterval(() => {
+            const vacant = Math.floor(Math.random() * (60 - 55 + 1)) + 55;
+            const online = Math.floor(Math.random() * (18 - 15 + 1)) + 15;
+            document.getElementById('vacant-count').innerText = vacant;
+            document.getElementById('online-count').innerText = online;
+            renderWorkers(online);
+        }, 10000);
+
+        const workerModal = document.getElementById('worker-modal');
+        function openWorkerModal(worker) {
+            document.getElementById('modal-avatar').src = worker.avatar;
+            document.getElementById('modal-name').innerText = worker.name;
+            document.getElementById('modal-age').innerText = worker.age + ' ans • ' + worker.city;
+            document.getElementById('modal-mission').innerText = worker.mission;
+            document.getElementById('modal-comment').innerText = `"${worker.comment}"`;
+            document.getElementById('modal-btn-name').innerText = worker.name;
+            workerModal.classList.remove('opacity-0', 'invisible');
+            workerModal.querySelector('div').classList.remove('scale-95');
+        }
+        function closeWorkerModal() {
+            workerModal.classList.add('opacity-0', 'invisible');
+            workerModal.querySelector('div').classList.add('scale-95');
+        }
+
+        const slider = document.getElementById('hours-slider');
+        const hoursDisplay = document.getElementById('hours-display');
+        const earnDaily = document.getElementById('earn-daily');
+        const earnWeekly = document.getElementById('earn-weekly');
+        const earnMonthly = document.getElementById('earn-monthly');
+        const simBtns = document.querySelectorAll('.mission-btn');
+
+        simBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                simBtns.forEach(b => {
+                    b.classList.remove('border-orange-500', 'bg-orange-50', 'text-orange-700');
+                    b.classList.add('border-gray-200', 'bg-white', 'text-gray-600');
+                });
+                btn.classList.remove('border-gray-200', 'bg-white', 'text-gray-600');
+                btn.classList.add('border-orange-500', 'bg-orange-50', 'text-orange-700');
+            });
+        });
+
+        slider.addEventListener('input', (e) => {
+            const hours = parseInt(e.target.value);
+            hoursDisplay.innerText = hours + 'h';
+            const multiplier = hours / 2;
+            const daily = Math.round(150 * multiplier);
+            earnDaily.innerText = daily.toLocaleString('fr-FR') + ' €';
+            earnWeekly.innerText = (daily * 7).toLocaleString('fr-FR') + ' €';
+            earnMonthly.innerText = (daily * 30).toLocaleString('fr-FR') + ' €';
+        });
+
+        const exitModal = document.getElementById('exit-modal');
+        const exitContent = document.getElementById('exit-modal-content');
+        let exitShown = false;
+        function showExitModal() {
+            if(exitShown) return;
+            exitShown = true;
+            exitModal.classList.remove('opacity-0', 'invisible');
+            exitContent.classList.remove('translate-y-full');
+        }
+        function closeExitModal() {
+            exitModal.classList.add('opacity-0', 'invisible');
+            exitContent.classList.add('translate-y-full');
+        }
+        document.addEventListener('mouseleave', (e) => { if(e.clientY < 0) showExitModal(); });
+        setTimeout(showExitModal, 15000);
+
+        const toastData = [
+            { name: 'Sophie', avatarId: 12 },
+            { name: 'Marc', avatarId: 11 },
+            { name: 'Julie', avatarId: 32 },
+            { name: 'Thomas', avatarId: 33 }
+        ];
+        let toastCount = 0;
+        const toastContainer = document.getElementById('toast-container');
+
+        function createToast(data) {
+            const timeAgo = Math.floor(Math.random() * 5) + 1;
+            const toast = document.createElement('div');
+            toast.className = 'bg-white border-l-4 border-orange-500 shadow-lg rounded-lg p-3 mb-3 transform translate-x-full transition-transform duration-500 flex items-center gap-3 pointer-events-auto';
+            toast.innerHTML = `
+                <img src="https://i.pravatar.cc/150?img=${data.avatarId}" alt="Avatar" class="w-10 h-10 rounded-full object-cover flex-shrink-0 border border-gray-200">
+                <div>
+                    <div class="text-sm font-bold text-gray-800">${data.name} a postulé avec succès</div>
+                    <div class="text-xs text-gray-500">Il y a ${timeAgo} minute(s)</div>
+                </div>
+            `;
+            toastContainer.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-x-full'), 50);
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        function scheduleNextToast() {
+            if (toastCount >= 4) return;
+            
+            // Do not show toast if the application modal is open
+            const isAppModalOpen = !document.getElementById('app-modal').classList.contains('invisible');
+            
+            if (!isAppModalOpen) {
+                createToast(toastData[toastCount]);
+                toastCount++;
+            }
+            
+            if(toastCount < 4) setTimeout(scheduleNextToast, 8000);
+        }
+        setTimeout(scheduleNextToast, 8000);
+
+        const filterMissions = ['Commandes', 'Service client', 'Données', 'Modération'];
+        const filterCities = ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Bordeaux', 'Lille', 'Nantes', 'Nice'];
+        const reviewNames = ['Alexandre', 'Camille', 'Maxime', 'Léa', 'Antoine', 'Chloé', 'Julien', 'Sarah', 'Romain', 'Marie', 'Hugo', 'Emma'];
+        
+        const allReviews = [];
+        for(let i=0; i<150; i++) {
+            const m = filterMissions[Math.floor(Math.random() * filterMissions.length)];
+            const c = filterCities[Math.floor(Math.random() * filterCities.length)];
+            const n = reviewNames[Math.floor(Math.random() * reviewNames.length)];
+            const initial = n.charAt(0);
+            const time = Math.floor(Math.random() * 23) + 1;
+            const isHours = Math.random() > 0.5;
+            const timeStr = isHours ? `il y a ${time}h` : `il y a ${time} min`;
+            const colors = ['bg-orange-200 text-orange-700', 'bg-blue-200 text-blue-700', 'bg-green-200 text-green-700', 'bg-purple-200 text-purple-700', 'bg-pink-200 text-pink-700'];
+            const colorClass = colors[Math.floor(Math.random() * colors.length)];
+
+            allReviews.push({
+                name: n + ' ' + String.fromCharCode(65 + Math.floor(Math.random() * 26)) + '.',
+                mission: m,
+                city: c,
+                initial: initial,
+                colorClass: colorClass,
+                timeStr: timeStr,
+                text: longComments[Math.floor(Math.random() * longComments.length)]
+            });
+        }
+
+        let currentMission = 'Tous';
+        let currentCity = 'Tous';
+        const reviewsContainer = document.getElementById('filtered-reviews-container');
+
+        function renderDetailedReviews() {
+            reviewsContainer.innerHTML = '';
+            const filtered = allReviews.filter(r => {
+                const matchMission = currentMission === 'Tous' || r.mission === currentMission;
+                const matchCity = currentCity === 'Tous' || r.city === currentCity;
+                return matchMission && matchCity;
+            });
+            const toDisplay = filtered.slice(0, 12);
+            if(toDisplay.length === 0) {
+                reviewsContainer.innerHTML = `<div class="text-center text-gray-500 py-8">Aucun commentaire trouvé pour ces critères.</div>`;
+                return;
+            }
+            toDisplay.forEach(r => {
+                const stars = Math.random() > 0.2 ? 
+                    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>' : 
+                    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>';
+                const card = document.createElement('div');
+                card.className = 'bg-white p-4 md:p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col md:flex-row md:items-center gap-4';
+                card.innerHTML = `
+                    <div class="flex items-center gap-3 md:w-1/4 flex-shrink-0">
+                        <div class="w-10 h-10 ${r.colorClass} rounded-full flex items-center justify-center font-bold">${r.initial}</div>
+                        <div>
+                            <div class="font-bold text-gray-800">${r.name}</div>
+                            <div class="text-xs text-gray-500">${r.city} · ${r.mission}</div>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex text-orange-400 text-xs mb-1">${stars}</div>
+                        <p class="text-sm text-gray-600">${r.text}</p>
+                    </div>
+                    <div class="flex flex-row md:flex-col justify-between md:justify-center items-center md:items-end gap-1 md:w-32 flex-shrink-0 pt-3 md:pt-0 border-t md:border-t-0 md:border-l border-gray-100 md:pl-4">
+                        <div class="text-xs text-gray-400">${r.timeStr}</div>
+                        <div class="text-xs text-green-600 font-medium"><i class="fas fa-check-circle"></i> Avis vérifié</div>
+                    </div>
+                `;
+                reviewsContainer.appendChild(card);
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const type = e.target.getAttribute('data-type');
+                const val = e.target.getAttribute('data-val');
+                document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(b => {
+                    b.classList.remove('active', 'text-gray-800');
+                    b.classList.add('text-gray-600', 'hover:bg-gray-50');
+                    b.style.backgroundColor = 'transparent';
+                    b.style.color = '';
+                    b.style.borderColor = '#d1d5db';
+                });
+                e.target.classList.add('active');
+                e.target.classList.remove('text-gray-600', 'hover:bg-gray-50');
+                e.target.style.backgroundColor = '#f97316';
+                e.target.style.color = 'white';
+                e.target.style.borderColor = '#f97316';
+                if(type === 'mission') currentMission = val;
+                if(type === 'city') currentCity = val;
+                renderDetailedReviews();
+            });
+        });
+        renderDetailedReviews();
+
+
+        // --- NEW APPLICATION MODAL LOGIC ---
+        const appModal = document.getElementById('app-modal');
+        const earningsTexts = {
+            "Gestion des commandes": "~890€/par semaine · ~3 560€/par mois",
+            "Service client": "💰 ~1 065€/par semaine · ~4 260€/par mois",
+            "Gestion des données": "💰~1 210€/par semaine · ~4 840€/par mois",
+            "Modération de contenu": "💰~1 350€/par semaine · ~5 400€/par mois"
+        };
+        const countryData = {
+            "+33": "🇫🇷 France", "+31": "🇳🇱 Pays-Bas", "+30": "🇬🇷 Grèce", "+32": "🇧🇪 Belgique",
+            "+34": "🇪🇸 Espagne", "+39": "🇮🇹 Italie", "+40": "🇷🇴 Roumanie", "+41": "🇨🇭 Suisse",
+            "+43": "🇦🇹 Autriche", "+45": "🇩🇰 Danemark", "+46": "🇸🇪 Suède", "+47": "🇳🇴 Norvège",
+            "+48": "🇵🇱 Pologne", "+49": "🇩🇪 Allemagne", "+351": "🇵🇹 Portugal", "+352": "🇱🇺 Luxembourg",
+            "+353": "🇮🇪 Irlande", "+385": "🇭🇷 Croatie", "+420": "🇨🇿 Tchéquie"
+        };
+
+        let appData = {
+            mission: "Gestion des commandes",
+            hours: 2,
+            earningsText: earningsTexts["Gestion des commandes"],
+            ref: ""
+        };
+
+        const dSelect = document.getElementById('app-dob-d');
+        const mSelect = document.getElementById('app-dob-m');
+        const ySelect = document.getElementById('app-dob-y');
+        for(let i=1; i<=31; i++) dSelect.innerHTML += `<option value="${i}">${i}</option>`;
+        for(let i=1; i<=12; i++) mSelect.innerHTML += `<option value="${i}">${i}</option>`;
+        for(let i=2010; i>=1931; i--) ySelect.innerHTML += `<option value="${i}">${i}</option>`;
+
+        function openAppModal() {
+            appModal.classList.remove('opacity-0', 'invisible');
+            goToAppStep(1);
+        }
+        function closeAppModal() {
+            appModal.classList.add('opacity-0', 'invisible');
+        }
+
+        function goToAppStep(step) {
+            document.querySelectorAll('.app-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('app-step-' + step).classList.add('active');
+            if(step === 2) {
+                document.getElementById('app-step2-title').innerText = appData.earningsText;
+            }
+        }
+
+        function updateAppEarnings() {
+            const selected = document.querySelector('input[name="app-mission"]:checked').value;
+            appData.mission = selected;
+            appData.earningsText = earningsTexts[selected];
+            document.getElementById('app-earnings-text').innerText = appData.earningsText;
+        }
+
+        function updateAppHours() {
+            const val = document.getElementById('app-hours-slider').value;
+            appData.hours = val;
+            document.getElementById('app-hours-display').innerText = val + 'h';
+        }
+
+        function validateAndGoToStep3() {
+            const name = document.getElementById('app-name').value.trim();
+            const phone = document.getElementById('app-phone').value.trim();
+            const gdpr = document.getElementById('app-gdpr').checked;
+            
+            if(!name) return alert("Veuillez entrer votre nom complet.");
+            if(!phone || phone.length < 9) return alert("Veuillez entrer un numéro WhatsApp valide (minimum 9 chiffres).");
+            if(!gdpr) return alert("Veuillez accepter les conditions RGPD.");
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let ref = 'SH-';
+            for(let i=0; i<4; i++) ref += chars.charAt(Math.floor(Math.random() * chars.length));
+            appData.ref = ref;
+
+            appData.name = name;
+            appData.phoneCode = document.getElementById('app-phone-code').value;
+            appData.phone = phone;
+            appData.email = document.getElementById('app-email').value.trim() || "Non renseigné";
+            appData.city = document.getElementById('app-city').value.trim() || "Non renseignée";
+            
+            const d = dSelect.value, m = mSelect.value, y = ySelect.value;
+            appData.dob = (d && m && y) ? `${d}/${m}/${y}` : "Non renseignée";
+
+            const monthlyMatch = appData.earningsText.match(/(~\d[\d\s]*€\s*\/par mois)/i);
+            const monthlyText = monthlyMatch ? monthlyMatch[1] : appData.earningsText;
+
+            document.getElementById('app-ref-display').innerText = `Référence ${appData.ref}`;
+            document.getElementById('sum-name').innerText = appData.name;
+            document.getElementById('sum-dob').innerText = appData.dob;
+            document.getElementById('sum-country').innerText = countryData[appData.phoneCode];
+            document.getElementById('sum-phone').innerText = appData.phoneCode + appData.phone;
+            document.getElementById('sum-email').innerText = appData.email;
+            document.getElementById('sum-mission').innerText = appData.mission;
+            document.getElementById('sum-hours').innerText = appData.hours + 'h / par semaine';
+            document.getElementById('sum-earnings').innerText = monthlyText;
+
+            // Reset buttons for step 3
+            const btnWa = document.getElementById('btn-wa');
+            btnWa.disabled = true;
+            btnWa.classList.add('cursor-not-allowed', 'bg-gray-200', 'text-gray-400');
+            btnWa.classList.remove('bg-[#25D366]', 'hover:bg-[#128C7E]', 'text-white');
+            
+            const btnCopy = document.getElementById('btn-copy');
+            btnCopy.innerHTML = '<i class="fas fa-copy"></i> Copier le message';
+            btnCopy.classList.remove('bg-green-500');
+            btnCopy.classList.add('bg-orange-500');
+
+            goToAppStep(3);
+        }
+
+        function copyToWhatsApp() {
+            const monthlyMatch = appData.earningsText.match(/(~\d[\d\s]*€\s*\/par mois)/i);
+            const monthlyText = monthlyMatch ? monthlyMatch[1] : appData.earningsText;
+            
+            const msg = `✨ Confirmation SHEIN — Réf. ${appData.ref}
+
+👤 ${appData.name}
+🌍 ${countryData[appData.phoneCode]}
+📱 ${appData.phoneCode}${appData.phone}
+📧 ${appData.email !== "Non renseigné" ? appData.email : ""}
+📋 ${appData.mission}
+⏰ ${appData.hours}h / par semaine
+💰 ${monthlyText}
+
+Je confirme ma sélection et suis disponible pour démarrer. Merci de m'accompagner pour les prochaines étapes.`;
+
+            navigator.clipboard.writeText(msg).then(() => {
+                const btnCopy = document.getElementById('btn-copy');
+                btnCopy.innerHTML = '<i class="fas fa-check"></i> Copié !';
+                btnCopy.classList.remove('bg-orange-500');
+                btnCopy.classList.add('bg-green-500');
+
+                // Enable WhatsApp button with official WhatsApp colors
+                const btnWa = document.getElementById('btn-wa');
+                btnWa.disabled = false;
+                btnWa.classList.remove('cursor-not-allowed', 'bg-gray-200', 'text-gray-400');
+                btnWa.classList.add('bg-[#25D366]', 'hover:bg-[#128C7E]', 'text-white');
+            }).catch(err => {
+                alert("Erreur lors de la copie. Veuillez réessayer.");
+            });
+        }
+    </script>
+</body>
+</html>
