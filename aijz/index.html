@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wealth System | The Future of Smart Work</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
+                        card: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* Custom Breathing Animation for Floating Button */
+        @keyframes breathe {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); 
+            }
+            50% { 
+                transform: scale(1.08); 
+                box-shadow: 0 0 20px 10px rgba(139, 92, 246, 0.4); 
+            }
+        }
+        .animate-breathe {
+            animation: breathe 2.5s infinite ease-in-out;
+        }
+
+        /* Live Notification Slide-in */
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+        .live-toast {
+            animation: slideUpFade 5s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden relative pb-20 md:pb-0">
+
+    <!-- Background Blobs -->
+    <div class="blob bg-primary w-96 h-96 rounded-full top-0 left-0 mix-blend-multiply"></div>
+    <div class="blob bg-secondary w-96 h-96 rounded-full top-40 right-0 mix-blend-multiply"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card border-b-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-3xl text-primary"></i>
+                    <span class="font-bold text-2xl tracking-wider">Nex<span class="gradient-text">AI</span></span>
+                </div>
+                <div>
+                    <button onclick="k2()" class="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-primary/30">
+                        Start Journey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-12 lg:pt-48 lg:pb-20 px-4 relative">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-semibold tracking-wide">
+                <i class="fa-solid fa-fire mr-2"></i> Over 10,000+ Active Users Today
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Work Smarter, Not Harder.<br>
+                <span class="gradient-text">Let AI Do The Heavy Lifting.</span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+                Everyone is talking about AI, but few are truly profiting from it. Welcome to a revolutionary work system. No fixed locations, no complex operations. You manage the strategy, our AI executes the work.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <button onclick="k2()" class="bg-white text-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                    Explore The System
+                </button>
+                <button onclick="k2()" class="glass-card text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-headset"></i> Contact Manager
+                </button>
+            </div>
+
+            <!-- Trust Badges (Marketing Element) -->
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 pt-8 border-t border-white/10 opacity-70">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-green-400 text-xl"></i> <span class="text-sm font-medium">Bank-grade Security</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-blue-400 text-xl"></i> <span class="text-sm font-medium">24/7 Automated</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-money-bill-transfer text-yellow-400 text-xl"></i> <span class="text-sm font-medium">Daily Payouts</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid (The 6 Images/Steps) -->
+    <section id="features" class="py-20 relative z-10 bg-card/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">How It <span class="gradient-text">Works</span></h2>
+                <p class="text-gray-400 text-lg">A simple, closed-loop system designed for everyday people.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Daily Check-in" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                            <i class="fa-solid fa-calendar-check text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">1. Daily Check-In</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Start your day with a simple click. Log in daily to claim your activity bonus. No complex tasks required—just a quick tap to activate your daily presence.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800" alt="Profit Box" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 text-purple-400">
+                            <i class="fa-solid fa-vault text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">2. The Profit Box</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Deposit your surplus balance and let AI execute data-driven strategies. Enjoy a highly flexible <strong>0.35% daily return</strong>, breaking traditional banking limits with zero lock-in periods.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=800" alt="AI Robots" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 text-green-400">
+                            <i class="fa-solid fa-robot text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">3. AI Robot Tools</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Choose from various cycles and return models based on your schedule. Our professional AI bots analyze the market without emotion, securing stable, daily income for you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Active Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 text-orange-400">
+                            <i class="fa-solid fa-gauge-high text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">4. Automated Execution</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Monitor your active bots in real-time. Simply log in daily to activate your AI orders, and the system will automatically execute the tasks while you focus on other things.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" alt="Team Building" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-pink-500/20 rounded-lg flex items-center justify-center mb-4 text-pink-400">
+                            <i class="fa-solid fa-users text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">5. Team & Rewards</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Share the platform in your community and earn up to <strong>5% commission</strong>. Build your AI team to unlock a fixed monthly salary, upgrading you from a participant to a manager.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Earnings Record" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-4 text-yellow-400">
+                            <i class="fa-solid fa-wallet text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">6. Transparent Earnings</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            A complete closed-loop system: Select Strategy → Start Bot → Auto Run → Team Growth → Generate Income. Track every penny and withdraw your daily earnings effortlessly.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Testimonials Section -->
+    <section class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Real Users, <span class="gradient-text">Real Results</span></h2>
+                <p class="text-gray-400 text-lg">See what our community is saying about the NexAI system.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <i class="fa-solid fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="User" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
+                        <div>
+                            <h4 class="font-bold text-lg">David Chen</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed italic">
+                        "I used to trade manually and lost a lot due to emotions. Since switching to this AI bot system, I just spend 5 minutes a day checking my dashboard. The 0.35% daily return on the profit box is incredible!"
+                    </p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <i class="fa-solid fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="User" class="w-14 h-14 rounded-full object-cover border-2 border-secondary">
+                        <div>
+                            <h4 class="font-bold text-lg">Sarah Jenkins</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed italic">
+                        "As a stay-at-home mom, I needed something flexible. This system is exactly that. I started small, built a team in my community, and now I'm receiving a fixed monthly salary as a manager. Highly recommended!"
+                    </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <i class="fa-solid fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="User" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
+                        <div>
+                            <h4 class="font-bold text-lg">Michael R.</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed italic">
+                        "The transparency is what sold me. I can see every single trade and earning record. The daily check-in bonus is a nice touch, and withdrawals are processed super fast. It's the perfect side hustle."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary / CTA Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary rounded-full filter blur-3xl opacity-30"></div>
+                <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-secondary rounded-full filter blur-3xl opacity-30"></div>
+                
+                <!-- Scarcity Element -->
+                <div class="inline-block mb-6 px-4 py-2 rounded-full bg-red-500/20 border border-red-500/50 text-red-400 font-semibold animate-pulse">
+                    <i class="fa-solid fa-clock mr-2"></i> Only 12 spots left for 1-on-1 guidance today!
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 relative z-10">Ready to Start Your AI Income Journey?</h2>
+                <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto relative z-10">
+                    This is a lightweight online career. No experience required. We provide 1-on-1 manager guidance. Whether you want a side hustle or a stable primary income, all you need is a smartphone.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+                    <button onclick="k2()" class="bg-gradient-to-r from-primary to-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-primary/30 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Contact Us Now
+                    </button>
+                    <button onclick="k2()" class="glass-card text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i> Register Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-10 mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <i class="fa-solid fa-microchip text-xl text-gray-400"></i>
+                <span class="font-bold text-xl text-gray-300">NexAI</span>
+            </div>
+            <p>&copy; 2026 NexAI Work System. All rights reserved.</p>
+            <p class="mt-2">Empowering individuals through artificial intelligence and smart automation.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Breathing Button (Mobile & Desktop) -->
+    <button onclick="k2()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 bg-gradient-to-r from-primary to-secondary text-white rounded-full p-4 md:px-8 md:py-4 flex items-center justify-center gap-3 cursor-pointer animate-breathe border border-white/20">
+        <i class="fa-solid fa-bolt text-2xl md:text-xl"></i>
+        <span class="hidden md:inline font-bold text-lg tracking-wide">Start Earning</span>
+    </button>
+
+    <!-- Fake Live Notification Popup (Marketing Element) -->
+    <div class="fixed bottom-6 left-6 z-40 glass-card px-4 py-3 rounded-xl flex items-center gap-3 live-toast pointer-events-none hidden sm:flex border-l-4 border-l-green-400">
+        <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <p class="text-sm font-bold text-white">User ***892 just withdrew</p>
+            <p class="text-xs text-green-400 font-semibold">+$145.50 to Bank Account</p>
+        </div>
+    </div>
+
+    <!-- The k2 JavaScript Function -->
+    <script>
+        function k2() {
+            window.location.href = 'https://www.qq.com';
+        }
+    </script>
+</body>
+</html>
