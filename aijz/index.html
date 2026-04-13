@@ -54,16 +54,34 @@
         /* Custom Breathing Animation for Floating Button */
         @keyframes breathe {
             0%, 100% { 
-                transform: scale(1); 
+                transform: scale(1) translateX(0); 
                 box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); 
             }
             50% { 
-                transform: scale(1.08); 
+                transform: scale(1.05) translateX(0); 
                 box-shadow: 0 0 20px 10px rgba(139, 92, 246, 0.4); 
             }
         }
-        .animate-breathe {
-            animation: breathe 2.5s infinite ease-in-out;
+        /* Special handling for mobile centering with transform */
+        @media (max-width: 767px) {
+            @keyframes breathe-mobile {
+                0%, 100% { 
+                    transform: translateX(-50%) scale(1); 
+                    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); 
+                }
+                50% { 
+                    transform: translateX(-50%) scale(1.05); 
+                    box-shadow: 0 0 20px 10px rgba(139, 92, 246, 0.4); 
+                }
+            }
+            .animate-breathe {
+                animation: breathe-mobile 2.5s infinite ease-in-out;
+            }
+        }
+        @media (min-width: 768px) {
+            .animate-breathe {
+                animation: breathe 2.5s infinite ease-in-out;
+            }
         }
 
         /* Live Notification Slide-in */
@@ -78,7 +96,7 @@
         }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden relative pb-20 md:pb-0">
+<body class="antialiased overflow-x-hidden relative pb-24 md:pb-0">
 
     <!-- Background Blobs -->
     <div class="blob bg-primary w-96 h-96 rounded-full top-0 left-0 mix-blend-multiply"></div>
@@ -353,13 +371,13 @@
     </footer>
 
     <!-- Floating Breathing Button (Mobile & Desktop) -->
-    <button onclick="k2()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 bg-gradient-to-r from-primary to-secondary text-white rounded-full p-4 md:px-8 md:py-4 flex items-center justify-center gap-3 cursor-pointer animate-breathe border border-white/20">
-        <i class="fa-solid fa-bolt text-2xl md:text-xl"></i>
-        <span class="hidden md:inline font-bold text-lg tracking-wide">Start Earning</span>
+    <button onclick="k2()" class="fixed bottom-4 left-1/2 w-[90%] md:w-auto md:bottom-10 md:left-auto md:right-10 z-50 bg-gradient-to-r from-primary to-secondary text-white rounded-full py-4 md:px-8 flex items-center justify-center gap-3 cursor-pointer animate-breathe border border-white/20 shadow-2xl">
+        <i class="fa-solid fa-bolt text-xl"></i>
+        <span class="font-bold text-lg tracking-wide">Start Earning</span>
     </button>
 
     <!-- Fake Live Notification Popup (Marketing Element) -->
-    <div class="fixed bottom-6 left-6 z-40 glass-card px-4 py-3 rounded-xl flex items-center gap-3 live-toast pointer-events-none hidden sm:flex border-l-4 border-l-green-400">
+    <div class="fixed bottom-24 left-6 z-40 glass-card px-4 py-3 rounded-xl flex items-center gap-3 live-toast pointer-events-none hidden sm:flex border-l-4 border-l-green-400">
         <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
             <i class="fa-solid fa-check"></i>
         </div>
