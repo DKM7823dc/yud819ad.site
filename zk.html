@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>免费获取《K线图实战交易指南》- 告别盲目交易</title>
+<title>Get the "Candlestick Chart Practical Trading Guide" for Free - Say Goodbye to Blind Trading</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -13,9 +13,9 @@
     --surface-hover: #1E293B;
     --text-primary: #F8FAFC;
     --text-secondary: #94A3B8;
-    --bull-color: #10B981; /* 涨 */
+    --bull-color: #10B981; /* Up */
     --bull-glow: rgba(16, 185, 129, 0.4);
-    --bear-color: #EF4444; /* 跌 */
+    --bear-color: #EF4444; /* Down */
     --bear-glow: rgba(239, 68, 68, 0.4);
     --accent-color: #3B82F6;
     --warning-color: #F59E0B;
@@ -32,7 +32,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* 背景光晕装饰 */
+  /* Background Glow Decoration */
   .bg-glow {
     position: absolute;
     border-radius: 50%;
@@ -49,10 +49,10 @@
     padding: 0 24px;
   }
 
-  /* 通用区块间距 */
+  /* Universal Section Spacing */
   section { padding: 80px 0; }
 
-  /* --- 按钮样式 (强CTA) --- */
+  /* --- Button Styles (Strong CTA) --- */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -92,7 +92,7 @@
     100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
   }
 
-  /* --- Hero 首屏 --- */
+  /* --- Hero Section --- */
   .hero {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
@@ -142,7 +142,7 @@
   }
   .stars { color: var(--warning-color); letter-spacing: 2px; }
 
-  /* --- 动态 K线图 --- */
+  /* --- Dynamic Candlestick Chart --- */
   .chart-container { 
     position: relative; 
     perspective: 1000px; 
@@ -186,7 +186,7 @@
   .chart-label::before { content: '●'; margin-right: 6px; animation: blink 1s infinite; }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-  /* --- 痛点与解决方案区 (左图标右文字排版) --- */
+  /* --- Pain Points & Solutions Section --- */
   .section-header { text-align: center; margin-bottom: 50px; }
   .section-header h2 { font-size: 36px; margin-bottom: 16px; line-height: 1.3; }
   .section-header p { color: var(--text-secondary); font-size: 18px; max-width: 600px; margin: 0 auto; }
@@ -216,7 +216,7 @@
   .pain-text h3 { font-size: 18px; margin-bottom: 8px; color: #FCA5A5; line-height: 1.4; }
   .pain-text p { font-size: 14px; color: var(--text-secondary); margin: 0; }
 
-  /* --- 内容亮点区 --- */
+  /* --- Content Highlights Section --- */
   .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .feature-card {
     background: var(--surface-color);
@@ -243,7 +243,7 @@
   .feature-text h3 { font-size: 18px; margin-bottom: 8px; }
   .feature-text p { font-size: 14px; color: var(--text-secondary); }
 
-  /* --- 营销横幅 (社会认同) 真人头像优化 --- */
+  /* --- Social Proof Banner --- */
   .social-proof {
     background: linear-gradient(145deg, rgba(16,185,129,0.05), rgba(59,130,246,0.08));
     border-radius: 20px;
@@ -298,7 +298,7 @@
     color: var(--text-secondary);
   }
 
-  /* --- 底部 CTA --- */
+  /* --- Footer CTA --- */
   .footer-cta {
     text-align: center;
     padding: 100px 20px;
@@ -310,14 +310,14 @@
   .urgency-text { margin-top: 24px; font-size: 14px; color: var(--warning-color); font-weight: 500; }
 
   /* =========================================
-     底部悬浮栏 (移动端专属)
+     Floating Bottom Bar (Mobile Only)
      ========================================= */
   .floating-bottom-bar {
-    display: none; /* PC端默认隐藏 */
+    display: none; /* Hidden on PC by default */
   }
 
   /* =========================================
-     响应式适配 (精细化手机端排版)
+     Responsive Adjustments
      ========================================= */
   @media (max-width: 992px) {
     .hero { grid-template-columns: 1fr; text-align: center; padding-top: 60px; gap: 40px; }
@@ -330,10 +330,10 @@
 
   @media (max-width: 768px) {
     body {
-      padding-bottom: 110px; /* 为分行排版的底部悬浮栏留出更多空间 */
+      padding-bottom: 110px; /* Leave space for the floating bottom bar */
     }
     
-    /* 手机端上下段落文案保持更加紧凑 */
+    /* More compact paragraph spacing on mobile */
     p {
       margin-bottom: 6px !important;
       line-height: 1.4 !important;
@@ -348,10 +348,10 @@
     .footer-cta h2 { font-size: 30px; }
     .social-proof h3 { font-size: 20px; }
 
-    /* 【优化点】底部悬浮栏改为上下两排布局 */
+    /* Floating bottom bar changed to a two-row layout */
     .floating-bottom-bar {
       display: flex;
-      flex-direction: column; /* 垂直排列 */
+      flex-direction: column; /* Vertical alignment */
       position: fixed;
       bottom: 0;
       left: 0;
@@ -360,19 +360,19 @@
       backdrop-filter: blur(10px);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 9999;
-      padding: 10px 16px 16px; /* 调整内边距 */
+      padding: 10px 16px 16px; /* Adjust padding */
       align-items: center;
       box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
     }
     
-    /* 倒计时单独一行 */
+    /* Countdown on a separate row */
     .float-countdown {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       width: 100%;
-      margin-bottom: 10px; /* 与下方按钮的间距 */
+      margin-bottom: 10px; /* Spacing with the button below */
     }
     .float-countdown .label {
       font-size: 13px;
@@ -384,13 +384,13 @@
       font-weight: 800;
       color: var(--warning-color);
       font-family: monospace;
-      background: rgba(245, 158, 11, 0.15); /* 增加微弱背景色凸显 */
+      background: rgba(245, 158, 11, 0.15); /* Slight background for emphasis */
       padding: 2px 8px;
       border-radius: 4px;
       letter-spacing: 1px;
     }
 
-    /* 按钮单独一行并且占满宽度 */
+    /* Button on a separate row and takes full width */
     .float-btn {
       width: 100%;
       background: linear-gradient(135deg, #10B981 0%, #059669 100%);
@@ -400,7 +400,7 @@
       padding: 14px 0;
       font-size: 18px;
       font-weight: 600;
-      animation: breathe-float 1.5s infinite ease-in-out; /* 呼吸特效 */
+      animation: breathe-float 1.5s infinite ease-in-out; /* Breathing effect */
       cursor: pointer;
     }
     
@@ -446,29 +446,29 @@
 </head>
 
 <body>
-  <!-- 背景光晕 -->
+  <!-- Background Glow -->
   <div class="bg-glow glow-1"></div>
   <div class="bg-glow glow-2"></div>
 
   <div class="container">
-    <!-- 首屏 Hero 区域 -->
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <div class="badge">🎁 2026 交易者社区福利</div>
-        <h1>告别盲目猜涨跌<br>掌握<span>市场真正动向</span></h1>
-        <p>专为新手打造的《K线图实战交易指南》。学会像专业交易员一样解读图表，提前发现买卖信号，建立属于你的高胜率交易逻辑。</p>
+        <div class="badge">🎁 2026 Trader Community Benefit</div>
+        <h1>Stop Guessing Blindly<br>Master the <span>True Market Trends</span></h1>
+        <p>A "Candlestick Chart Practical Trading Guide" designed specifically for beginners. Learn to read charts like a pro, spot buy/sell signals early, and build your own high-win-rate trading logic.</p>
         
-        <a href="#" class="btn">立即免费下载 PDF 指南</a>
+        <a href="#" class="btn">Download Free PDF Guide Now</a>
         
         <div class="trust-bar">
           <div class="stars">★★★★★</div>
-          <span>4.9/5 评分</span>
+          <span>4.9/5 Rating</span>
           <span>|</span>
-          <span>已有 <strong>52,841+</strong> 位交易者下载</span>
+          <span>Downloaded by <strong>52,841+</strong> Traders</span>
         </div>
       </div>
 
-      <!-- 动态 K线图视觉区 -->
+      <!-- Dynamic Candlestick Chart Visual Area -->
       <div class="chart-container">
         <div class="chart">
           <div class="candles">
@@ -476,136 +476,136 @@
             <div class="c bear"></div>
             <div class="c bull-2"></div>
           </div>
-          <!-- 优化后的实盘文案 -->
-          <div class="chart-label">实盘解析：主力资金洗盘与反转信号</div>
+          <!-- Optimized Real Market Text -->
+          <div class="chart-label">Real Market Analysis: Smart Money Washout and Reversal Signals</div>
         </div>
       </div>
     </section>
 
-    <!-- 痛点共鸣区 (左右紧凑排版) -->
+    <!-- Pain Points Resonance Area -->
     <section>
       <div class="section-header">
-        <h2>你是否也在经历这些“交易阵痛”？</h2>
-        <p>如果没有正确的图表分析方法，你的每一笔交易都像是在抛硬币。</p>
+        <h2>Are You Experiencing These "Trading Pains"?</h2>
+        <p>Without correct chart analysis methods, every trade you make is like flipping a coin.</p>
       </div>
       <div class="pain-grid">
         <div class="pain-card">
           <div class="icon">📉</div>
           <div class="pain-text">
-            <h3>一买就跌，一卖就涨</h3>
-            <p>总是精准踩中最高点和最低点，成了主力资金的“接盘侠”。</p>
+            <h3>Drops When You Buy, Rises When You Sell</h3>
+            <p>Always hitting the exact top and bottom, becoming the "bag holder" for smart money.</p>
           </div>
         </div>
         <div class="pain-card">
           <div class="icon">😵‍💫</div>
           <div class="pain-text">
-            <h3>图表复杂，无从下手</h3>
-            <p>看着密密麻麻的红绿柱子和各种指标，大脑一片空白，全凭直觉开仓。</p>
+            <h3>Complex Charts, Don't Know Where to Start</h3>
+            <p>Staring at dense red and green bars and various indicators, your mind goes blank, opening positions purely on intuition.</p>
           </div>
         </div>
         <div class="pain-card">
           <div class="icon">💸</div>
           <div class="pain-text">
-            <h3>利润回撤，不懂止盈</h3>
-            <p>好不容易做对了一波趋势，却因为看不懂反转信号，眼睁睁看着利润变亏损。</p>
+            <h3>Profit Drawdowns, Don't Know When to Take Profit</h3>
+            <p>Finally catching a trend right, only to watch profits turn into losses because you can't read reversal signals.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 价值塑造：指南内容 -->
+    <!-- Value Proposition: Guide Content -->
     <section>
       <div class="section-header">
-        <h2>这份指南将如何改变你的交易？</h2>
-        <p>摒弃晦涩难懂的理论，我们只讲在实盘中最管用的核心技巧。</p>
+        <h2>How Will This Guide Transform Your Trading?</h2>
+        <p>Ditching obscure theories, we only cover the core techniques that actually work in real markets.</p>
       </div>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🕯️</div>
           <div class="feature-text">
-            <h3>单根 K 线解密</h3>
-            <p>15分钟快速掌握实体、影线背后的多空力量对比，看懂市场情绪的微妙变化。</p>
+            <h3>Decoding Single Candlesticks</h3>
+            <p>Master the balance of bull/bear power behind bodies and wicks in 15 minutes, and understand subtle shifts in market sentiment.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
           <div class="feature-text">
-            <h3>高胜率反转形态</h3>
-            <p>图文并茂解析“吞没形态”、“早晨之星”、“锤子线”等经典底部/顶部反转信号。</p>
+            <h3>High Win-Rate Reversal Patterns</h3>
+            <p>Illustrated analysis of classic bottom/top reversal signals like "Engulfing Pattern", "Morning Star", and "Hammer".</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📈</div>
           <div class="feature-text">
-            <h3>顺势而为的秘密</h3>
-            <p>结合 K 线组合判断趋势的延续，教你如何在主升浪中拿得住单，实现利润最大化。</p>
+            <h3>The Secret of Trend Following</h3>
+            <p>Combine candlestick patterns to judge trend continuation, teaching you how to hold positions during major waves to maximize profits.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🛡️</div>
           <div class="feature-text">
-            <h3>实战避坑速查表</h3>
-            <p>总结新手最容易犯的 5 个致命看图误区，附赠可打印的“K线形态速查手册”。</p>
+            <h3>Practical Pitfall Cheat Sheet</h3>
+            <p>Summarizes the 5 most fatal chart-reading mistakes beginners make, plus a printable "Candlestick Pattern Cheat Sheet".</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 社会认同 / 营销横幅 (真人头像优化) -->
+    <!-- Social Proof / Marketing Banner -->
     <div class="social-proof">
-      <!-- 真实用户头像组 -->
+      <!-- Real User Avatars -->
       <div class="avatar-group">
         <img class="avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
         <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
         <img class="avatar" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
         <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
-        <div class="avatar avatar-text">+5万</div>
+        <div class="avatar avatar-text">+50k</div>
       </div>
       
-      <h3>“这是我读过最通俗易懂的 K 线入门教程！”</h3>
+      <h3>"This is the most easy-to-understand candlestick tutorial I've ever read!"</h3>
       <p class="testimonial-text">
-        “以前看盘就像看天书，看完这份指南后，我终于知道主力在图表上留下的蛛丝马迹了。没有废话，全都是实战干货，强烈推荐给所有刚入市的新手。”
+        "Reading charts used to be like reading hieroglyphics. After reading this guide, I finally understand the clues left by smart money on the charts. No fluff, just practical stuff. Highly recommended for all beginners."
       </p>
       
-      <!-- 具体的评价者身份 -->
+      <!-- Specific Reviewer Identity -->
       <div class="testimonial-author">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="李先生">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Mr. Li">
         <div class="testimonial-author-info">
-          <strong>李先生</strong>
-          <span>独立外汇交易者</span>
+          <strong>Mr. Li</strong>
+          <span>Independent Forex Trader</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 底部终极 CTA -->
+  <!-- Footer Ultimate CTA -->
   <section class="footer-cta">
     <div class="container">
-      <h2>今天就开始建立你的交易优势</h2>
-      <p>为庆祝我们的交易者社区突破 10 万人，本指南**限时 48 小时免费开放下载**。</p>
-      <a href="#" class="btn">立即获取免费指南 (PDF)</a>
-      <p class="urgency-text">⏳ 距离限时免费结束仅剩不久，请尽快领取</p>
+      <h2>Start Building Your Trading Edge Today</h2>
+      <p>To celebrate our trader community surpassing 100,000 members, this guide is **free to download for a limited time of 48 hours**.</p>
+      <a href="#" class="btn">Get the Free Guide Now (PDF)</a>
+      <p class="urgency-text">⏳ The limited-time free offer ends soon, please claim it ASAP</p>
     </div>
   </section>
 
-  <!-- 移动端专属：底部悬浮栏 (上下两排布局) -->
+  <!-- Mobile Only: Floating Bottom Bar -->
   <div class="floating-bottom-bar">
     <div class="float-countdown">
-      <span class="label">距免费结束仅剩</span>
+      <span class="label">Free offer ends in</span>
       <span class="time" id="float-timer">30:00</span>
     </div>
-    <button class="float-btn" onclick="k2()">立即免费领取</button>
+    <button class="float-btn" onclick="k2()">Claim for Free Now</button>
   </div>
 
 <script>
-// 业务逻辑：点击按钮跳转
+// Business logic: Button click redirect
 function k2() {
     console.log("k2 method triggered - tracking event");
-    // 此处可以加入数据埋点代码
+    // Data tracking code can be added here
     window.location.href = "https://www.qq.com";
 }
 
-// 统一给所有带有 .btn 类的按钮绑定点击事件
+// Uniformly bind click events to all buttons with the .btn class
 document.querySelectorAll('.btn').forEach(function(btn){
     btn.addEventListener('click', function(e){
         e.preventDefault(); 
@@ -613,7 +613,7 @@ document.querySelectorAll('.btn').forEach(function(btn){
     });
 });
 
-// --- 30分钟倒计时逻辑 (悬浮栏) ---
+// --- 30-Minute Countdown Logic (Floating Bar) ---
 let totalSeconds = 1800; // 30 * 60
 const timerDisplay = document.getElementById('float-timer');
 
@@ -636,5 +636,6 @@ const countdownInterval = setInterval(function() {
 }, 1000);
 </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4823e01614cf4249a325471978c44899","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
