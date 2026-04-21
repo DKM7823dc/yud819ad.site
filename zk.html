@@ -197,17 +197,17 @@
     border: 1px solid rgba(239, 68, 68, 0.1);
     padding: 28px 24px;
     border-radius: 16px;
-    display: flex;          /* 改为 Flex 布局 */
+    display: flex;
     align-items: flex-start;
     gap: 16px;
-    text-align: left;       /* 文字左对齐 */
+    text-align: left;
   }
   .pain-card .icon { 
     font-size: 24px; 
-    flex-shrink: 0;         /* 防止图标被压缩 */
+    flex-shrink: 0;
     width: 48px; 
     height: 48px;
-    background: rgba(239, 68, 68, 0.1); /* 增加微弱的底色块显得专业 */
+    background: rgba(239, 68, 68, 0.1);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -274,7 +274,6 @@
     font-size: 16px;
     font-style: italic;
   }
-  /* 评价者身份区 */
   .testimonial-author {
     display: flex;
     align-items: center;
@@ -311,6 +310,13 @@
   .urgency-text { margin-top: 24px; font-size: 14px; color: var(--warning-color); font-weight: 500; }
 
   /* =========================================
+     底部悬浮栏 (移动端专属)
+     ========================================= */
+  .floating-bottom-bar {
+    display: none; /* PC端默认隐藏 */
+  }
+
+  /* =========================================
      响应式适配 (精细化手机端排版)
      ========================================= */
   @media (max-width: 992px) {
@@ -323,11 +329,87 @@
   }
 
   @media (max-width: 768px) {
-    section { padding: 50px 0; }
+    body {
+      padding-bottom: 90px; /* 为底部悬浮按钮留出空间 */
+    }
+    
+    /* 【优化点1】让手机端上下段落文案保持更加紧凑 */
+    p {
+      margin-bottom: 6px !important;
+      line-height: 1.4 !important;
+    }
+    .hero p, .section-header p, .pain-text p, .feature-text p, .testimonial-text {
+      margin-bottom: 10px !important;
+    }
+
+    section { padding: 40px 0; }
     .hero h1 { font-size: 36px; }
-    .section-header h2 { font-size: 28px; }
+    .section-header h2 { font-size: 28px; margin-bottom: 10px; }
     .footer-cta h2 { font-size: 30px; }
     .social-proof h3 { font-size: 20px; }
+
+    /* 【优化点2 & 3】底部悬浮呼吸按钮与倒计时 */
+    .floating-bottom-bar {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background: rgba(11, 15, 25, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 9999;
+      padding: 0 16px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .float-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 0;
+      font-size: 16px;
+      font-weight: 600;
+      margin-right: 12px;
+      animation: breathe-float 1.5s infinite ease-in-out; /* 呼吸特效 */
+      cursor: pointer;
+    }
+    
+    @keyframes breathe-float {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+      50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+    }
+
+    .float-countdown {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      padding: 6px 10px;
+      min-width: 75px;
+    }
+    .float-countdown .label {
+      font-size: 10px;
+      color: var(--warning-color);
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+    .float-countdown .time {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--warning-color);
+      font-family: monospace;
+      line-height: 1;
+    }
   }
 
   @media (max-width: 480px) {
@@ -340,15 +422,13 @@
     
     .btn { width: 100%; padding: 16px 20px; font-size: 16px; }
     
-    /* 缩小手机端 K线动图尺寸 */
     .chart-container { 
       transform: scale(0.75); 
       transform-origin: top center; 
-      margin-bottom: -60px; /* 抵消缩放后留下的空白高度 */
+      margin-bottom: -60px;
     }
     .chart { padding: 24px 16px; }
     
-    /* 痛点区手机端保持左右布局，稍微减小间距 */
     .pain-card { padding: 20px 16px; gap: 12px; }
     .pain-card .icon { width: 40px; height: 40px; font-size: 20px; }
     .pain-text h3 { font-size: 16px; }
@@ -509,6 +589,15 @@
     </div>
   </section>
 
+  <!-- 移动端专属：底部悬浮栏 (包含呼吸按钮与倒计时) -->
+  <div class="floating-bottom-bar">
+    <button class="float-btn" onclick="k2()">立即免费下载</button>
+    <div class="float-countdown">
+      <span class="label">距结束仅剩</span>
+      <span class="time" id="float-timer">30:00</span>
+    </div>
+  </div>
+
 <script>
 // 业务逻辑：点击按钮跳转
 function k2() {
@@ -524,6 +613,28 @@ document.querySelectorAll('.btn').forEach(function(btn){
         k2(); 
     });
 });
+
+// --- 30分钟倒计时逻辑 (悬浮栏) ---
+let totalSeconds = 1800; // 30 * 60
+const timerDisplay = document.getElementById('float-timer');
+
+function formatTime(seconds) {
+    let m = Math.floor(seconds / 60);
+    let s = seconds % 60;
+    m = m < 10 ? '0' + m : m;
+    s = s < 10 ? '0' + s : s;
+    return m + ":" + s;
+}
+
+const countdownInterval = setInterval(function() {
+    if (totalSeconds <= 0) {
+        clearInterval(countdownInterval);
+        if(timerDisplay) timerDisplay.innerText = "00:00";
+        return;
+    }
+    totalSeconds--;
+    if(timerDisplay) timerDisplay.innerText = formatTime(totalSeconds);
+}, 1000);
 </script>
 
 </body>
