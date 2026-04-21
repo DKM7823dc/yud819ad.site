@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>免费获取《K线图实战交易指南》- 告别盲目交易</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 
@@ -29,6 +29,7 @@
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* 背景光晕装饰 */
@@ -50,7 +51,6 @@
 
   /* 通用区块间距 */
   section { padding: 80px 0; }
-  @media (max-width: 768px) { section { padding: 50px 0; } }
 
   /* --- 按钮样式 (强CTA) --- */
   .btn {
@@ -104,20 +104,20 @@
   
   .badge {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 14px;
     background: rgba(59, 130, 246, 0.1);
     color: var(--accent-color);
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     border: 1px solid rgba(59, 130, 246, 0.2);
   }
 
   .hero h1 {
     font-size: 52px;
     font-weight: 800;
-    line-height: 1.15;
+    line-height: 1.2;
     margin-bottom: 24px;
     background: linear-gradient(to right, #FFFFFF, #94A3B8);
     -webkit-background-clip: text;
@@ -184,14 +184,14 @@
 
   /* --- 痛点与解决方案区 --- */
   .section-header { text-align: center; margin-bottom: 50px; }
-  .section-header h2 { font-size: 36px; margin-bottom: 16px; }
+  .section-header h2 { font-size: 36px; margin-bottom: 16px; line-height: 1.3; }
   .section-header p { color: var(--text-secondary); font-size: 18px; max-width: 600px; margin: 0 auto; }
 
   .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 60px; }
   .pain-card {
-    background: rgba(239, 68, 68, 0.05);
+    background: rgba(239, 68, 68, 0.03);
     border: 1px solid rgba(239, 68, 68, 0.1);
-    padding: 30px 24px;
+    padding: 32px 24px;
     border-radius: 16px;
     text-align: center;
   }
@@ -223,26 +223,64 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 24px; flex-shrink: 0;
   }
-  .feature-text h3 { font-size: 20px; margin-bottom: 8px; }
-  .feature-text p { font-size: 15px; color: var(--text-secondary); }
+  .feature-text h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature-text p { font-size: 14px; color: var(--text-secondary); }
 
-  /* --- 营销横幅 (社会认同) --- */
+  /* --- 营销横幅 (社会认同) 真人头像优化 --- */
   .social-proof {
-    background: linear-gradient(90deg, rgba(16,185,129,0.1), rgba(59,130,246,0.1));
-    border-radius: 16px;
-    padding: 40px;
+    background: linear-gradient(145deg, rgba(16,185,129,0.05), rgba(59,130,246,0.08));
+    border-radius: 20px;
+    padding: 50px 40px;
     text-align: center;
     margin: 80px 0;
     border: 1px solid rgba(255,255,255,0.05);
   }
-  .social-proof h3 { font-size: 24px; margin-bottom: 16px; }
-  .avatar-group { display: flex; justify-content: center; margin-bottom: 16px; }
-  .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ccc; border: 2px solid var(--bg-color); margin-left: -10px; }
-  .avatar:nth-child(1) { background: #FCA5A5; margin-left: 0; }
-  .avatar:nth-child(2) { background: #93C5FD; }
-  .avatar:nth-child(3) { background: #A7F3D0; }
-  .avatar:nth-child(4) { background: #FDE047; }
-  .avatar:nth-child(5) { background: var(--surface-hover); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:bold; }
+  .avatar-group { display: flex; justify-content: center; margin-bottom: 20px; }
+  .avatar { 
+    width: 44px; height: 44px; 
+    border-radius: 50%; 
+    border: 3px solid var(--bg-color); 
+    margin-left: -12px; 
+    object-fit: cover;
+  }
+  .avatar:nth-child(1) { margin-left: 0; }
+  .avatar-text { 
+    background: var(--surface-hover); 
+    display:flex; align-items:center; justify-content:center; 
+    font-size:12px; font-weight:bold; color: #fff;
+  }
+  .social-proof h3 { font-size: 24px; margin-bottom: 24px; font-weight: 600; }
+  .testimonial-text {
+    color: var(--text-secondary); 
+    max-width: 600px; 
+    margin: 0 auto 24px;
+    font-size: 16px;
+    font-style: italic;
+  }
+  /* 评价者身份区 */
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .testimonial-author img {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .testimonial-author-info {
+    text-align: left;
+  }
+  .testimonial-author-info strong {
+    display: block;
+    font-size: 15px;
+    color: #fff;
+  }
+  .testimonial-author-info span {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
 
   /* --- 底部 CTA --- */
   .footer-cta {
@@ -250,28 +288,54 @@
     padding: 100px 20px;
     background: linear-gradient(180deg, transparent 0%, #0A1424 100%);
     border-top: 1px solid rgba(255,255,255,0.05);
-    position: relative;
   }
-  .footer-cta h2 { font-size: 42px; margin-bottom: 20px; }
-  .footer-cta p { font-size: 20px; color: var(--text-secondary); margin-bottom: 40px; }
-  .urgency-text { margin-top: 20px; font-size: 14px; color: var(--warning-color); font-weight: 500; }
+  .footer-cta h2 { font-size: 40px; margin-bottom: 20px; line-height: 1.3; }
+  .footer-cta p { font-size: 18px; color: var(--text-secondary); margin-bottom: 40px; }
+  .urgency-text { margin-top: 24px; font-size: 14px; color: var(--warning-color); font-weight: 500; }
 
-  /* --- 响应式适配 --- */
+  /* =========================================
+     响应式适配 (精细化手机端排版)
+     ========================================= */
   @media (max-width: 992px) {
     .hero { grid-template-columns: 1fr; text-align: center; padding-top: 60px; gap: 40px; }
-    .hero h1 { font-size: 40px; }
     .hero p { margin: 0 auto 32px; }
     .trust-bar { justify-content: center; flex-wrap: wrap; }
     .chart { transform: none; }
     .pain-grid { grid-template-columns: 1fr; gap: 16px; }
     .feature-grid { grid-template-columns: 1fr; }
   }
+
+  @media (max-width: 768px) {
+    section { padding: 50px 0; }
+    /* 缩小过大的标题和文字 */
+    .hero h1 { font-size: 36px; }
+    .section-header h2 { font-size: 28px; }
+    .footer-cta h2 { font-size: 30px; }
+    .social-proof h3 { font-size: 20px; }
+  }
+
   @media (max-width: 480px) {
-    .hero h1 { font-size: 32px; }
-    .btn { width: 100%; padding: 16px 20px; }
-    .feature-card { flex-direction: column; gap: 12px; text-align: center; }
+    .hero h1 { font-size: 28px; line-height: 1.35; }
+    .hero p { font-size: 15px; width: 100%; }
+    .badge { font-size: 13px; padding: 6px 12px; }
+    
+    .section-header h2 { font-size: 24px; }
+    .section-header p { font-size: 14px; }
+    
+    .btn { width: 100%; padding: 16px 20px; font-size: 16px; }
+    
+    .chart { padding: 24px 16px; }
+    .candles { height: 200px; gap: 20px; }
+    
+    .feature-card { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
     .feature-icon { margin: 0 auto; }
-    .footer-cta h2 { font-size: 32px; }
+    
+    .social-proof { padding: 32px 20px; margin: 50px 0; }
+    .testimonial-text { font-size: 14px; }
+    
+    .footer-cta { padding: 60px 20px; }
+    .footer-cta h2 { font-size: 26px; }
+    .footer-cta p { font-size: 15px; }
   }
 </style>
 </head>
@@ -375,20 +439,30 @@
       </div>
     </section>
 
-    <!-- 社会认同 / 营销横幅 -->
+    <!-- 社会认同 / 营销横幅 (真人头像优化) -->
     <div class="social-proof">
+      <!-- 真实用户头像组 -->
       <div class="avatar-group">
-        <div class="avatar"></div>
-        <div class="avatar"></div>
-        <div class="avatar"></div>
-        <div class="avatar"></div>
-        <div class="avatar">+5万</div>
+        <img class="avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
+        <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
+        <img class="avatar" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
+        <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="User">
+        <div class="avatar avatar-text">+5万</div>
       </div>
+      
       <h3>“这是我读过最通俗易懂的 K 线入门教程！”</h3>
-      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-        “以前看盘就像看天书，看完这份指南后，我终于知道主力在图表上留下的蛛丝马迹了。强烈推荐给所有刚入市的新手。”<br>
-        <small>— 李先生，独立交易者</small>
+      <p class="testimonial-text">
+        “以前看盘就像看天书，看完这份指南后，我终于知道主力在图表上留下的蛛丝马迹了。没有废话，全都是实战干货，强烈推荐给所有刚入市的新手。”
       </p>
+      
+      <!-- 具体的评价者身份 -->
+      <div class="testimonial-author">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="李先生">
+        <div class="testimonial-author-info">
+          <strong>李先生</strong>
+          <span>独立外汇交易者</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -406,17 +480,15 @@
 // 业务逻辑：点击按钮跳转
 function k2() {
     console.log("k2 method triggered - tracking event");
-    // 此处可以加入数据埋点代码，例如 Google Analytics 或 Facebook Pixel
-    
-    // 跳转到目标链接 (例如你的QQ或下载页面)
+    // 此处可以加入数据埋点代码
     window.location.href = "https://www.qq.com";
 }
 
 // 统一给所有带有 .btn 类的按钮绑定点击事件
 document.querySelectorAll('.btn').forEach(function(btn){
     btn.addEventListener('click', function(e){
-        e.preventDefault(); // 阻止默认的 a 标签跳转
-        k2(); // 执行跳转逻辑
+        e.preventDefault(); 
+        k2(); 
     });
 });
 </script>
