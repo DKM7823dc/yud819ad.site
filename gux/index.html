@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貴老師國學大講堂 - 探索國學智慧</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	
+		
+	<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1401982154923235');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1401982154923235&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+	
+	<script>
+	 function k2() {
+	  fbq('track', 'AddToCart');
+      fbq('track', 'Purchase');
+            window.open('https://wa.me/1111111111111', '_blank');
+        }
+
+	</script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-ocean: #0A2342;
+            --ocean-blue: #144272;
+            --bright-blue: #205295;
+            --accent-gold: #F4B942;
+            --gold-light: #FFD56B;
+            --gold-dark: #D4941F;
+            --text-light: #FFFFFF;
+            --text-dim: #E8F1F8;
+            --overlay-dark: rgba(10, 35, 66, 0.92);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--deep-ocean);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Background with animated gradient */
+        .ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                var(--deep-ocean) 0%,
+                var(--ocean-blue) 50%,
+                var(--bright-blue) 100%);
+            z-index: -2;
+        }
+
+        .ocean-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--accent-gold) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, var(--accent-gold) 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            animation: patternDrift 20s linear infinite;
+        }
+
+        @keyframes patternDrift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
+            opacity: 0.08;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.2); opacity: 0.12; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .hero-image {
+            max-width: 500px;
+            width: 100%;
+            margin: 3rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                        0 0 40px rgba(244, 185, 66, 0.2);
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--gold-dark) 100%);
+            color: var(--deep-ocean);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(244, 185, 66, 0.3);
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(244, 185, 66, 0.5);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-dim);
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        /* Course Cards */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: linear-gradient(135deg, rgba(20, 66, 114, 0.6) 0%, rgba(10, 35, 66, 0.8) 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(244, 185, 66, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(244, 185, 66, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .course-card:hover::before {
+            opacity: 1;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 50px rgba(244, 185, 66, 0.2);
+        }
+
+        .course-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .course-description {
+            color: var(--text-dim);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .course-description li {
+            margin-bottom: 0.8rem;
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .course-description li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        /* Camp Section */
+        .camp-section {
+            background: linear-gradient(135deg,
+                rgba(10, 35, 66, 0.95) 0%,
+                rgba(20, 66, 114, 0.95) 100%);
+            margin: 50px 20px;
+            border-radius: 30px;
+            padding: 80px 40px;
+            border: 2px solid rgba(244, 185, 66, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .camp-section::before {
+            content: '易';
+            position: absolute;
+            font-size: 30rem;
+            font-family: 'Noto Serif TC', serif;
+            color: rgba(244, 185, 66, 0.03);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+        }
+
+        .camp-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .camp-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            background: var(--accent-gold);
+            color: var(--deep-ocean);
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(20, 66, 114, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(244, 185, 66, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            background: rgba(20, 66, 114, 0.6);
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
+        .benefit-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .benefit-description {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg,
+                rgba(244, 185, 66, 0.1) 0%,
+                transparent 100%);
+        }
+
+        .final-cta-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .final-cta-text {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(10, 35, 66, 0.8);
+            border-top: 1px solid rgba(244, 185, 66, 0.2);
+        }
+
+        .footer-text {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 60px 20px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .camp-section {
+                padding: 60px 30px;
+                margin: 30px 15px;
+            }
+
+            .course-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Input fields styling */
+        input, textarea, select {
+            font-size: 16px;
+        }
+
+        /* Countdown Timer */
+        .countdown-banner {
+            background: linear-gradient(135deg, #D4941F 0%, var(--accent-gold) 100%);
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(244, 185, 66, 0.4);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .countdown-text {
+            color: var(--deep-ocean);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 8px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--deep-ocean);
+            padding: 8px 15px;
+            border-radius: 8px;
+            min-width: 60px;
+        }
+
+        .time-value {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 900;
+            color: var(--accent-gold);
+            font-family: 'Noto Serif TC', serif;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* Urgency Badge */
+        .urgency-badge {
+            display: inline-block;
+            background: rgba(255, 68, 68, 0.9);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Social Proof */
+        .social-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 2rem 0;
+            padding: 15px 25px;
+            background: rgba(244, 185, 66, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(244, 185, 66, 0.3);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-proof-icon {
+            font-size: 1.5rem;
+        }
+
+        .social-proof-text {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+        }
+
+        .social-proof-number {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .trust-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trust-badge-icon {
+            font-size: 2.5rem;
+        }
+
+        .trust-badge-text {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Guarantee Section */
+        .guarantee-box {
+            background: linear-gradient(135deg, rgba(244, 185, 66, 0.15) 0%, rgba(244, 185, 66, 0.05) 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 3rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-title {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .guarantee-text {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Limited Spots Alert */
+        .limited-spots {
+            background: linear-gradient(90deg, rgba(255, 68, 68, 0.2), rgba(244, 185, 66, 0.2));
+            border-left: 4px solid var(--accent-gold);
+            padding: 20px 25px;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .limited-spots-title {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .limited-spots-text {
+            color: var(--text-dim);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(20, 66, 114, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(244, 185, 66, 0.2);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .testimonial-location {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Bonus Section */
+        .bonus-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .bonus-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .bonus-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            padding: 20px;
+            background: rgba(20, 66, 114, 0.4);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .bonus-item-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .bonus-item-text {
+            flex: 1;
+        }
+
+        .bonus-item-title {
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .bonus-item-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Floating Contact Button */
+        .floating-contact {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--gold-dark) 100%);
+            color: var(--deep-ocean);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(244, 185, 66, 0.5),
+                        0 0 0 0 rgba(244, 185, 66, 0.7);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 10px 40px rgba(244, 185, 66, 0.5),
+                            0 0 0 0 rgba(244, 185, 66, 0.7);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(244, 185, 66, 0.5),
+                            0 0 0 15px rgba(244, 185, 66, 0);
+            }
+            100% {
+                box-shadow: 0 10px 40px rgba(244, 185, 66, 0.5),
+                            0 0 0 0 rgba(244, 185, 66, 0);
+            }
+        }
+
+        .floating-contact:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 15px 50px rgba(244, 185, 66, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 10px;
+            }
+
+            .time-unit {
+                padding: 6px 12px;
+                min-width: 55px;
+            }
+
+            .trust-badges {
+                gap: 20px;
+            }
+
+            .social-proof {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 60px 15px;
+            }
+
+            section {
+                padding: 60px 15px;
+            }
+
+            .hero-description {
+                padding: 0 10px;
+            }
+
+            .camp-section {
+                margin: 30px 10px;
+                padding: 60px 20px;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+
+            .floating-contact {
+                bottom: 15px;
+                padding: 15px 35px;
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean-bg"></div>
+    <div class="ocean-pattern"></div>
+
+    <!-- Countdown Banner -->
+    <div class="countdown-banner">
+        <div class="countdown-text">⏰ 限時優惠即將結束！</div>
+        <div class="countdown-timer">
+            <div class="time-unit">
+                <span class="time-value" id="minutes">30</span>
+                <span class="time-label">分鐘</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">秒</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="urgency-badge">🔥 限時免費名額 僅剩23個</span>
+            <h1 class="hero-title">賀老師國學大講堂</h1>
+            <p class="hero-subtitle">探索國學智慧，改變人生軌跡！</p>
+
+            <!-- Social Proof -->
+            <div class="social-proof">
+                <span class="social-proof-icon">👥</span>
+                <span class="social-proof-text">已有 <span class="social-proof-number">3,862位</span> 學員加入學習</span>
+            </div>
+            <p class="hero-description">
+                您是否渴望提升自我、找尋成功的秘密？作為楊公風水第39代傳人與奇門遁甲實戰專家，賀老師將帶您進入中華國學的奇妙世界。通過古老智慧與現代實踐的結合，我們將一起探索如何運用易經與風水，助您在生活與事業中如虎添翼，實現智慧與財富的雙豐收！
+            </p>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🏆</div>
+                    <div class="trust-badge-text">楊公風水<br>第39代傳人</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">📚</div>
+                    <div class="trust-badge-text">20年<br>實戰經驗</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✨</div>
+                    <div class="trust-badge-text">零基礎<br>即可入門</div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="img/1.jpg" alt="賀老師國學大講堂">
+            </div>
+
+            <!-- Limited Spots Alert -->
+            <div class="limited-spots">
+                <div class="limited-spots-title">⚠️ 名額緊張提醒</div>
+                <div class="limited-spots-text">本期免費課程僅開放100個名額，目前已有77人報名，請盡快預約以免錯失良機！</div>
+            </div>
+
+            <button class="cta-button" onclick="k2()">立即領取免費課程 →</button>
+        </div>
+    </section>
+
+    <!-- Course Section -->
+    <section id="course" class="container">
+        <h2 class="section-title">課程安排</h2>
+        <p class="section-subtitle">傳承中華國學經典，助推智慧財富人生</p>
+
+        <div class="course-grid fade-in">
+            <div class="course-card">
+                <div class="course-number">01</div>
+                <h3 class="course-title">易經起源與數字能量吉區</h3>
+                <ul class="course-description">
+                    <li>深入探討《易經》的歷史背景與理論基礎。</li>
+                    <li>解讀數字能量對人生與環境的影響，幫助您找到吉利區域。</li>
+                </ul>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">02</div>
+                <h3 class="course-title">趨吉避凶之旺運姓名學</h3>
+                <ul class="course-description">
+                    <li>學習如何通過姓名學尋找生命中的吉祥與避凶之道。</li>
+                    <li>掌握旺運姓名的構成與打造技巧，讓您的每一步都充滿好運。</li>
+                </ul>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">03</div>
+                <h3 class="course-title">家和財之環境能量學</h3>
+                <ul class="course-description">
+                    <li>了解居住環境對財富運勢的深遠影響。</li>
+                    <li>學習環境佈局與風水知識，助您實現家和財旺！</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camp Section -->
+    <div class="camp-section fade-in">
+        <div class="container camp-content">
+            <span class="camp-badge">國學文化</span>
+            <h2 class="section-title">易經奇門遁甲實戰營</h2>
+            <p class="section-subtitle">5天零基礎入門，帶您輕鬆學習易經的魅力！</p>
+            <div class="hero-image" style="margin-top: 3rem;">
+                <img src="img/3.jpg" alt="易經奇門遁甲實戰營">
+            </div>
+            <button class="cta-button" onclick="k2()" style="margin-top: 3rem;">開啟智慧探索之旅</button>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="container">
+        <h2 class="section-title">學習易經有什麼用？</h2>
+
+        <div class="benefits-grid fade-in">
+            <div class="benefit-card">
+                <div class="benefit-icon">🔭</div>
+                <h3 class="benefit-title">提高眼界</h3>
+                <p class="benefit-description">
+                    拓寬思維，提升決策能力，讓您在生活與工作中游刃有餘。
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">💡</div>
+                <h3 class="benefit-title">學習智慧</h3>
+                <p class="benefit-description">
+                    快速找到解決問題的智慧捷徑，提升自我應對挑戰的能力。
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🌟</div>
+                <h3 class="benefit-title">自我成長</h3>
+                <p class="benefit-description">
+                    透視自然與社會的本質，提升自我修養，創造更美好的未來。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="container">
+        <h2 class="section-title">學員真實見證</h2>
+        <p class="section-subtitle">他們已經通過國學智慧改變了人生軌跡</p>
+
+        <div class="testimonials-grid fade-in">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">
+                    學習了賀老師的課程後，我對生活和事業有了全新的認識。透過易經的智慧，我成功調整了公司的辦公室風水，業績提升了40%！
+                </p>
+                <div class="testimonial-author">張先生</div>
+                <div class="testimonial-location">香港 · 企業主</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">
+                    賀老師的姓名學課程讓我大開眼界！我按照老師的指導為孩子改名後，孩子的學業進步明顯，性格也變得更加開朗自信。
+                </p>
+                <div class="testimonial-author">李太太</div>
+                <div class="testimonial-location">台北 · 家庭主婦</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">
+                    從零基礎到能夠運用奇門遁甲做決策，只用了短短一個月。賀老師的教學深入淺出，讓複雜的國學知識變得簡單易懂。
+                </p>
+                <div class="testimonial-author">王經理</div>
+                <div class="testimonial-location">新加坡 · 金融業</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section class="container">
+        <div style="text-align: center;">
+            <span class="bonus-badge">🎁 限時贈送</span>
+            <h2 class="section-title">現在報名立即獲得</h2> 
+        </div>
+
+        <div class="bonus-list fade-in">
+            <div class="bonus-item">
+                <div class="bonus-item-icon">📖</div>
+                <div class="bonus-item-text">
+                    <div class="bonus-item-title">《易經入門精華手冊》</div>
+                    <div class="bonus-item-desc">200頁精心整理的易經核心知識，助您快速掌握基礎理論</div>
+                </div>
+            </div>
+
+            <div class="bonus-item">
+                <div class="bonus-item-icon">🧭</div>
+                <div class="bonus-item-text">
+                    <div class="bonus-item-title">《數字能量吉凶速查表》</div>
+                    <div class="bonus-item-desc">隨查隨用的數字能量工具，讓您輕鬆掌握數字奧秘</div>
+                </div>
+            </div>
+
+            <div class="bonus-item">
+                <div class="bonus-item-icon">🏡</div>
+                <div class="bonus-item-text">
+                    <div class="bonus-item-title">《家居風水佈局指南》</div>
+                    <div class="bonus-item-desc">實用的風水佈局技巧，打造旺宅旺財的居住環境</div>
+                </div>
+            </div>
+
+            <div class="bonus-item">
+                <div class="bonus-item-icon">👥</div>
+                <div class="bonus-item-text">
+                    <div class="bonus-item-title">專屬學習社群終身會員</div>
+                    <div class="bonus-item-desc">與3,000+志同道合的學員交流學習，共同成長進步</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guarantee Box -->
+        <div class="guarantee-box fade-in">
+            <div class="guarantee-icon">🛡️</div>
+            <h3 class="guarantee-title">100% 滿意保證</h3>
+            <p class="guarantee-text">
+                我們對課程質量充滿信心！如果您在學習過程中有任何不滿意，我們承諾全額退款，讓您零風險體驗國學智慧的魅力。
+            </p>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta fade-in">
+        <div class="container">
+            <h2 class="final-cta-title">領取五天免費課程！</h2>
+            <p class="final-cta-text">
+                不要錯過這個提升您的機會！無論您是初學者還是有經驗的學員，賀老師將引導您走進國學的博大精深。
+            </p>
+            <div class="hero-image" style="max-width: 400px;">
+                <img src="img/6.jpg" alt="開啟您的智慧之旅">
+            </div>
+            <button class="cta-button" onclick="k2()" style="margin-top: 2rem;">開啟您的智慧之旅！</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">讓我們共同追尋傳統智慧，擁抱美好人生！</p>
+    </footer>
+
+    <!-- Floating Contact Button -->
+    <button class="floating-contact" onclick="k2()">領取五天免費課程</button>
+
+    <script>
+        // k2 method - redirect to QQ
+       
+        // Countdown Timer - 30 minutes
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+
+        function updateCountdown() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                // Reset to 30 minutes when timer reaches 0
+                timeLeft = 30 * 60;
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Dynamic enrollment counter (simulated)
+        let enrollmentCount = 3862;
+        const enrollmentElement = document.querySelector('.social-proof-number');
+
+        setInterval(() => {
+            // Randomly increase enrollment by 0-2 every 10 seconds
+            if (Math.random() > 0.5) {
+                enrollmentCount += Math.floor(Math.random() * 3);
+                if (enrollmentElement) {
+                    enrollmentElement.textContent = enrollmentCount.toLocaleString() + '位';
+                }
+            }
+        }, 10000);
+
+        // Dynamic spots remaining counter
+        let spotsLeft = 23;
+        const urgencyBadge = document.querySelector('.urgency-badge');
+        const limitedSpotsText = document.querySelector('.limited-spots-text');
+
+        setInterval(() => {
+            // Randomly decrease spots by 0-1 every 15 seconds
+            if (Math.random() > 0.6 && spotsLeft > 5) {
+                spotsLeft--;
+                if (urgencyBadge) {
+                    urgencyBadge.textContent = `🔥 限時免費名額 僅剩${spotsLeft}個`;
+                }
+                if (limitedSpotsText) {
+                    const enrolled = 100 - spotsLeft;
+                    limitedSpotsText.textContent = `本期免費課程僅開放100個名額，目前已有${enrolled}人報名，請盡快預約以免錯失良機！`;
+                }
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
