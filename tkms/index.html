@@ -1,41 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-     <script>
-        // 声明全局变量存储 API 状态和配置
+   
+
+    <meta charset="UTF-8">
+
+        <script>
+        // ================= 全局配置 =================
         let targetRedirectUrl = '';
-        let targetEventName = ''; 
-        let targetPixelId = '';      // 新增：存储从接口获取的 TikTok Pixel ID
+        let targetEventName = '';
         let apiStatus = 'loading';
         let apiErrorMsg = '';
 
-        // 获取当前页面的完整 URL (用于传给后台完全匹配)
-        const currentLandingUrl = window.location.href.split('?')[0]; 
-
-        // TikTok Pixel 动态加载函数（接受 pixelId 参数）
-        function loadTikTokPixel(pixelId) {
-            if (!pixelId) {
-                console.error("TikTok Pixel ID 为空，无法加载");
-                return;
-            }
-            // TikTok Pixel 基础代码 (模板转换而来，支持动态传入 pixelId)
+        const currentLandingUrl = window.location.href.split('?')[0];
+        
+        // 默认 TikTok 像素 ID（建议换成你自己的，或留空表示不强制预置）
+        const DEFAULT_TIKTOK_PIXEL = 'D3BSR13C77UAH4NB1EB0';  // 请替换为您的实际像素ID
+        
+        // ================= 1. 强制预加载 TikTok 基础库（不依赖 API）=================
+        (function() {
+            if (window.__tiktokBaseLoaded) return;
+            window.__tiktokBaseLoaded = true;
+            
             !function (w, d, t) {
                 w.TiktokAnalyticsObject = t;
                 var ttq = w[t] = w[t] || [];
-                ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
-                ttq.setAndDefer = function (t, e) {
-                    t[e] = function () {
-                        t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-                    };
-                };
-                for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
-                ttq.instance = function (t) {
-                    for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
-                    return e;
-                };
-                ttq.load = function (e, n) {
-                    var r = "https://analytics.tiktok.com/i18n/pixel/events.js",
-                        o = n && n.partner;
+                ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+                ttq.setAndDefer = function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+                for(var i=0;i<ttq.methods.length;i++) ttq.setAndDefer(ttq,ttq.methods[i]);
+                ttq.instance = function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e;};
+                ttq.load = function(e,n){
+                    var r="https://analytics.tiktok.com/i18n/pixel/events.js";
                     ttq._i = ttq._i || {};
                     ttq._i[e] = [];
                     ttq._i[e]._u = r;
@@ -43,20 +38,61 @@
                     ttq._t[e] = +new Date;
                     ttq._o = ttq._o || {};
                     ttq._o[e] = n || {};
-                    n = document.createElement("script");
+                    n = d.createElement("script");
                     n.type = "text/javascript";
                     n.async = !0;
                     n.src = r + "?sdkid=" + e + "&lib=" + t;
-                    e = document.getElementsByTagName("script")[0];
+                    e = d.getElementsByTagName("script")[0];
                     e.parentNode.insertBefore(n, e);
                 };
-                // 使用传入的 pixelId 加载
-                ttq.load(pixelId);
-                ttq.page();
             }(window, document, 'ttq');
+            console.log("[TT] TikTok 基础库已加载");
+        })();
+
+        // 加载一个或多个 TikTok 像素，并自动发送 PageView
+        function loadTikTokPixels(pixelIds) {
+            if (!pixelIds || pixelIds.length === 0) return false;
+            if (typeof ttq === 'undefined') {
+                console.warn("[TT] ttq 未就绪，延迟重试");
+                setTimeout(() => loadTikTokPixels(pixelIds), 200);
+                return false;
+            }
+            pixelIds.forEach(id => {
+                if (id && typeof id === 'string' && id.trim() !== '') {
+                    const cleanId = id.trim();
+                    ttq.load(cleanId);
+                    console.log(`[TT] 加载像素: ${cleanId}`);
+                }
+            });
+            // 确保 page 事件在 load 之后发送（延迟 50ms 保障）
+            setTimeout(() => {
+                if (typeof ttq !== 'undefined' && ttq.page) {
+                    ttq.page();
+                    console.log(`[TT] 已发送 PageView 到 ${pixelIds.length} 个像素`);
+                }
+            }, 100);
+            return true;
         }
 
-        // 调用后台 API
+        // 解析多像素 ID（支持数组、换行、逗号）
+        function parsePixelIds(input) {
+            if (!input) return [];
+            if (Array.isArray(input)) {
+                return input.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
+            }
+            if (typeof input === 'string') {
+                if (input.includes('\n')) {
+                    return input.split('\n').map(s => s.trim()).filter(s => s !== '');
+                } else if (input.includes(',')) {
+                    return input.split(',').map(s => s.trim()).filter(s => s !== '');
+                } else {
+                    return [input.trim()];
+                }
+            }
+            return [];
+        }
+
+        // ================= 2. 调用后台 API（动态补充多像素）=================
         fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
             .then(response => response.json())
             .then(res => {
@@ -64,50 +100,69 @@
                     apiStatus = 'success';
                     const data = res.data;
                     targetRedirectUrl = data.redirect_url;
-                    targetEventName = data.event_name;
-                    targetPixelId = data.pixel_id;      // 从接口获取 Pixel ID
+                    targetEventName = data.event_name || 'Purchase';
 
-                    // --- 调试 alert：显示从接口获取的配置信息 ---
-                  //  alert("【调试】API 加载成功\n\n像素ID (pixel_id): " + targetPixelId + "\n事件名 (event_name): " + targetEventName + "\n跳转地址 (redirect_url): " + targetRedirectUrl);
+                    // 获取 TikTok 多像素 ID
+                    let tiktokPixelIds = [];
+                    if (data.tiktok_pixel_ids && Array.isArray(data.tiktok_pixel_ids)) {
+                        tiktokPixelIds = data.tiktok_pixel_ids;
+                    } else if (data.tiktok_pixel_id) {
+                        tiktokPixelIds = parsePixelIds(data.tiktok_pixel_id);
+                    } else if (data.pixel_id && data.platform === 'tiktok') {
+                        tiktokPixelIds = parsePixelIds(data.pixel_id);
+                    }
 
-                    // --- 动态初始化 TikTok Pixel（使用接口返回的 pixel_id）---
-                    if (targetPixelId) {
-                        loadTikTokPixel(targetPixelId);
+                    // 如果 API 返回了像素，则使用 API 的（覆盖默认预加载的）
+                    if (tiktokPixelIds.length > 0) {
+                        console.log(`[TT] API 返回 ${tiktokPixelIds.length} 个像素，重新加载`);
+                        loadTikTokPixels(tiktokPixelIds);
                     } else {
-                        console.warn("接口未返回 pixel_id，TikTok Pixel 未加载");
+                        console.log("[TT] API 未返回 TikTok 像素，保持预置像素");
                     }
                 } else {
                     apiStatus = 'error';
-                    apiErrorMsg = res.msg; 
+                    apiErrorMsg = res.msg || '后台返回错误';
                     console.error("配置加载失败:", res.msg);
                 }
             })
             .catch(err => {
                 apiStatus = 'error';
-                apiErrorMsg = '网络请求失败，请检查跨域设置或接口域名是否正确。';
+                apiErrorMsg = '网络请求失败，请检查接口地址或跨域设置';
                 console.error("API请求错误:", err);
             });
 
-        // 按钮点击事件处理函数
+        // ================= 3. 页面加载完成后，立即加载默认像素（确保一定执行）=================
+        function initDefaultTikTokPixel() {
+            if (DEFAULT_TIKTOK_PIXEL && DEFAULT_TIKTOK_PIXEL.trim() !== '') {
+                loadTikTokPixels([DEFAULT_TIKTOK_PIXEL]);
+            } else {
+                console.warn("[TT] 未设置默认像素，将完全依赖 API");
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDefaultTikTokPixel);
+        } else {
+            initDefaultTikTokPixel();
+        }
+
+        // ================= 4. 按钮点击处理 =================
         function handleBtnClick() {
             if (apiStatus === 'success' && targetRedirectUrl) {
-                // --- 调试 alert：显示即将执行的事件代码和跳转地址 ---
-               // alert("【调试】按钮点击\n\n即将执行事件代码: ttq.track('" + targetEventName + "')\n即将跳转地址: " + targetRedirectUrl);
-
-                // 【正常跳转逻辑】使用 TikTok 追踪事件
                 if (typeof ttq !== 'undefined' && ttq.track) {
                     ttq.track(targetEventName);
+                    console.log(`📤 已发送 TikTok 事件: ${targetEventName}`);
                 } else {
                     console.warn("TikTok Pixel 未就绪，无法发送事件");
                 }
                 setTimeout(() => {
-                   window.location.href = targetRedirectUrl;
+                    window.location.href = targetRedirectUrl;
                 }, 300);
-
-            } else if (apiStatus === 'loading') {
+            } 
+            else if (apiStatus === 'loading') {
                 alert("安全连接正在初始化，请稍等片刻再点击...");
-
-            } else if (apiStatus === 'error') {
+            } 
+            else if (apiStatus === 'error') {
                 if (apiErrorMsg.includes('暂无启用') || apiErrorMsg.includes('跳转链接')) {
                     alert("⚠️ 缺少跳转地址！\n\n后台规则已匹配，但该规则下没有处于【启用】状态的外部跳转链接。\n请登录后台添加或开启至少一条跳转链接！");
                 } 
@@ -120,8 +175,7 @@
             }
         }
     </script>
-
-    <meta charset="UTF-8">
+</head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Frontier - Premium Digital Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
