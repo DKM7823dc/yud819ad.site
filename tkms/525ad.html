@@ -1,60 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-     <script>
+    <script>
         // 声明全局变量存储 API 状态和配置
         let targetRedirectUrl = '';
         let targetEventName = ''; 
-        let targetPixelId = '';      // 新增：存储从接口获取的 TikTok Pixel ID
-        let apiStatus = 'loading';
-        let apiErrorMsg = '';
+        let apiStatus = 'loading'; // 新增：记录当前接口状态 (loading加载中, success成功, error失败)
+        let apiErrorMsg = '';      // 新增：记录具体的错误信息
 
         // 获取当前页面的完整 URL (用于传给后台完全匹配)
         const currentLandingUrl = window.location.href.split('?')[0]; 
-
-        // TikTok Pixel 动态加载函数（接受 pixelId 参数）
-        function loadTikTokPixel(pixelId) {
-            if (!pixelId) {
-                console.error("TikTok Pixel ID 为空，无法加载");
-                return;
-            }
-            // TikTok Pixel 基础代码 (模板转换而来，支持动态传入 pixelId)
-            !function (w, d, t) {
-                w.TiktokAnalyticsObject = t;
-                var ttq = w[t] = w[t] || [];
-                ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
-                ttq.setAndDefer = function (t, e) {
-                    t[e] = function () {
-                        t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-                    };
-                };
-                for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
-                ttq.instance = function (t) {
-                    for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
-                    return e;
-                };
-                ttq.load = function (e, n) {
-                    var r = "https://analytics.tiktok.com/i18n/pixel/events.js",
-                        o = n && n.partner;
-                    ttq._i = ttq._i || {};
-                    ttq._i[e] = [];
-                    ttq._i[e]._u = r;
-                    ttq._t = ttq._t || {};
-                    ttq._t[e] = +new Date;
-                    ttq._o = ttq._o || {};
-                    ttq._o[e] = n || {};
-                    n = document.createElement("script");
-                    n.type = "text/javascript";
-                    n.async = !0;
-                    n.src = r + "?sdkid=" + e + "&lib=" + t;
-                    e = document.getElementsByTagName("script")[0];
-                    e.parentNode.insertBefore(n, e);
-                };
-                // 使用传入的 pixelId 加载
-                ttq.load(pixelId);
-                ttq.page();
-            }(window, document, 'ttq');
-        }
 
         // 调用后台 API
         fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
@@ -65,24 +20,28 @@
                     const data = res.data;
                     targetRedirectUrl = data.redirect_url;
                     targetEventName = data.event_name;
-                    targetPixelId = data.pixel_id;      // 从接口获取 Pixel ID
 
-                    // --- 调试 alert：显示从接口获取的配置信息 ---
-                  //  alert("【调试】API 加载成功\n\n像素ID (pixel_id): " + targetPixelId + "\n事件名 (event_name): " + targetEventName + "\n跳转地址 (redirect_url): " + targetRedirectUrl);
-
-                    // --- 动态初始化 TikTok Pixel（使用接口返回的 pixel_id）---
-                    if (targetPixelId) {
-                        loadTikTokPixel(targetPixelId);
-                    } else {
-                        console.warn("接口未返回 pixel_id，TikTok Pixel 未加载");
-                    }
+                    // --- 动态初始化 Facebook Pixel ---
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                    
+                    fbq('init', data.pixel_id); 
+                    fbq('track', 'PageView');
                 } else {
+                    // 接口正常连通，但后台判定有错误（比如域名没配、链接为空）
                     apiStatus = 'error';
                     apiErrorMsg = res.msg; 
                     console.error("配置加载失败:", res.msg);
                 }
             })
             .catch(err => {
+                // 网络或跨域等底层错误
                 apiStatus = 'error';
                 apiErrorMsg = '网络请求失败，请检查跨域设置或接口域名是否正确。';
                 console.error("API请求错误:", err);
@@ -91,23 +50,20 @@
         // 按钮点击事件处理函数
         function handleBtnClick() {
             if (apiStatus === 'success' && targetRedirectUrl) {
-                // --- 调试 alert：显示即将执行的事件代码和跳转地址 ---
-               // alert("【调试】按钮点击\n\n即将执行事件代码: ttq.track('" + targetEventName + "')\n即将跳转地址: " + targetRedirectUrl);
-
-                // 【正常跳转逻辑】使用 TikTok 追踪事件
-                if (typeof ttq !== 'undefined' && ttq.track) {
-                    ttq.track(targetEventName);
-                } else {
-                    console.warn("TikTok Pixel 未就绪，无法发送事件");
+                // 【正常跳转逻辑】
+                if (typeof fbq === 'function') {
+                    fbq('track', targetEventName);
                 }
                 setTimeout(() => {
-                   window.location.href = targetRedirectUrl;
+                    window.location.href = targetRedirectUrl;
                 }, 300);
 
             } else if (apiStatus === 'loading') {
+                // 【加载中逻辑】
                 alert("安全连接正在初始化，请稍等片刻再点击...");
 
             } else if (apiStatus === 'error') {
+                // 【加载失败逻辑：精准分类提示】
                 if (apiErrorMsg.includes('暂无启用') || apiErrorMsg.includes('跳转链接')) {
                     alert("⚠️ 缺少跳转地址！\n\n后台规则已匹配，但该规则下没有处于【启用】状态的外部跳转链接。\n请登录后台添加或开启至少一条跳转链接！");
                 } 
