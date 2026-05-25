@@ -1,77 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-    
-  <!-- TikTok Pixel Code Star1t -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+     <script>
+        // 声明全局变量存储 API 状态和配置
+        let targetRedirectUrl = '';
+        let targetEventName = ''; 
+        let targetPixelId = '';      // 新增：存储从接口获取的 TikTok Pixel ID
+        let apiStatus = 'loading';
+        let apiErrorMsg = '';
 
+        // 获取当前页面的完整 URL (用于传给后台完全匹配)
+        const currentLandingUrl = window.location.href.split('?')[0]; 
 
-  ttq.load('D7J3GEJC77U557SHJGI0');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+        // TikTok Pixel 动态加载函数（接受 pixelId 参数）
+        function loadTikTokPixel(pixelId) {
+            if (!pixelId) {
+                console.error("TikTok Pixel ID 为空，无法加载");
+                return;
+            }
+            // TikTok Pixel 基础代码 (模板转换而来，支持动态传入 pixelId)
+            !function (w, d, t) {
+                w.TiktokAnalyticsObject = t;
+                var ttq = w[t] = w[t] || [];
+                ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
+                ttq.setAndDefer = function (t, e) {
+                    t[e] = function () {
+                        t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                    };
+                };
+                for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+                ttq.instance = function (t) {
+                    for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
+                    return e;
+                };
+                ttq.load = function (e, n) {
+                    var r = "https://analytics.tiktok.com/i18n/pixel/events.js",
+                        o = n && n.partner;
+                    ttq._i = ttq._i || {};
+                    ttq._i[e] = [];
+                    ttq._i[e]._u = r;
+                    ttq._t = ttq._t || {};
+                    ttq._t[e] = +new Date;
+                    ttq._o = ttq._o || {};
+                    ttq._o[e] = n || {};
+                    n = document.createElement("script");
+                    n.type = "text/javascript";
+                    n.async = !0;
+                    n.src = r + "?sdkid=" + e + "&lib=" + t;
+                    e = document.getElementsByTagName("script")[0];
+                    e.parentNode.insertBefore(n, e);
+                };
+                // 使用传入的 pixelId 加载
+                ttq.load(pixelId);
+                ttq.page();
+            }(window, document, 'ttq');
+        }
 
-  
-  <!-- TikTok Pixel Code Star1t -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+        // 调用后台 API
+        fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
+            .then(response => response.json())
+            .then(res => {
+                if (res.code === 200) {
+                    apiStatus = 'success';
+                    const data = res.data;
+                    targetRedirectUrl = data.redirect_url;
+                    targetEventName = data.event_name;
+                    targetPixelId = data.pixel_id;      // 从接口获取 Pixel ID
 
+                    // --- 调试 alert：显示从接口获取的配置信息 ---
+                  //  alert("【调试】API 加载成功\n\n像素ID (pixel_id): " + targetPixelId + "\n事件名 (event_name): " + targetEventName + "\n跳转地址 (redirect_url): " + targetRedirectUrl);
 
-  ttq.load('D6P6OTJC77UAQ8PMC2H0');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+                    // --- 动态初始化 TikTok Pixel（使用接口返回的 pixel_id）---
+                    if (targetPixelId) {
+                        loadTikTokPixel(targetPixelId);
+                    } else {
+                        console.warn("接口未返回 pixel_id，TikTok Pixel 未加载");
+                    }
+                } else {
+                    apiStatus = 'error';
+                    apiErrorMsg = res.msg; 
+                    console.error("配置加载失败:", res.msg);
+                }
+            })
+            .catch(err => {
+                apiStatus = 'error';
+                apiErrorMsg = '网络请求失败，请检查跨域设置或接口域名是否正确。';
+                console.error("API请求错误:", err);
+            });
 
-   <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+        // 按钮点击事件处理函数
+        function handleBtnClick() {
+            if (apiStatus === 'success' && targetRedirectUrl) {
+                // --- 调试 alert：显示即将执行的事件代码和跳转地址 ---
+               // alert("【调试】按钮点击\n\n即将执行事件代码: ttq.track('" + targetEventName + "')\n即将跳转地址: " + targetRedirectUrl);
 
+                // 【正常跳转逻辑】使用 TikTok 追踪事件
+                if (typeof ttq !== 'undefined' && ttq.track) {
+                    ttq.track(targetEventName);
+                } else {
+                    console.warn("TikTok Pixel 未就绪，无法发送事件");
+                }
+                setTimeout(() => {
+                   window.location.href = targetRedirectUrl;
+                }, 300);
 
-  ttq.load('D6P9T8RC77U1CBCKJ80G');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+            } else if (apiStatus === 'loading') {
+                alert("安全连接正在初始化，请稍等片刻再点击...");
 
-
-  <script>
-  function k2() {
-      // 定义多个链接
-      const links = [
-          'https://hw.url668.com/s/GQbOIWNua'
-      ];
-
-      // 随机选择一个链接
-      const randomIndex = Math.floor(Math.random() * links.length);
-      const randomLink = links[randomIndex];
-
-      // 追踪事件
-      ttq.track('ClickButton');
-      ttq.track('Contact');
-      ttq.track('AddToCart');
-      ttq.track('CompleteRegistration');
-
-      // 新窗口打开随机链接
-      window.open(randomLink, '_blank');
-  }
-</script>
-
+            } else if (apiStatus === 'error') {
+                if (apiErrorMsg.includes('暂无启用') || apiErrorMsg.includes('跳转链接')) {
+                    alert("⚠️ 缺少跳转地址！\n\n后台规则已匹配，但该规则下没有处于【启用】状态的外部跳转链接。\n请登录后台添加或开启至少一条跳转链接！");
+                } 
+                else if (apiErrorMsg.includes('未找到匹配')) {
+                    alert("⚠️ 域名未匹配！\n\n请检查后台填写的【落地页地址】是否与下方当前网址完全一致（注意http/https和斜杠）：\n" + currentLandingUrl);
+                } 
+                else {
+                    alert("⚠️ 配置加载异常：\n\n" + apiErrorMsg);
+                }
+            }
+        }
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury - Premium Collection</title>
+    <title>Tech Frontier - Premium Digital Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
@@ -133,10 +185,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <header class="container mx-auto px-4 py-2">
             <div class="text-center">
                 <h1 class="text-2xl md:text-3xl font-luxury font-bold gradient-text mb-1">
-                   A building block, a whole world, a small building block, a big dream!
+                   Next‑Gen Tech, Unlimited Fun
                 </h1>
                 <p class="text-luxury-gold text-base md:text-lg font-light">
- 
+                    Innovative Devices | Smart Entertainment | More
                 </p>
             </div>
         </header>
@@ -148,8 +200,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
              <!-- Left Side - Hero Image -->
                 <div class="text-center order-2 md:order-1">
                     <div class="relative inline-block">
-                        <img src="img/1.jpg"
-                             alt="Luxury Watch Collection"
+                        <img src="img/1.png"
+                             alt="Premium Digital Collection"
                              class="w-36 h-36 md:w-48 md:h-48 object-cover rounded-full luxury-shadow border-4 border-luxury-gold/30 mx-auto" >
                          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-luxury-gold/20 to-transparent"></div>
                     </div>
@@ -162,8 +214,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                                 <i class="fas fa-gem text-luxury-gold text-sm"></i>
                             </div>
                             <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Premium Quality, Affordable Price</h3>
-                                <p class="text-gray-300 text-sm">Don't spend too much pursuing high taste</p>
+                                <h3 class="text-base font-semibold text-white mb-1">Cutting‑Edge Quality, Fair Price</h3>
+                                <p class="text-gray-300 text-sm">Experience innovation without breaking the bank</p>
                             </div>
                         </div>
 
@@ -172,8 +224,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                                 <i class="fas fa-gift text-luxury-gold text-sm"></i>
                             </div>
                             <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Best Prices & Original Gift Boxes</h3>
-                                <p class="text-gray-300 text-sm">Best prices, original gift boxes</p>
+                                <h3 class="text-base font-semibold text-white mb-1">Best Deals & Premium Packaging</h3>
+                                <p class="text-gray-300 text-sm">Competitive prices, gift‑ready boxes</p>
                             </div>
                         </div>
 
@@ -182,8 +234,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                                 <i class="fas fa-search text-luxury-gold text-sm"></i>
                             </div>
                             <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Complete Collection</h3>
-                                <p class="text-gray-300 text-sm">Here you can find anything you need</p>
+                                <h3 class="text-base font-semibold text-white mb-1">Complete Tech Ecosystem</h3>
+                                <p class="text-gray-300 text-sm">Everything you need, all in one place</p>
                             </div>
                         </div>
 
@@ -192,31 +244,31 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                                 <i class="fas fa-shield-alt text-luxury-gold text-sm"></i>
                             </div>
                             <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Secure & Private</h3>
-                                <p class="text-gray-300 text-sm">Safe purchase, privacy protection</p>
+                                <h3 class="text-base font-semibold text-white mb-1">Secure & Confidential</h3>
+                                <p class="text-gray-300 text-sm">Safe checkout, your privacy protected</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Watch Gallery Carousel -->
+            <!-- Tech Gallery Carousel -->
             <div class="mt-6">
                 <h2 class="text-lg md:text-xl font-luxury font-bold text-center gradient-text mb-4">
-                   ↓↓↓Click the button and send 'TikTok' to get a discount↓↓
+                   ↓↓↓ Click the button and send "TikTok" to claim your discount ↓↓↓
                 </h2>
 
                 <div class="relative max-w-2xl mx-auto">
                     <div class="carousel-container overflow-hidden">
                         <div class="carousel-track flex transition-transform duration-500 ease-in-out" id="carouselTrack">
                             <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/2.jpg" alt="Watch 1" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3EWatch Collection%3C/text%3E%3C/svg%3E'">
+                                <img src="img/2.png" alt="Tech product showcase 1" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/3.jpg" alt="Watch 2" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3EWatch Collection%3C/text%3E%3C/svg%3E'">
+                                <img src="img/3.png" alt="Tech product showcase 2" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/4.jpg" alt="Watch 3" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3EWatch Collection%3C/text%3E%3C/svg%3E'">
+                                <img src="img/4.png" alt="Tech product showcase 3" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
                             </div>
                         </div>
                     </div>
@@ -244,10 +296,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
         <div class="relative">
             <a href="javascript:void(0)"
-               onclick="k2()"
+               onclick="handleBtnClick()"
                class="breathe bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-full shadow-2xl transition-all duration-300 flex items-center space-x-3 whitespace-nowrap">
                 <i class="fab fa-whatsapp text-xl"></i>
-                <span class="font-medium" style="font-size: 1.5rem;">Contact us now
+                <span class="font-medium" style="font-size: 1.5rem;">Contact Us Now
 
                 </span>
             </a>
@@ -347,12 +399,4 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </script>
  </body>
 
-
 </html>
-
-
-
-
-
-
-
