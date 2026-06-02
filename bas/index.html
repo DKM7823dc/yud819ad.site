@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MelodyStudio AI | راگ کی ترقی درج کریں، پورا伴奏 خودکار بنائیں</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #0a0c12; color: #f0f3fa; }
+    .gradient-text {
+      background: linear-gradient(135deg, #c084fc, #60a5fa, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(95deg, #8b5cf6, #3b82f6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5); }
+    .btn-outline-light {
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+    .btn-outline-light:hover { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.2); }
+    .glass-card {
+      background: rgba(18, 20, 30, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s;
+    }
+    .glass-card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-5px); }
+    .wave-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; overflow: hidden; z-index: 0;
+    }
+    .wave {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 180px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(107,70,193,0.15)" fill-opacity="0.4" d="M0,192L48,186.7C96,181,192,171,288,176C384,181,480,203,576,208C672,213,768,203,864,186.7C960,171,1056,149,1152,138.7C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x;
+      background-size: cover; opacity: 0.3;
+    }
+    .comparison-table td { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body class="relative bg-[#0a0c12] text-gray-200">
+  <div class="wave-bg"><div class="wave"></div><div class="wave" style="bottom:40px;opacity:0.2;height:140px;"></div></div>
+
+  <nav class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center flex-wrap">
+      <div class="flex items-center gap-2"><i class="fas fa-microchip text-3xl text-indigo-400"></i><span class="text-xl font-bold text-white">Melody<span class="text-indigo-400">Studio AI</span></span></div>
+      <div class="hidden md:flex gap-8 text-gray-300 font-medium">
+        <a href="#features" class="hover:text-white nav-link">AI خصوصیات</a>
+        <a href="#specs" class="hover:text-white nav-link">سسٹم کی ضروریات</a>
+        <a href="#reviews" class="hover:text-white nav-link">جائزے</a>
+        <a href="#download" class="hover:text-white nav-link">مفت تجربہ</a>
+      </div>
+      <a href="#" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold btn-action">AI کمپوزیشن آزمائیں</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ہیرو سیکشن: صرف راگ درج کریں -->
+    <section class="pt-36 pb-20 px-4 relative overflow-hidden">
+      <div class="container mx-auto text-center relative z-10">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-indigo-500/20 text-indigo-300 text-sm font-medium mb-6 backdrop-blur-sm">
+          <i class="fas fa-robot mr-2"></i> AI موسیقی جنریشن انجن – ہر کوئی استعمال کر سکتا ہے
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-white">
+          بس <span class="gradient-text">راگ کی ترقی درج کریں</span><br>اور مکمل伴奏 خودکار بن جائے گا
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mt-6">
+          "C → Am → F → G" ٹائپ کریں، AI پاپ، راک، EDM، جاز وغیرہ میں آپ کی پسند کے مطابق<br>
+          راگ، بیس، ڈرم اور تمام ساز خودکار ترتیب دے گا۔ موسیقی کا نظریہ صفر، ہر کوئی پیشہ ورانہ موسیقی بنا سکتا ہے۔
+        </p>
+        <div class="flex flex-wrap justify-center gap-5 mt-10">
+          <a href="#" class="btn-primary px-8 py-4 rounded-full text-lg font-bold text-white inline-flex items-center gap-2 shadow-2xl btn-action">
+            <i class="fab fa-windows"></i> مفت AI کمپوزیشن شروع کریں
+          </a>
+          <a href="#" class="btn-outline-light px-7 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 text-white btn-action">
+            <i class="fas fa-play-circle"></i> AI ڈیمو دیکھیں
+          </a>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 mt-12 text-sm text-gray-400">
+          <span><i class="fas fa-brain text-emerald-400 mr-1"></i> راگ → تمام حصوں کی خودکار تخلیق</span>
+          <span><i class="fas fa-music text-emerald-400 mr-1"></i> 1000+ اصناف معاون</span>
+          <span><i class="fas fa-clock text-emerald-400 mr-1"></i> تخلیق کا وقت صرف 3 سیکنڈ</span>
+          <span><i class="fas fa-chalkboard-user text-emerald-400 mr-1"></i> ہر کوئی بدیہی طور پر استعمال کر سکتا ہے</span>
+        </div>
+        <div class="mt-16 max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-indigo-500/30 bg-black/40 backdrop-blur-sm">
+          <div class="flex justify-center items-center p-5 bg-gradient-to-r from-indigo-950/50 to-slate-900/50">
+            <div class="flex items-center gap-1 h-28 md:h-36">
+              <div class="w-3 h-12 bg-indigo-400 rounded-full animate-pulse" style="animation-duration:0.8s"></div>
+              <div class="w-3 h-20 bg-fuchsia-400 rounded-full animate-pulse" style="animation-duration:1.1s"></div>
+              <div class="w-3 h-28 bg-blue-400 rounded-full animate-pulse" style="animation-duration:0.6s"></div>
+              <div class="w-3 h-16 bg-indigo-300 rounded-full animate-pulse" style="animation-duration:1.3s"></div>
+              <div class="w-3 h-24 bg-purple-400 rounded-full animate-pulse" style="animation-duration:0.9s"></div>
+              <div class="w-3 h-36 bg-indigo-500 rounded-full animate-pulse" style="animation-duration:1.2s"></div>
+              <div class="w-3 h-20 bg-violet-400 rounded-full animate-pulse" style="animation-duration:0.5s"></div>
+            </div>
+            <div class="ml-5 px-3 py-1 bg-indigo-800/60 rounded-full text-xs text-white flex items-center gap-1"><i class="fas fa-microchip"></i> AI راگ کی ترقی کا تجزیہ کر رہا ہے</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- فیصلہ کن برتری: صرف راگ درج کریں -->
+    <section class="py-12 px-4">
+      <div class="container mx-auto max-w-5xl">
+        <div class="glass-card p-8 text-center">
+          <div class="flex justify-center gap-3 text-3xl mb-4"><i class="fas fa-keyboard text-indigo-400"></i><i class="fas fa-music text-indigo-400"></i><i class="fas fa-infinity text-indigo-400"></i></div>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">کوئی مشکل کام نہیں۔<br>بس راگ ٹائپ کریں، اور پیشہ ورانہ伴奏 تیار</h2>
+          <div class="grid md:grid-cols-3 gap-6 mt-8 text-left">
+            <div><i class="fas fa-magic text-indigo-400 mr-2"></i> <strong>بس راگ کی ترقی درج کریں</strong><br><span class="text-gray-300 text-sm">مثال: C-G-Am-F ٹائپ کریں → AI فوری طور پر مکمل ترتیب تخلیق کر دے گا۔</span></div>
+            <div><i class="fas fa-head-side-brain text-indigo-400 mr-2"></i> <strong>آلات موسیقی کا تجربہ صفر بھی چلے گا</strong><br><span class="text-gray-300 text-sm">موسیقی کے نظریہ کی ضرورت نہیں۔ ہر کوئی اپنی مرضی کی موسیقی بنا سکتا ہے۔</span></div>
+            <div><i class="fas fa-sliders-h text-indigo-400 mr-2"></i> <strong>بھرپور ترتیب خودکار</strong><br><span class="text-gray-300 text-sm">بیس لائن، ڈرم پیٹرن، راگ وائسنگ، کاؤنٹر میلوڈی — سب AI ذمہ دار ہے۔</span></div>
+          </div>
+          <div class="mt-6 p-3 bg-indigo-900/30 rounded-lg text-sm text-gray-200"><i class="fas fa-chart-simple mr-1"></i> بیٹا ٹیسٹرز کی رائے: "راگ ڈالے اور چند سیکنڈ میں مکمل۔ کمپوزیشن کی مشکل یکدم کم ہوگئی۔"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تفصیلی خصوصیات: AI انجن -->
+    <section id="features" class="py-20 px-4 bg-gradient-to-b from-transparent to-indigo-950/20">
+      <div class="container mx-auto">
+        <div class="text-center mb-14">
+          <span class="text-indigo-300 uppercase tracking-wider text-sm font-semibold">AI بنیادی ٹیکنالوجی</span>
+          <h2 class="text-4xl md:text-5xl font-bold mt-2 text-white">درج کردہ راگ سے خودکار تخلیق کرنے والے 6 AI</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto mt-4">آپ کی طرف سے ترتیب اور مکسنگ مکمل کرتا ہے</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-5"><i class="fas fa-chord-diagram text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">راگ شناسی AI</h3><p class="text-gray-300">درج کردہ راگ کی ترقی کا تجزیہ کرتا ہے، صنف کے مطابق بہترین وائسنگ اور ٹینشن خودکار عطا کرتا ہے۔</p></div>
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center mb-5"><i class="fas fa-waveform text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">میلوڈی تخلیق AI</h3><p class="text-gray-300">راگ کی ترقی کے مطابق قدرتی اور یادگار مرکزی دھن لامحدود تخلیق کرتا ہے۔</p></div>
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-5"><i class="fas fa-drum text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">ڈرم / پرکیشن AI</h3><p class="text-gray-300">گانے کے ماحول کے مطابق تال اور فل خودکار تخلیق کرتا ہے۔</p></div>
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center mb-5"><i class="fas fa-guitar text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">بیس لائن AI</h3><p class="text-gray-300">راگ کی جڑ پکڑ کر مختلف بیس پیٹرن (سلیپ، پکنگ وغیرہ) تخلیق کرتا ہے۔</p></div>
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-5"><i class="fas fa-microphone-alt text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">آواز ترکیب AI</h3><p class="text-gray-300">بول ڈالیں، انسانی آواز کی طرح کی ترکیب کرتا ہے۔ جاپانی/انگریزی معاون۔</p></div>
+          <div class="glass-card p-7 rounded-2xl"><div class="w-14 h-14 rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center mb-5"><i class="fas fa-chart-line text-2xl text-white"></i></div><h3 class="text-2xl font-bold mb-2 text-white">خودکار ماسٹرنگ AI</h3><p class="text-gray-300">ایک کلک میں بلند آواز اور EQ بہتر بناتا ہے۔ اسٹریمنگ پلیٹ فارمز کے لیے موزوں۔</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- موازنہ جدول -->
+    <section class="py-16 px-4">
+      <div class="container mx-auto max-w-4xl">
+        <div class="text-center mb-10"><h2 class="text-3xl md:text-4xl font-bold text-white">دیگر موسیقی سافٹ ویئر سے فرق</h2><p class="text-gray-400 mt-2">بس راگ درج کریں، ہر کوئی استعمال کر سکتا ہے، کم لاگت</p></div>
+        <div class="glass-card p-6 overflow-x-auto">
+          <table class="w-full comparison-table text-sm md:text-base">
+            <tr class="border-b border-white/20"><th class="text-left py-3 text-white">خصوصیت</th><th class="text-center text-indigo-300">MelodyStudio AI</th><th class="text-center text-gray-400">روایتی DAW</th><th class="text-center text-gray-400">دیگر آن لائن AI</th></tr>
+            <tr><td class="py-3">راگ سے مکمل ترتیب</td><td class="text-center text-emerald-400">✅ صرف 3 سیکنڈ</td><td class="text-center">❌ دستی کام ضروری</td><td class="text-center">△ ایڈجسٹمنٹ درکار</td></tr>
+            <tr><td class="py-3">موسیقی کے علم کی ضرورت</td><td class="text-center text-emerald-400">صفر، ٹھیک ہے</td><td class="text-center">اعلیٰ علم ضروری</td><td class="text-center">درمیانی سطح ضروری</td></tr>
+            <tr><td class="py-3">آواز ترکیب (جاپانی)</td><td class="text-center text-emerald-400">معیاری شامل</td><td class="text-center">الگ پلگ ان</td><td class="text-center">❌ غیر معاون</td></tr>
+            <tr><td class="py-3">تجارتی استعمال ممکن</td><td class="text-center text-emerald-400">تمام منصوبوں میں</td><td class="text-center">ممکن (مگر خودکار تخلیق نہیں)</td><td class="text-center">محدود</td></tr>
+            <tr><td class="py-3">قیمت</td><td class="text-center text-emerald-400">ایک بار خریداری ¥14,800</td><td class="text-center">مفت تا مہنگا</td><td class="text-center">ماہانہ ¥4,000~</td></tr>
+            <tr><td class="py-3">مفت ٹرائل</td><td class="text-center text-emerald-400">14 دن، تمام خصوصیات</td><td class="text-center">نہیں</td><td class="text-center">7 دن، محدود</td></tr>
+          </table>
+        </div>
+        <p class="text-gray-400 text-center text-sm mt-6">※ ابتدائی صارف بھی بدیہی طور پر استعمال کر سکتے ہیں۔ بس راگ ٹائپ کریں، ہر کوئی پیشہ ورانہ موسیقی بنا سکتا ہے۔</p>
+      </div>
+    </section>
+
+    <!-- سسٹم کی ضروریات + ڈاؤن لوڈ -->
+    <section id="specs" class="py-20 px-4">
+      <div class="container mx-auto">
+        <div class="flex flex-col lg:flex-row gap-12 items-center">
+          <div class="flex-1">
+            <div class="inline-block px-4 py-1 bg-indigo-500/20 rounded-full text-indigo-300 text-sm mb-4">سسٹم کی ضروریات</div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-5 text-white">کم طاقت والے پی سی پر بھی AI آرام سے چلتا ہے</h2>
+            <p class="text-gray-300 mb-6">کلاؤڈ انضمام کی بدولت نیٹ بک پر بھی کام کرتا ہے۔ Core i3، 4GB میموری کافی ہے۔</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><i class="fas fa-microchip text-indigo-400"></i> <strong>آپریٹنگ سسٹم</strong><br><span class="text-gray-300">Windows 10/11</span></div>
+              <div><i class="fas fa-memory text-indigo-400"></i> <strong>میموری</strong><br><span class="text-gray-300">4GB سے زیادہ (8GB تجویز کردہ)</span></div>
+              <div><i class="fas fa-hdd text-indigo-400"></i> <strong>اسٹوریج</strong><br><span class="text-gray-300">1.5GB + AI ماڈل (5GB)</span></div>
+              <div><i class="fas fa-globe text-indigo-400"></i> <strong>نیٹ ورک</strong><br><span class="text-gray-300">صرف پہلی بار شروع کرتے وقت</span></div>
+            </div>
+            <div class="mt-8 p-4 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <i class="fas fa-gift text-indigo-300 mr-2"></i> <span class="text-gray-200"><strong>محدود مدت کی پیشکش:</strong> ڈاؤن لوڈ + انسٹال کرنے پر "پیشہ ور راگ کے 500 پیٹرن" + "AI ماسٹرنگ پری سیٹ" مفت حاصل کریں۔</span>
+            </div>
+          </div>
+          <div class="flex-1 flex justify-center">
+            <div class="glass-card p-6 rounded-3xl w-full max-w-md text-center">
+              <i class="fas fa-download text-5xl text-indigo-400 mb-3"></i>
+              <h3 class="text-2xl font-bold text-white">ابھی AI کمپوزیشن کا تجربہ کریں</h3>
+              <p class="text-gray-300 text-sm my-3">14 دن، تمام خصوصیات غیر محدود، کریڈٹ کارڈ کی ضرورت نہیں</p>
+              <div class="bg-black/50 rounded-xl p-3 my-3 text-left">
+                <div class="flex justify-between text-sm text-gray-300"><span>نیا AI ماڈل</span><span>v3.0 (2026)</span></div>
+                <div class="flex justify-between text-sm text-gray-300 mt-1"><span>فائل سائز</span><span>312 MB (.exe)</span></div>
+                <div class="flex justify-between text-sm text-gray-300 mt-1"><span>وائرس چیک</span><span>✓ صاف</span></div>
+              </div>
+              <a href="#" class="btn-primary w-full py-3 rounded-xl text-white font-bold inline-block text-center btn-action">مفت ڈاؤن لوڈ (AI ورژن)</a>
+              <p class="text-xs text-gray-500 mt-3">اردو انٹرفیس / آف لائن بھی جزوی AI کام کر سکتا ہے</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- جائزے -->
+    <section id="reviews" class="py-20 px-4 bg-black/30">
+      <div class="container mx-auto">
+        <div class="text-center mb-12">
+          <i class="fas fa-star text-amber-400"></i><i class="fas fa-star text-amber-400 mx-1"></i><i class="fas fa-star text-amber-400"></i>
+          <h2 class="text-3xl md:text-4xl font-bold mt-3 text-white">"موسیقی کا تجربہ صفر ہونے کے باوجود، پہلی بار پیشہ ورانہ گانا بنا لیا"</h2>
+          <p class="text-gray-400">4.9/5 (کل 3,200 جائزے)</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="glass-card p-6 rounded-2xl"><div class="flex gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-200">"C-G-Am-F ٹائپ کیا تو ایک دم پاپ اسٹائل کی مکمل ترتیب بن گئی۔ اتنا آسان ہوگا کبھی نہیں سوچا تھا۔"</p><div class="flex items-center gap-3 mt-4"><div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center"><i class="fas fa-user text-white"></i></div><div><p class="font-semibold text-white">سوزوکی اچیرو</p><p class="text-xs text-gray-400">ملازم / ابتدائی</p></div></div></div>
+          <div class="glass-card p-6 rounded-2xl"><div class="flex gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-200">"بس راگ سمجھ آجائے، باقی سب AI کر دیتا ہے۔ YouTube کے لیے BGM چند منٹ میں بنا لیا۔"</p><div class="flex items-center gap-3 mt-4"><div class="w-10 h-10 rounded-full bg-fuchsia-500 flex items-center justify-center"><i class="fas fa-user"></i></div><div><p class="font-semibold text-white">ایتو ایری</p><p class="text-xs text-gray-400">ویڈیو تخلیق کار</p></div></div></div>
+          <div class="glass-card p-6 rounded-2xl"><div class="flex gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="text-gray-200">"خریدنے سے پہلے مفت ٹرائل میں سب آزمانے کا موقع بہت اچھا۔ بس راگ درج کریں، حیرت انگیز حد تک حقیقی伴奏۔"</p><div class="flex items-center gap-3 mt-4"><div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center"><i class="fas fa-user"></i></div><div><p class="font-semibold text-white">تاکاہاشی ماکوتو</p><p class="text-xs text-gray-400">پیانو ابتدائی</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- آخری ڈاؤن لوڈ کال ٹو ایکشن -->
+    <section id="download" class="py-20 px-4 relative">
+      <div class="container mx-auto text-center relative z-10">
+        <div class="glass-card p-8 md:p-12 rounded-3xl max-w-3xl mx-auto border border-indigo-500/30">
+          <i class="fas fa-robot text-5xl text-indigo-400 mb-4"></i>
+          <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">بس راگ کی ترقی درج کریں، اور آپ کی اپنی موسیقی تیار</h2>
+          <p class="text-gray-300 mb-4 text-lg">✅ کریڈٹ کارڈ کی ضرورت نہیں ✅ 14 دن تمام خصوصیات غیر محدود ✅ Windows 10/11 معاون</p>
+          <div class="bg-indigo-900/40 p-4 rounded-xl mb-6 inline-block w-full">
+            <span class="text-amber-300 font-bold">🎁 صرف ابھی کے لیے خصوصی پیشکش 🎁</span>
+            <p class="text-sm text-gray-200 mt-1">ابھی ڈاؤن لوڈ کرنے والوں کے لیے "AI راگ کی ترقی کی ترکیبی کتاب" + "پیشہ ورانہ 10,000 لوپ نمونے" مفت۔<br>ساتھ ہی خریداری پر 30% کی چھوٹ کوپن ای میل کر دیا جائے گا۔</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#" class="btn-primary px-10 py-4 rounded-full text-xl font-bold flex items-center justify-center gap-3 shadow-xl text-white btn-action">
+              <i class="fab fa-windows"></i> مفت AI کمپوزیشن شروع کریں
+            </a>
+            <a href="#" class="btn-outline-light px-8 py-4 rounded-full text-lg flex items-center justify-center gap-2 text-white btn-action">
+              <i class="far fa-envelope"></i> AI خبریں وصول کریں
+            </a>
+          </div>
+          <p class="text-xs text-gray-500 mt-6">آف لائن بھی بنیادی AI خصوصیات کام کرتی ہیں۔ اعلیٰ کلاؤڈ AI انٹرنیٹ کنکشن پر دستیاب۔<br>ڈاؤن لوڈ فائل روزانہ وائرس اسکین شدہ۔ 14 دن بعد کوئی خودکار ادائیگی نہیں ہوگی۔</p>
+          <div class="mt-6 flex justify-center gap-5 text-sm text-gray-400">
+            <span><i class="fas fa-shield-alt text-indigo-400"></i> سیکورٹی تصدیق شدہ</span>
+            <span><i class="fas fa-sync-alt text-indigo-400"></i> ایک بار خریداری، کوئی ماہانہ فیس نہیں</span>
+            <span><i class="fas fa-headset text-indigo-400"></i> 24 گھنٹے سپورٹ</span>
+          </div>
+          <div class="mt-8 flex justify-center gap-4 text-3xl text-gray-500"><i class="fab fa-windows"></i><i class="fab fa-microsoft"></i><i class="fas fa-microchip"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-10 px-6 text-center text-gray-400 text-sm">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex gap-5"><i class="fab fa-twitter hover:text-indigo-400 cursor-pointer"></i><i class="fab fa-instagram hover:text-indigo-400 cursor-pointer"></i><i class="fab fa-youtube hover:text-indigo-400 cursor-pointer"></i><i class="fab fa-discord hover:text-indigo-400 cursor-pointer"></i></div>
+        <p>© 2026 MelodyStudio AI — راگ درج کریں، ہر کوئی پیشہ ور موسیقی بنا سکتا ہے</p>
+        <div class="flex gap-4"><a href="#" class="hover:text-white">رازداری کی پالیسی</a><a href="#" class="hover:text-white">شرائط و ضوابط</a><a href="#" class="hover:text-white">معاونت</a></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function k2() {
+      window.location.href = 'https://www.qq.com';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const btns = document.querySelectorAll('.btn-action, .btn-primary, .btn-outline-light, .bg-indigo-600');
+      btns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          k2();
+        });
+      });
+    });
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"373c7c119a7443a7a1cad01dc8e023ab","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
