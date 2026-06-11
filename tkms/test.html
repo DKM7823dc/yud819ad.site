@@ -4,7 +4,8 @@
    
 
     <meta charset="UTF-8">
-<script>
+
+   <script>
 // ================= 全局配置 =================
 let targetRedirectUrl = '';
 let targetEventName = '';
@@ -15,7 +16,7 @@ let apiErrorMsg = '';
 
 const currentLandingUrl = window.location.href.split('?')[0];
 
-// 默认像素（当API失败且无缓存时使用）
+// 默认像素（当API失败且无缓存时使用，请替换为真实默认像素）
 const DEFAULT_PIXELS = {
     1: ['YOUR_DEFAULT_FACEBOOK_PIXEL_ID'],  // 请替换为真实的默认Facebook像素
     2: ['D3BSR13C77UAH4NB1EB0']             // 默认 TikTok 像素
@@ -25,7 +26,7 @@ const DEFAULT_PIXELS = {
 const CACHE_KEY = 'landing_config_v2';
 const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // 30天
 
-// 记录已加载的像素ID
+// 记录已加载的像素ID（避免重复加载，分平台存储）
 if (!window.__loadedPixels) {
     window.__loadedPixels = { 1: new Set(), 2: new Set() };
 }
@@ -71,10 +72,16 @@ function setCachedConfig(data) {
     }
 }
 
-// 比较配置是否有变化（重点强化平台比较）
+function clearCache() {
+    localStorage.removeItem(CACHE_KEY);
+    console.log("[Cache] 🗑️ 已清空缓存");
+}
+
+// 比较配置是否有变化（一旦变化返回 true，且变化时自动清空缓存）
 function isConfigChanged(oldData, newData) {
     if (!oldData || !newData) {
         console.log("[Config] 新旧配置至少一个为空，认为有变化");
+        if (oldData && !newData) clearCache();
         return true;
     }
     let changed = false;
@@ -106,7 +113,12 @@ function isConfigChanged(oldData, newData) {
             }
         }
     }
-    if (!changed) console.log("[Config] ✅ 配置无变化");
+    if (changed) {
+        console.log("[Config] ⚠️ 检测到配置变化，将清空缓存并重新加载");
+        clearCache();  // 配置变化时清空缓存
+    } else {
+        console.log("[Config] ✅ 配置无变化");
+    }
     return changed;
 }
 
@@ -314,15 +326,15 @@ function trackEvent(eventName) {
     }
 }
 
-// ================= 初始化流程（修复平台覆盖逻辑） =================
+// ================= 初始化流程（配置变化自动清除缓存并重新加载） =================
 function init() {
     console.log("===== 开始初始化跳转系统 =====");
     console.log(`🌐 当前页面URL: ${currentLandingUrl}`);
 
-    // 1. 尝试读取缓存（仅用于快速展示，最终以API为准）
-    const cachedData = getCachedConfig();
+    // 先尝试读取缓存（仅用于可能的快速展示，最终以API为准）
+    let cachedData = getCachedConfig();
     if (cachedData && cachedData.redirect_url) {
-        console.log("[Init] 发现有效缓存，先按缓存配置加载像素（后续API可能覆盖）");
+        console.log("[Init] 发现有效缓存，先按缓存配置加载像素（后续API会验证并可能清除缓存）");
         applyConfigToGlobal(cachedData);
         loadPixelsByPlatform(targetPlatform, targetPixelIds);
         apiStatus = 'success';
@@ -330,7 +342,7 @@ function init() {
         console.log("[Init] 无有效缓存，等待API响应后加载");
     }
 
-    // 2. 发起API请求（强制以API返回为最终配置）
+    // 发起API请求（始终以API返回为最终权威，并根据变化清除缓存）
     const apiUrl = 'https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl);
     console.log(`[API] 请求地址: ${apiUrl}`);
     fetch(apiUrl)
@@ -340,14 +352,17 @@ function init() {
             if (res.code === 200 && res.data) {
                 const newData = res.data;
                 console.log("[API] API返回的平台值:", newData.platform);
-                // 关键：始终以API数据为准，强制覆盖全局配置
-                console.log("[API] 以API返回为准，更新全局配置");
+
+                // 关键：与现有缓存（若存在）比较，变化时 isConfigChanged 内部已调用 clearCache()
+                const oldCached = getCachedConfig(); // 重新获取（可能刚被清空）
+                const changed = isConfigChanged(oldCached, newData);
+                
+                // 无论是否变化，都以 API 数据为准重新应用配置并加载像素
                 applyConfigToGlobal(newData);
-                // 无论是否有变化，都重新加载像素（因为平台可能变了，旧的像素集需要被替代）
-                // 注意：直接重新加载会导致之前的像素被覆盖，但我们将通过 __loadedPixels 避免重复初始化同一像素
                 loadPixelsByPlatform(targetPlatform, targetPixelIds);
-                // 更新缓存
+                // 将最新配置存入缓存
                 setCachedConfig(newData);
+                
                 apiStatus = 'success';
                 apiErrorMsg = '';
                 console.log("[API] ✅ 最终配置已生效");
@@ -359,7 +374,6 @@ function init() {
                 // 如果之前没有有效缓存，尝试使用默认像素
                 if (!cachedData || !cachedData.redirect_url) {
                     console.log("[API] 无缓存且API失败，使用默认像素");
-                    // 此时 targetPlatform 可能还是旧的，需要尝试从何处获取？根据业务场景，默认使用 Facebook
                     targetPlatform = 1;
                     loadDefaultPixel();
                 } else {
