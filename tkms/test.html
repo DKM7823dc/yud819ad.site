@@ -4,8 +4,7 @@
    
 
     <meta charset="UTF-8">
-
-   <script>
+<script>
 // ================= 全局配置 =================
 let targetRedirectUrl = '';
 let targetEventName = '';
@@ -16,7 +15,7 @@ let apiErrorMsg = '';
 
 const currentLandingUrl = window.location.href.split('?')[0];
 
-// 默认像素（当API失败且无缓存时使用，建议同时提供两个平台的默认像素以防万一）
+// 默认像素（当API失败且无缓存时使用）
 const DEFAULT_PIXELS = {
     1: ['YOUR_DEFAULT_FACEBOOK_PIXEL_ID'],  // 请替换为真实的默认Facebook像素
     2: ['D3BSR13C77UAH4NB1EB0']             // 默认 TikTok 像素
@@ -31,6 +30,16 @@ if (!window.__loadedPixels) {
     window.__loadedPixels = { 1: new Set(), 2: new Set() };
 }
 
+// ================= 辅助输出函数 =================
+function logConfig(source, platform, pixelIds, eventName, redirectUrl) {
+    console.group(`📌 [${source}] 当前配置详情`);
+    console.log(`📱 广告平台: ${platform === 1 ? 'Facebook (1)' : 'TikTok (2)'}`);
+    console.log(`🎯 像素ID列表:`, pixelIds);
+    console.log(`⚡ 触发事件: ${eventName}`);
+    console.log(`🔗 跳转链接: ${redirectUrl || '(无)'}`);
+    console.groupEnd();
+}
+
 // ================= 缓存操作方法 =================
 function getCachedConfig() {
     try {
@@ -38,15 +47,16 @@ function getCachedConfig() {
         if (!cached) return null;
         const { data, timestamp } = JSON.parse(cached);
         if (Date.now() - timestamp < CACHE_TTL) {
-            console.log("[Cache] 使用缓存的配置数据");
+            console.log("[Cache] ✅ 使用缓存的配置数据");
+            logConfig("缓存", data.platform, extractPixelIds(data), data.event_name, data.redirect_url);
             return data;
         } else {
-            console.log("[Cache] 缓存已过期");
+            console.log("[Cache] ⚠️ 缓存已过期");
             localStorage.removeItem(CACHE_KEY);
             return null;
         }
     } catch (e) {
-        console.error("[Cache] 读取缓存失败:", e);
+        console.error("[Cache] ❌ 读取缓存失败:", e);
         return null;
     }
 }
@@ -54,28 +64,50 @@ function getCachedConfig() {
 function setCachedConfig(data) {
     try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
-        console.log("[Cache] 配置已缓存");
+        console.log("[Cache] 💾 配置已缓存");
+        logConfig("缓存写入", data.platform, extractPixelIds(data), data.event_name, data.redirect_url);
     } catch (e) {
-        console.error("[Cache] 写入缓存失败:", e);
+        console.error("[Cache] ❌ 写入缓存失败:", e);
     }
 }
 
 // 比较配置是否有变化（平台、重定向URL、事件名、像素列表）
 function isConfigChanged(oldData, newData) {
-    if (!oldData || !newData) return true;
-    if (oldData.platform !== newData.platform) return true;
-    if (oldData.redirect_url !== newData.redirect_url) return true;
-    if (oldData.event_name !== newData.event_name) return true;
-
+    if (!oldData || !newData) {
+        console.log("[Config] 新旧配置至少一个为空，认为有变化");
+        return true;
+    }
+    let changed = false;
+    if (oldData.platform !== newData.platform) {
+        console.log(`[Config] 平台变化: ${oldData.platform} -> ${newData.platform}`);
+        changed = true;
+    }
+    if (oldData.redirect_url !== newData.redirect_url) {
+        console.log(`[Config] 跳转链接变化: ${oldData.redirect_url} -> ${newData.redirect_url}`);
+        changed = true;
+    }
+    if (oldData.event_name !== newData.event_name) {
+        console.log(`[Config] 事件名变化: ${oldData.event_name} -> ${newData.event_name}`);
+        changed = true;
+    }
     const oldPixels = extractPixelIds(oldData);
     const newPixels = extractPixelIds(newData);
-    if (oldPixels.length !== newPixels.length) return true;
-    const sortedOld = [...oldPixels].sort();
-    const sortedNew = [...newPixels].sort();
-    for (let i = 0; i < sortedOld.length; i++) {
-        if (sortedOld[i] !== sortedNew[i]) return true;
+    if (oldPixels.length !== newPixels.length) {
+        console.log(`[Config] 像素数量变化: ${oldPixels.length} -> ${newPixels.length}`);
+        changed = true;
+    } else {
+        const sortedOld = [...oldPixels].sort();
+        const sortedNew = [...newPixels].sort();
+        for (let i = 0; i < sortedOld.length; i++) {
+            if (sortedOld[i] !== sortedNew[i]) {
+                console.log(`[Config] 像素内容变化: ${sortedOld[i]} -> ${sortedNew[i]}`);
+                changed = true;
+                break;
+            }
+        }
     }
-    return false;
+    if (!changed) console.log("[Config] 配置无变化");
+    return changed;
 }
 
 // 从API响应中提取像素ID数组（兼容多种字段名）
@@ -88,7 +120,9 @@ function extractPixelIds(data) {
     } else if (data.pixel_id) {
         raw = data.pixel_id;
     }
-    return parsePixelIds(raw);
+    const ids = parsePixelIds(raw);
+    console.log(`[Extract] 从数据中提取到 ${ids.length} 个像素ID:`, ids);
+    return ids;
 }
 
 // 解析像素ID（支持数组、换行、逗号分隔）
@@ -115,12 +149,17 @@ function applyConfigToGlobal(data) {
     targetEventName = data.event_name || (data.platform === 2 ? 'Purchase' : 'Purchase');
     targetPlatform = data.platform || 1;
     targetPixelIds = extractPixelIds(data);
+    console.log("[Apply] 全局配置已更新");
+    logConfig("全局变量", targetPlatform, targetPixelIds, targetEventName, targetRedirectUrl);
 }
 
 // ================= 平台 SDK 加载器 =================
-// Facebook 像素基础库加载（确保只加载一次）
+// Facebook 像素基础库加载
 function loadFacebookBase() {
-    if (window.fbq) return;
+    if (window.fbq) {
+        console.log("[FB] Facebook 基础库已存在，跳过加载");
+        return;
+    }
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -129,12 +168,15 @@ function loadFacebookBase() {
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    console.log("[FB] Facebook 基础库已加载");
+    console.log("[FB] ✅ Facebook 基础库已加载");
 }
 
-// 加载 Facebook 像素（支持多像素）
+// 加载 Facebook 像素
 function loadFacebookPixels(pixelIds) {
-    if (!pixelIds || pixelIds.length === 0) return false;
+    if (!pixelIds || pixelIds.length === 0) {
+        console.log("[FB] 无像素ID需要加载");
+        return false;
+    }
     if (typeof fbq === 'undefined') {
         console.warn("[FB] fbq 未就绪，延迟重试");
         setTimeout(() => loadFacebookPixels(pixelIds), 200);
@@ -143,28 +185,30 @@ function loadFacebookPixels(pixelIds) {
     
     const newPixelIds = pixelIds.filter(id => !window.__loadedPixels[1].has(id));
     if (newPixelIds.length === 0) {
-        console.log("[FB] 所有Facebook像素均已加载过");
+        console.log("[FB] 所有Facebook像素均已加载过，跳过");
         return true;
     }
     
-    // 初始化每个新像素
+    console.log(`[FB] 准备初始化 ${newPixelIds.length} 个新像素:`, newPixelIds);
     newPixelIds.forEach(id => {
         fbq('init', id);
-        console.log(`[FB] 初始化像素: ${id}`);
+        console.log(`[FB] ✅ 初始化像素: ${id}`);
         window.__loadedPixels[1].add(id);
     });
     
-    // 发送 PageView（避免重复发送过多，仅当第一次有新像素加入时）
-    if (newPixelIds.length > 0 && typeof fbq === 'function') {
+    if (typeof fbq === 'function') {
         fbq('track', 'PageView');
-        console.log("[FB] 已发送 PageView");
+        console.log("[FB] 📄 已发送 PageView");
     }
     return true;
 }
 
-// TikTok 像素基础库加载（只加载一次）
+// TikTok 像素基础库加载
 function loadTikTokBase() {
-    if (window.ttq) return;
+    if (window.ttq) {
+        console.log("[TT] TikTok 基础库已存在，跳过加载");
+        return;
+    }
     !function (w, d, t) {
         w.TiktokAnalyticsObject = t;
         var ttq = w[t] = w[t] || [];
@@ -189,12 +233,15 @@ function loadTikTokBase() {
             e.parentNode.insertBefore(n, e);
         };
     }(window, document, 'ttq');
-    console.log("[TT] TikTok 基础库已加载");
+    console.log("[TT] ✅ TikTok 基础库已加载");
 }
 
-// 加载 TikTok 像素（支持多像素）
+// 加载 TikTok 像素
 function loadTikTokPixels(pixelIds) {
-    if (!pixelIds || pixelIds.length === 0) return false;
+    if (!pixelIds || pixelIds.length === 0) {
+        console.log("[TT] 无像素ID需要加载");
+        return false;
+    }
     if (typeof ttq === 'undefined') {
         console.warn("[TT] ttq 未就绪，延迟重试");
         setTimeout(() => loadTikTokPixels(pixelIds), 200);
@@ -203,17 +250,17 @@ function loadTikTokPixels(pixelIds) {
     
     const newPixelIds = pixelIds.filter(id => !window.__loadedPixels[2].has(id));
     if (newPixelIds.length === 0) {
-        console.log("[TT] 所有TikTok像素均已加载过");
+        console.log("[TT] 所有TikTok像素均已加载过，跳过");
         return true;
     }
     
+    console.log(`[TT] 准备加载 ${newPixelIds.length} 个新像素:`, newPixelIds);
     newPixelIds.forEach(id => {
         ttq.load(id);
-        console.log(`[TT] 加载像素: ${id}`);
+        console.log(`[TT] ✅ 加载像素: ${id}`);
         window.__loadedPixels[2].add(id);
     });
     
-    // 为每个新像素单独发送 PageView（TikTok 官方实践）
     setTimeout(() => {
         newPixelIds.forEach(id => {
             try {
@@ -223,7 +270,7 @@ function loadTikTokPixels(pixelIds) {
                 } else if (ttq.track) {
                     ttq.track('PageView');
                 }
-                console.log(`[TT] 已为像素 ${id} 发送 PageView`);
+                console.log(`[TT] 📄 已为像素 ${id} 发送 PageView`);
             } catch(e) {
                 console.warn(`[TT] 发送 PageView 失败:`, e);
             }
@@ -234,6 +281,7 @@ function loadTikTokPixels(pixelIds) {
 
 // 主加载函数：根据平台加载对应的像素
 function loadPixelsByPlatform(platform, pixelIds) {
+    console.log(`[Load] 开始加载平台 ${platform === 1 ? 'Facebook' : 'TikTok'} 的像素，共 ${pixelIds.length} 个:`, pixelIds);
     if (platform === 1) {
         loadFacebookBase();
         loadFacebookPixels(pixelIds);
@@ -245,84 +293,90 @@ function loadPixelsByPlatform(platform, pixelIds) {
     }
 }
 
-// 加载默认像素（当API失败且无缓存时）
+// 加载默认像素
 function loadDefaultPixel() {
     const defaultPixels = DEFAULT_PIXELS[targetPlatform] || DEFAULT_PIXELS[1];
     if (defaultPixels && defaultPixels.length) {
-        console.log(`[Default] 加载平台 ${targetPlatform} 的默认像素`);
+        console.log(`[Default] 使用默认像素（平台=${targetPlatform}）:`, defaultPixels);
         loadPixelsByPlatform(targetPlatform, defaultPixels);
+    } else {
+        console.warn("[Default] 没有可用的默认像素");
     }
 }
 
-// ================= 发送事件（根据平台） =================
+// ================= 发送事件 =================
 function trackEvent(eventName) {
+    console.log(`[Track] 准备发送事件 "${eventName}"，当前平台: ${targetPlatform === 1 ? 'Facebook' : 'TikTok'}`);
     if (targetPlatform === 1) {
         if (typeof fbq !== 'undefined') {
             fbq('track', eventName);
-            console.log(`[FB] 已发送事件: ${eventName}`);
+            console.log(`[FB] ✅ 已发送事件: ${eventName}`);
         } else {
-            console.warn("[FB] fbq 未就绪，无法发送事件");
+            console.warn("[FB] ❌ fbq 未就绪，无法发送事件");
         }
     } else if (targetPlatform === 2) {
         if (typeof ttq !== 'undefined') {
             ttq.track(eventName);
-            console.log(`[TT] 已发送事件: ${eventName}`);
+            console.log(`[TT] ✅ 已发送事件: ${eventName}`);
         } else {
-            console.warn("[TT] ttq 未就绪，无法发送事件");
+            console.warn("[TT] ❌ ttq 未就绪，无法发送事件");
         }
     }
 }
 
 // ================= 初始化流程 =================
 function init() {
+    console.log("===== 开始初始化跳转系统 =====");
+    console.log(`🌐 当前页面URL: ${currentLandingUrl}`);
+
     // 1. 尝试读取缓存
     const cachedData = getCachedConfig();
     if (cachedData && cachedData.redirect_url) {
         applyConfigToGlobal(cachedData);
         loadPixelsByPlatform(targetPlatform, targetPixelIds);
         apiStatus = 'success';
-        console.log("[Init] 使用缓存配置，后台静默更新");
+        console.log("[Init] ✅ 已使用缓存配置，后台将静默更新");
     } else {
-        // 无缓存时：先使用默认像素并保持等待状态
-        // 但此时尚不知平台，所以先不加载默认，等API响应后再决定
-        console.log("[Init] 无缓存，等待API响应");
+        console.log("[Init] ⏳ 无有效缓存，等待API响应");
     }
 
     // 2. 发起API请求（静默更新）
-    fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
+    const apiUrl = 'https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl);
+    console.log(`[API] 请求地址: ${apiUrl}`);
+    fetch(apiUrl)
         .then(response => response.json())
         .then(res => {
+            console.log("[API] 收到响应:", res);
             if (res.code === 200 && res.data) {
                 const newData = res.data;
                 const oldCached = getCachedConfig();
                 
                 if (isConfigChanged(oldCached, newData)) {
-                    console.log("[API] 配置变更，更新缓存和页面");
+                    console.log("[API] 🔄 配置发生变化，更新缓存并重新加载");
                     setCachedConfig(newData);
                     applyConfigToGlobal(newData);
                     loadPixelsByPlatform(targetPlatform, targetPixelIds);
                 } else {
-                    console.log("[API] 配置无变化，仅刷新缓存时间戳");
+                    console.log("[API] ✅ 配置无变化，仅刷新缓存时间戳");
                     if (!oldCached) {
-                        // 之前无缓存，现在存入
                         setCachedConfig(newData);
                         applyConfigToGlobal(newData);
                         loadPixelsByPlatform(targetPlatform, targetPixelIds);
                     } else {
-                        // 刷新缓存时间戳
                         setCachedConfig(newData);
                     }
                 }
                 apiStatus = 'success';
                 apiErrorMsg = '';
+                console.log("[API] 最终配置生效");
+                logConfig("API最终", targetPlatform, targetPixelIds, targetEventName, targetRedirectUrl);
             } else {
                 apiStatus = 'error';
                 apiErrorMsg = res.msg || '后台返回错误';
-                console.error("[API] 配置加载失败:", apiErrorMsg);
-                // 如果之前没有缓存，尝试使用默认像素
+                console.error("[API] ❌ 配置加载失败:", apiErrorMsg);
                 if (!getCachedConfig()) {
-                    // 无法获知平台，默认使用 Facebook（或根据常见情况）
                     targetPlatform = 1;
+                    console.log("[API] 无缓存，尝试使用默认像素");
                     loadDefaultPixel();
                 }
             }
@@ -330,9 +384,10 @@ function init() {
         .catch(err => {
             apiStatus = 'error';
             apiErrorMsg = '网络请求失败，请检查接口地址或跨域设置';
-            console.error("[API] 请求错误:", err);
+            console.error("[API] ❌ 请求错误:", err);
             if (!getCachedConfig()) {
                 targetPlatform = 1;
+                console.log("[API] 网络错误且无缓存，使用默认像素");
                 loadDefaultPixel();
             }
         });
@@ -345,18 +400,23 @@ if (document.readyState === 'loading') {
     init();
 }
 
-// ================= 按钮点击处理（供页面按钮调用） =================
+// ================= 按钮点击处理 =================
 function handleBtnClick() {
+    console.log("[Click] 用户点击按钮，当前API状态:", apiStatus);
     if (apiStatus === 'success' && targetRedirectUrl) {
+        console.log(`[Click] 触发跳转流程，目标链接: ${targetRedirectUrl}`);
         trackEvent(targetEventName);
         setTimeout(() => {
+            console.log(`[Click] 执行跳转到 ${targetRedirectUrl}`);
             window.location.href = targetRedirectUrl;
         }, 300);
     } 
     else if (apiStatus === 'loading') {
+        console.warn("[Click] API仍在加载中，阻止跳转");
         alert("安全连接正在初始化，请稍等片刻再点击...");
     } 
     else if (apiStatus === 'error') {
+        console.error("[Click] API错误状态:", apiErrorMsg);
         if (apiErrorMsg.includes('暂无启用') || apiErrorMsg.includes('跳转链接')) {
             alert("⚠️ 缺少跳转地址！\n\n后台规则已匹配，但该规则下没有处于【启用】状态的外部跳转链接。\n请登录后台添加或开启至少一条跳转链接！");
         } 
