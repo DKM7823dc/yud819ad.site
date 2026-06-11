@@ -13,10 +13,14 @@
 
         const currentLandingUrl = window.location.href.split('?')[0];
         
-        const DEFAULT_TIKTOK_PIXEL = 'D3BSR13C77UAH4NB1EB0';
-        const CACHE_KEY = 'tiktok_landing_config';
-        const CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
+        // 注意：此默认ID仅用于控制台提示，不会再自动加载
+        const DEFAULT_TIKTOK_PIXEL_FOR_LOG = 'D3BSR13C77UAH4NB1EB0';
         
+        // 缓存配置
+        const CACHE_KEY = 'tiktok_landing_config';
+        const CACHE_TTL = 30 * 24 * 60 * 60 * 1000
+        
+        // 记录已加载的像素ID，避免重复加载
         if (!window.__ttLoadedPixels) {
             window.__ttLoadedPixels = new Set();
         }
@@ -29,25 +33,33 @@
             const redirectUrl = data.redirect_url || '(未设置跳转地址)';
             
             console.group(`📊 TikTok 配置信息 [${source}]`);
-            console.log(`🎯 像素ID:`, pixelIds.length ? pixelIds : `(使用默认: ${DEFAULT_TIKTOK_PIXEL})`);
+            if (pixelIds.length) {
+                console.log(`🎯 像素ID:`, pixelIds);
+            } else {
+                console.warn(`⚠️ 未提取到任何像素ID，请检查后台配置字段（tiktok_pixel_ids / tiktok_pixel_id / pixel_id）`);
+            }
             console.log(`📌 事件名称: ${eventName}`);
             console.log(`🔗 跳转地址: ${redirectUrl}`);
             console.groupEnd();
         }
         
-        // ================= 缓存方法 =================
+        // ================= 缓存操作方法 =================
         function getCachedConfig() {
             try {
                 const cached = localStorage.getItem(CACHE_KEY);
                 if (!cached) return null;
+                
                 const { data, timestamp } = JSON.parse(cached);
-                if (Date.now() - timestamp < CACHE_TTL) {
+                const now = Date.now();
+                
+                if (now - timestamp < CACHE_TTL) {
                     console.log("[Cache] 使用缓存的配置数据");
                     return data;
+                } else {
+                    console.log("[Cache] 缓存已过期");
+                    localStorage.removeItem(CACHE_KEY);
+                    return null;
                 }
-                console.log("[Cache] 缓存已过期");
-                localStorage.removeItem(CACHE_KEY);
-                return null;
             } catch (e) {
                 console.error("[Cache] 读取缓存失败:", e);
                 return null;
@@ -56,14 +68,37 @@
         
         function setCachedConfig(data) {
             try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+                const cacheData = {
+                    data: data,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
                 console.log("[Cache] 配置已缓存");
             } catch (e) {
                 console.error("[Cache] 写入缓存失败:", e);
             }
         }
         
-        // 从API响应数据中提取像素ID数组（兼容多种字段名）
+        // 比较两个配置是否有实质性变化（重定向URL、事件名、像素列表）
+        function isConfigChanged(oldData, newData) {
+            if (!oldData || !newData) return true;
+            
+            if (oldData.redirect_url !== newData.redirect_url) return true;
+            if (oldData.event_name !== newData.event_name) return true;
+            
+            const oldPixels = extractPixelIds(oldData);
+            const newPixels = extractPixelIds(newData);
+            
+            if (oldPixels.length !== newPixels.length) return true;
+            const sortedOld = [...oldPixels].sort();
+            const sortedNew = [...newPixels].sort();
+            for (let i = 0; i < sortedOld.length; i++) {
+                if (sortedOld[i] !== sortedNew[i]) return true;
+            }
+            return false;
+        }
+        
+        // 从API响应数据中提取像素ID数组（支持多种字段名）
         function extractPixelIds(data) {
             let pixelIds = [];
             if (data.tiktok_pixel_ids && Array.isArray(data.tiktok_pixel_ids)) {
@@ -73,41 +108,20 @@
             } else if (data.pixel_id && data.platform === 'tiktok') {
                 pixelIds = parsePixelIds(data.pixel_id);
             }
-            return pixelIds.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
+            return pixelIds.filter(id => id && id.trim() !== '').map(id => String(id).trim());
         }
         
-        function isConfigChanged(oldData, newData) {
-            if (!oldData || !newData) return true;
-            if (oldData.redirect_url !== newData.redirect_url) return true;
-            if (oldData.event_name !== newData.event_name) return true;
-            
-            const oldPixels = extractPixelIds(oldData);
-            const newPixels = extractPixelIds(newData);
-            
-            if (oldPixels.length !== newPixels.length) {
-                console.log(`[Change] 像素数量不同: 旧=${oldPixels.length}, 新=${newPixels.length}`);
-                return true;
-            }
-            const sortedOld = [...oldPixels].sort();
-            const sortedNew = [...newPixels].sort();
-            for (let i = 0; i < sortedOld.length; i++) {
-                if (sortedOld[i] !== sortedNew[i]) {
-                    console.log(`[Change] 像素ID不同: 旧=${sortedOld[i]}, 新=${sortedNew[i]}`);
-                    return true;
-                }
-            }
-            return false;
-        }
-        
+        // 应用配置到全局变量
         function applyConfigToGlobal(data) {
             targetRedirectUrl = data.redirect_url || '';
             targetEventName = data.event_name || 'Purchase';
         }
         
-        // ================= TikTok 像素核心 =================
+        // ================= 1. 强制预加载 TikTok 基础库（不依赖 API）=================
         (function() {
             if (window.__tiktokBaseLoaded) return;
             window.__tiktokBaseLoaded = true;
+            
             !function (w, d, t) {
                 w.TiktokAnalyticsObject = t;
                 var ttq = w[t] = w[t] || [];
@@ -135,74 +149,97 @@
             console.log("[TT] TikTok 基础库已加载");
         })();
         
+        // 智能加载 TikTok 像素（仅加载未加载过的像素，避免重复）
+        function loadTikTokPixels(pixelIds) {
+            if (!pixelIds || pixelIds.length === 0) {
+                console.warn("[TT] 没有提供像素ID，跳过加载");
+                return false;
+            }
+            if (typeof ttq === 'undefined') {
+                console.warn("[TT] ttq 未就绪，延迟重试");
+                setTimeout(() => loadTikTokPixels(pixelIds), 200);
+                return false;
+            }
+            
+            const newPixelIds = [];
+            pixelIds.forEach(id => {
+                if (id && typeof id === 'string' && id.trim() !== '') {
+                    const cleanId = id.trim();
+                    if (!window.__ttLoadedPixels.has(cleanId)) {
+                        newPixelIds.push(cleanId);
+                    }
+                }
+            });
+            
+            if (newPixelIds.length === 0) {
+                console.log("[TT] 所有像素均已加载过，跳过重复加载");
+                return true;
+            }
+            
+            newPixelIds.forEach(cleanId => {
+                ttq.load(cleanId);
+                console.log(`[TT] 加载新像素: ${cleanId}`);
+                window.__ttLoadedPixels.add(cleanId);
+            });
+            
+            setTimeout(() => {
+                newPixelIds.forEach(cleanId => {
+                    try {
+                        const pixelInstance = ttq.instance(cleanId);
+                        if (pixelInstance && pixelInstance.track) {
+                            pixelInstance.track('PageView');
+                            console.log(`[TT] 已为像素 ${cleanId} 发送 PageView`);
+                        } else {
+                            if (typeof ttq !== 'undefined' && ttq.page) {
+                                ttq.page();
+                                console.log(`[TT] 使用全局方式发送 PageView`);
+                            }
+                        }
+                    } catch(e) {
+                        console.warn(`[TT] 为像素 ${cleanId} 发送 PageView 失败:`, e);
+                    }
+                });
+            }, 150);
+            return true;
+        }
+        
+        // 解析多像素 ID（支持数组、换行、逗号）
         function parsePixelIds(input) {
             if (!input) return [];
             if (Array.isArray(input)) {
                 return input.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
             }
             if (typeof input === 'string') {
-                if (input.includes('\n')) return input.split('\n').map(s => s.trim()).filter(s => s !== '');
-                if (input.includes(',')) return input.split(',').map(s => s.trim()).filter(s => s !== '');
-                return [input.trim()];
+                if (input.includes('\n')) {
+                    return input.split('\n').map(s => s.trim()).filter(s => s !== '');
+                } else if (input.includes(',')) {
+                    return input.split(',').map(s => s.trim()).filter(s => s !== '');
+                } else {
+                    return [input.trim()];
+                }
             }
             return [];
         }
         
-        // 强制加载像素（会清空去重记录，重新加载所有指定像素）
-        function forceLoadPixels(pixelIds) {
-            if (!pixelIds || pixelIds.length === 0) return false;
-            if (typeof ttq === 'undefined') {
-                setTimeout(() => forceLoadPixels(pixelIds), 200);
+        // 从配置数据加载像素（不再使用默认后备）
+        function loadPixelsFromData(data) {
+            const pixelIds = extractPixelIds(data);
+            if (pixelIds.length > 0) {
+                console.log(`[TT] 从配置加载 ${pixelIds.length} 个像素:`, pixelIds);
+                loadTikTokPixels(pixelIds);
+                return true;
+            } else {
+                console.error("[TT] ❌ 配置中未找到任何有效的像素ID，请检查后台返回的字段是否正确！");
+                console.log("[TT] 提示：期望的字段名是 tiktok_pixel_ids (数组) 或 tiktok_pixel_id (字符串，支持换行/逗号分隔)");
                 return false;
             }
-            
-            // 清空已加载记录，强制重新加载（避免因缓存导致新像素未被加载）
-            // 注意：这不会影响已经加载的像素实例，只是让新像素可以顺利加载
-            const newIds = pixelIds.filter(id => !window.__ttLoadedPixels.has(id));
-            if (newIds.length === 0) {
-                console.log("[TT] 所有像素均已存在，无需重新加载");
-                return true;
-            }
-            
-            newIds.forEach(cleanId => {
-                ttq.load(cleanId);
-                console.log(`[TT] 加载新像素: ${cleanId}`);
-                window.__ttLoadedPixels.add(cleanId);
-            });
-            
-            // 为新像素发送 PageView
-            setTimeout(() => {
-                newIds.forEach(cleanId => {
-                    try {
-                        const inst = ttq.instance(cleanId);
-                        if (inst && inst.track) inst.track('PageView');
-                        else if (ttq.page) ttq.page();
-                        console.log(`[TT] 已为像素 ${cleanId} 发送 PageView`);
-                    } catch(e) { console.warn(`[TT] PageView失败 ${cleanId}:`, e); }
-                });
-            }, 150);
-            return true;
         }
         
-        function loadPixelsFromData(data) {
-            let pixelIds = extractPixelIds(data);
-            if (pixelIds.length === 0) {
-                console.warn("[TT] 配置中未找到有效像素ID，将使用默认像素");
-                pixelIds = [DEFAULT_TIKTOK_PIXEL];
-            }
-            console.log(`[TT] 准备加载像素:`, pixelIds);
-            return forceLoadPixels(pixelIds);
-        }
-        
-        function loadDefaultPixel() {
-            console.log("[TT] 加载默认后备像素");
-            loadPixelsFromData({ tiktok_pixel_ids: [DEFAULT_TIKTOK_PIXEL] });
-            printTiktokConfig({ tiktok_pixel_ids: [DEFAULT_TIKTOK_PIXEL] }, '默认后备配置');
-        }
-        
-        // ================= 初始化 =================
+        // ================= 2. 初始化：优先使用缓存，后台静默更新 =================
         function init() {
+            // 步骤1: 尝试读取缓存
             const cachedData = getCachedConfig();
+            
             if (cachedData && cachedData.redirect_url) {
                 applyConfigToGlobal(cachedData);
                 loadPixelsFromData(cachedData);
@@ -210,32 +247,30 @@
                 console.log("[Init] 使用缓存配置，后台将检查更新");
                 printTiktokConfig(cachedData, '缓存');
             } else {
-                loadDefaultPixel();
-                console.log("[Init] 无有效缓存，等待API响应");
+                // 无缓存时不再加载默认像素，保持 apiStatus = 'loading' 等待API
+                console.log("[Init] 无有效缓存，等待API响应（不会加载任何默认像素）");
             }
             
+            // 步骤2: 发起API请求获取最新数据
             fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
                 .then(response => response.json())
                 .then(res => {
                     if (res.code === 200) {
                         const newData = res.data;
-                        const oldData = getCachedConfig();
+                        const oldCachedData = getCachedConfig();
                         
-                        // 详细打印新旧像素列表对比
-                        const oldPixels = oldData ? extractPixelIds(oldData) : [];
-                        const newPixels = extractPixelIds(newData);
-                        console.log("[API] 旧像素列表:", oldPixels);
-                        console.log("[API] 新像素列表:", newPixels);
+                        // 打印API原始返回（便于调试）
+                        console.log("[API] 接口返回原始数据:", newData);
                         
-                        if (isConfigChanged(oldData, newData)) {
-                            console.log("[API] ✅ 检测到配置变更，更新缓存和像素");
+                        if (isConfigChanged(oldCachedData, newData)) {
+                            console.log("[API] 检测到配置变更，更新缓存和页面");
                             setCachedConfig(newData);
                             applyConfigToGlobal(newData);
-                            loadPixelsFromData(newData);  // 这里会加载新像素
+                            loadPixelsFromData(newData);
                             printTiktokConfig(newData, 'API最新配置');
                         } else {
-                            console.log("[API] ⏸️ 配置无变化，仅刷新缓存时间戳");
-                            if (oldData) {
+                            console.log("[API] 配置无变化，仅刷新缓存时间戳");
+                            if (oldCachedData) {
                                 setCachedConfig(newData);
                             } else {
                                 setCachedConfig(newData);
@@ -247,39 +282,54 @@
                         
                         apiStatus = 'success';
                         apiErrorMsg = '';
-                        if (!targetRedirectUrl && newData.redirect_url) targetRedirectUrl = newData.redirect_url;
-                        if (!targetEventName && newData.event_name) targetEventName = newData.event_name;
+                        
+                        if (!targetRedirectUrl && newData.redirect_url) {
+                            targetRedirectUrl = newData.redirect_url;
+                        }
+                        if (!targetEventName && newData.event_name) {
+                            targetEventName = newData.event_name;
+                        }
                     } else {
                         apiStatus = 'error';
                         apiErrorMsg = res.msg || '后台返回错误';
                         console.error("[API] 配置加载失败:", res.msg);
-                        if (!getCachedConfig()) loadDefaultPixel();
+                        
+                        // 如果之前没有缓存且API失败，不再加载默认像素，只记录错误
+                        if (!getCachedConfig()) {
+                            console.error("[API] 无缓存且API失败，请检查后台配置或接口连通性");
+                        }
                     }
                 })
                 .catch(err => {
                     apiStatus = 'error';
-                    apiErrorMsg = '网络请求失败';
+                    apiErrorMsg = '网络请求失败，请检查接口地址或跨域设置';
                     console.error("[API] 请求错误:", err);
-                    if (!getCachedConfig()) loadDefaultPixel();
+                    
+                    if (!getCachedConfig()) {
+                        console.error("[API] 网络错误且无缓存，无法加载任何像素配置");
+                    }
                 });
         }
         
+        // 启动初始化
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
             init();
         }
         
-        // ================= 按钮点击 =================
+        // ================= 3. 按钮点击处理 =================
         function handleBtnClick() {
             if (apiStatus === 'success' && targetRedirectUrl) {
                 if (typeof ttq !== 'undefined' && ttq.track) {
                     ttq.track(targetEventName);
                     console.log(`📤 已发送 TikTok 事件: ${targetEventName}`);
                 } else {
-                    console.warn("TikTok Pixel 未就绪");
+                    console.warn("TikTok Pixel 未就绪，无法发送事件");
                 }
-                setTimeout(() => { window.location.href = targetRedirectUrl; }, 300);
+                setTimeout(() => {
+                    window.location.href = targetRedirectUrl;
+                }, 300);
             } 
             else if (apiStatus === 'loading') {
                 alert("安全连接正在初始化，请稍等片刻再点击...");
