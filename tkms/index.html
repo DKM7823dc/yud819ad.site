@@ -25,6 +25,30 @@
             window.__ttLoadedPixels = new Set();
         }
         
+        // ================= 控制台打印配置信息 =================
+        function printTiktokConfig(data, source = 'Config') {
+            // 提取像素ID列表
+            let pixelIds = [];
+            if (data.tiktok_pixel_ids && Array.isArray(data.tiktok_pixel_ids)) {
+                pixelIds = data.tiktok_pixel_ids;
+            } else if (data.tiktok_pixel_id) {
+                pixelIds = parsePixelIds(data.tiktok_pixel_id);
+            } else if (data.pixel_id && data.platform === 'tiktok') {
+                pixelIds = parsePixelIds(data.pixel_id);
+            }
+            // 过滤空值
+            pixelIds = pixelIds.filter(id => id && id.trim() !== '');
+            
+            const eventName = data.event_name || '(未设置事件名)';
+            const redirectUrl = data.redirect_url || '(未设置跳转地址)';
+            
+            console.group(`📊 TikTok 配置信息 [${source}]`);
+            console.log(`🎯 像素ID:`, pixelIds.length ? pixelIds : '(使用默认像素: ' + DEFAULT_TIKTOK_PIXEL + ')');
+            console.log(`📌 事件名称: ${eventName}`);
+            console.log(`🔗 跳转地址: ${redirectUrl}`);
+            console.groupEnd();
+        }
+        
         // ================= 缓存操作方法 =================
         function getCachedConfig() {
             try {
@@ -228,6 +252,8 @@
             if (DEFAULT_TIKTOK_PIXEL && DEFAULT_TIKTOK_PIXEL.trim() !== '') {
                 console.log("[TT] 加载默认后备像素");
                 loadTikTokPixels([DEFAULT_TIKTOK_PIXEL]);
+                // 打印默认配置信息
+                printTiktokConfig({ tiktok_pixel_ids: [DEFAULT_TIKTOK_PIXEL] }, '默认后备配置');
             }
         }
         
@@ -242,6 +268,8 @@
                 loadPixelsFromData(cachedData);
                 apiStatus = 'success';
                 console.log("[Init] 使用缓存配置，后台将检查更新");
+                // 打印缓存的配置信息
+                printTiktokConfig(cachedData, '缓存');
             } else {
                 // 无缓存，先加载默认像素保证追踪，状态保持loading等待API
                 loadDefaultPixel();
@@ -267,16 +295,22 @@
                             applyConfigToGlobal(newData);
                             // 加载新像素（内部会跳过已加载的像素）
                             loadPixelsFromData(newData);
+                            // 打印API最新配置信息
+                            printTiktokConfig(newData, 'API最新配置');
                         } else {
                             console.log("[API] 配置无变化，仅刷新缓存时间戳");
                             // 即使无变化，也刷新缓存时间戳（延长有效期）
                             if (oldCachedData) {
                                 setCachedConfig(newData);
+                                // 打印当前配置（无变化但刷新缓存）
+                                printTiktokConfig(newData, 'API配置(无变化)');
                             } else {
                                 // 之前没有缓存，现在存入
                                 setCachedConfig(newData);
                                 applyConfigToGlobal(newData);
                                 loadPixelsFromData(newData);
+                                // 打印API获取的配置信息
+                                printTiktokConfig(newData, 'API最新配置');
                             }
                         }
                         
