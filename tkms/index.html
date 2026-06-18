@@ -1,676 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-   
-
+<head>
     <meta charset="UTF-8">
-<script>
-        // ================= 全局配置 =================
-        let targetRedirectUrl = '';
-        let targetEventName = '';
-        let apiStatus = 'loading';
-        let apiErrorMsg = '';
-
-        const currentLandingUrl = window.location.href.split('?')[0];
-        
-        // 注意：此默认ID仅用于控制台提示，不会再自动加载
-        const DEFAULT_TIKTOK_PIXEL_FOR_LOG = 'D3BSR13C77UAH4NB1EB0';
-        
-        // 缓存配置
-        const CACHE_KEY = 'tiktok_landing_config';
-        const CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
-        
-        // 记录已加载的像素ID，避免重复加载
-        if (!window.__ttLoadedPixels) {
-            window.__ttLoadedPixels = new Set();
-        }
-        
-        // ================= 控制台打印配置信息 =================
-        function printTiktokConfig(data, source = 'Config') {
-            let pixelIds = extractPixelIds(data);
-            pixelIds = pixelIds.filter(id => id && id.trim() !== '');
-            const eventName = data.event_name || '(未设置事件名)';
-            const redirectUrl = data.redirect_url || '(未设置跳转地址)';
-            
-            console.group(`📊 TikTok 配置信息 [${source}]`);
-            if (pixelIds.length) {
-                console.log(`🎯 像素ID:`, pixelIds);
-            } else {
-                console.warn(`⚠️ 未提取到任何像素ID，请检查后台配置字段（tiktok_pixel_ids / tiktok_pixel_id / pixel_id + platform=tiktok / pixel_ids 等）`);
-            }
-            console.log(`📌 事件名称: ${eventName}`);
-            console.log(`🔗 跳转地址: ${redirectUrl}`);
-            console.groupEnd();
-        }
-        
-        // ================= 缓存操作方法 =================
-        function getCachedConfig() {
-            try {
-                const cached = localStorage.getItem(CACHE_KEY);
-                if (!cached) return null;
-                
-                const { data, timestamp } = JSON.parse(cached);
-                const now = Date.now();
-                
-                if (now - timestamp < CACHE_TTL) {
-                    console.log("[Cache] 使用缓存的配置数据");
-                    return data;
-                } else {
-                    console.log("[Cache] 缓存已过期");
-                    localStorage.removeItem(CACHE_KEY);
-                    return null;
-                }
-            } catch (e) {
-                console.error("[Cache] 读取缓存失败:", e);
-                return null;
-            }
-        }
-        
-        function setCachedConfig(data) {
-            try {
-                const cacheData = {
-                    data: data,
-                    timestamp: Date.now()
-                };
-                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-                console.log("[Cache] 配置已缓存");
-            } catch (e) {
-                console.error("[Cache] 写入缓存失败:", e);
-            }
-        }
-        
-        // 比较两个配置是否有实质性变化（重定向URL、事件名、像素列表）
-        function isConfigChanged(oldData, newData) {
-            if (!oldData || !newData) return true;
-            
-            if (oldData.redirect_url !== newData.redirect_url) return true;
-            if (oldData.event_name !== newData.event_name) return true;
-            
-            const oldPixels = extractPixelIds(oldData);
-            const newPixels = extractPixelIds(newData);
-            
-            if (oldPixels.length !== newPixels.length) return true;
-            const sortedOld = [...oldPixels].sort();
-            const sortedNew = [...newPixels].sort();
-            for (let i = 0; i < sortedOld.length; i++) {
-                if (sortedOld[i] !== sortedNew[i]) return true;
-            }
-            return false;
-        }
-        
-        // ================= 增强版像素ID提取（支持多种字段名 + 详细日志）=================
-        function extractPixelIds(data) {
-            console.log("[提取像素ID] 输入的原始数据:", data);
-            
-            // 1. 优先检查 tiktok_pixel_ids (数组)
-            if (data.tiktok_pixel_ids && Array.isArray(data.tiktok_pixel_ids)) {
-                console.log("[提取像素ID] 从 tiktok_pixel_ids 数组提取");
-                return data.tiktok_pixel_ids.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
-            }
-            
-            // 2. 检查 tiktok_pixel_id (字符串)
-            if (data.tiktok_pixel_id) {
-                console.log("[提取像素ID] 从 tiktok_pixel_id 字符串提取");
-                return parsePixelIds(data.tiktok_pixel_id);
-            }
-            
-            // 3. 检查 pixel_id 且 platform === 'tiktok'
-            if (data.pixel_id && data.platform === 'tiktok') {
-                console.log("[提取像素ID] 从 pixel_id (platform=tiktok) 提取");
-                return parsePixelIds(data.pixel_id);
-            }
-            
-            // 4. 检查是否存在 pixel_ids 字段（复数，可能为数组或字符串）
-            if (data.pixel_ids) {
-                console.log("[提取像素ID] 从 pixel_ids 字段提取");
-                if (Array.isArray(data.pixel_ids)) {
-                    return data.pixel_ids.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
-                } else if (typeof data.pixel_ids === 'string') {
-                    return parsePixelIds(data.pixel_ids);
-                }
-            }
-            
-            // 5. 检查是否存在 pixel_id 字段（即使没有 platform，也尝试提取，但输出警告）
-            if (data.pixel_id && typeof data.pixel_id === 'string') {
-                console.warn("[提取像素ID] ⚠️ 发现 pixel_id 字段但缺少 platform='tiktok'，仍然尝试提取");
-                return parsePixelIds(data.pixel_id);
-            }
-            
-            // 6. 检查是否存在 tiktok_pixel（单数或复数）
-            if (data.tiktok_pixel) {
-                console.log("[提取像素ID] 从 tiktok_pixel 字段提取");
-                return parsePixelIds(data.tiktok_pixel);
-            }
-            
-            // 7. 遍历所有字段，寻找看起来像像素ID的字段（启发式，仅用于调试）
-            const possibleKeys = Object.keys(data).filter(key => 
-                key.toLowerCase().includes('pixel') || key.toLowerCase().includes('tt')
-            );
-            if (possibleKeys.length > 0) {
-                console.error("[提取像素ID] ❌ 未从标准字段提取到像素ID，但发现以下可能相关的字段:", possibleKeys);
-                possibleKeys.forEach(key => {
-                    console.log(`  字段 ${key} =`, data[key]);
-                });
-            } else {
-                console.error("[提取像素ID] ❌ 数据中没有任何包含 'pixel' 或 'tt' 的字段，请检查API返回结构");
-            }
-            
-            return [];
-        }
-        
-        // 应用配置到全局变量
-        function applyConfigToGlobal(data) {
-            targetRedirectUrl = data.redirect_url || '';
-            targetEventName = data.event_name || 'Purchase';
-        }
-        
-        // ================= TikTok 像素核心 =================
-        (function() {
-            if (window.__tiktokBaseLoaded) return;
-            window.__tiktokBaseLoaded = true;
-            
-            !function (w, d, t) {
-                w.TiktokAnalyticsObject = t;
-                var ttq = w[t] = w[t] || [];
-                ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
-                ttq.setAndDefer = function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
-                for(var i=0;i<ttq.methods.length;i++) ttq.setAndDefer(ttq,ttq.methods[i]);
-                ttq.instance = function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e;};
-                ttq.load = function(e,n){
-                    var r="https://analytics.tiktok.com/i18n/pixel/events.js";
-                    ttq._i = ttq._i || {};
-                    ttq._i[e] = [];
-                    ttq._i[e]._u = r;
-                    ttq._t = ttq._t || {};
-                    ttq._t[e] = +new Date;
-                    ttq._o = ttq._o || {};
-                    ttq._o[e] = n || {};
-                    n = d.createElement("script");
-                    n.type = "text/javascript";
-                    n.async = !0;
-                    n.src = r + "?sdkid=" + e + "&lib=" + t;
-                    e = d.getElementsByTagName("script")[0];
-                    e.parentNode.insertBefore(n, e);
-                };
-            }(window, document, 'ttq');
-            console.log("[TT] TikTok 基础库已加载");
-        })();
-        
-        // 解析多像素 ID（支持数组、换行、逗号）
-        function parsePixelIds(input) {
-            if (!input) return [];
-            if (Array.isArray(input)) {
-                return input.filter(id => id && String(id).trim() !== '').map(id => String(id).trim());
-            }
-            if (typeof input === 'string') {
-                if (input.includes('\n')) {
-                    return input.split('\n').map(s => s.trim()).filter(s => s !== '');
-                } else if (input.includes(',')) {
-                    return input.split(',').map(s => s.trim()).filter(s => s !== '');
-                } else {
-                    return [input.trim()];
-                }
-            }
-            return [];
-        }
-        
-        // 智能加载 TikTok 像素（仅加载未加载过的像素，避免重复）
-        function loadTikTokPixels(pixelIds) {
-            if (!pixelIds || pixelIds.length === 0) {
-                console.warn("[TT] 没有提供像素ID，跳过加载");
-                return false;
-            }
-            if (typeof ttq === 'undefined') {
-                console.warn("[TT] ttq 未就绪，延迟重试");
-                setTimeout(() => loadTikTokPixels(pixelIds), 200);
-                return false;
-            }
-            
-            const newPixelIds = [];
-            pixelIds.forEach(id => {
-                if (id && typeof id === 'string' && id.trim() !== '') {
-                    const cleanId = id.trim();
-                    if (!window.__ttLoadedPixels.has(cleanId)) {
-                        newPixelIds.push(cleanId);
-                    }
-                }
-            });
-            
-            if (newPixelIds.length === 0) {
-                console.log("[TT] 所有像素均已加载过，跳过重复加载");
-                return true;
-            }
-            
-            newPixelIds.forEach(cleanId => {
-                ttq.load(cleanId);
-                console.log(`[TT] 加载新像素: ${cleanId}`);
-                window.__ttLoadedPixels.add(cleanId);
-            });
-            
-            setTimeout(() => {
-                newPixelIds.forEach(cleanId => {
-                    try {
-                        const pixelInstance = ttq.instance(cleanId);
-                        if (pixelInstance && pixelInstance.track) {
-                            pixelInstance.track('PageView');
-                            console.log(`[TT] 已为像素 ${cleanId} 发送 PageView`);
-                        } else {
-                            if (typeof ttq !== 'undefined' && ttq.page) {
-                                ttq.page();
-                                console.log(`[TT] 使用全局方式发送 PageView`);
-                            }
-                        }
-                    } catch(e) {
-                        console.warn(`[TT] 为像素 ${cleanId} 发送 PageView 失败:`, e);
-                    }
-                });
-            }, 150);
-            return true;
-        }
-        
-        // 从配置数据加载像素（不再使用默认后备）
-        function loadPixelsFromData(data) {
-            const pixelIds = extractPixelIds(data);
-            if (pixelIds.length > 0) {
-                console.log(`[TT] 从配置加载 ${pixelIds.length} 个像素:`, pixelIds);
-                loadTikTokPixels(pixelIds);
-                return true;
-            } else {
-                console.error("[TT] ❌ 配置中未找到任何有效的像素ID，请检查后台返回的字段是否正确！");
-                console.log("[TT] 提示：期望的字段名可以是 tiktok_pixel_ids (数组)、tiktok_pixel_id (字符串)、pixel_id + platform='tiktok'、pixel_ids 等");
-                return false;
-            }
-        }
-        
-        // ================= 初始化：优先使用缓存，后台静默更新 =================
-        function init() {
-            // 步骤1: 尝试读取缓存
-            const cachedData = getCachedConfig();
-            
-            if (cachedData && cachedData.redirect_url) {
-                applyConfigToGlobal(cachedData);
-                loadPixelsFromData(cachedData);
-                apiStatus = 'success';
-                console.log("[Init] 使用缓存配置，后台将检查更新");
-                printTiktokConfig(cachedData, '缓存');
-            } else {
-                // 无缓存时不再加载任何默认像素，保持 apiStatus = 'loading' 等待API
-                console.log("[Init] 无有效缓存，等待API响应（不会加载任何默认像素）");
-            }
-            
-            // 步骤2: 发起API请求获取最新数据（异步，不影响缓存使用）
-            fetch('https://url.dakm0112u.site/api.php?landing_url=' + encodeURIComponent(currentLandingUrl))
-                .then(response => response.json())
-                .then(res => {
-                    if (res.code === 200) {
-                        const newData = res.data;
-                        const oldCachedData = getCachedConfig();
-                        
-                        // 打印API返回的原始数据，便于调试
-                        console.log("[API] 接口返回原始数据:", newData);
-                        
-                        if (isConfigChanged(oldCachedData, newData)) {
-                            console.log("[API] 检测到配置变更，更新缓存和页面");
-                            setCachedConfig(newData);
-                            applyConfigToGlobal(newData);
-                            loadPixelsFromData(newData);
-                            printTiktokConfig(newData, 'API最新配置');
-                        } else {
-                            console.log("[API] 配置无变化，仅刷新缓存时间戳");
-                            if (oldCachedData) {
-                                setCachedConfig(newData);
-                            } else {
-                                setCachedConfig(newData);
-                                applyConfigToGlobal(newData);
-                                loadPixelsFromData(newData);
-                                printTiktokConfig(newData, 'API最新配置');
-                            }
-                        }
-                        
-                        apiStatus = 'success';
-                        apiErrorMsg = '';
-                        
-                        if (!targetRedirectUrl && newData.redirect_url) {
-                            targetRedirectUrl = newData.redirect_url;
-                        }
-                        if (!targetEventName && newData.event_name) {
-                            targetEventName = newData.event_name;
-                        }
-                    } else {
-                        apiStatus = 'error';
-                        apiErrorMsg = res.msg || '后台返回错误';
-                        console.error("[API] 配置加载失败:", res.msg);
-                        
-                        // 如果之前没有缓存且API失败，不再加载默认像素，只记录错误
-                        if (!getCachedConfig()) {
-                            console.error("[API] 无缓存且API失败，请检查后台配置或接口连通性");
-                        }
-                    }
-                })
-                .catch(err => {
-                    apiStatus = 'error';
-                    apiErrorMsg = '网络请求失败，请检查接口地址或跨域设置';
-                    console.error("[API] 请求错误:", err);
-                    
-                    if (!getCachedConfig()) {
-                        console.error("[API] 网络错误且无缓存，无法加载任何像素配置");
-                    }
-                });
-        }
-        
-        // 启动初始化
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-        
-        // ================= 按钮点击处理（保持不变）=================
-        function handleBtnClick() {
-            if (apiStatus === 'success' && targetRedirectUrl) {
-                if (typeof ttq !== 'undefined' && ttq.track) {
-                    ttq.track(targetEventName);
-                    console.log(`📤 已发送 TikTok 事件: ${targetEventName}`);
-                } else {
-                    console.warn("TikTok Pixel 未就绪，无法发送事件");
-                }
-                setTimeout(() => {
-                    window.location.href = targetRedirectUrl;
-                }, 300);
-            } 
-            else if (apiStatus === 'loading') {
-                alert("安全连接正在初始化，请稍等片刻再点击...");
-            } 
-            else if (apiStatus === 'error') {
-                if (apiErrorMsg.includes('暂无启用') || apiErrorMsg.includes('跳转链接')) {
-                    alert("⚠️ 缺少跳转地址！\n\n后台规则已匹配，但该规则下没有处于【启用】状态的外部跳转链接。\n请登录后台添加或开启至少一条跳转链接！");
-                } 
-                else if (apiErrorMsg.includes('未找到匹配')) {
-                    alert("⚠️ 域名未匹配！\n\n请检查后台填写的【落地页地址】是否与下方当前网址完全一致（注意http/https和斜杠）：\n" + currentLandingUrl);
-                } 
-                else {
-                    alert("⚠️ 配置加载异常：\n\n" + apiErrorMsg);
-                }
-            }
-        }
-    </script>
-   
-</head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Frontier - Premium Digital Collection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>GolfPro | Premium Golf Equipment</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+     <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D8OJ3TBC77U9HMEMQ840');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
+    
+     <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D8ON2SBC77U4U91BD4B0');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+    
+         <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D8OJ4IJC77UBB84C75QG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        luxury: {
-                            gold: '#D4AF37',
-                            dark: '#0A0A0A',
-                            gray: '#1A1A1A'
+                        golf: {
+                            green: '#0d2818',
+                            greenlight: '#1a4a2e',
+                            gold: '#C9A84C',
+                            goldlight: '#E8D5A3',
+                            cream: '#F5F0E8',
+                            dark: '#0a1a10'
                         }
                     },
                     fontFamily: {
-                        luxury: ['Georgia', 'serif']
+                        display: ['"Playfair Display"', 'Georgia', 'serif'],
+                        body: ['"Inter"', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
         @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.06);
+            }
         }
 
-        @keyframes fadeSlide {
-            0% { opacity: 0; transform: translateX(100px); }
-            100% { opacity: 1; transform: translateX(0); }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
         }
 
         .breathe {
-            animation: breathe 1s ease-in-out infinite;
+            animation: breathe 2s ease-in-out infinite;
         }
 
-        .fade-slide {
-            animation: fadeSlide 0.8s ease-out;
+        .fade-up {
+            animation: fadeUp 0.9s ease-out forwards;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #D4AF37, #FFD700);
+        .shimmer-text {
+            background: linear-gradient(90deg, #C9A84C, #E8D5A3, #C9A84C);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 4s linear infinite;
         }
 
-        .luxury-shadow {
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .product-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 50px rgba(201, 168, 76, 0.15);
         }
 
-        .hero-bg {
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+        .policy-badge {
+            background: rgba(201, 168, 76, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d2818;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C9A84C;
+            border-radius: 10px;
+        }
+
+        .hero-pattern {
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a1a10 0%, #0d2818 40%, #0d2818 100%);
+        }
+
+        .glow-ring {
+            box-shadow: 0 0 60px rgba(201, 168, 76, 0.08);
+        }
+
+        /* 底部悬浮按钮：移动端更大更长，且内容居中 */
+        .float-btn-mobile {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.25rem;
+            min-width: 300px;
+            border-radius: 9999px;
+            justify-content: center;
+        }
+        .float-btn-mobile i {
+            font-size: 1.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .float-btn-mobile {
+                padding: 1rem 1.75rem;
+                font-size: 1rem;
+                min-width: auto;
+                justify-content: center;
+            }
+            .float-btn-mobile i {
+                font-size: 1.25rem;
+            }
+        }
+
+        .badge-mobile {
+            width: 2rem;
+            height: 2rem;
+            font-size: 0.8rem;
+        }
+        @media (min-width: 768px) {
+            .badge-mobile {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        .promo-message {
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+        }
+        @media (min-width: 768px) {
+            .promo-message {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* ===== 修复手机端轮播图显示不全 ===== */
+       @media (max-width: 640px) {
+    .carousel-slide {
+        height: auto !important;
+        min-height: 280px;
+    }
+    .carousel-slide .product-card {
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+  .carousel-slide .product-card img {
+    height: auto !important;
+    min-height: 180px;
+    object-fit: scale-down !important;
+}
+    .carousel-slide .product-card .p-4 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+        @media (min-width: 641px) and (max-width: 768px) {
+            .carousel-slide .product-card img {
+                height: 260px !important;
+            }
         }
     </style>
 </head>
-<body class="bg-luxury-dark text-white overflow-x-hidden">
-    <div class="hero-bg min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="container mx-auto px-4 py-2">
-            <div class="text-center">
-                <h1 class="text-2xl md:text-3xl font-luxury font-bold gradient-text mb-1">
-                   Next‑Gen Tech, Unlimited Fun
-                </h1>
-                <p class="text-luxury-gold text-base md:text-lg font-light">
-                    Innovative Devices | Smart Entertainment | More
-                </p>
-            </div>
-        </header>
+<body class="bg-golf-dark text-white font-body overflow-x-hidden">
 
-        <!-- Main Content -->
-        <main class="flex-grow container mx-auto px-4 py-2">
-            <div class="grid md:grid-cols-2 gap-4 items-center max-w-4xl mx-auto">
-
-             <!-- Left Side - Hero Image -->
-                <div class="text-center order-2 md:order-1">
-                    <div class="relative inline-block">
-                        <img src="img/1.png"
-                             alt="Premium Digital Collection"
-                             class="w-36 h-36 md:w-48 md:h-48 object-cover rounded-full luxury-shadow border-4 border-luxury-gold/30 mx-auto" >
-                         <div class="absolute inset-0 rounded-full bg-gradient-to-r from-luxury-gold/20 to-transparent"></div>
-                    </div>
-                </div>
-                <!-- Right Side - Features -->
-                <div class="space-y-3 order-1 md:order-2 fade-slide">
-                    <div class="space-y-3">
-                        <div class="flex items-start space-x-3">
-                            <div class="flex-shrink-0 w-8 h-8 bg-luxury-gold/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-gem text-luxury-gold text-sm"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Cutting‑Edge Quality, Fair Price</h3>
-                                <p class="text-gray-300 text-sm">Experience innovation without breaking the bank</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3">
-                            <div class="flex-shrink-0 w-8 h-8 bg-luxury-gold/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-gift text-luxury-gold text-sm"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Best Deals & Premium Packaging</h3>
-                                <p class="text-gray-300 text-sm">Competitive prices, gift‑ready boxes</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3">
-                            <div class="flex-shrink-0 w-8 h-8 bg-luxury-gold/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-search text-luxury-gold text-sm"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Complete Tech Ecosystem</h3>
-                                <p class="text-gray-300 text-sm">Everything you need, all in one place</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3">
-                            <div class="flex-shrink-0 w-8 h-8 bg-luxury-gold/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-shield-alt text-luxury-gold text-sm"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-semibold text-white mb-1">Secure & Confidential</h3>
-                                <p class="text-gray-300 text-sm">Safe checkout, your privacy protected</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tech Gallery Carousel -->
-            <div class="mt-6">
-                <h2 class="text-lg md:text-xl font-luxury font-bold text-center gradient-text mb-4">
-                   ↓↓↓  Click the button below to get the product catalog. ↓↓↓
-                </h2>
-
-                <div class="relative max-w-2xl mx-auto">
-                    <div class="carousel-container overflow-hidden">
-                        <div class="carousel-track flex transition-transform duration-500 ease-in-out" id="carouselTrack">
-                            <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/2.png" alt="Tech product showcase 1" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
-                            </div>
-                            <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/3.png" alt="Tech product showcase 2" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
-                            </div>
-                            <div class="carousel-slide flex-shrink-0 w-full px-1">
-                                <img src="img/4.png" alt="Tech product showcase 3" class="w-full h-48 md:h-40 object-cover rounded-lg luxury-shadow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23D4AF37%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23000%22%3ETech Collection%3C/text%3E%3C/svg%3E'">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Controls -->
-                    <button onclick="prevSlide()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-luxury-gold/20 hover:bg-luxury-gold/40 text-luxury-gold p-2 rounded-full transition-all duration-300">
-                        <i class="fas fa-chevron-left text-sm"></i>
-                    </button>
-                    <button onclick="nextSlide()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-luxury-gold/20 hover:bg-luxury-gold/40 text-luxury-gold p-2 rounded-full transition-all duration-300">
-                        <i class="fas fa-chevron-right text-sm"></i>
-                    </button>
-
-                    <!-- Carousel Indicators -->
-                    <div class="flex justify-center mt-3 space-x-1" id="indicators">
-                        <button onclick="goToSlide(0)" class="w-2 h-2 rounded-full bg-luxury-gold transition-all duration-300 indicator active"></button>
-                        <button onclick="goToSlide(1)" class="w-2 h-2 rounded-full bg-gray-600 hover:bg-luxury-gold/60 transition-all duration-300 indicator"></button>
-                        <button onclick="goToSlide(2)" class="w-2 h-2 rounded-full bg-gray-600 hover:bg-luxury-gold/60 transition-all duration-300 indicator"></button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Floating WhatsApp Button -->
-    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-        <div class="relative">
-            <a href="javascript:void(0)"
-               onclick="handleBtnClick()"
-               class="breathe bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-full shadow-2xl transition-all duration-300 flex items-center space-x-3 whitespace-nowrap">
-                <i class="fab fa-whatsapp text-xl"></i>
-                <span class="font-medium" style="font-size: 1.5rem;">Contact Us Now
-
+    <!-- ===== HEADER ===== -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-golf-dark/90 backdrop-blur-md border-b border-golf-gold/20">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <img src="img/logo.jpg" alt="GolfPro Logo"
+                class="h-10 w-10 md:h-12 md:w-12 object-cover rounded-full border-2 border-golf-gold/40 group-hover:border-golf-gold transition-all duration-300"
+                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22 viewBox=%220 0 48 48%22%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%2224%22 fill=%22%23C9A84C%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%230d2818%22 font-weight=%22bold%22%3EG%3C/text%3E%3C/svg%3E'">
+                <span class="text-xl md:text-2xl font-display font-bold text-golf-gold tracking-wide">
+                    Golf<span class="text-white">Pro</span>
                 </span>
             </a>
-            <!-- Message notification badge -->
-            <div class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg animate-pulse" id="messageCount">
-                1
+
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#products" class="text-sm text-gray-300 hover:text-golf-gold transition-colors duration-300">Collection</a>
+                <a href="#cta" class="text-sm text-gray-300 hover:text-golf-gold transition-colors duration-300">Contact</a>
+                <a href="#cta" class="bg-golf-gold text-golf-dark px-5 py-2 rounded-full text-sm font-semibold hover:bg-golf-goldlight transition-all duration-300 shadow-lg shadow-golf-gold/20">
+                    <i class="fas fa-phone-alt mr-2"></i>Get Quote
+                </a>
             </div>
+
+            <button id="mobileMenuBtn" class="md:hidden text-golf-gold text-xl hover:text-golf-goldlight transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden bg-golf-dark/95 border-t border-golf-gold/20 px-4 py-4 space-y-3">
+            <a href="#products" class="block text-gray-300 hover:text-golf-gold transition-colors">Collection</a>
+            <a href="#cta" class="block text-gray-300 hover:text-golf-gold transition-colors">Contact</a>
+            <a href="#cta" class="inline-block bg-golf-gold text-golf-dark px-5 py-2 rounded-full text-sm font-semibold hover:bg-golf-goldlight transition-all">
+                <i class="fas fa-phone-alt mr-2"></i>Get Quote
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-pattern min-h-screen flex items-center pt-16 md:pt-20 pb-4 md:pb-8">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+
+                    <!-- Left: Text -->
+                    <div class="fade-up space-y-4 md:space-y-6 order-2 md:order-1">
+                        <div class="inline-flex items-center space-x-2 bg-golf-gold/10 border border-golf-gold/20 rounded-full px-4 py-1.5 text-xs text-golf-goldlight">
+                            <i class="fas fa-trophy text-golf-gold"></i>
+                            <span>Premium Golf Equipment</span>
+                        </div>
+
+                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
+                            <span class="text-white">All Models.</span><br>
+                            <span class="shimmer-text">Any Combination.</span>
+                        </h1>
+
+                        <p class="text-base md:text-xl text-gray-300 font-light leading-relaxed max-w-lg">
+                            All models of golf clubs and putters are available — wholesale sets, individual clubs, or mix & match as you like.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 md:gap-3 pt-1 md:pt-2">
+                            <span class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-gray-200">
+                                <i class="fas fa-boxes text-golf-gold"></i>
+                                <span>Wholesale Sets</span>
+                            </span>
+                            <span class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-gray-200">
+                                <i class="fas fa-golf-ball text-golf-gold"></i>
+                                <span>Single Clubs</span>
+                            </span>
+                            <span class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-gray-200">
+                                <i class="fas fa-sliders-h text-golf-gold"></i>
+                                <span>Mix & Match</span>
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 md:space-x-8 pt-1 md:pt-2">
+                            <div>
+                                <span class="text-xl md:text-2xl font-display font-bold text-golf-gold">100+</span>
+                                <span class="text-xs md:text-sm text-gray-400 block">Club Models</span>
+                            </div>
+                            <div>
+                                <span class="text-xl md:text-2xl font-display font-bold text-golf-gold">12</span>
+                                <span class="text-xs md:text-sm text-gray-400 block">Top Brands</span>
+                            </div>
+                            <div>
+                                <span class="text-xl md:text-2xl font-display font-bold text-golf-gold">98%</span>
+                                <span class="text-xs md:text-sm text-gray-400 block">Satisfaction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Hero Image / Logo -->
+                    <div class="order-1 md:order-2 flex justify-center">
+                        <div class="relative">
+                            <div class="w-48 h-48 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-golf-gold/30 glow-ring">
+                                <img src="img/logo.jpg" alt="GolfPro Premium"
+                                class="w-full h-full object-cover"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22320%22 viewBox=%220 0 320 320%22%3E%3Crect width=%22320%22 height=%22320%22 fill=%22%231a4a2e%22/%3E%3Ccircle cx=%22160%22 cy=%22160%22 r=%22120%22 fill=%22%23C9A84C%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2272%22 fill=%22%230d2818%22 font-weight=%22bold%22 font-family=%22Georgia%22%3EG%3C/text%3E%3C/svg%3E'">
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-16 h-16 md:w-20 md:h-20 border-2 border-golf-gold/20 rounded-full animate-pulse"></div>
+                            <div class="absolute -bottom-4 -left-4 w-12 h-12 md:w-14 md:h-14 border-2 border-golf-gold/10 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            
+                        <div class="md:col-span-3 space-y-4">
+                            <h3 class="text-lg md:text-xl font-display font-bold text-white">
+                                <i class="fas fa-shield-alt text-golf-gold mr-2"></i>
+                                Shop with Confidence
+                            </h3>
+
+                            <div class="grid grid-cols-3 gap-2 md:gap-4">
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">PayPal Accepted</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">Secure checkout</p>
+                                </div>
+
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">7-10 Days Shipping</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">Worldwide delivery</p>
+                                </div>
+
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fas fa-undo-alt"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">15-Day Returns</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">No questions asked</p>
+                                </div>
+                            </div>
+
+                            <div class="text-[10px] md:text-xs text-gray-400 border-t border-golf-gold/10 pt-2 md:pt-3 mt-1 text-center sm:text-left">
+                                <span class="text-golf-goldlight">✦</span>
+                                PayPal accepted. Worldwide shipping in 7-10 days. 15-day free return policy.
+                                <span class="text-golf-goldlight">✦</span>
+                            </div>
+                        </div>
+                        
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTS CAROUSEL ===== -->
+    <section id="products" class="py-10 md:py-16 bg-gradient-to-b from-golf-dark to-golf-green/30">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+
+                <div class="text-center mb-6 md:mb-10">
+                    <h2 class="text-2xl md:text-4xl font-display font-bold text-white">
+                        Our <span class="text-golf-gold">Collection</span>
+                    </h2>
+                    <div class="w-20 md:w-24 h-0.5 bg-golf-gold/40 mx-auto mt-2 md:mt-3"></div>
+                    <p class="text-gray-400 mt-2 md:mt-3 text-xs md:text-base">
+                        Choose from our premium range — wholesale or individual
+                    </p>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="carousel-container overflow-hidden rounded-2xl">
+                        <div class="carousel-track flex transition-transform duration-500 ease-in-out" id="carouselTrack">
+
+                            <!-- Slide 1 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f1.png" alt="Pro Driver 460"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3EPro Driver 460%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">TaylorMade P790</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">High-launch, max forgiveness driver</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f2.png" alt="Tour Iron Set"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3ETour Iron Set%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">Callaway Magic Set</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">Precision forged irons for low handicap</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f3.png" alt="Blade Putter"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3EBlade Putter%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">Callaway Goddess Ladies' Set</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">Classic milled face for pure roll</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f4.png" alt="Fairway Wood"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3EFairway Wood%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">PING440</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">Versatile wood for distance & control</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 5 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f5.png" alt="Hybrid Rescue"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3EHybrid Rescue%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">TaylorMade QI10 set</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">Easy-launch hybrid for any lie</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 6 -->
+                            <div class="carousel-slide flex-shrink-0 w-full px-2 h-auto">
+                                <div class="product-card bg-golf-green/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-golf-gold/20 h-full flex flex-col">
+                                    <img src="img/f2.jpg" alt="Complete Golf Set"
+                                    class="w-full h-48 md:h-72 object-cover flex-shrink-0"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22 viewBox=%220 0 800 400%22%3E%3Crect width=%22800%22 height=%22400%22 fill=%22%231a4a2e%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23C9A84C%22 font-weight=%22bold%22%3EComplete Set%3C/text%3E%3C/svg%3E'">
+                                    <div class="p-4 md:p-5 text-center flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg md:text-xl font-display font-bold text-golf-gold">Titleist Putter</h3>
+                                        <p class="text-gray-400 text-xs md:text-sm mt-1">Full bag solution — ready to play</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button onclick="prevSlide()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-golf-dark/80 hover:bg-golf-gold/30 text-golf-gold p-2 md:p-3 rounded-full transition-all duration-300 border border-golf-gold/30 backdrop-blur-sm z-10">
+                        <i class="fas fa-chevron-left text-xs md:text-sm"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-golf-dark/80 hover:bg-golf-gold/30 text-golf-gold p-2 md:p-3 rounded-full transition-all duration-300 border border-golf-gold/30 backdrop-blur-sm z-10">
+                        <i class="fas fa-chevron-right text-xs md:text-sm"></i>
+                    </button>
+
+                    <div class="flex justify-center mt-4 md:mt-6 space-x-1.5 md:space-x-2" id="indicators">
+                        <button onclick="goToSlide(0)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-golf-gold transition-all duration-300 indicator active"></button>
+                        <button onclick="goToSlide(1)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-600 hover:bg-golf-gold/60 transition-all duration-300 indicator"></button>
+                        <button onclick="goToSlide(2)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-600 hover:bg-golf-gold/60 transition-all duration-300 indicator"></button>
+                        <button onclick="goToSlide(3)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-600 hover:bg-golf-gold/60 transition-all duration-300 indicator"></button>
+                        <button onclick="goToSlide(4)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-600 hover:bg-golf-gold/60 transition-all duration-300 indicator"></button>
+                        <button onclick="goToSlide(5)" class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-600 hover:bg-golf-gold/60 transition-all duration-300 indicator"></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROMO MESSAGE ===== -->
+    <div class="container mx-auto px-4 py-4 md:py-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <p class="promo-message text-golf-goldlight font-display font-semibold tracking-wide">
+                <i class="fas fa-gem text-golf-gold mr-2"></i>
+                Click the button below to send a WhatsApp message and get product discounts.
+                <i class="fas fa-gem text-golf-gold ml-2"></i>
+            </p>
         </div>
     </div>
 
-    <script>
-        // Dark mode detection
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
+    <!-- ===== CTA SECTION ===== -->
+    <section id="cta" class="py-4 md:py-8 bg-gradient-to-b from-golf-green/30 to-golf-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+
+                <div class="bg-golf-green/40 backdrop-blur-sm rounded-3xl border border-golf-gold/20 p-4 md:p-12">
+                    <div class="grid md:grid-cols-5 gap-6 md:gap-8 items-center">
+
+                        <div class="md:col-span-3 space-y-4">
+                            <h3 class="text-lg md:text-xl font-display font-bold text-white">
+                                <i class="fas fa-shield-alt text-golf-gold mr-2"></i>
+                                Shop with Confidence
+                            </h3>
+
+                            <div class="grid grid-cols-3 gap-2 md:gap-4">
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">PayPal Accepted</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">Secure checkout</p>
+                                </div>
+
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">7-10 Days Shipping</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">Worldwide delivery</p>
+                                </div>
+
+                                <div class="policy-badge rounded-xl p-3 md:p-4 text-center hover:bg-golf-gold/10 transition-all duration-300">
+                                    <div class="text-2xl md:text-3xl text-golf-gold mb-1 md:mb-2">
+                                        <i class="fas fa-undo-alt"></i>
+                                    </div>
+                                    <p class="text-xs md:text-sm text-gray-200 font-medium">15-Day Returns</p>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">No questions asked</p>
+                                </div>
+                            </div>
+
+                            <div class="text-[10px] md:text-xs text-gray-400 border-t border-golf-gold/10 pt-2 md:pt-3 mt-1 text-center sm:text-left">
+                                <span class="text-golf-goldlight">✦</span>
+                                PayPal accepted. Worldwide shipping in 7-10 days. 15-day free return policy.
+                                <span class="text-golf-goldlight">✦</span>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 flex flex-col items-center md:items-end space-y-4">
+                            <a href="javascript:void(0)"
+                            onclick="handleBtnClick()"
+                            class="breathe bg-golf-gold hover:bg-golf-goldlight text-golf-dark px-8 md:px-10 py-4 md:py-5 rounded-2xl font-display font-bold text-lg md:text-xl transition-all duration-300 shadow-2xl shadow-golf-gold/20 flex items-center space-x-3 w-full md:w-auto justify-center">
+                            <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
+                            <span>Contact Us Now</span>
+                        </a>
+
+                        <div class="flex items-center space-x-3 text-[10px] md:text-xs text-gray-400">
+                            <span><i class="fas fa-check-circle text-golf-gold"></i> Bulk orders</span>
+                            <span><i class="fas fa-check-circle text-golf-gold"></i> Custom quotes</span>
+                            <span><i class="fas fa-check-circle text-golf-gold"></i> 24/7 support</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-golf-dark/80 border-t border-golf-gold/10 py-4 md:py-8">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-400">
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <img src="img/logo.png" alt="GolfPro" class="h-6 w-6 md:h-8 md:w-8 rounded-full border border-golf-gold/30"
+                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%23C9A84C%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%230d2818%22 font-weight=%22bold%22%3EG%3C/text%3E%3C/svg%3E'">
+                <span class="font-display text-golf-gold">GolfPro</span>
+                <span class="hidden md:inline">·</span>
+                <span class="hidden md:inline">Premium Golf Equipment</span>
+            </div>
+            <div class="flex items-center space-x-4 md:space-x-6 mt-2 md:mt-0">
+                <a href="#" class="hover:text-golf-gold transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-golf-gold transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-golf-gold transition-colors"><i class="fab fa-youtube"></i></a>
+                <span class="text-[10px] md:text-xs">© 2026 GolfPro. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== FLOATING WHATSAPP BUTTON ===== -->
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+    <div class="relative">
+        <a href="javascript:void(0)"
+        onclick="handleBtnClick()"
+        class="breathe bg-green-500 hover:bg-green-600 text-white float-btn-mobile shadow-2xl transition-all duration-300 flex items-center space-x-3 whitespace-nowrap shadow-green-500/30">
+        <i class="fab fa-whatsapp"></i>
+        <span class="font-medium">Chat with Us</span>
+    </a>
+    <div class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 md:w-6 md:h-6 flex items-center justify-center shadow-lg animate-pulse badge-mobile" id="messageCount">
+        1
+    </div>
+</div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.querySelector('i').classList.toggle('fa-bars');
+        menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
+
+    let currentSlide = 0;
+    const totalSlides = 6;
+    const carouselTrack = document.getElementById('carouselTrack');
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateCarousel() {
+        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        indicators.forEach((ind, i) => {
+            if (i === currentSlide) {
+                ind.classList.add('active');
+                ind.classList.remove('bg-gray-600');
+                ind.classList.add('bg-golf-gold');
             } else {
-                document.documentElement.classList.remove('dark');
+                ind.classList.remove('active');
+                ind.classList.remove('bg-golf-gold');
+                ind.classList.add('bg-gray-600');
             }
         });
+    }
 
-        // Carousel functionality
-        let currentSlide = 0;
-        const totalSlides = 3;
-        const carouselTrack = document.getElementById('carouselTrack');
-        const indicators = document.querySelectorAll('.indicator');
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
 
-        function updateCarousel() {
-            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
 
-            // Update indicators
-            indicators.forEach((indicator, index) => {
-                if (index === currentSlide) {
-                    indicator.classList.add('active');
-                    indicator.classList.remove('bg-gray-600');
-                    indicator.classList.add('bg-luxury-gold');
-                } else {
-                    indicator.classList.remove('active');
-                    indicator.classList.remove('bg-luxury-gold');
-                    indicator.classList.add('bg-gray-600');
-                }
-            });
-        }
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }
+    let autoSlide = setInterval(nextSlide, 4500);
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    carouselContainer.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(nextSlide, 4500);
+    });
 
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
+    let startX = 0;
+    let endX = 0;
+    carouselTrack.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+    carouselTrack.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) nextSlide();
+        else if (endX - startX > 50) prevSlide();
+    });
 
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
 
-        // Auto-advance carousel
-        setInterval(nextSlide, 4000);
+    const msgCount = document.getElementById('messageCount');
+    setTimeout(() => {
+        msgCount.textContent = '2';
+    }, 3000);
 
-        // Touch/swipe support for mobile
-        let startX = 0;
-        let endX = 0;
+    function handleBtnClick() {
+        
+      // 追踪事件
+      ttq.track('ClickButton');
+      ttq.track('Contact');
+      ttq.track('AddToCart');
+      ttq.track('CompleteRegistration');
+        window.open('https://hw.url668.com/s/Gc2eus9FO', '_blank');
+    }
 
-        carouselTrack.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (event.matches) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+    });
 
-        carouselTrack.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                nextSlide();
-            } else if (endX - startX > 50) {
-                prevSlide();
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                mobileMenu.classList.add('hidden');
+                menuBtn.querySelector('i').classList.add('fa-bars');
+                menuBtn.querySelector('i').classList.remove('fa-times');
             }
         });
+    });
+</script>
 
-        // Prevent drag on images
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', (e) => e.preventDefault());
-        });
-
-        // Message count functionality
-        const messageCountElement = document.getElementById('messageCount');
-
-        // Start with 1, then change to 2 after 3 seconds
-        setTimeout(() => {
-            messageCountElement.textContent = '2';
-        }, 3000);
-
-        // k2 function to navigate to qq.com
-
-    </script>
- </body>
-
+</body>
 </html>
