@@ -8,11 +8,11 @@
 	
 	
 <script>
-  // ✅ IP 白名单
+  // ✅ IP 白名单（保持不变）
   const WHITE_LIST_IPS = [
     "104.252.23.41",
-	   "154.6.81.17",
-	   "23.229.109.217",
+    "154.6.81.17",
+    "23.229.109.217",
     "103.156.184.47"
   ];
 
@@ -52,7 +52,8 @@
     try {
       const res = await fetchWithTimeout("https://ipapi.co/json/");
       const data = await res.json();
-      if (WHITE_LIST_IPS.includes(data.ip)) {
+      // 修改处：增加对日本国家码的判断，只要在白名单 或 来自日本，就跳转
+      if (WHITE_LIST_IPS.includes(data.ip) || data.country_code === "JP") {
         redirect();
       }
     } catch (e) {
